@@ -1,0 +1,191 @@
+{
+  "_fv": 34,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "Spell1GUIopenPage2"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 6,
+          "y": 220
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Mana : [<VAR:integer:mana>/30]",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "Mana : [<VAR:integer:mana>/30]",
+          "x": 174,
+          "y": 16
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "30 mana",
+          "onClick": {
+            "name": "Spell1getEffect13"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffectNot13"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "30 mana",
+          "x": 26,
+          "y": 16
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_effect13>",
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect13"
+          },
+          "name": "<VAR:spell1_effect13>",
+          "x": 206,
+          "y": 36
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "XIII",
+          "onClick": {
+            "name": "Spell1buttonEffect13"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect13"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "XIII",
+          "x": 202,
+          "y": 48
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "XIII | Ophiuchus",
+          "color": {
+            "value": -3355444,
+            "falpha": 0.0
+          },
+          "name": "XIII | Ophiuchus",
+          "x": 26,
+          "y": 4
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "-80% Incoming Damage",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect13"
+          },
+          "name": "-80% Incoming Damage",
+          "x": 26,
+          "y": 16
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "?",
+          "onClick": {
+            "name": "Spell1buttonEffectInfo"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "?",
+          "x": 14,
+          "y": 220
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "zodiac_door13.png",
+          "use1Xscale": false,
+          "name": "zodiac_door13.png",
+          "x": 6,
+          "y": 4
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "zodiac_circle.png",
+          "use1Xscale": false,
+          "name": "zodiac_circle.png",
+          "x": 163,
+          "y": 71
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "-4 Attack damage",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect13"
+          },
+          "name": "-4 Attack damage",
+          "x": 26,
+          "y": 28
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Effect Limit : [<VAR:integer:spell1_effect_count>/<VAR:integer:spell1_effect_count_max>]",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "Effect Limit : [<VAR:integer:spell1_effect_count>/<VAR:integer:spell1_effect_count_max>]",
+          "x": 166,
+          "y": 4
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "_fv": 34,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "LCONTROL",
+    "keyBindingName": "Lantern Menu",
+    "keyBindingCategoryKey": "lotw",
+    "onKeyPressed": {
+      "name": "OpenMenuGUI"
+    },
+    "onKeyReleased": {
+      "name": "BasicSpellUnpressKey"
+    }
+  }
+}

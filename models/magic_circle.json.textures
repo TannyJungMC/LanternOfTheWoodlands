@@ -2,21 +2,39 @@
   "mappings": {
     "default": {
       "map": {
-        "1": "spell_zodiac_circle"
+        "1": "zodiac_circle"
       },
       "name": "default"
     },
-    "healing": {
+    "spell_book_healing": {
       "map": {
-        "1": "spell_healing_circle"
+        "1": "spell_book_healing_circle"
       },
-      "name": "healing"
+      "name": "spell_book_healing"
     },
-    "teleport": {
+    "spell_book_holy": {
       "map": {
-        "1": "spell_teleport_circle"
+        "1": "spell_book_holy_circle"
       },
-      "name": "teleport"
+      "name": "spell_book_holy"
+    },
+    "spell_book_weather": {
+      "map": {
+        "1": "spell_book_weather_circle"
+      },
+      "name": "spell_book_weather"
+    },
+    "spell_book_teleportation": {
+      "map": {
+        "1": "spell_book_teleportation_circle"
+      },
+      "name": "spell_book_teleportation"
+    },
+    "spell_book_teleportation2": {
+      "map": {
+        "1": "spell_book_teleportation_circle2"
+      },
+      "name": "spell_book_teleportation2"
     }
   }
 }

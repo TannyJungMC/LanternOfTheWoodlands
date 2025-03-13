@@ -1,0 +1,807 @@
+{
+  "_fv": 34,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Mana : [<VAR:integer:mana>/30]",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "Mana : [<VAR:integer:mana>/30]",
+          "x": 230,
+          "y": 196
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Back",
+          "onClick": {
+            "name": "ClickLanternGround"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Back",
+          "x": 374,
+          "y": 192
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Cancel Spell",
+          "onClick": {
+            "name": "Spell2cancel"
+          },
+          "width": 88,
+          "height": 20,
+          "name": "Cancel Spell",
+          "x": 134,
+          "y": 192
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "PHAROS OF THE SKY",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "PHAROS OF THE SKY",
+          "x": 170,
+          "y": 28
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell10.png",
+          "use1Xscale": false,
+          "name": "spell10.png",
+          "x": 150,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "",
+          "color": {
+            "value": -6750208,
+            "falpha": 0.0
+          },
+          "name": "",
+          "x": 278,
+          "y": 32
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Entity",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "Entity",
+          "x": 170,
+          "y": 120
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Tracker",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "Tracker",
+          "x": 170,
+          "y": 168
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "fireball_gold.png",
+          "use1Xscale": false,
+          "name": "fireball_gold.png",
+          "x": 150,
+          "y": 92
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "fireball_green.png",
+          "use1Xscale": false,
+          "name": "fireball_green.png",
+          "x": 150,
+          "y": 104
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "fireball_white.png",
+          "use1Xscale": false,
+          "name": "fireball_white.png",
+          "x": 150,
+          "y": 116
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "fireball_blue.png",
+          "use1Xscale": false,
+          "name": "fireball_blue.png",
+          "x": 150,
+          "y": 128
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "fireball_red.png",
+          "use1Xscale": false,
+          "name": "fireball_red.png",
+          "x": 150,
+          "y": 140
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "fireball_purple.png",
+          "use1Xscale": false,
+          "name": "fireball_purple.png",
+          "x": 150,
+          "y": 152
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "ring_white.png",
+          "use1Xscale": false,
+          "name": "ring_white.png",
+          "x": 150,
+          "y": 164
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Lantern",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "Lantern",
+          "x": 170,
+          "y": 96
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "You",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "You",
+          "x": 170,
+          "y": 108
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Ally",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "Ally",
+          "x": 170,
+          "y": 132
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Enemy",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "Enemy",
+          "x": 170,
+          "y": 144
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Buoy",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "Buoy",
+          "x": 170,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "Spell2GUIpage2open"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 414,
+          "y": 88
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "The spell of detection.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "The spell of detection.",
+          "x": 158,
+          "y": 44
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Create a hologram map of",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Create a hologram map of",
+          "x": 150,
+          "y": 56
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "in the nebula.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "in the nebula.",
+          "x": 150,
+          "y": 80
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell2zone.png",
+          "use1Xscale": false,
+          "name": "spell2zone.png",
+          "x": 246,
+          "y": -8
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Level 1/3",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnLevel1"
+          },
+          "name": "Level 1/3",
+          "x": 218,
+          "y": 156
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Level 2/3",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnLevel2"
+          },
+          "name": "Level 2/3",
+          "x": 218,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "20 mana",
+          "onClick": {
+            "name": "Spell2GUIgetLevel"
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnLevelNot3"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "20 mana",
+          "x": 218,
+          "y": 132
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Upgrade",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnLevelNot3"
+          },
+          "name": "Upgrade",
+          "x": 226,
+          "y": 120
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Level",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnLevelNot3"
+          },
+          "name": "Level",
+          "x": 230,
+          "y": 108
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell2buttonNotificationBuoy"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 378,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell2buttonNotificationEnemy"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 378,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell2buttonNotificationTracker"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 378,
+          "y": 120
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Notifications",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Notifications",
+          "x": 286,
+          "y": 104
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Tracker",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "- Tracker",
+          "x": 286,
+          "y": 124
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Enemy",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "- Enemy",
+          "x": 286,
+          "y": 144
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Buoy",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "- Buoy",
+          "x": 286,
+          "y": 164
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell2_notification_tracker>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell2_notification_tracker>",
+          "x": 390,
+          "y": 124
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell2_notification_other_team>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell2_notification_other_team>",
+          "x": 390,
+          "y": 144
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell2_notification_buoy>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell2_notification_buoy>",
+          "x": 390,
+          "y": 164
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "entities like the stars",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "entities like the stars",
+          "x": 150,
+          "y": 68
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell_costs.png",
+          "use1Xscale": false,
+          "displayCondition": {
+            "name": "Spell2GUIreturnCustomOn"
+          },
+          "name": "spell_costs.png",
+          "x": -18,
+          "y": 12
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "N",
+          "onClick": {
+            "name": "Spell2directionN"
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnCustomOn"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "N",
+          "x": 58,
+          "y": 60
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "W",
+          "onClick": {
+            "name": "Spell2directionW"
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnCustomOn"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "W",
+          "x": 34,
+          "y": 84
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "E",
+          "onClick": {
+            "name": "Spell2directionE"
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnCustomOn"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "E",
+          "x": 82,
+          "y": 84
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "S",
+          "onClick": {
+            "name": "Spell2directionS"
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnCustomOn"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "S",
+          "x": 58,
+          "y": 108
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "U",
+          "onClick": {
+            "name": "Spell2directionUP"
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnCustomOn"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "U",
+          "x": 46,
+          "y": 108
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "D",
+          "onClick": {
+            "name": "Spell2directionDOWN"
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnCustomOn"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "D",
+          "x": 82,
+          "y": 108
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "Spell2placeLanternTP"
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnCustomOn"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "R",
+          "x": 58,
+          "y": 84
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "Spell2buttonShowCustom"
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnLevel3"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "+",
+          "x": 134,
+          "y": 16
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Display",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnCustomOn"
+          },
+          "name": "Display",
+          "x": 50,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Position",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnCustomOn"
+          },
+          "name": "Position",
+          "x": 46,
+          "y": 36
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Display Size",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnCustomOn"
+          },
+          "name": "Display Size",
+          "x": 30,
+          "y": 144
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "Spell2buttonSizeReset"
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnCustomOn"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "R",
+          "x": 30,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell2buttonSize"
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnCustomOn"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 38,
+          "y": 156
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell2_size>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnCustomOn"
+          },
+          "name": "<VAR:spell2_size>",
+          "x": 50,
+          "y": 160
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

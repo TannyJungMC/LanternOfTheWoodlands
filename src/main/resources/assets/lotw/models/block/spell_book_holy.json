@@ -1,0 +1,8 @@
+{
+  "parent": "lotw:custom/book",
+  "textures": {
+    "all": "lotw:blocks/spell_book_holy",
+    "particle": "lotw:blocks/spell_book_holy",
+    "0": "lotw:blocks/spell_book_holy"
+  }
+}

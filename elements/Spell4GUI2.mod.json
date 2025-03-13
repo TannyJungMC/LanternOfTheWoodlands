@@ -1,5 +1,5 @@
 {
-  "_fv": 73,
+  "_fv": 34,
   "_type": "gui",
   "definition": {
     "type": 0,
@@ -7,370 +7,466 @@
     "height": 0,
     "inventoryOffsetX": 0,
     "inventoryOffsetY": 0,
-    "renderBgLayer": true,
+    "renderBgLayer": false,
     "doesPauseGame": false,
     "components": [
       {
         "type": "label",
         "data": {
-          "name": "label_proc_gu_ireturn_mana",
-          "text": {
-            "fixedValue": "",
-            "name": "GUIreturnMana"
-          },
+          "text": "Mana : [<VAR:integer:mana>/30]",
           "color": {
-            "value": -10066330,
+            "value": -6710887,
             "falpha": 0.0
           },
-          "x": 54,
-          "y": 4,
-          "locked": false
+          "name": "Mana : [<VAR:integer:mana>/30]",
+          "x": 134,
+          "y": 196
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "",
+          "color": {
+            "value": -6750208,
+            "falpha": 0.0
+          },
+          "name": "",
+          "x": 278,
+          "y": 32
         }
       },
       {
         "type": "image",
         "data": {
-          "image": "background_book.png",
-          "use1Xscale": true,
-          "x": 54,
-          "y": 16,
-          "locked": false
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
         }
       },
       {
-        "type": "imagebutton",
+        "type": "label",
         "data": {
-          "name": "imagebutton_symbol_exit",
-          "image": "symbol_exit.png",
-          "hoveredImage": "",
+          "text": "Spell Active Setting",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Spell Active Setting",
+          "x": 286,
+          "y": 24
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
           "onClick": {
-            "name": "GUIClose"
+            "name": "Spell4buttonSwitchShoot"
           },
-          "x": 358,
-          "y": 208,
-          "locked": false
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 378,
+          "y": 40
         }
       },
       {
-        "type": "imagebutton",
+        "type": "label",
         "data": {
-          "name": "imagebutton_icon_home",
-          "image": "icon_home.png",
-          "hoveredImage": "icon_home_2s.png",
+          "text": "<VAR:spell4_switch_shoot>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell4_switch_shoot>",
+          "x": 390,
+          "y": 44
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Lock Shoot",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "- Lock Shoot",
+          "x": 286,
+          "y": 44
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Lock Reverse",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "- Lock Reverse",
+          "x": 286,
+          "y": 64
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
           "onClick": {
-            "name": "MenuGUIOpen"
+            "name": "Spell4buttonSwitchReverse"
           },
-          "x": 42,
-          "y": 24,
-          "locked": false
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 378,
+          "y": 60
         }
       },
       {
-        "type": "imagebutton",
+        "type": "label",
         "data": {
-          "name": "imagebutton_symbol_next",
-          "image": "symbol_next.png",
-          "hoveredImage": "",
+          "text": "<VAR:spell4_switch_reverse>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell4_switch_reverse>",
+          "x": 390,
+          "y": 64
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Follow Range",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "- Follow Range",
+          "x": 286,
+          "y": 84
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
           "onClick": {
-            "name": "GUInext"
+            "name": "Spell4buttonFollowYou"
           },
-          "x": 366,
-          "y": 108,
-          "locked": false
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 378,
+          "y": 80
         }
       },
       {
-        "type": "imagebutton",
+        "type": "label",
         "data": {
-          "name": "imagebutton_symbol_previous",
-          "image": "symbol_previous.png",
-          "hoveredImage": "",
+          "text": "<VAR:spell4_follow_you>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell4_follow_you>",
+          "x": 390,
+          "y": 84
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
           "onClick": {
-            "name": "GUIprevious"
+            "name": "OpenAdvanceSpellGUI"
           },
-          "x": 54,
-          "y": 108,
-          "locked": false
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 134,
+          "y": 88
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell4_image_2.png",
+          "use1Xscale": false,
+          "name": "spell4_image_2.png",
+          "x": 290,
+          "y": 116
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_proc_gu_ireturn_page_left",
-          "text": {
-            "fixedValue": "",
-            "name": "GUIreturnPageLeft"
-          },
+          "text": "Display Setting",
           "color": {
-            "value": -3355444,
+            "value": -10092544,
             "falpha": 0.0
           },
-          "x": 130,
-          "y": 208,
-          "locked": false
+          "name": "Display Setting",
+          "x": 150,
+          "y": 24
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_proc_gu_ireturn_page_right",
-          "text": {
-            "fixedValue": "",
-            "name": "GUIreturnPageRight"
-          },
+          "text": "- Overlay",
           "color": {
-            "value": -3355444,
+            "value": -6737152,
             "falpha": 0.0
           },
-          "x": 282,
-          "y": 208,
-          "locked": false
+          "name": "- Overlay",
+          "x": 150,
+          "y": 44
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_for_every_warriors_who_died_in_t",
-          "text": {
-            "fixedValue": "For every warriors"
-          },
+          "text": "- Target Arrow",
           "color": {
-            "value": -12829636,
+            "value": -6737152,
             "falpha": 0.0
           },
-          "x": 78,
-          "y": 52,
-          "locked": false
+          "name": "- Target Arrow",
+          "x": 150,
+          "y": 64
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell4buttonOverlay"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 242,
+          "y": 40
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_died_in_the_war_i_will_remember",
-          "text": {
-            "fixedValue": "who died in this war. I will"
-          },
+          "text": "<VAR:spell4_overlay>",
           "color": {
-            "value": -12829636,
+            "value": -6724096,
             "falpha": 0.0
           },
-          "x": 70,
-          "y": 64,
-          "locked": false
+          "name": "<VAR:spell4_overlay>",
+          "x": 254,
+          "y": 44
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell4buttonArrow"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 242,
+          "y": 60
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_remember_you_your_fight_your_c",
-          "text": {
-            "fixedValue": "remember your fight, your"
-          },
+          "text": "<VAR:spell4_arrow>",
           "color": {
-            "value": -12829636,
+            "value": -6724096,
             "falpha": 0.0
           },
-          "x": 70,
-          "y": 76,
-          "locked": false
+          "name": "<VAR:spell4_arrow>",
+          "x": 254,
+          "y": 64
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_your_courage_i_want_to_say_than",
-          "text": {
-            "fixedValue": "courage. I want to say"
-          },
+          "text": "Spell Inactive Setting",
           "color": {
-            "value": -12829636,
+            "value": -10092544,
             "falpha": 0.0
           },
-          "x": 70,
-          "y": 88,
-          "locked": false
+          "name": "Spell Inactive Setting",
+          "x": 150,
+          "y": 84
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_say_thank_you_for_protect_us",
-          "text": {
-            "fixedValue": "thank you for protecting"
-          },
+          "text": "- At Lantern",
           "color": {
-            "value": -12829636,
+            "value": -6737152,
             "falpha": 0.0
           },
-          "x": 70,
-          "y": 100,
-          "locked": false
+          "name": "- At Lantern",
+          "x": 150,
+          "y": 104
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_in_this_time_i_would_like_to_us",
-          "text": {
-            "fixedValue": "protect your determination."
-          },
+          "text": "- Free Flying",
           "color": {
-            "value": -12829636,
+            "value": -6737152,
             "falpha": 0.0
           },
-          "x": 70,
-          "y": 136,
-          "locked": false
+          "name": "- Free Flying",
+          "x": 150,
+          "y": 124
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_victory_and_freedom_back",
-          "text": {
-            "fixedValue": "I would like to use"
-          },
+          "text": "- Gravity",
           "color": {
-            "value": -12829636,
+            "value": -6737152,
             "falpha": 0.0
           },
-          "x": 230,
-          "y": 32,
-          "locked": false
+          "name": "- Gravity",
+          "x": 150,
+          "y": 144
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_us",
-          "text": {
-            "fixedValue": "us from the darkness."
-          },
+          "text": "- Boundary",
           "color": {
-            "value": -12829636,
+            "value": -6737152,
             "falpha": 0.0
           },
-          "x": 70,
-          "y": 112,
-          "locked": false
+          "name": "- Boundary",
+          "x": 150,
+          "y": 164
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell4buttonAroundLantern"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 242,
+          "y": 100
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell4buttonFreeFlying"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 242,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell4buttonGravity"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 242,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell4buttonSize"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 242,
+          "y": 160
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_like_to_use_your_weapons_to_fig",
-          "text": {
-            "fixedValue": "your weapons, to fight the"
-          },
+          "text": "<VAR:spell4_pause_around_lantern>",
           "color": {
-            "value": -12829636,
+            "value": -6724096,
             "falpha": 0.0
           },
-          "x": 222,
-          "y": 44,
-          "locked": false
+          "name": "<VAR:spell4_pause_around_lantern>",
+          "x": 254,
+          "y": 104
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_to_fight_the_darkness_youre_th",
-          "text": {
-            "fixedValue": "darkness back, and give us"
-          },
+          "text": "<VAR:spell4_pause_free_flying>",
           "color": {
-            "value": -12829636,
+            "value": -6724096,
             "falpha": 0.0
           },
-          "x": 222,
-          "y": 56,
-          "locked": false
+          "name": "<VAR:spell4_pause_free_flying>",
+          "x": 254,
+          "y": 124
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_our_lights_in_the_dark",
-          "text": {
-            "fixedValue": "freedom. Please, give me"
-          },
+          "text": "<VAR:spell4_pause_gravity>",
           "color": {
-            "value": -12829636,
+            "value": -6724096,
             "falpha": 0.0
           },
-          "x": 222,
-          "y": 68,
-          "locked": false
+          "name": "<VAR:spell4_pause_gravity>",
+          "x": 254,
+          "y": 144
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_darkness",
-          "text": {
-            "fixedValue": "But now, it's my turn to"
-          },
+          "text": "<VAR:integer:spell4_pause_size>",
           "color": {
-            "value": -12829636,
+            "value": -6724096,
             "falpha": 0.0
           },
-          "x": 70,
-          "y": 124,
-          "locked": false
-        }
-      },
-      {
-        "type": "label",
-        "data": {
-          "name": "label_me_strength",
-          "text": {
-            "fixedValue": "power."
-          },
-          "color": {
-            "value": -12829636,
-            "falpha": 0.0
-          },
-          "x": 222,
-          "y": 80,
-          "locked": false
-        }
-      },
-      {
-        "type": "imagebutton",
-        "data": {
-          "name": "imagebutton_background_text_green",
-          "image": "background_text_green.png",
-          "hoveredImage": "",
-          "x": 70,
-          "y": 28,
-          "locked": false
-        }
-      },
-      {
-        "type": "label",
-        "data": {
-          "name": "label_story",
-          "text": {
-            "fixedValue": "STORY"
-          },
-          "color": {
-            "value": -1,
-            "falpha": 0.0
-          },
-          "x": 122,
-          "y": 32,
-          "locked": false
-        }
-      },
-      {
-        "type": "imagebutton",
-        "data": {
-          "name": "imagebutton_image_spell4_story",
-          "image": "image_spell4_story.png",
-          "hoveredImage": "",
-          "x": 82,
-          "y": 148,
-          "locked": false
+          "name": "<VAR:integer:spell4_pause_size>",
+          "x": 254,
+          "y": 164
         }
       }
     ],

@@ -1,7 +1,0 @@
-{
-  "parent": "lanternofthewoodlands:custom/anchor",
-  "textures": {
-    "0": "lanternofthewoodlands:block/anchor",
-    "particle": "lanternofthewoodlands:item/anchor"
-  }
-}

@@ -1,0 +1,12 @@
+{
+  "_fv": 34,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "LCONTROL",
+    "keyBindingName": "Get Lantern",
+    "keyBindingCategoryKey": "lotw",
+    "onKeyPressed": {
+      "name": "GetLantern"
+    }
+  }
+}

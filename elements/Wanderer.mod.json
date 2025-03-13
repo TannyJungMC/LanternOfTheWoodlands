@@ -1,0 +1,48 @@
+{
+  "_fv": 34,
+  "_type": "rangeditem",
+  "definition": {
+    "renderType": 0,
+    "texture": "wanderer",
+    "customModelName": "Normal",
+    "name": "Otherworldly Wanderer",
+    "specialInfo": [
+      "------------------------------",
+      "Info",
+      "> Right click to shoot",
+      "> It will summon portal door when hit ground",
+      "> Teleport all entity in circle to your lantern on a stick",
+      "> Open the portal for 3 seconds but 10 seconds when hold in left hand",
+      "------------------------------"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:LotwTab"
+    },
+    "stackSize": 64,
+    "ammoItem": {
+      "value": "CUSTOM:Wanderer"
+    },
+    "shootConstantly": false,
+    "usageCount": 0,
+    "actionSound": {
+      "value": "block.enchantment_table.use"
+    },
+    "hasGlow": false,
+    "animation": "bow",
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "bulletPower": 10.0,
+    "bulletDamage": 0.0,
+    "bulletKnockback": 0,
+    "bulletParticles": false,
+    "bulletIgnitesFire": false,
+    "bulletItemTexture": {
+      "value": "CUSTOM:InvisibleBlock"
+    },
+    "bulletModel": "Default",
+    "customBulletModelTexture": "",
+    "onBulletHitsBlock": {
+      "name": "BasicSpell5start"
+    }
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "_fv": 73,
+  "_fv": 34,
   "_type": "gui",
   "definition": {
     "type": 0,
@@ -7,82 +7,469 @@
     "height": 0,
     "inventoryOffsetX": 0,
     "inventoryOffsetY": 0,
-    "renderBgLayer": true,
+    "renderBgLayer": false,
     "doesPauseGame": false,
     "components": [
       {
         "type": "image",
         "data": {
-          "image": "background_book.png",
-          "use1Xscale": true,
-          "x": 102,
-          "y": 8,
-          "locked": false
-        }
-      },
-      {
-        "type": "checkbox",
-        "data": {
-          "name": "kjn",
-          "text": "",
-          "x": 118,
-          "y": 20,
-          "locked": false
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_pause",
-          "text": {
-            "fixedValue": "Pause"
-          },
+          "text": "Mana : [<VAR:integer:mana>/30]",
           "color": {
-            "value": -12829636,
+            "value": -6710887,
             "falpha": 0.0
           },
-          "x": 142,
-          "y": 28,
-          "locked": false
+          "name": "Mana : [<VAR:integer:mana>/30]",
+          "x": 230,
+          "y": 196
         }
       },
       {
         "type": "button",
         "data": {
-          "name": "button_empty",
-          "text": "",
-          "isUndecorated": false,
-          "width": 20,
+          "text": "Back",
+          "onClick": {
+            "name": "ClickLanternGround"
+          },
+          "width": 48,
           "height": 20,
-          "x": 118,
-          "y": 44,
-          "locked": false
+          "name": "Back",
+          "x": 374,
+          "y": 192
         }
       },
       {
         "type": "button",
         "data": {
-          "name": "button_close",
-          "text": "Close",
-          "isUndecorated": false,
-          "width": 40,
+          "text": "Cancel Spell",
+          "onClick": {
+            "name": "Spell1cancel"
+          },
+          "width": 88,
           "height": 20,
-          "x": 382,
-          "y": 208,
-          "locked": false
+          "name": "Cancel Spell",
+          "x": 134,
+          "y": 192
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "FALSE DIVINATION",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "FALSE DIVINATION",
+          "x": 170,
+          "y": 28
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell3.png",
+          "use1Xscale": false,
+          "name": "spell3.png",
+          "x": 150,
+          "y": 24
         }
       },
       {
         "type": "button",
         "data": {
-          "name": "button_empty1",
-          "text": ">",
-          "isUndecorated": false,
+          "text": "-",
+          "onClick": {
+            "name": "Spell1buttonRemoveAll"
+          },
           "width": 8,
           "height": 20,
+          "name": "-",
+          "x": 150,
+          "y": 124
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "The spell of astrology.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "The spell of astrology.",
+          "x": 158,
+          "y": 44
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Use all 13 zodiac cards,",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Use all 13 zodiac cards,",
+          "x": 150,
+          "y": 56
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "only work while lantern",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "only work while lantern",
+          "x": 150,
+          "y": 68
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "Spell1GUIopenPage2"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
           "x": 414,
-          "y": 96,
-          "locked": false
+          "y": 88
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell1station_image.png",
+          "use1Xscale": true,
+          "name": "spell1station_image.png",
+          "x": 182,
+          "y": 96
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Effect Limit : [<VAR:integer:spell1_effect_count>/<VAR:integer:spell1_effect_count_max>]",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "Effect Limit : [<VAR:integer:spell1_effect_count>/<VAR:integer:spell1_effect_count_max>]",
+          "x": 162,
+          "y": 128
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell1buttonRadius"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 158,
+          "y": 160
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Radius : <VAR:integer:spell1_distance>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1radiusGetTrue"
+          },
+          "name": "Radius : <VAR:integer:spell1_distance>",
+          "x": 170,
+          "y": 164
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "Spell1buttonRadiusReset"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "R",
+          "x": 150,
+          "y": 160
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "on a stick.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "on a stick.",
+          "x": 150,
+          "y": 80
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "30 mana",
+          "onClick": {
+            "name": "Spell1buttonRadiusGet"
+          },
+          "displayCondition": {
+            "name": "Spell1radiusGet"
+          },
+          "width": 104,
+          "height": 20,
+          "name": "30 mana",
+          "x": 170,
+          "y": 160
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Target For Good Effects",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Target For Good Effects",
+          "x": 286,
+          "y": 24
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "Spell1buttonTargetGoodReset"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "R",
+          "x": 286,
+          "y": 36
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell1buttonTargetGood"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 294,
+          "y": 36
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "Spell1buttonTargetBadReset"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "R",
+          "x": 286,
+          "y": 72
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell1buttonTargetBad"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 294,
+          "y": 72
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_target_good>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell1_target_good>",
+          "x": 306,
+          "y": 40
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_target_bad>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell1_target_bad>",
+          "x": 306,
+          "y": 76
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Custom Radius",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Custom Radius",
+          "x": 150,
+          "y": 148
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Zodiac Circle",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "- Zodiac Circle",
+          "x": 286,
+          "y": 120
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Zodiac Cards",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "- Zodiac Cards",
+          "x": 286,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell1buttonInvisibleDoor"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 378,
+          "y": 136
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell1buttonInvisibleCircle"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 378,
+          "y": 116
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Hide Objects",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Hide Objects",
+          "x": 286,
+          "y": 100
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_invisible_card>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell1_invisible_card>",
+          "x": 390,
+          "y": 140
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_invisible_circle>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell1_invisible_circle>",
+          "x": 390,
+          "y": 120
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Target For Bad Effects",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Target For Bad Effects",
+          "x": 286,
+          "y": 60
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_lily.png",
+          "use1Xscale": false,
+          "name": "1_lily.png",
+          "x": 338,
+          "y": 160
         }
       }
     ],

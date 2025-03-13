@@ -1,0 +1,7 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "lotw:blocks/wall_of_vines",
+    "particle": "lotw:blocks/wall_of_vines"
+  }
+}

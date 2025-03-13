@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "lotw:block/lantern_stick"
+    },
+    "facing=east": {
+      "model": "lotw:block/lantern_stick",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "lotw:block/lantern_stick",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "lotw:block/lantern_stick",
+      "y": 270
+    }
+  }
+}

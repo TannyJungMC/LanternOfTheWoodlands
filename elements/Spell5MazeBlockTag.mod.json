@@ -1,0 +1,26 @@
+{
+  "_fv": 34,
+  "_type": "tag",
+  "definition": {
+    "type": "Blocks",
+    "items": [],
+    "blocks": [
+      {
+        "value": "Blocks.MONSTER_EGG#2"
+      },
+      {
+        "value": "Blocks.MONSTER_EGG#3"
+      },
+      {
+        "value": "Blocks.MONSTER_EGG#4"
+      },
+      {
+        "value": "Blocks.VINE"
+      }
+    ],
+    "functions": [],
+    "entities": [],
+    "name": "spell_5_maze_block_tag",
+    "namespace": "minecraft"
+  }
+}

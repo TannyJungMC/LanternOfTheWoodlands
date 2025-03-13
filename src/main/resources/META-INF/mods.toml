@@ -1,29 +1,26 @@
 modLoader="javafml"
-loaderVersion="[47,)"
+loaderVersion="[36,)"
 license="All Rights Reserved"
 
 [[mods]]
-modId="lanternofthewoodlands"
-version="4.1.0"
+modId="lotw"
+version="1.1.4"
 displayName="Lantern of The Woodlands"
-displayURL="https://legacy.curseforge.com/members/tannyjung/projects"
-logoFile="logo.png"
 credits="Created with MCreator"
+displayURL="https://www.curseforge.com/members/tannyjung/projects"
+logoFile="logo.png"
 authors="TannyJung"
-description="MAGIC!"
+description='''
+A magic lantern with nature magic spells
+'''
 
-# Start of user code block mod configuration
-# End of user code block mod configuration
-
-[[dependencies.lanternofthewoodlands]]
+[[dependencies.lotw]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.20.1]"
-    ordering="AFTER"
+    versionRange="[1.16.5]"
+    ordering="NONE"
     side="BOTH"
 
 
 
 
-# Start of user code block dependencies configuration
-# End of user code block dependencies configuration

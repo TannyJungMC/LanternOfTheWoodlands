@@ -1,0 +1,7 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "lotw:blocks/flower_of_life1",
+    "particle": "lotw:blocks/flower_of_life1"
+  }
+}

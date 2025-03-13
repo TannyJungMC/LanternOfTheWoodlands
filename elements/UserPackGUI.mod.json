@@ -1,0 +1,311 @@
+{
+  "_fv": 34,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Close",
+          "onClick": {
+            "name": "CloseGUI"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Close",
+          "x": 374,
+          "y": 192
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "basicspell13.png",
+          "use1Xscale": false,
+          "name": "basicspell13.png",
+          "x": 286,
+          "y": 24
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "basicspell12.png",
+          "use1Xscale": false,
+          "name": "basicspell12.png",
+          "x": 286,
+          "y": 104
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "THE PLANT HUNTER'S",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "THE PLANT HUNTER'S",
+          "x": 306,
+          "y": 28
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "BOTTLE OF MANA",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "BOTTLE OF MANA",
+          "x": 306,
+          "y": 108
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "30 mana",
+          "onClick": {
+            "name": "BasicSpell13get"
+          },
+          "width": 96,
+          "height": 20,
+          "name": "30 mana",
+          "x": 286,
+          "y": 80
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "30 mana",
+          "onClick": {
+            "name": "BasicSpell12get"
+          },
+          "width": 96,
+          "height": 20,
+          "name": "30 mana",
+          "x": 286,
+          "y": 160
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "BAG",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "BAG",
+          "x": 306,
+          "y": 40
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "X",
+          "onClick": {
+            "name": "BasicSpell12cancel"
+          },
+          "width": 16,
+          "height": 20,
+          "name": "X",
+          "x": 390,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "X",
+          "onClick": {
+            "name": "BasicSpell13cancel"
+          },
+          "width": 16,
+          "height": 20,
+          "name": "X",
+          "x": 390,
+          "y": 80
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Store 150 mana into",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Store 150 mana into",
+          "x": 294,
+          "y": 124
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "the bottle.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "the bottle.",
+          "x": 286,
+          "y": 136
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "for use in spells.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "for use in spells.",
+          "x": 286,
+          "y": 68
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Store items and plant",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Store items and plant",
+          "x": 294,
+          "y": 56
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Mana : [<VAR:integer:mana>/30]",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "Mana : [<VAR:integer:mana>/30]",
+          "x": 134,
+          "y": 196
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "InfoSpellGUIprevious"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 134,
+          "y": 88
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "InfoSpellGUInext"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 414,
+          "y": 88
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "{",
+          "onClick": {
+            "name": "InfoSpellGUIhome"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "{",
+          "x": 134,
+          "y": 16
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "USER",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "USER",
+          "x": 202,
+          "y": 88
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "PACK",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "PACK",
+          "x": 202,
+          "y": 100
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Back",
+          "onClick": {
+            "name": "ClickLanternGround"
+          },
+          "displayCondition": {
+            "name": "ReturnLanternGoundTRUE"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Back",
+          "x": 326,
+          "y": 192
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

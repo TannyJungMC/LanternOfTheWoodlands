@@ -1,0 +1,29 @@
+{
+  "_fv": 34,
+  "_type": "tag",
+  "definition": {
+    "type": "Blocks",
+    "items": [],
+    "blocks": [
+      {
+        "value": "CUSTOM:IllusionLeaves"
+      },
+      {
+        "value": "CUSTOM:IllusionLog"
+      },
+      {
+        "value": "CUSTOM:IllusionStone"
+      },
+      {
+        "value": "CUSTOM:IllusionDirt"
+      },
+      {
+        "value": "CUSTOM:IllusionGrass"
+      }
+    ],
+    "functions": [],
+    "entities": [],
+    "name": "illusion_block",
+    "namespace": "minecraft"
+  }
+}

@@ -1,0 +1,310 @@
+{
+  "_fv": 34,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Close",
+          "onClick": {
+            "name": "CloseGUI"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Close",
+          "x": 374,
+          "y": 192
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Mana : [<VAR:integer:mana>/30]",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "Mana : [<VAR:integer:mana>/30]",
+          "x": 134,
+          "y": 196
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "InfoSpellGUInext"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 414,
+          "y": 88
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "{",
+          "onClick": {
+            "name": "InfoSpellGUIhome"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "{",
+          "x": 134,
+          "y": 16
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "InfoSpellGUIprevious"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 134,
+          "y": 88
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell3.png",
+          "use1Xscale": false,
+          "name": "spell3.png",
+          "x": 286,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "FALSE DIVINATION",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "FALSE DIVINATION",
+          "x": 306,
+          "y": 28
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "ADVANCE",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "ADVANCE",
+          "x": 190,
+          "y": 88
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "The spell of astrology.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "The spell of astrology.",
+          "x": 294,
+          "y": 44
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Use all 13 zodiac cards,",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Use all 13 zodiac cards,",
+          "x": 286,
+          "y": 56
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "only work while lantern",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "only work while lantern",
+          "x": 286,
+          "y": 68
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "R : Oxeye Daisy",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "R : Oxeye Daisy",
+          "x": 286,
+          "y": 156
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "M : 30",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "M : 30",
+          "x": 286,
+          "y": 168
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "SPELLS",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "SPELLS",
+          "x": 194,
+          "y": 100
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "on a stick.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "on a stick.",
+          "x": 286,
+          "y": 80
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "B : Lily of The Valley",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "B : Lily of The Valley",
+          "x": 286,
+          "y": 144
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "D : Fern",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "D : Fern",
+          "x": 286,
+          "y": 132
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Y : Birch Sapling",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "Y : Birch Sapling",
+          "x": 286,
+          "y": 120
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "P : Warped Fungus",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "P : Warped Fungus",
+          "x": 286,
+          "y": 108
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "G : Sunflower",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "G : Sunflower",
+          "x": 286,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Back",
+          "onClick": {
+            "name": "ClickLanternGround"
+          },
+          "displayCondition": {
+            "name": "ReturnLanternGoundTRUE"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Back",
+          "x": 326,
+          "y": 192
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

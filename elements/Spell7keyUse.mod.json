@@ -1,0 +1,12 @@
+{
+  "_fv": 34,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "5",
+    "keyBindingName": "Advance Spell 7 - Use Ability",
+    "keyBindingCategoryKey": "lotw",
+    "onKeyPressed": {
+      "name": "Spell7keyUseRun"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "lotw:block/wall_of_vines"
+    },
+    "facing=east": {
+      "model": "lotw:block/wall_of_vines",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "lotw:block/wall_of_vines",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "lotw:block/wall_of_vines",
+      "y": 270
+    }
+  }
+}

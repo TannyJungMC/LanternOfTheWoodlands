@@ -1,0 +1,893 @@
+{
+  "_fv": 34,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Close",
+          "onClick": {
+            "name": "CloseGUI"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Close",
+          "x": 374,
+          "y": 192
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "ALTERNATIVE KEYBOARD",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "ALTERNATIVE KEYBOARD",
+          "x": 154,
+          "y": 24
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "InfoSpellGUInext"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 414,
+          "y": 88
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Back",
+          "onClick": {
+            "name": "ClickLanternGround"
+          },
+          "displayCondition": {
+            "name": "ReturnLanternGoundTRUE"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Back",
+          "x": 326,
+          "y": 192
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "a",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonA"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "a",
+          "x": 286,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "b",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonB"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "b",
+          "x": 298,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "c",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonC"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "c",
+          "x": 310,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "d",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonD"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "d",
+          "x": 322,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "e",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonE"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "e",
+          "x": 334,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "f",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonF"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "f",
+          "x": 346,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "g",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonG"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "g",
+          "x": 358,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "h",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonH"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "h",
+          "x": 370,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "i",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonI"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "i",
+          "x": 382,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "j",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonJ"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "j",
+          "x": 394,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "k",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonK"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "k",
+          "x": 286,
+          "y": 116
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "l",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonL"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "l",
+          "x": 298,
+          "y": 116
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "m",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonM"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "m",
+          "x": 310,
+          "y": 116
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "n",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonN"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "n",
+          "x": 322,
+          "y": 116
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "o",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonO"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "o",
+          "x": 334,
+          "y": 116
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "p",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonP"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "p",
+          "x": 346,
+          "y": 116
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "q",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonQ"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "q",
+          "x": 358,
+          "y": 116
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "r",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonR"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "r",
+          "x": 370,
+          "y": 116
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "s",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonS"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "s",
+          "x": 382,
+          "y": 116
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "t",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonT"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "t",
+          "x": 394,
+          "y": 116
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "u",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonU"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "u",
+          "x": 310,
+          "y": 136
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "v",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonV"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "v",
+          "x": 322,
+          "y": 136
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "w",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonW"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "w",
+          "x": 334,
+          "y": 136
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonX"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "x",
+          "x": 346,
+          "y": 136
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "y",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonY"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "y",
+          "x": 358,
+          "y": 136
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "z",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonZ"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "z",
+          "x": 370,
+          "y": 136
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "_",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonSpace"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "_",
+          "x": 286,
+          "y": 72
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonRemove"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "<",
+          "x": 394,
+          "y": 72
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:aternative_keyboard>",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "<VAR:aternative_keyboard>",
+          "x": 286,
+          "y": 44
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Saves",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Saves",
+          "x": 150,
+          "y": 88
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "The keyboard for write",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "The keyboard for write",
+          "x": 158,
+          "y": 40
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "custom text to use in",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "custom text to use in",
+          "x": 150,
+          "y": 52
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonSave1"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "+",
+          "x": 150,
+          "y": 100
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonReset"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "R",
+          "x": 414,
+          "y": 16
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "0",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonNumber0"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "0",
+          "x": 286,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "1",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonNumber1"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "1",
+          "x": 298,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "2",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonNumber2"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "2",
+          "x": 310,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "3",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonNumber3"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "3",
+          "x": 322,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "4",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonNumber4"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "4",
+          "x": 334,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "5",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonNumber5"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "5",
+          "x": 346,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "6",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonNumber6"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "6",
+          "x": 358,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "7",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonNumber7"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "7",
+          "x": 370,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "8",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonNumber8"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "8",
+          "x": 382,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "9",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonNumber9"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "9",
+          "x": 394,
+          "y": 160
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "some spells.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "some spells.",
+          "x": 150,
+          "y": 64
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonSave2"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "+",
+          "x": 150,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonSave3"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "+",
+          "x": 150,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonSave4"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "+",
+          "x": 150,
+          "y": 160
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:aternative_keyboard_save1>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:aternative_keyboard_save1>",
+          "x": 162,
+          "y": 104
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:aternative_keyboard_save2>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:aternative_keyboard_save2>",
+          "x": 162,
+          "y": 124
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:aternative_keyboard_save3>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:aternative_keyboard_save3>",
+          "x": 162,
+          "y": 144
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:aternative_keyboard_save4>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:aternative_keyboard_save4>",
+          "x": 162,
+          "y": 164
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "InfoSpellGUIprevious"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 134,
+          "y": 88
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ",",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonDot2"
+          },
+          "width": 12,
+          "height": 20,
+          "name": ",",
+          "x": 310,
+          "y": 72
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "=",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonEqual"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "=",
+          "x": 334,
+          "y": 72
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ".",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonDot"
+          },
+          "width": 12,
+          "height": 20,
+          "name": ".",
+          "x": 298,
+          "y": 72
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "!",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonSurprised"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "!",
+          "x": 346,
+          "y": 72
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ":",
+          "onClick": {
+            "name": "AlternativeKeyboardButtonDoubleDots"
+          },
+          "width": 12,
+          "height": 20,
+          "name": ":",
+          "x": 322,
+          "y": 72
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

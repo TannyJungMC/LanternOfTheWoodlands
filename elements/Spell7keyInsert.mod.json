@@ -1,0 +1,12 @@
+{
+  "_fv": 34,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "4",
+    "keyBindingName": "Advance Spell 7 - Input/Output",
+    "keyBindingCategoryKey": "lotw",
+    "onKeyPressed": {
+      "name": "Spell7keyInsertRun"
+    }
+  }
+}

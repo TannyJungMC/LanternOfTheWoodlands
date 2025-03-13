@@ -1,0 +1,709 @@
+{
+  "_fv": 34,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Mana : [<VAR:integer:mana>/30]",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "Mana : [<VAR:integer:mana>/30]",
+          "x": 134,
+          "y": 196
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "",
+          "color": {
+            "value": -6750208,
+            "falpha": 0.0
+          },
+          "name": "",
+          "x": 278,
+          "y": 32
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Entity Filter",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Entity Filter",
+          "x": 286,
+          "y": 144
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "OpenAdvanceSpellGUI"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 134,
+          "y": 88
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "5 mana",
+          "onClick": {
+            "name": "Spell2getTracker"
+          },
+          "width": 44,
+          "height": 20,
+          "name": "5 mana",
+          "x": 38,
+          "y": 76
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "3 mana",
+          "onClick": {
+            "name": "Spell2getWaypoint"
+          },
+          "width": 52,
+          "height": 20,
+          "name": "3 mana",
+          "x": 38,
+          "y": 128
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-",
+          "onClick": {
+            "name": "Spell2removeTracker"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "-",
+          "x": 90,
+          "y": 76
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-",
+          "onClick": {
+            "name": "Spell2removeWaypoint"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "-",
+          "x": 90,
+          "y": 128
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "?",
+          "onClick": {
+            "name": "Spell2checkTrackerList"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "?",
+          "x": 82,
+          "y": 76
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Buoy",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Buoy",
+          "x": 58,
+          "y": 108
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Tracker",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Tracker",
+          "x": 50,
+          "y": 56
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell2buttonInfo"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 378,
+          "y": 36
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Info",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "- Info",
+          "x": 286,
+          "y": 40
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Entity",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "- Entity",
+          "x": 286,
+          "y": 60
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Player",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "- Player",
+          "x": 286,
+          "y": 80
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell2buttonEntity"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 378,
+          "y": 56
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell2buttonPlayer"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 378,
+          "y": 76
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell2_show_info>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell2_show_info>",
+          "x": 390,
+          "y": 40
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell2_show_entity>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell2_show_entity>",
+          "x": 390,
+          "y": 60
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell2_show_player>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell2_show_player>",
+          "x": 390,
+          "y": 80
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell2_findkey_list>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnLevel2up"
+          },
+          "name": "<VAR:spell2_findkey_list>",
+          "x": 306,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Unlock at Level 2",
+          "displayCondition": {
+            "name": "Spell2GUIreturnLevel1"
+          },
+          "width": 100,
+          "height": 20,
+          "name": "Unlock at Level 2",
+          "x": 306,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "=",
+          "onClick": {
+            "name": "Spell2buttonFindKeyType"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "=",
+          "x": 294,
+          "y": 156
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Specify Positions",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Specify Positions",
+          "x": 286,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Tracker",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "- Tracker",
+          "x": 286,
+          "y": 100
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Buoy",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "- Buoy",
+          "x": 286,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell2buttonTracker"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 378,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell2buttonBuoy"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 378,
+          "y": 116
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell2_show_tracker>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell2_show_tracker>",
+          "x": 390,
+          "y": 100
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell2_show_waypoint>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell2_show_waypoint>",
+          "x": 390,
+          "y": 120
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:spell2_zoom>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell2GUIreturnLevel3"
+          },
+          "name": "<VAR:integer:spell2_zoom>",
+          "x": 170,
+          "y": 40
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "Spell2buttonZoomReset"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "R",
+          "x": 150,
+          "y": 36
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell2buttonZoom"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 158,
+          "y": 36
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Scan Distance",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Scan Distance",
+          "x": 150,
+          "y": 24
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Unlock at Level 3",
+          "displayCondition": {
+            "name": "Spell2GUIreturnLevelNot3"
+          },
+          "width": 100,
+          "height": 20,
+          "name": "Unlock at Level 3",
+          "x": 170,
+          "y": 36
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell_costs.png",
+          "use1Xscale": false,
+          "name": "spell_costs.png",
+          "x": -18,
+          "y": 12
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Radar Display Quarity",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Radar Display Quarity",
+          "x": 150,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "Spell2buttonRadarQuarityReset"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "R",
+          "x": 150,
+          "y": 108
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell2buttonRadarQuarity"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 158,
+          "y": 108
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell2_scanner_quarity>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell2_scanner_quarity>",
+          "x": 170,
+          "y": 112
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Footstep",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Footstep",
+          "x": 150,
+          "y": 132
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "Spell2buttonFootstepReset"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "R",
+          "x": 150,
+          "y": 144
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell2buttonFootStep"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 158,
+          "y": 144
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Unlock at Level 3",
+          "displayCondition": {
+            "name": "Spell2GUIreturnLevelNot3"
+          },
+          "width": 100,
+          "height": 20,
+          "name": "Unlock at Level 3",
+          "x": 170,
+          "y": 144
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell2_footstep>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell2_footstep>",
+          "x": 170,
+          "y": 148
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Scan Speed and Details",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Scan Speed and Details",
+          "x": 150,
+          "y": 60
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "Spell2buttonSpeedReset"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "R",
+          "x": 150,
+          "y": 72
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "Spell2buttonSpeed"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 158,
+          "y": 72
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell2_speed>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell2_speed>",
+          "x": 170,
+          "y": 76
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "Spell2buttonFindKeyTypeReset"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "R",
+          "x": 286,
+          "y": 156
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

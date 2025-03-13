@@ -1,0 +1,179 @@
+{
+  "_fv": 34,
+  "_type": "overlay",
+  "definition": {
+    "priority": "NORMAL",
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "text": "Pos : <VAR:integer:spell7_book_number> » <VAR:integer:spell7_move>",
+          "color": {
+            "value": -3368449,
+            "falpha": 0.0
+          },
+          "name": "Pos : <VAR:integer:spell7_book_number> » <VAR:integer:spell7_move>",
+          "x": 6,
+          "y": 104
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell7_generator1>",
+          "color": {
+            "value": -3368704,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell7_generator1>",
+          "x": 22,
+          "y": 4
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell7_generator2>",
+          "color": {
+            "value": -3368704,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell7_generator2>",
+          "x": 22,
+          "y": 16
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell7_generator3>",
+          "color": {
+            "value": -3368704,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell7_generator3>",
+          "x": 22,
+          "y": 28
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "☑",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell7returnGenerator1work"
+          },
+          "name": "☑",
+          "x": 6,
+          "y": 4
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "☑",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell7returnGenerator2work"
+          },
+          "name": "☑",
+          "x": 6,
+          "y": 16
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "☑",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell7returnGenerator3work"
+          },
+          "name": "☑",
+          "x": 6,
+          "y": 28
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Mode : <VAR:integer:spell7_mode>",
+          "color": {
+            "value": -6697984,
+            "falpha": 0.0
+          },
+          "name": "Mode : <VAR:integer:spell7_mode>",
+          "x": 6,
+          "y": 128
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Spell : <VAR:spell7_use>",
+          "color": {
+            "value": -16724839,
+            "falpha": 0.0
+          },
+          "name": "Spell : <VAR:spell7_use>",
+          "x": 6,
+          "y": 116
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "First Spell : <VAR:spell7_use_double>",
+          "color": {
+            "value": -3355444,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell7returnDoubleSpell"
+          },
+          "name": "First Spell : <VAR:spell7_use_double>",
+          "x": 6,
+          "y": 64
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "First Pos : <VAR:integer:spell7_use_double_number>",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell7returnDoubleSpell"
+          },
+          "name": "First Pos : <VAR:integer:spell7_use_double_number>",
+          "x": 6,
+          "y": 76
+        }
+      }
+    ],
+    "baseTexture": "",
+    "overlayTarget": "Ingame",
+    "displayCondition": {
+      "name": "Spell7returnOverlay"
+    },
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

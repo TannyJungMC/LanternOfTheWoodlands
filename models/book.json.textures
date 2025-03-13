@@ -1,10 +1,88 @@
 {
   "mappings": {
+    "book_enchanted": {
+      "map": {
+        "0": "book_enchanted"
+      },
+      "name": "book_enchanted"
+    },
     "default": {
       "map": {
-        "missing": "user_book"
+        "0": "book"
       },
       "name": "default"
+    },
+    "book_writtien": {
+      "map": {
+        "0": "book_written"
+      },
+      "name": "book_writtien"
+    },
+    "book_writing": {
+      "map": {
+        "0": "book_writing"
+      },
+      "name": "book_writing"
+    },
+    "spell_book_ice": {
+      "map": {
+        "0": "spell_book_ice"
+      },
+      "name": "spell_book_ice"
+    },
+    "spell_book_dark": {
+      "map": {
+        "0": "spell_book_dark"
+      },
+      "name": "spell_book_dark"
+    },
+    "spell_book_fire": {
+      "map": {
+        "0": "spell_book_fire"
+      },
+      "name": "spell_book_fire"
+    },
+    "spell_book_weather": {
+      "map": {
+        "0": "spell_book_weather"
+      },
+      "name": "spell_book_weather"
+    },
+    "spell_book_healing": {
+      "map": {
+        "0": "spell_book_healing"
+      },
+      "name": "spell_book_healing"
+    },
+    "spell_book_holy": {
+      "map": {
+        "0": "spell_book_holy"
+      },
+      "name": "spell_book_holy"
+    },
+    "spell_book_light": {
+      "map": {
+        "0": "spell_book_light"
+      },
+      "name": "spell_book_light"
+    },
+    "spell_book_adaptive": {
+      "map": {
+        "0": "spell_book_adaptive"
+      },
+      "name": "spell_book_adaptive"
+    },
+    "spell_book_wind": {
+      "map": {
+        "0": "spell_book_wind"
+      },
+      "name": "spell_book_wind"
+    },
+    "spell_book_teleportation": {
+      "map": {
+        "0": "spell_book_teleportation"
+      },
+      "name": "spell_book_teleportation"
     }
   }
 }

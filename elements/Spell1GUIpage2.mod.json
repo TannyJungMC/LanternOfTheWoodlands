@@ -1,0 +1,1363 @@
+{
+  "_fv": 34,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "OpenAdvanceSpellGUI"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 6,
+          "y": 220
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Mana : [<VAR:integer:mana>/30]",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "Mana : [<VAR:integer:mana>/30]",
+          "x": 174,
+          "y": 16
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_effect1>",
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect1"
+          },
+          "name": "<VAR:spell1_effect1>",
+          "x": 206,
+          "y": 36
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "I",
+          "onClick": {
+            "name": "Spell1buttonEffect1"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect1"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "I",
+          "x": 202,
+          "y": 48
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "II",
+          "onClick": {
+            "name": "Spell1buttonEffect2"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect2"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "II",
+          "x": 234,
+          "y": 52
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "IV",
+          "onClick": {
+            "name": "Spell1buttonEffect4"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect4"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "IV",
+          "x": 266,
+          "y": 108
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "III",
+          "onClick": {
+            "name": "Spell1buttonEffect3"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect3"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "III",
+          "x": 262,
+          "y": 76
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "V",
+          "onClick": {
+            "name": "Spell1buttonEffect5"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect5"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "V",
+          "x": 262,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "VI",
+          "onClick": {
+            "name": "Spell1buttonEffect6"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect6"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "VI",
+          "x": 234,
+          "y": 168
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "VII",
+          "onClick": {
+            "name": "Spell1buttonEffect7"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect7"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "VII",
+          "x": 202,
+          "y": 172
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "XII",
+          "onClick": {
+            "name": "Spell1buttonEffect12"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect12"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "XII",
+          "x": 170,
+          "y": 52
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "X",
+          "onClick": {
+            "name": "Spell1buttonEffect10"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect10"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "X",
+          "x": 138,
+          "y": 108
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "XI",
+          "onClick": {
+            "name": "Spell1buttonEffect11"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect11"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "XI",
+          "x": 142,
+          "y": 76
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "IX",
+          "onClick": {
+            "name": "Spell1buttonEffect9"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect9"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "IX",
+          "x": 142,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "VIII",
+          "onClick": {
+            "name": "Spell1buttonEffect8"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect8"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "VIII",
+          "x": 170,
+          "y": 168
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_effect2>",
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect2"
+          },
+          "name": "<VAR:spell1_effect2>",
+          "x": 238,
+          "y": 40
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_effect3>",
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect3"
+          },
+          "name": "<VAR:spell1_effect3>",
+          "x": 266,
+          "y": 64
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_effect4>",
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect4"
+          },
+          "name": "<VAR:spell1_effect4>",
+          "x": 290,
+          "y": 112
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_effect5>",
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect5"
+          },
+          "name": "<VAR:spell1_effect5>",
+          "x": 266,
+          "y": 164
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_effect6>",
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect6"
+          },
+          "name": "<VAR:spell1_effect6>",
+          "x": 238,
+          "y": 192
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_effect7>",
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect7"
+          },
+          "name": "<VAR:spell1_effect7>",
+          "x": 206,
+          "y": 196
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_effect8>",
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect8"
+          },
+          "name": "<VAR:spell1_effect8>",
+          "x": 174,
+          "y": 192
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_effect9>",
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect9"
+          },
+          "name": "<VAR:spell1_effect9>",
+          "x": 146,
+          "y": 164
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_effect10>",
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect10"
+          },
+          "name": "<VAR:spell1_effect10>",
+          "x": 118,
+          "y": 112
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_effect11>",
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect11"
+          },
+          "name": "<VAR:spell1_effect11>",
+          "x": 146,
+          "y": 64
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_effect12>",
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1startEffect12"
+          },
+          "name": "<VAR:spell1_effect12>",
+          "x": 174,
+          "y": 40
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "I | Aries",
+          "color": {
+            "value": -1329017,
+            "falpha": 0.0
+          },
+          "name": "I | Aries",
+          "x": 26,
+          "y": 4
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "II | Taurus",
+          "color": {
+            "value": -2446,
+            "falpha": 0.0
+          },
+          "name": "II | Taurus",
+          "x": 26,
+          "y": 40
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "III | Gemini",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "III | Gemini",
+          "x": 26,
+          "y": 76
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "IV | Cancer",
+          "color": {
+            "value": -11550592,
+            "falpha": 0.0
+          },
+          "name": "IV | Cancer",
+          "x": 26,
+          "y": 112
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "V | Leo",
+          "color": {
+            "value": -5593481,
+            "falpha": 0.0
+          },
+          "name": "V | Leo",
+          "x": 26,
+          "y": 148
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "VI | Virgo",
+          "color": {
+            "value": -36190,
+            "falpha": 0.0
+          },
+          "name": "VI | Virgo",
+          "x": 26,
+          "y": 184
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Libra | VII",
+          "color": {
+            "value": -8856252,
+            "falpha": 0.0
+          },
+          "name": "Libra | VII",
+          "x": 350,
+          "y": 4
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Scorpio | VIII",
+          "color": {
+            "value": -1615553,
+            "falpha": 0.0
+          },
+          "name": "Scorpio | VIII",
+          "x": 338,
+          "y": 40
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Sagittarius | IX",
+          "color": {
+            "value": -6516753,
+            "falpha": 0.0
+          },
+          "name": "Sagittarius | IX",
+          "x": 326,
+          "y": 76
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Capricorn | X",
+          "color": {
+            "value": -2978790,
+            "falpha": 0.0
+          },
+          "name": "Capricorn | X",
+          "x": 334,
+          "y": 112
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Aquarius | XI",
+          "color": {
+            "value": -8001564,
+            "falpha": 0.0
+          },
+          "name": "Aquarius | XI",
+          "x": 334,
+          "y": 148
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Pisces | XII",
+          "color": {
+            "value": -16741414,
+            "falpha": 0.0
+          },
+          "name": "Pisces | XII",
+          "x": 346,
+          "y": 184
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "20 mana",
+          "onClick": {
+            "name": "Spell1getEffect1"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffectNot1"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "20 mana",
+          "x": 26,
+          "y": 16
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "30 mana",
+          "onClick": {
+            "name": "Spell1getEffect2"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffectNot2"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "30 mana",
+          "x": 26,
+          "y": 52
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "20 mana",
+          "onClick": {
+            "name": "Spell1getEffect3"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffectNot3"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "20 mana",
+          "x": 26,
+          "y": 88
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "20 mana",
+          "onClick": {
+            "name": "Spell1getEffect4"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffectNot4"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "20 mana",
+          "x": 26,
+          "y": 124
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "20 mana",
+          "onClick": {
+            "name": "Spell1getEffect5"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffectNot5"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "20 mana",
+          "x": 26,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "30 mana",
+          "onClick": {
+            "name": "Spell1getEffect6"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffectNot6"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "30 mana",
+          "x": 26,
+          "y": 196
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "20 mana",
+          "onClick": {
+            "name": "Spell1getEffect7"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffectNot7"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "20 mana",
+          "x": 354,
+          "y": 16
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "20 mana",
+          "onClick": {
+            "name": "Spell1getEffect8"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffectNot8"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "20 mana",
+          "x": 354,
+          "y": 52
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "20 mana",
+          "onClick": {
+            "name": "Spell1getEffect9"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffectNot9"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "20 mana",
+          "x": 354,
+          "y": 88
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "30 mana",
+          "onClick": {
+            "name": "Spell1getEffect10"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffectNot10"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "30 mana",
+          "x": 354,
+          "y": 124
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "30 mana",
+          "onClick": {
+            "name": "Spell1getEffect11"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffectNot11"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "30 mana",
+          "x": 354,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "20 mana",
+          "onClick": {
+            "name": "Spell1getEffect12"
+          },
+          "displayCondition": {
+            "name": "Spell1startEffectNot12"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "20 mana",
+          "x": 354,
+          "y": 196
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "?",
+          "onClick": {
+            "name": "Spell1buttonEffectInfo"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "?",
+          "x": 14,
+          "y": 220
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Invisibility",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect1"
+          },
+          "name": "Invisibility",
+          "x": 26,
+          "y": 16
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "+6 Attack Damage",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect2"
+          },
+          "name": "+6 Attack Damage",
+          "x": 26,
+          "y": 52
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Remove All Effects",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect3"
+          },
+          "name": "Remove All Effects",
+          "x": 26,
+          "y": 88
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "5 Blocks Jump",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect4"
+          },
+          "name": "5 Blocks Jump",
+          "x": 26,
+          "y": 124
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Slow Falling",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect5"
+          },
+          "name": "Slow Falling",
+          "x": 26,
+          "y": 160
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Heal +2/Time",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect6"
+          },
+          "name": "Heal +2/Time",
+          "x": 26,
+          "y": 196
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "+255 Luck",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect7"
+          },
+          "name": "+255 Luck",
+          "x": 350,
+          "y": 16
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Fire Resistance",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect8"
+          },
+          "name": "Fire Resistance",
+          "x": 322,
+          "y": 52
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "+60% Speed",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect9"
+          },
+          "name": "+60% Speed",
+          "x": 342,
+          "y": 88
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "+200% Mining Speed",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect10"
+          },
+          "name": "+200% Mining Speed",
+          "x": 302,
+          "y": 124
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Atlantis Power",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect11"
+          },
+          "name": "Atlantis Power",
+          "x": 326,
+          "y": 160
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Night Vision",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect12"
+          },
+          "name": "Night Vision",
+          "x": 342,
+          "y": 196
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "zodiac_circle.png",
+          "use1Xscale": false,
+          "name": "zodiac_circle.png",
+          "x": 163,
+          "y": 71
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "zodiac_door9.png",
+          "use1Xscale": false,
+          "name": "zodiac_door9.png",
+          "x": 406,
+          "y": 76
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "zodiac_door8.png",
+          "use1Xscale": false,
+          "name": "zodiac_door8.png",
+          "x": 406,
+          "y": 40
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "zodiac_door1.png",
+          "use1Xscale": false,
+          "name": "zodiac_door1.png",
+          "x": 6,
+          "y": 4
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "zodiac_door2.png",
+          "use1Xscale": false,
+          "name": "zodiac_door2.png",
+          "x": 6,
+          "y": 40
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "zodiac_door3.png",
+          "use1Xscale": false,
+          "name": "zodiac_door3.png",
+          "x": 6,
+          "y": 76
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "zodiac_door4.png",
+          "use1Xscale": false,
+          "name": "zodiac_door4.png",
+          "x": 6,
+          "y": 112
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "zodiac_door5.png",
+          "use1Xscale": false,
+          "name": "zodiac_door5.png",
+          "x": 6,
+          "y": 148
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "zodiac_door6.png",
+          "use1Xscale": false,
+          "name": "zodiac_door6.png",
+          "x": 6,
+          "y": 184
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "zodiac_door7.png",
+          "use1Xscale": false,
+          "name": "zodiac_door7.png",
+          "x": 406,
+          "y": 4
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "zodiac_door10.png",
+          "use1Xscale": false,
+          "name": "zodiac_door10.png",
+          "x": 406,
+          "y": 112
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "zodiac_door11.png",
+          "use1Xscale": false,
+          "name": "zodiac_door11.png",
+          "x": 406,
+          "y": 148
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "zodiac_door12.png",
+          "use1Xscale": false,
+          "name": "zodiac_door12.png",
+          "x": 406,
+          "y": 184
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Glowing",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect1"
+          },
+          "name": "Glowing",
+          "x": 26,
+          "y": 28
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "-6 Attack Damage",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect2"
+          },
+          "name": "-6 Attack Damage",
+          "x": 26,
+          "y": 64
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Hunger -1/Time",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect3"
+          },
+          "name": "Hunger -1/Time",
+          "x": 26,
+          "y": 100
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Fly Up 20 Blocks",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect4"
+          },
+          "name": "Fly Up 20 Blocks",
+          "x": 26,
+          "y": 136
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Nausea",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect5"
+          },
+          "name": "Nausea",
+          "x": 26,
+          "y": 172
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Instant Damage -3/Time",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect6"
+          },
+          "name": "Instant Damage -3/Time",
+          "x": 26,
+          "y": 208
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "-255 Luck",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect7"
+          },
+          "name": "-255 Luck",
+          "x": 350,
+          "y": 28
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Damage -1/Time",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect8"
+          },
+          "name": "Damage -1/Time",
+          "x": 326,
+          "y": 64
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "-60% Speed",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect9"
+          },
+          "name": "-60% Speed",
+          "x": 342,
+          "y": 100
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "-70% Mining Speed",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect10"
+          },
+          "name": "-70% Mining Speed",
+          "x": 310,
+          "y": 136
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Nausea",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect11"
+          },
+          "name": "Nausea",
+          "x": 362,
+          "y": 172
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Blindness",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1infoEffect12"
+          },
+          "name": "Blindness",
+          "x": 354,
+          "y": 208
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "Spell1GUIopenPage3"
+          },
+          "displayCondition": {
+            "name": "Spell1unlockAll12"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 414,
+          "y": 220
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Effect Limit : [<VAR:integer:spell1_effect_count>/<VAR:integer:spell1_effect_count_max>]",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "Effect Limit : [<VAR:integer:spell1_effect_count>/<VAR:integer:spell1_effect_count_max>]",
+          "x": 166,
+          "y": 4
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

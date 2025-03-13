@@ -1,0 +1,8 @@
+{
+  "parent": "lotw:custom/magic_circle",
+  "textures": {
+    "all": "lotw:blocks/spell_book_holy_circle",
+    "particle": "lotw:blocks/spell_book_holy_circle",
+    "1": "lotw:blocks/spell_book_holy_circle"
+  }
+}

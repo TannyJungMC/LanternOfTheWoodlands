@@ -1,0 +1,28 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "mini_lantern_0"
+      },
+      "name": "default"
+    },
+    "mini_lantern_1": {
+      "map": {
+        "0": "mini_lantern_1"
+      },
+      "name": "mini_lantern_1"
+    },
+    "mini_lantern_2": {
+      "map": {
+        "0": "mini_lantern_2"
+      },
+      "name": "mini_lantern_2"
+    },
+    "mini_lantern_3": {
+      "map": {
+        "0": "mini_lantern_3"
+      },
+      "name": "mini_lantern_3"
+    }
+  }
+}

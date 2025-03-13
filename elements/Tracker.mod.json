@@ -1,0 +1,49 @@
+{
+  "_fv": 34,
+  "_type": "rangeditem",
+  "definition": {
+    "renderType": 0,
+    "texture": "specifyfireball",
+    "customModelName": "Normal",
+    "name": "Tracker",
+    "specialInfo": [
+      "------------------------------",
+      "Info",
+      "> Right click to shoot",
+      "> It will create tracker when it hit block",
+      "> Tracker can only affect to mob in 5 radius",
+      "> Unlimited time",
+      "> Usable 3 times",
+      "------------------------------"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:LotwTab"
+    },
+    "stackSize": 1,
+    "ammoItem": {
+      "value": ""
+    },
+    "shootConstantly": false,
+    "usageCount": 3,
+    "actionSound": {
+      "value": "entity.endereye.death"
+    },
+    "hasGlow": false,
+    "animation": "bow",
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "bulletPower": 1.0,
+    "bulletDamage": 0.0,
+    "bulletKnockback": 0,
+    "bulletParticles": false,
+    "bulletIgnitesFire": false,
+    "bulletItemTexture": {
+      "value": "CUSTOM:Tracker"
+    },
+    "bulletModel": "Default",
+    "customBulletModelTexture": "",
+    "onBulletHitsBlock": {
+      "name": "Spell2trackerHitBlock"
+    }
+  }
+}

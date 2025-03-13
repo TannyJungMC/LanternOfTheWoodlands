@@ -1,0 +1,12 @@
+{
+  "_fv": 34,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "3",
+    "keyBindingName": "Advance Spell 7 - Select Book",
+    "keyBindingCategoryKey": "lotw",
+    "onKeyPressed": {
+      "name": "Spell7keySelectRun"
+    }
+  }
+}

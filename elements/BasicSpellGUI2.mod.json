@@ -1,0 +1,337 @@
+{
+  "_fv": 34,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Close",
+          "onClick": {
+            "name": "CloseGUI"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Close",
+          "x": 374,
+          "y": 192
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Mana : [<VAR:integer:mana>/30]",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "Mana : [<VAR:integer:mana>/30]",
+          "x": 134,
+          "y": 196
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "X",
+          "onClick": {
+            "name": "BasicSpell3cancel"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "X",
+          "x": 398,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "InfoSpellGUInext"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 414,
+          "y": 88
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-",
+          "onClick": {
+            "name": "BasicSpell3clear"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "-",
+          "x": 390,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "{",
+          "onClick": {
+            "name": "InfoSpellGUIhome"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "{",
+          "x": 134,
+          "y": 16
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "InfoSpellGUIprevious"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 134,
+          "y": 88
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "basicspell3.png",
+          "use1Xscale": false,
+          "name": "basicspell3.png",
+          "x": 286,
+          "y": 24
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "basicspell2.png",
+          "use1Xscale": false,
+          "name": "basicspell2.png",
+          "x": 150,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "WINTER WIND",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "WINTER WIND",
+          "x": 306,
+          "y": 28
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "LANTERN LIGHT",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "LANTERN LIGHT",
+          "x": 170,
+          "y": 28
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Create area of cold",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Create area of cold",
+          "x": 294,
+          "y": 44
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "wind, can heal ally but",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "wind, can heal ally but",
+          "x": 286,
+          "y": 56
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "slow down enemy.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "slow down enemy.",
+          "x": 286,
+          "y": 68
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "G : Azure Bluet",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "G : Azure Bluet",
+          "x": 286,
+          "y": 156
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Create a temporary",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Create a temporary",
+          "x": 158,
+          "y": 44
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "light.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "light.",
+          "x": 150,
+          "y": 56
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "G : Dandelion",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "G : Dandelion",
+          "x": 150,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-",
+          "onClick": {
+            "name": "BasicSpell2clear"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "-",
+          "x": 254,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "X",
+          "onClick": {
+            "name": "BasicSpell2cancel"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "X",
+          "x": 262,
+          "y": 160
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "M : 1",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "M : 1",
+          "x": 150,
+          "y": 168
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "M : 3",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "M : 3",
+          "x": 286,
+          "y": 168
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Back",
+          "onClick": {
+            "name": "ClickLanternGround"
+          },
+          "displayCondition": {
+            "name": "ReturnLanternGoundTRUE"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Back",
+          "x": 326,
+          "y": 192
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

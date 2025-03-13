@@ -1,0 +1,10 @@
+{
+  "parent": "block/grass_block",
+  "textures": {
+    "bottom": "lotw:blocks/dirt",
+    "top": "lotw:blocks/grass_block_top",
+    "side": "lotw:blocks/grass_block_side",
+    "overlay": "lotw:blocks/grass_block_side_overlay",
+    "particle": "lotw:blocks/dirt"
+  }
+}

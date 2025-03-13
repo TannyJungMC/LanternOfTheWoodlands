@@ -1,9 +1,0 @@
-{
-  "parent": "lanternofthewoodlands:custom/magic_circle",
-  "textures": {
-    "all": "lanternofthewoodlands:block/spell_healing_circle",
-    "particle": "lanternofthewoodlands:block/spell_healing_circle",
-    "1": "lanternofthewoodlands:block/spell_healing_circle"
-  },
-  "render_type": "translucent"
-}

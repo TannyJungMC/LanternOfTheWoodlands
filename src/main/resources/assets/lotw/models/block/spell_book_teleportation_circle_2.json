@@ -1,0 +1,8 @@
+{
+  "parent": "lotw:custom/magic_circle",
+  "textures": {
+    "all": "lotw:blocks/spell_book_teleportation_circle2",
+    "particle": "lotw:blocks/spell_book_teleportation_circle2",
+    "1": "lotw:blocks/spell_book_teleportation_circle2"
+  }
+}

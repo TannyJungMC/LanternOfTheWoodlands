@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "lotw:block/illusion_grass"
+    },
+    "facing=east": {
+      "model": "lotw:block/illusion_grass",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "lotw:block/illusion_grass",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "lotw:block/illusion_grass",
+      "y": 270
+    }
+  }
+}

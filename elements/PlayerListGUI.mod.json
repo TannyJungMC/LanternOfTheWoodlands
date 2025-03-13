@@ -1,0 +1,571 @@
+{
+  "_fv": 34,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "button",
+        "data": {
+          "text": "?",
+          "onClick": {
+            "name": "ShowPlayerList"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "?",
+          "x": 414,
+          "y": 16
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-",
+          "onClick": {
+            "name": "RemovePlayerList"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "-",
+          "x": 414,
+          "y": 164
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "SUPPORTER",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "SUPPORTER",
+          "x": 170,
+          "y": 28
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Close",
+          "onClick": {
+            "name": "CloseGUI"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Close",
+          "x": 374,
+          "y": 192
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "RemoveAllPlayerList"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "R",
+          "x": 414,
+          "y": 36
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:player_list_manual>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:player_list_manual>",
+          "x": 306,
+          "y": 164
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Add player or entity",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Add player or entity",
+          "x": 158,
+          "y": 44
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "to ally list. They can",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "to ally list. They can",
+          "x": 150,
+          "y": 56
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "get support and will",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "get support and will",
+          "x": 150,
+          "y": 68
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "not get most bad effects",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "not get most bad effects",
+          "x": 150,
+          "y": 80
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "ally_list.png",
+          "use1Xscale": false,
+          "name": "ally_list.png",
+          "x": 150,
+          "y": 24
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "InfoSpellGUIprevious"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 134,
+          "y": 88
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "InfoSpellGUInext"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 414,
+          "y": 88
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "{",
+          "onClick": {
+            "name": "InfoSpellGUIhome"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "{",
+          "x": 134,
+          "y": 16
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Back",
+          "onClick": {
+            "name": "ClickLanternGround"
+          },
+          "displayCondition": {
+            "name": "ReturnLanternGoundTRUE"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Back",
+          "x": 326,
+          "y": 192
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell2_1.png",
+          "use1Xscale": false,
+          "name": "spell2_1.png",
+          "x": 146,
+          "y": 100
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Manually",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Manually",
+          "x": 286,
+          "y": 148
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "AllyManualSet"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "+",
+          "x": 414,
+          "y": 144
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Auto List",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Auto List",
+          "x": 286,
+          "y": 24
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "=",
+          "onClick": {
+            "name": "AllyListButtonAuto1"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "=",
+          "x": 294,
+          "y": 36
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:ally_list_auto1>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:ally_list_auto1>",
+          "x": 306,
+          "y": 40
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "=",
+          "onClick": {
+            "name": "AllyListButtonAuto2"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "=",
+          "x": 294,
+          "y": 56
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "=",
+          "onClick": {
+            "name": "AllyListButtonAuto3"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "=",
+          "x": 294,
+          "y": 76
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "AllyListButtonAuto1reset"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "R",
+          "x": 286,
+          "y": 36
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "AllyListButtonAuto2reset"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "R",
+          "x": 286,
+          "y": 56
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "AllyListButtonAuto3reset"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "R",
+          "x": 286,
+          "y": 76
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:ally_list_auto2>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:ally_list_auto2>",
+          "x": 306,
+          "y": 60
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:ally_list_auto3>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:ally_list_auto3>",
+          "x": 306,
+          "y": 80
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Chat Setting",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Chat Setting",
+          "x": 150,
+          "y": 148
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "from the magic.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "from the magic.",
+          "x": 150,
+          "y": 92
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "#",
+          "onClick": {
+            "name": "AllyButtonChat"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "#",
+          "x": 150,
+          "y": 160
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:ally_list_chat>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:ally_list_chat>",
+          "x": 162,
+          "y": 164
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "AllyListButtonAuto4reset"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "R",
+          "x": 286,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "AllyListButtonAuto5reset"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "R",
+          "x": 286,
+          "y": 116
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "=",
+          "onClick": {
+            "name": "AllyListButtonAuto4"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "=",
+          "x": 294,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "=",
+          "onClick": {
+            "name": "AllyListButtonAuto5"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "=",
+          "x": 294,
+          "y": 116
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:ally_list_auto4>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:ally_list_auto4>",
+          "x": 306,
+          "y": 100
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:ally_list_auto5>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "<VAR:ally_list_auto5>",
+          "x": 306,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "=",
+          "onClick": {
+            "name": "AllyCustomSet"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "=",
+          "x": 294,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "AllyManualReset"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "R",
+          "x": 286,
+          "y": 160
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

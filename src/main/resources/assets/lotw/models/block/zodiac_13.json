@@ -1,0 +1,9 @@
+{
+  "parent": "lotw:custom/zodiac_door",
+  "textures": {
+    "all": "lotw:blocks/zodiac_door13",
+    "particle": "lotw:blocks/zodiac_door13",
+    "1": "lotw:blocks/zodiac_door13",
+    "missing": "lotw:blocks/"
+  }
+}

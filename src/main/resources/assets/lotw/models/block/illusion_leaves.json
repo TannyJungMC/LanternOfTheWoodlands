@@ -1,0 +1,7 @@
+{
+  "parent": "block/leaves",
+  "textures": {
+    "all": "lotw:blocks/oak_leaves",
+    "particle": "lotw:blocks/oak_leaves"
+  }
+}

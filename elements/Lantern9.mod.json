@@ -1,0 +1,159 @@
+{
+  "_fv": 34,
+  "_type": "block",
+  "definition": {
+    "texture": "lantern_9",
+    "textureTop": "",
+    "textureLeft": "",
+    "textureFront": "",
+    "textureRight": "",
+    "textureBack": "",
+    "renderType": 2,
+    "customModelName": "lantern:lantern_9",
+    "rotationMode": 1,
+    "enablePitch": false,
+    "emissiveRendering": false,
+    "displayFluidOverlay": false,
+    "itemTexture": "",
+    "particleTexture": "",
+    "tintType": "No tint",
+    "isItemTinted": false,
+    "hasTransparency": true,
+    "connectedSides": false,
+    "transparencyType": "TRANSLUCENT",
+    "disableOffset": false,
+    "boundingBoxes": [
+      {
+        "mx": 6.0,
+        "my": 0.0,
+        "mz": 6.0,
+        "Mx": 10.0,
+        "My": 6.29,
+        "Mz": 10.0,
+        "subtract": false
+      }
+    ],
+    "name": "Lantern of The Woodlands",
+    "specialInfo": [
+      "------------------------------",
+      "Functions",
+      "> Mana Regeneration : hold in left hand or place on ground/hanging/with a stick (x2 speed)",
+      "> Lantern Menu : hold in left hand and click \"Ctrl\"",
+      "> Advance Spell : place on ground and right click on it",
+      "> Hanging Lantern : place lantern under the block",
+      "> Lantern With a Stick : hold \"Ctrl\" key and place lantern on ground",
+      "> Healing Area : heal 0.5/10s when stay near lantern or 0.5/5s when hold in left hand",
+      "> Chunk Loader : load 40x40 blocks around the lantern when place on ground/hanging/with a stick",
+      "------------------------------"
+    ],
+    "hardness": 0.0,
+    "resistance": 10.0,
+    "hasGravity": false,
+    "isWaterloggable": false,
+    "creativeTab": {
+      "value": "CUSTOM:LotwTab"
+    },
+    "destroyTool": "Not specified",
+    "customDrop": {
+      "value": ""
+    },
+    "dropAmount": 1,
+    "useLootTableForDrops": false,
+    "requiresCorrectTool": false,
+    "enchantPowerBonus": 0.0,
+    "plantsGrowOn": false,
+    "canRedstoneConnect": false,
+    "lightOpacity": 0,
+    "material": {
+      "value": "WOOD"
+    },
+    "tickRate": 10,
+    "tickRandomly": false,
+    "isReplaceable": false,
+    "canProvidePower": false,
+    "emittedRedstonePower": {
+      "fixedValue": 15.0
+    },
+    "colorOnMap": "DEFAULT",
+    "creativePickItem": {
+      "value": ""
+    },
+    "offsetType": "NONE",
+    "aiPathNodeType": "DEFAULT",
+    "flammability": 0,
+    "fireSpreadSpeed": 0,
+    "isLadder": false,
+    "slipperiness": 0.6,
+    "speedFactor": 1.0,
+    "jumpFactor": 1.0,
+    "reactionToPushing": "NORMAL",
+    "isNotColidable": false,
+    "isCustomSoundType": true,
+    "soundOnStep": {
+      "value": "WOOD"
+    },
+    "breakSound": {
+      "value": "block.lantern.break"
+    },
+    "fallSound": {
+      "value": "block.lantern.fall"
+    },
+    "hitSound": {
+      "value": "block.lantern.hit"
+    },
+    "placeSound": {
+      "value": "block.lantern.place"
+    },
+    "stepSound": {
+      "value": "block.lantern.step"
+    },
+    "luminance": 9,
+    "unbreakable": false,
+    "breakHarvestLevel": 1,
+    "spawnParticles": false,
+    "particleToSpawn": {
+      "value": "SPELL_INSTANT"
+    },
+    "particleSpawningShape": "Spread",
+    "particleSpawningRadious": 0.5,
+    "particleAmount": 1,
+    "hasInventory": true,
+    "guiBoundTo": "<NONE>",
+    "openGUIOnRightClick": false,
+    "inventorySize": 9,
+    "inventoryStackSize": 64,
+    "inventoryDropWhenDestroyed": true,
+    "inventoryComparatorPower": true,
+    "inventoryOutSlotIDs": [],
+    "inventoryInSlotIDs": [],
+    "hasEnergyStorage": false,
+    "energyInitial": 0,
+    "energyCapacity": 400000,
+    "energyMaxReceive": 200,
+    "energyMaxExtract": 200,
+    "isFluidTank": false,
+    "fluidCapacity": 8000,
+    "fluidRestrictions": [],
+    "onRightClicked": {
+      "name": "ClickLanternGround"
+    },
+    "onDestroyedByPlayer": {
+      "name": "DestroyLantern"
+    },
+    "onBlockPlayedBy": {
+      "name": "PlaceLantern"
+    },
+    "spawnWorldTypes": [],
+    "restrictionBiomes": [],
+    "blocksToReplace": [
+      {
+        "value": "Blocks.STONE"
+      }
+    ],
+    "generationShape": "UNIFORM",
+    "frequencyPerChunks": 10,
+    "frequencyOnChunk": 16,
+    "minGenerateHeight": 0,
+    "maxGenerateHeight": 64
+  }
+}

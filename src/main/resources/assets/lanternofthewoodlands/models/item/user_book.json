@@ -1,7 +1,0 @@
-{
-  "parent": "lanternofthewoodlands:custom/book",
-  "textures": {
-    "missing": "lanternofthewoodlands:block/user_book",
-    "particle": "minecraft:item/knowledge_book"
-  }
-}

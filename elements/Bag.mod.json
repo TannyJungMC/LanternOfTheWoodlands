@@ -1,0 +1,53 @@
+{
+  "_fv": 34,
+  "_type": "item",
+  "definition": {
+    "renderType": 0,
+    "texture": "basicspell13",
+    "customModelName": "Normal",
+    "name": "The Plant Hunter's Bag",
+    "rarity": "COMMON",
+    "creativeTab": {
+      "value": "CUSTOM:LotwTab"
+    },
+    "stackSize": 1,
+    "enchantability": 0,
+    "useDuration": 0,
+    "toolType": 1.0,
+    "damageCount": 0,
+    "recipeRemainder": {
+      "value": ""
+    },
+    "destroyAnyBlock": false,
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "specialInfo": [
+      "------------------------------",
+      "Info",
+      "> Right click to open inventory",
+      "> Hold shift and right click on ground to place it",
+      "> Left click at bag on ground to pick it up",
+      "> Cancel this user pack will remove all items in the bag",
+      "------------------------------"
+    ],
+    "hasGlow": false,
+    "guiBoundTo": "BagGUI",
+    "inventorySize": 65,
+    "inventoryStackSize": 16,
+    "onRightClickedOnBlock": {
+      "name": "BagPlace"
+    },
+    "isFood": false,
+    "nutritionalValue": 4,
+    "saturation": 0.3,
+    "eatResultItem": {
+      "value": ""
+    },
+    "isMeat": false,
+    "isAlwaysEdible": false,
+    "animation": "eat"
+  }
+}

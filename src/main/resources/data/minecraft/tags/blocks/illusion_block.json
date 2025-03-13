@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "lotw:illusion_log",
+    "lotw:illusion_stone",
+    "lotw:illusion_dirt",
+    "lotw:illusion_leaves",
+    "lotw:illusion_grass"
+  ]
+}

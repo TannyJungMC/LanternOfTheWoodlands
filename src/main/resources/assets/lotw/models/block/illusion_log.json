@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "lotw:blocks/oak_log_top",
+    "up": "lotw:blocks/oak_log_top",
+    "north": "lotw:blocks/oak_log",
+    "east": "lotw:blocks/oak_log",
+    "south": "lotw:blocks/oak_log",
+    "west": "lotw:blocks/oak_log",
+    "particle": "lotw:blocks/oak_log_top"
+  }
+}

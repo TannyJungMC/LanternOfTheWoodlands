@@ -1,0 +1,99 @@
+{
+  "_fv": 34,
+  "_type": "overlay",
+  "definition": {
+    "priority": "NORMAL",
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "text": "Distance : <VAR:integer:spell4_distance>",
+          "color": {
+            "value": -52429,
+            "falpha": 0.0
+          },
+          "name": "Distance : <VAR:integer:spell4_distance>",
+          "x": 6,
+          "y": 108
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Weapon : <VAR:spell4_weapon_type>",
+          "color": {
+            "value": -13395712,
+            "falpha": 0.0
+          },
+          "name": "Weapon : <VAR:spell4_weapon_type>",
+          "x": 6,
+          "y": 72
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Mode : <VAR:spell4_mode>",
+          "color": {
+            "value": -16737895,
+            "falpha": 0.0
+          },
+          "name": "Mode : <VAR:spell4_mode>",
+          "x": 6,
+          "y": 84
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Skill : <VAR:spell4_ability>",
+          "color": {
+            "value": -3407770,
+            "falpha": 0.0
+          },
+          "name": "Skill : <VAR:spell4_ability>",
+          "x": 6,
+          "y": 156
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Reverse : <VAR:spell4_reverse>",
+          "color": {
+            "value": -3381760,
+            "falpha": 0.0
+          },
+          "name": "Reverse : <VAR:spell4_reverse>",
+          "x": 6,
+          "y": 144
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Lock Target : <VAR:spell4_target_lock>",
+          "color": {
+            "value": -3355648,
+            "falpha": 0.0
+          },
+          "name": "Lock Target : <VAR:spell4_target_lock>",
+          "x": 6,
+          "y": 120
+        }
+      }
+    ],
+    "baseTexture": "",
+    "overlayTarget": "Ingame",
+    "displayCondition": {
+      "name": "Spell4returnOverlayTRUE"
+    },
+    "gridSettings": {
+      "sx": 16,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

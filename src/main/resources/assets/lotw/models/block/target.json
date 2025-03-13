@@ -1,0 +1,8 @@
+{
+  "parent": "lotw:custom/target",
+  "textures": {
+    "all": "lotw:blocks/target_texture",
+    "particle": "lotw:blocks/target_texture",
+    "0": "lotw:blocks/target_texture"
+  }
+}

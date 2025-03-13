@@ -6,23 +6,95 @@
       },
       "name": "default"
     },
-    "stage3": {
-      "map": {
-        "0": "lantern_3"
-      },
-      "name": "stage3"
-    },
-    "stage2": {
-      "map": {
-        "0": "lantern_2"
-      },
-      "name": "stage2"
-    },
-    "stage1": {
+    "lantern_1": {
       "map": {
         "0": "lantern_1"
       },
-      "name": "stage1"
+      "name": "lantern_1"
+    },
+    "lantern_2": {
+      "map": {
+        "0": "lantern_2"
+      },
+      "name": "lantern_2"
+    },
+    "lantern_3": {
+      "map": {
+        "0": "lantern_3"
+      },
+      "name": "lantern_3"
+    },
+    "lantern_4": {
+      "map": {
+        "0": "lantern_4"
+      },
+      "name": "lantern_4"
+    },
+    "lantern_5": {
+      "map": {
+        "0": "lantern_5"
+      },
+      "name": "lantern_5"
+    },
+    "lantern_6": {
+      "map": {
+        "0": "lantern_6"
+      },
+      "name": "lantern_6"
+    },
+    "lantern_7": {
+      "map": {
+        "0": "lantern_7"
+      },
+      "name": "lantern_7"
+    },
+    "lantern_8": {
+      "map": {
+        "0": "lantern_8"
+      },
+      "name": "lantern_8"
+    },
+    "lantern_9": {
+      "map": {
+        "0": "lantern_9"
+      },
+      "name": "lantern_9"
+    },
+    "lantern_10": {
+      "map": {
+        "0": "lantern_10"
+      },
+      "name": "lantern_10"
+    },
+    "lantern_11": {
+      "map": {
+        "0": "lantern_11"
+      },
+      "name": "lantern_11"
+    },
+    "lantern_12": {
+      "map": {
+        "0": "lantern_12"
+      },
+      "name": "lantern_12"
+    },
+    "lantern_13": {
+      "map": {
+        "0": "lantern_13"
+      },
+      "name": "lantern_13"
+    },
+    "lantern_14": {
+      "map": {
+        "0": "lantern_14"
+      },
+      "name": "lantern_14"
+    },
+    "lantern_15": {
+      "map": {
+        "0": "lantern_15"
+      },
+      "name": "lantern_15"
     }
   }
 }

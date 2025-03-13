@@ -1,5 +1,5 @@
 {
-  "_fv": 73,
+  "_fv": 34,
   "_type": "block",
   "definition": {
     "texture": "lantern_2",
@@ -9,8 +9,8 @@
     "textureRight": "",
     "textureBack": "",
     "renderType": 2,
-    "customModelName": "lantern:stage2",
-    "rotationMode": 0,
+    "customModelName": "lantern:lantern_2",
+    "rotationMode": 1,
     "enablePitch": false,
     "emissiveRendering": false,
     "displayFluidOverlay": false,
@@ -24,25 +24,35 @@
     "disableOffset": false,
     "boundingBoxes": [
       {
-        "mx": 0.0,
+        "mx": 6.0,
         "my": 0.0,
-        "mz": 0.0,
-        "Mx": 16.0,
-        "My": 16.0,
-        "Mz": 16.0,
+        "mz": 6.0,
+        "Mx": 10.0,
+        "My": 6.29,
+        "Mz": 10.0,
         "subtract": false
       }
     ],
-    "customProperties": [],
-    "name": "Lantern",
-    "specialInformation": {
-      "fixedValue": []
-    },
-    "hardness": 1.0,
+    "name": "Lantern of The Woodlands",
+    "specialInfo": [
+      "------------------------------",
+      "Functions",
+      "> Mana Regeneration : hold in left hand or place on ground/hanging/with a stick (x2 speed)",
+      "> Lantern Menu : hold in left hand and click \"Ctrl\"",
+      "> Advance Spell : place on ground and right click on it",
+      "> Hanging Lantern : place lantern under the block",
+      "> Lantern With a Stick : hold \"Ctrl\" key and place lantern on ground",
+      "> Healing Area : heal 0.5/10s when stay near lantern or 0.5/5s when hold in left hand",
+      "> Chunk Loader : load 40x40 blocks around the lantern when place on ground/hanging/with a stick",
+      "------------------------------"
+    ],
+    "hardness": 0.0,
     "resistance": 10.0,
     "hasGravity": false,
     "isWaterloggable": false,
-    "creativeTabs": [],
+    "creativeTab": {
+      "value": "CUSTOM:LotwTab"
+    },
     "destroyTool": "Not specified",
     "customDrop": {
       "value": ""
@@ -55,9 +65,9 @@
     "canRedstoneConnect": false,
     "lightOpacity": 0,
     "material": {
-      "value": "ROCK"
+      "value": "WOOD"
     },
-    "tickRate": 0,
+    "tickRate": 10,
     "tickRandomly": false,
     "isReplaceable": false,
     "canProvidePower": false,
@@ -78,30 +88,37 @@
     "jumpFactor": 1.0,
     "reactionToPushing": "NORMAL",
     "isNotColidable": false,
-    "isCustomSoundType": false,
+    "isCustomSoundType": true,
     "soundOnStep": {
-      "value": "LANTERN"
+      "value": "WOOD"
     },
     "breakSound": {
-      "value": ""
+      "value": "block.lantern.break"
     },
     "fallSound": {
-      "value": ""
+      "value": "block.lantern.fall"
     },
     "hitSound": {
-      "value": ""
+      "value": "block.lantern.hit"
     },
     "placeSound": {
-      "value": ""
+      "value": "block.lantern.place"
     },
     "stepSound": {
-      "value": ""
+      "value": "block.lantern.step"
     },
-    "luminance": 10,
+    "luminance": 2,
     "unbreakable": false,
-    "vanillaToolTier": "STONE",
-    "isBonemealable": false,
-    "hasInventory": false,
+    "breakHarvestLevel": 1,
+    "spawnParticles": false,
+    "particleToSpawn": {
+      "value": "SPELL_INSTANT"
+    },
+    "particleSpawningShape": "Spread",
+    "particleSpawningRadious": 0.5,
+    "particleAmount": 1,
+    "hasInventory": true,
+    "guiBoundTo": "<NONE>",
     "openGUIOnRightClick": false,
     "inventorySize": 9,
     "inventoryStackSize": 64,
@@ -117,11 +134,20 @@
     "isFluidTank": false,
     "fluidCapacity": 8000,
     "fluidRestrictions": [],
-    "generateFeature": false,
+    "onRightClicked": {
+      "name": "ClickLanternGround"
+    },
+    "onDestroyedByPlayer": {
+      "name": "DestroyLantern"
+    },
+    "onBlockPlayedBy": {
+      "name": "PlaceLantern"
+    },
+    "spawnWorldTypes": [],
     "restrictionBiomes": [],
     "blocksToReplace": [
       {
-        "value": "TAG:stone_ore_replaceables"
+        "value": "Blocks.STONE"
       }
     ],
     "generationShape": "UNIFORM",

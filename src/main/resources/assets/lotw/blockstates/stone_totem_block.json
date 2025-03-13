@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "lotw:block/stone_totem_block"
+    }
+  }
+}

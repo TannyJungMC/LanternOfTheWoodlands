@@ -1,0 +1,48 @@
+{
+  "_fv": 34,
+  "_type": "rangeditem",
+  "definition": {
+    "renderType": 0,
+    "texture": "lantern_fire_orb",
+    "customModelName": "Normal",
+    "name": "Lantern Light",
+    "specialInfo": [
+      "------------------------------",
+      "Info",
+      "> Right click to shoot",
+      "> It will summon light when hit block",
+      "> Hold shift and shoot to summon with +5 height",
+      "> It can spilt if other sides of the block it hit is air",
+      "------------------------------"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:LotwTab"
+    },
+    "stackSize": 64,
+    "ammoItem": {
+      "value": "CUSTOM:SummonLight"
+    },
+    "shootConstantly": false,
+    "usageCount": 0,
+    "actionSound": {
+      "value": "entity.endereye.death"
+    },
+    "hasGlow": false,
+    "animation": "bow",
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "bulletPower": 1.0,
+    "bulletDamage": 0.0,
+    "bulletKnockback": 0,
+    "bulletParticles": false,
+    "bulletIgnitesFire": false,
+    "bulletItemTexture": {
+      "value": "Blocks.AIR"
+    },
+    "bulletModel": "Default",
+    "customBulletModelTexture": "",
+    "onBulletHitsBlock": {
+      "name": "BasicSpell2lightHitBlock"
+    }
+  }
+}

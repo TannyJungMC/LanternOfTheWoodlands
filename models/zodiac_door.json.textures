@@ -1,0 +1,95 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "1": "zodiac_door1",
+        "missing": ""
+      },
+      "name": "default"
+    },
+    "door2": {
+      "map": {
+        "1": "zodiac_door2",
+        "missing": ""
+      },
+      "name": "door2"
+    },
+    "door3": {
+      "map": {
+        "1": "zodiac_door3",
+        "missing": ""
+      },
+      "name": "door3"
+    },
+    "door4": {
+      "map": {
+        "1": "zodiac_door4",
+        "missing": ""
+      },
+      "name": "door4"
+    },
+    "door5": {
+      "map": {
+        "1": "zodiac_door5",
+        "missing": ""
+      },
+      "name": "door5"
+    },
+    "door6": {
+      "map": {
+        "1": "zodiac_door6",
+        "missing": ""
+      },
+      "name": "door6"
+    },
+    "door7": {
+      "map": {
+        "1": "zodiac_door7",
+        "missing": ""
+      },
+      "name": "door7"
+    },
+    "door8": {
+      "map": {
+        "1": "zodiac_door8",
+        "missing": ""
+      },
+      "name": "door8"
+    },
+    "door9": {
+      "map": {
+        "1": "zodiac_door9",
+        "missing": ""
+      },
+      "name": "door9"
+    },
+    "door10": {
+      "map": {
+        "1": "zodiac_door10",
+        "missing": ""
+      },
+      "name": "door10"
+    },
+    "door11": {
+      "map": {
+        "1": "zodiac_door11",
+        "missing": ""
+      },
+      "name": "door11"
+    },
+    "door12": {
+      "map": {
+        "1": "zodiac_door12",
+        "missing": ""
+      },
+      "name": "door12"
+    },
+    "door13": {
+      "map": {
+        "1": "zodiac_door13",
+        "missing": ""
+      },
+      "name": "door13"
+    }
+  }
+}

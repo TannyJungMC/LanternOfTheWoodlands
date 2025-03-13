@@ -1,0 +1,15 @@
+{
+  "_fv": 34,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "LSHIFT",
+    "keyBindingName": "Advance Spell 4 - Shoot",
+    "keyBindingCategoryKey": "lotw",
+    "onKeyPressed": {
+      "name": "Spell4keyShootRUN"
+    },
+    "onKeyReleased": {
+      "name": "Spell4keyShootRELEASE"
+    }
+  }
+}

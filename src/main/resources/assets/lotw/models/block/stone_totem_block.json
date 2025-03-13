@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "lotw:blocks/stone_totem",
+    "particle": "lotw:blocks/stone_totem"
+  }
+}

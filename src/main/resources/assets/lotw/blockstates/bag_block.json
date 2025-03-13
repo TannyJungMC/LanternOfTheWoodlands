@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "lotw:block/bag_block"
+    },
+    "facing=east": {
+      "model": "lotw:block/bag_block",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "lotw:block/bag_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "lotw:block/bag_block",
+      "y": 270
+    }
+  }
+}

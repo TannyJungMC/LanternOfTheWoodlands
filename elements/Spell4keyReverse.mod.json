@@ -1,0 +1,15 @@
+{
+  "_fv": 34,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "LCONTROL",
+    "keyBindingName": "Advance Spell 4 - Reverse",
+    "keyBindingCategoryKey": "lotw",
+    "onKeyPressed": {
+      "name": "Spell4keyReverseRUN"
+    },
+    "onKeyReleased": {
+      "name": "Spell4keyReverseRELEASE"
+    }
+  }
+}

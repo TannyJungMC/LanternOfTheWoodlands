@@ -1,0 +1,15 @@
+{
+  "_fv": 34,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "3",
+    "keyBindingName": "Advance Spell 4 - Distance (-)",
+    "keyBindingCategoryKey": "lotw",
+    "onKeyPressed": {
+      "name": "Spell4keyDistanceReduceRUN"
+    },
+    "onKeyReleased": {
+      "name": "Spell4keyDistanceRELEASE"
+    }
+  }
+}

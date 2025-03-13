@@ -1,0 +1,28 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "lantern_0"
+      },
+      "name": "default"
+    },
+    "stage3": {
+      "map": {
+        "0": "lantern_3"
+      },
+      "name": "stage3"
+    },
+    "stage2": {
+      "map": {
+        "0": "lantern_2"
+      },
+      "name": "stage2"
+    },
+    "stage1": {
+      "map": {
+        "0": "lantern_1"
+      },
+      "name": "stage1"
+    }
+  }
+}

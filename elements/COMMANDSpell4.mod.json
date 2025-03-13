@@ -1,0 +1,10 @@
+{
+  "_fv": 73,
+  "_type": "command",
+  "definition": {
+    "commandName": "lanternofthewoodlands",
+    "type": "STANDARD",
+    "permissionLevel": "2",
+    "argsxml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"args_start\" deletable=\"false\" x=\"40\" y=\"40\"><next><block type=\"literal\"><field name=\"name\">spell4</field><statement name=\"args\"><block type=\"literal\"><field name=\"name\">direction</field><statement name=\"args\"><block type=\"entity\"><field name=\"name\">entity</field><field name=\"type\">entities</field><statement name=\"args\"><block type=\"call_procedure\"><field name=\"procedure\">COMMANDSpell4Direction</field></block></statement></block></statement><next><block type=\"literal\"><field name=\"name\">travel</field><statement name=\"args\"><block type=\"entity\"><field name=\"name\">entity</field><field name=\"type\">entities</field><statement name=\"args\"><block type=\"call_procedure\"><field name=\"procedure\">COMMANDSpell4Travel</field></block></statement></block></statement></block></next></block></statement></block></next></block></xml>"
+  }
+}

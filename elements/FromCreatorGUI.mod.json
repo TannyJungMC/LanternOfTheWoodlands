@@ -1,0 +1,309 @@
+{
+  "_fv": 73,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_mana",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnMana"
+          },
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "x": 54,
+          "y": 4,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_thank_you_for_download",
+          "text": {
+            "fixedValue": "Thank you for download"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 78,
+          "y": 68,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_and_playing_my_mods",
+          "text": {
+            "fixedValue": "and playing my mods! You"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 80,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_can_followsupport_me",
+          "text": {
+            "fixedValue": "can follow/support me on"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 92,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_the_website_link_below",
+          "text": {
+            "fixedValue": "website links below and"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 104,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_website_links_will_send_to_your",
+          "text": {
+            "fixedValue": "Website links will send to your chat"
+          },
+          "width": 56,
+          "height": 8,
+          "x": 110,
+          "y": 180,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_subscribe_me_in_patreon",
+          "text": {
+            "fixedValue": "subscribe me on Patreon."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 116,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "background_book.png",
+          "use1Xscale": true,
+          "x": 54,
+          "y": 16,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_exit",
+          "image": "symbol_exit.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUIClose"
+          },
+          "x": 358,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_next",
+          "image": "symbol_next.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUInext"
+          },
+          "x": 366,
+          "y": 108,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_icon_social_links",
+          "image": "icon_social_links.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUIbuttonSocialLinks"
+          },
+          "x": 106,
+          "y": 180,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_i_do_artworks_too_if",
+          "text": {
+            "fixedValue": "I do artworks too! If you"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 78,
+          "y": 132,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_you_want_to_see_theyre_in",
+          "text": {
+            "fixedValue": "interested, they're in my"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 144,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_my_twitter_and_pinterest",
+          "text": {
+            "fixedValue": "Twitter and Pinterest."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 156,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_page_left",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnPageLeft"
+          },
+          "color": {
+            "value": -3355444,
+            "falpha": 0.0
+          },
+          "x": 130,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_page_right",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnPageRight"
+          },
+          "color": {
+            "value": -3355444,
+            "falpha": 0.0
+          },
+          "x": 282,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "image_name.png",
+          "use1Xscale": true,
+          "x": 70,
+          "y": 32,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "image_from_creator.png",
+          "use1Xscale": true,
+          "x": 230,
+          "y": 40,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_image_tape_3s",
+          "image": "image_tape_3s.png",
+          "hoveredImage": "",
+          "x": 334,
+          "y": 32,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_image_tape_4s",
+          "image": "image_tape_4s.png",
+          "hoveredImage": "",
+          "x": 222,
+          "y": 168,
+          "locked": false
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

@@ -1,0 +1,385 @@
+{
+  "_fv": 73,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_mana",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnMana"
+          },
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "x": 54,
+          "y": 4,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "background_book.png",
+          "use1Xscale": true,
+          "x": 54,
+          "y": 16,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_exit",
+          "image": "symbol_exit.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUIClose"
+          },
+          "x": 358,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_icon_home",
+          "image": "icon_home.png",
+          "hoveredImage": "icon_home_2s.png",
+          "onClick": {
+            "name": "MenuGUIOpen"
+          },
+          "x": 42,
+          "y": 24,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_next",
+          "image": "symbol_next.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUInext"
+          },
+          "x": 366,
+          "y": 108,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_previous",
+          "image": "symbol_previous.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUIprevious"
+          },
+          "x": 54,
+          "y": 108,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_page_left",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnPageLeft"
+          },
+          "color": {
+            "value": -3355444,
+            "falpha": 0.0
+          },
+          "x": 130,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_page_right",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnPageRight"
+          },
+          "color": {
+            "value": -3355444,
+            "falpha": 0.0
+          },
+          "x": 282,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_for_every_warriors_who_died_in_t",
+          "text": {
+            "fixedValue": "For every warriors"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 78,
+          "y": 52,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_died_in_the_war_i_will_remember",
+          "text": {
+            "fixedValue": "who died in this war. I will"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 64,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_remember_you_your_fight_your_c",
+          "text": {
+            "fixedValue": "remember your fight, your"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 76,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_your_courage_i_want_to_say_than",
+          "text": {
+            "fixedValue": "courage. I want to say"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 88,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_say_thank_you_for_protect_us",
+          "text": {
+            "fixedValue": "thank you for protecting"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 100,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_in_this_time_i_would_like_to_us",
+          "text": {
+            "fixedValue": "protect your determination."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 136,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_victory_and_freedom_back",
+          "text": {
+            "fixedValue": "I would like to use"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 230,
+          "y": 32,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_us",
+          "text": {
+            "fixedValue": "us from the darkness."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 112,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_like_to_use_your_weapons_to_fig",
+          "text": {
+            "fixedValue": "your weapons, to fight the"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 44,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_to_fight_the_darkness_youre_th",
+          "text": {
+            "fixedValue": "darkness back, and give us"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 56,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_our_lights_in_the_dark",
+          "text": {
+            "fixedValue": "freedom. Please, give me"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 68,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_darkness",
+          "text": {
+            "fixedValue": "But now, it's my turn to"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 124,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_me_strength",
+          "text": {
+            "fixedValue": "power."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 80,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_background_text_green",
+          "image": "background_text_green.png",
+          "hoveredImage": "",
+          "x": 70,
+          "y": 28,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_story",
+          "text": {
+            "fixedValue": "STORY"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "x": 122,
+          "y": 32,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_image_spell4_story",
+          "image": "image_spell4_story.png",
+          "hoveredImage": "",
+          "x": 82,
+          "y": 148,
+          "locked": false
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

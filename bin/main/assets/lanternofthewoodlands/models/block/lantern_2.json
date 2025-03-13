@@ -1,0 +1,9 @@
+{
+  "parent": "lanternofthewoodlands:custom/lantern",
+  "textures": {
+    "all": "lanternofthewoodlands:block/lantern_2",
+    "particle": "lanternofthewoodlands:block/lantern_2",
+    "0": "lanternofthewoodlands:block/lantern_2"
+  },
+  "render_type": "translucent"
+}

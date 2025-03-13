@@ -1,0 +1,488 @@
+{
+  "_fv": 73,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_mana",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnMana"
+          },
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "x": 54,
+          "y": 4,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_book_index",
+          "text": {
+            "fixedValue": "MUST READ"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "x": 114,
+          "y": 32,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "background_book.png",
+          "use1Xscale": true,
+          "x": 54,
+          "y": 16,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_page_left",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnPageLeft"
+          },
+          "color": {
+            "value": -3355444,
+            "falpha": 0.0
+          },
+          "x": 130,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_page_right",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnPageRight"
+          },
+          "color": {
+            "value": -3355444,
+            "falpha": 0.0
+          },
+          "x": 282,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_before_using_my_magic_from",
+          "text": {
+            "fixedValue": "Before using my magic,"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 78,
+          "y": 72,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_you_need_to_make_contract",
+          "text": {
+            "fixedValue": "you need to read the Laws"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 84,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_and_make_contract_between",
+          "text": {
+            "fixedValue": "of Magic in next page. Then"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 96,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_next",
+          "image": "symbol_next.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUInext"
+          },
+          "x": 366,
+          "y": 108,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_previous",
+          "image": "symbol_previous.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUIprevious"
+          },
+          "x": 54,
+          "y": 108,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_icon_home",
+          "image": "icon_home.png",
+          "hoveredImage": "icon_home_2s.png",
+          "onClick": {
+            "name": "MenuGUIOpen"
+          },
+          "x": 42,
+          "y": 24,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_after_agree_i_save_settings_a",
+          "text": {
+            "fixedValue": "After you accepted, it"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 78,
+          "y": 124,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_give_you_small_magic_to",
+          "text": {
+            "fixedValue": "will give you user role and"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 136,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_store_saves_of_spell_settings",
+          "text": {
+            "fixedValue": "enable small magic to store"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 148,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_store_saves_of_spell_settings1",
+          "text": {
+            "fixedValue": "settings of spells on your"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 160,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_around_your_body",
+          "text": {
+            "fixedValue": "body. So you can use your"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 172,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_settings_from_lost_when",
+          "text": {
+            "fixedValue": "current spell on any book."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 184,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_checkbox",
+          "image": "symbol_checkbox.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "AgreementGUIbuttonAccept"
+          },
+          "x": 222,
+          "y": 184,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_i_understand_and",
+          "text": {
+            "fixedValue": "I accept"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 234,
+          "y": 184,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_before_checking_i_accept",
+          "text": {
+            "fixedValue": "If you uncheck the box,"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 230,
+          "y": 32,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_uncheck_to_remove_the_user",
+          "text": {
+            "fixedValue": "it will pause all spell"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 44,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_checking_i_accept",
+          "text": {
+            "fixedValue": "check the accept box."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 108,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_true",
+          "image": "symbol_true.png",
+          "hoveredImage": "",
+          "displayCondition": {
+            "name": "AgreementGUIreturnAcceptTrue"
+          },
+          "x": 222,
+          "y": 184,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_operations1",
+          "text": {
+            "fixedValue": "operations, needed this"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 56,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_when_holding_the_book",
+          "text": {
+            "fixedValue": "book on hand to uncheck"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 68,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_uncheck_the_box",
+          "text": {
+            "fixedValue": "the box."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 80,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_exit",
+          "image": "symbol_exit.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUIClose"
+          },
+          "x": 358,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_agreement",
+          "text": {
+            "fixedValue": "AGREEMENT"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "x": 114,
+          "y": 52,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_background_text_dark_gray",
+          "image": "background_text_dark_gray.png",
+          "hoveredImage": "",
+          "x": 70,
+          "y": 28,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_background_text_purple",
+          "image": "background_text_purple.png",
+          "hoveredImage": "",
+          "x": 70,
+          "y": 48,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_image_spell7",
+          "image": "image_spell7.png",
+          "hoveredImage": "",
+          "x": 234,
+          "y": 116,
+          "locked": false
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

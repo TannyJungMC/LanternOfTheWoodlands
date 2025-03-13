@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "lanternofthewoodlands:blocks/sword_knight",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lanternofthewoodlands:sword_knight"
+        }
+      ]
+    }
+  ]
+}

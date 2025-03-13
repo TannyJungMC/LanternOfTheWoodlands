@@ -1,0 +1,9 @@
+{
+  "parent": "lanternofthewoodlands:custom/magic_circle",
+  "textures": {
+    "all": "lanternofthewoodlands:block/spell_teleport_circle",
+    "particle": "lanternofthewoodlands:block/spell_teleport_circle",
+    "1": "lanternofthewoodlands:block/spell_teleport_circle"
+  },
+  "render_type": "translucent"
+}

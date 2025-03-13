@@ -1,0 +1,12 @@
+{
+  "_fv": 73,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "1",
+    "keyBindingName": "Spell4 - Type",
+    "keyBindingCategoryKey": "lanternofthewoodlands",
+    "onKeyPressed": {
+      "name": "Spell4keyTypeRun"
+    }
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "_fv": 73,
+  "_fv": 33,
   "_type": "gui",
   "definition": {
     "type": 0,
@@ -7,85 +7,304 @@
     "height": 0,
     "inventoryOffsetX": 0,
     "inventoryOffsetY": 0,
-    "renderBgLayer": true,
+    "renderBgLayer": false,
     "doesPauseGame": false,
     "components": [
       {
         "type": "image",
         "data": {
-          "image": "background_book.png",
-          "use1Xscale": true,
-          "x": 102,
-          "y": 8,
-          "locked": false
-        }
-      },
-      {
-        "type": "checkbox",
-        "data": {
-          "name": "kjn",
-          "text": "",
-          "x": 118,
-          "y": 20,
-          "locked": false
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_pause",
-          "text": {
-            "fixedValue": "Pause"
-          },
+          "text": "Mana : [ <VAR:mana> /15.0]",
           "color": {
-            "value": -12829636,
+            "value": -6710887,
             "falpha": 0.0
           },
-          "x": 142,
-          "y": 28,
-          "locked": false
+          "name": "Mana : [ <VAR:mana> /15.0]",
+          "x": 230,
+          "y": 196
         }
       },
       {
         "type": "button",
         "data": {
-          "name": "button_empty",
-          "text": "",
-          "isUndecorated": false,
-          "width": 20,
-          "height": 20,
-          "x": 118,
-          "y": 44,
-          "locked": false
-        }
-      },
-      {
-        "type": "button",
-        "data": {
-          "name": "button_close",
           "text": "Close",
-          "isUndecorated": false,
+          "onClick": {
+            "name": "CloseGUI"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Close",
+          "x": 374,
+          "y": 192
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Cancel Spell",
+          "onClick": {
+            "name": "Spell1cancel"
+          },
+          "width": 88,
+          "height": 20,
+          "name": "Cancel Spell",
+          "x": 134,
+          "y": 192
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Zodiacs",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Zodiacs",
+          "x": 170,
+          "y": 28
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell3.png",
+          "use1Xscale": false,
+          "name": "spell3.png",
+          "x": 150,
+          "y": 24
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Small",
+          "onClick": {
+            "name": "Spell1getstation"
+          },
           "width": 40,
           "height": 20,
-          "x": 382,
-          "y": 208,
-          "locked": false
+          "name": "Small",
+          "x": 150,
+          "y": 144
         }
       },
       {
         "type": "button",
         "data": {
-          "name": "button_empty1",
+          "text": "Remove All",
+          "onClick": {
+            "name": "Spell1removeButton"
+          },
+          "width": 68,
+          "height": 20,
+          "name": "Remove All",
+          "x": 282,
+          "y": 144
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": "Specify Position",
+          "isCheckedProcedure": {
+            "name": "Spell1checkboxspecifystation"
+          },
+          "name": "spell1specify_position",
+          "x": 6,
+          "y": 56
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": "Invisible Station",
+          "isCheckedProcedure": {
+            "name": "Spell1checkboxinvisiblestation"
+          },
+          "name": "spell1invisible_station",
+          "x": 6,
+          "y": 32
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "1 mana",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "1 mana",
+          "x": 154,
+          "y": 168
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Medium",
+          "onClick": {
+            "name": "Spell1getStationMedium"
+          },
+          "width": 40,
+          "height": 20,
+          "name": "Medium",
+          "x": 190,
+          "y": 144
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "7 mana",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "7 mana",
+          "x": 194,
+          "y": 168
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Large",
+          "onClick": {
+            "name": "Spell1getStationLarge"
+          },
+          "width": 40,
+          "height": 20,
+          "name": "Large",
+          "x": 230,
+          "y": 144
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "15 mana",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "15 mana",
+          "x": 230,
+          "y": 168
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": "Lantern Station",
+          "isCheckedProcedure": {
+            "name": "Spell1checkboxLanternStation"
+          },
+          "name": "spell1latern_station",
+          "x": 6,
+          "y": 8
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "The magic circle that",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "The magic circle that",
+          "x": 158,
+          "y": 44
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "give you and your team",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "give you and your team",
+          "x": 150,
+          "y": 56
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "good effects.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "good effects.",
+          "x": 150,
+          "y": 68
+        }
+      },
+      {
+        "type": "button",
+        "data": {
           "text": ">",
-          "isUndecorated": false,
+          "onClick": {
+            "name": "Spell1GUIopenPage2"
+          },
           "width": 8,
           "height": 20,
+          "name": ">",
           "x": 414,
-          "y": 96,
-          "locked": false
+          "y": 88
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell1station_image.png",
+          "use1Xscale": false,
+          "name": "spell1station_image.png",
+          "x": 158,
+          "y": 88
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell1image.png",
+          "use1Xscale": false,
+          "name": "spell1image.png",
+          "x": 262,
+          "y": 0
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Active Count : <VAR:spell1_station_count>",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "name": "Active Count : <VAR:spell1_station_count>",
+          "x": 282,
+          "y": 168
         }
       }
     ],
+    "onTick": {
+      "name": "Spell1GUItest"
+    },
     "gridSettings": {
       "sx": 8,
       "sy": 8,

@@ -1,0 +1,12 @@
+{
+  "_fv": 33,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "LCONTROL",
+    "keyBindingName": "Autumn of Loss - Swap Weapons",
+    "keyBindingCategoryKey": "lotw",
+    "onKeyPressed": {
+      "name": "Spell4choose"
+    }
+  }
+}

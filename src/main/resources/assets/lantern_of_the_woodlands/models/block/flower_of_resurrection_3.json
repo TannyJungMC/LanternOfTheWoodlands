@@ -1,0 +1,7 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "lantern_of_the_woodlands:blocks/flower_of_resurrestion3",
+    "particle": "lantern_of_the_woodlands:blocks/flower_of_resurrestion3"
+  }
+}

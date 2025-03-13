@@ -1,0 +1,98 @@
+{
+  "_fv": 33,
+  "_type": "plant",
+  "definition": {
+    "renderType": 12,
+    "texture": "flower_of_resurrestion1",
+    "textureBottom": "",
+    "customModelName": "Cross model",
+    "itemTexture": "flower_of_resurrestion_seed",
+    "particleTexture": "flower_of_resurrestion1",
+    "tintType": "No tint",
+    "isItemTinted": false,
+    "plantType": "normal",
+    "staticPlantGenerationType": "Flower",
+    "suspiciousStewEffect": "SPEED",
+    "suspiciousStewDuration": 100,
+    "growapableSpawnType": "Plains",
+    "growapableMaxHeight": 3,
+    "doublePlantGenerationType": "Flower",
+    "customBoundingBox": true,
+    "disableOffset": false,
+    "boundingBoxes": [
+      {
+        "mx": 7.0,
+        "my": 0.0,
+        "mz": 7.0,
+        "Mx": 9.0,
+        "My": 2.0,
+        "Mz": 9.0,
+        "subtract": false
+      }
+    ],
+    "name": "Flower of Resurrection (Seed)",
+    "specialInfo": [
+      "--------------------",
+      "info",
+      "> right click on grass block or dirt to start",
+      "> it will create new spawn point for you and your ally at this flower",
+      "> used 1 minutes",
+      "--------------------"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:Tab"
+    },
+    "hardness": 0.0,
+    "resistance": 0.0,
+    "luminance": 0,
+    "unbreakable": false,
+    "isSolid": false,
+    "isCustomSoundType": false,
+    "soundOnStep": {
+      "value": "PLANT"
+    },
+    "breakSound": {
+      "value": ""
+    },
+    "stepSound": {
+      "value": ""
+    },
+    "placeSound": {
+      "value": ""
+    },
+    "hitSound": {
+      "value": ""
+    },
+    "fallSound": {
+      "value": ""
+    },
+    "useLootTableForDrops": false,
+    "customDrop": {
+      "value": ""
+    },
+    "dropAmount": 1,
+    "forceTicking": false,
+    "emissiveRendering": false,
+    "hasTileEntity": false,
+    "isReplaceable": false,
+    "colorOnMap": "DEFAULT",
+    "creativePickItem": {
+      "value": ""
+    },
+    "offsetType": "XZ",
+    "aiPathNodeType": "DEFAULT",
+    "flammability": 100,
+    "fireSpreadSpeed": 60,
+    "jumpFactor": 1.0,
+    "speedFactor": 1.0,
+    "canBePlacedOn": [],
+    "frequencyOnChunks": 5,
+    "spawnWorldTypes": [],
+    "restrictionBiomes": [],
+    "patchSize": 64,
+    "generateAtAnyHeight": false,
+    "onBlockPlacedBy": {
+      "name": "BasicSpell10random"
+    }
+  }
+}

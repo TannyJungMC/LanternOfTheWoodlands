@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "lantern_of_the_woodlands:items/spell4_forest_staff"
+  }
+}

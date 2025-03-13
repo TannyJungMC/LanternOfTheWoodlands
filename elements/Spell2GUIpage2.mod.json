@@ -1,0 +1,566 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Mana : [ <VAR:mana> /15.0]",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "Mana : [ <VAR:mana> /15.0]",
+          "x": 230,
+          "y": 196
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell2_1.png",
+          "use1Xscale": false,
+          "name": "spell2_1.png",
+          "x": 150,
+          "y": 84
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Close",
+          "onClick": {
+            "name": "CloseGUI"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Close",
+          "x": 374,
+          "y": 192
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Cancel Spell",
+          "onClick": {
+            "name": "Spell2cancel"
+          },
+          "width": 88,
+          "height": 20,
+          "name": "Cancel Spell",
+          "x": 134,
+          "y": 192
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "",
+          "color": {
+            "value": -6750208,
+            "falpha": 0.0
+          },
+          "name": "",
+          "x": 278,
+          "y": 32
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Filter",
+          "color": {
+            "value": -6737152,
+            "falpha": 0.0
+          },
+          "name": "Filter",
+          "x": 150,
+          "y": 28
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "(id + selector)",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "name": "(id + selector)",
+          "x": 182,
+          "y": 28
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "ClickLanternGround"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 134,
+          "y": 88
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Get",
+          "onClick": {
+            "name": "Spell2getTracker"
+          },
+          "width": 44,
+          "height": 20,
+          "name": "Get",
+          "x": 282,
+          "y": 36
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "3",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "name": "3",
+          "x": 342,
+          "y": 36
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Get",
+          "onClick": {
+            "name": "Spell2getWaypoint"
+          },
+          "width": 44,
+          "height": 20,
+          "name": "Get",
+          "x": 362,
+          "y": 36
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Remove",
+          "onClick": {
+            "name": "Spell2removeTracker"
+          },
+          "width": 44,
+          "height": 20,
+          "name": "Remove",
+          "x": 282,
+          "y": 60
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Remove",
+          "onClick": {
+            "name": "Spell2removeWaypoint"
+          },
+          "width": 44,
+          "height": 20,
+          "name": "Remove",
+          "x": 362,
+          "y": 60
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "mana",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "name": "mana",
+          "x": 334,
+          "y": 48
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "",
+          "width": 120,
+          "height": 20,
+          "name": "spell2_find_key",
+          "x": 150,
+          "y": 40
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-",
+          "onClick": {
+            "name": "Spell2GUIclickStopFinding"
+          },
+          "displayCondition": {
+            "name": "Spell2GUIfindKeyRepeatON"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "-",
+          "x": 258,
+          "y": 64
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "Spell2GUIclickStartFindKey"
+          },
+          "displayCondition": {
+            "name": "Spell2GUIdisplayUnlock"
+          },
+          "width": 12,
+          "height": 20,
+          "name": "+",
+          "x": 246,
+          "y": 64
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Unlock",
+          "onClick": {
+            "name": "Spell2getFindKey"
+          },
+          "displayCondition": {
+            "name": "Spell2GUIdisplayNotUnlock"
+          },
+          "width": 72,
+          "height": 20,
+          "name": "Unlock",
+          "x": 150,
+          "y": 64
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "15 mana",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell2GUIdisplayNotUnlock"
+          },
+          "name": "15 mana",
+          "x": 230,
+          "y": 68
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "List",
+          "onClick": {
+            "name": "Spell2checkTrackerList"
+          },
+          "width": 44,
+          "height": 20,
+          "name": "List",
+          "x": 282,
+          "y": 84
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell2GUIfindKeyRepeatON"
+          },
+          "width": 12,
+          "height": 20,
+          "name": " ",
+          "x": 246,
+          "y": 64
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell2GUIdisplayUnlock"
+          },
+          "width": 12,
+          "height": 20,
+          "name": " ",
+          "x": 258,
+          "y": 64
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Ex : iron_golem",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Ex : iron_golem",
+          "x": 150,
+          "y": 132
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "bee,limit=1,sort=nearest",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "bee,limit=1,sort=nearest",
+          "x": 150,
+          "y": 168
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "You can add selector",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "name": "You can add selector",
+          "x": 158,
+          "y": 144
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "after the id like this",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "name": "after the id like this",
+          "x": 158,
+          "y": 156
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Buoy",
+          "color": {
+            "value": -13421824,
+            "falpha": 0.0
+          },
+          "name": "Buoy",
+          "x": 374,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Tracker",
+          "color": {
+            "value": -13421824,
+            "falpha": 0.0
+          },
+          "name": "Tracker",
+          "x": 286,
+          "y": 24
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "^",
+          "onClick": {
+            "name": "Spell2directionN"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "^",
+          "x": 366,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "Spell2directionW"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "<",
+          "x": 346,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "Spell2directionE"
+          },
+          "width": 20,
+          "height": 20,
+          "name": ">",
+          "x": 386,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "v",
+          "onClick": {
+            "name": "Spell2directionS"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "v",
+          "x": 366,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "R",
+          "onClick": {
+            "name": "Spell2placeLanternTP"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "R",
+          "x": 366,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "Spell2directionUP"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "+",
+          "x": 346,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-",
+          "onClick": {
+            "name": "Spell2directionDOWN"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "-",
+          "x": 386,
+          "y": 160
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "N",
+          "color": {
+            "value": -6750208,
+            "falpha": 0.0
+          },
+          "name": "N",
+          "x": 374,
+          "y": 108
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Display",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Display",
+          "x": 294,
+          "y": 136
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Position",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Position",
+          "x": 290,
+          "y": 148
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_sunflower.png",
+          "use1Xscale": false,
+          "name": "1_sunflower.png",
+          "x": 302,
+          "y": 160
+        }
+      }
+    ],
+    "onOpen": {
+      "name": "Spell2whenGUIopen2"
+    },
+    "gridSettings": {
+      "sx": 16,
+      "sy": 16,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

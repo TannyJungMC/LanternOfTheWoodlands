@@ -1,9 +1,0 @@
-{
-  "parent": "lanternofthewoodlands:custom/sword_knight",
-  "textures": {
-    "all": "lanternofthewoodlands:block/sword_knight",
-    "particle": "lanternofthewoodlands:block/sword_knight",
-    "0": "lanternofthewoodlands:block/sword_knight"
-  },
-  "render_type": "solid"
-}

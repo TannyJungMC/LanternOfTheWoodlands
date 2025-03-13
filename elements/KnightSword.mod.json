@@ -1,55 +1,33 @@
 {
-  "_fv": 73,
-  "_type": "item",
+  "_fv": 33,
+  "_type": "tool",
   "definition": {
     "renderType": 0,
     "texture": "spell4_knight_sword",
-    "customModelName": "Tool",
-    "customProperties": {},
-    "states": [],
+    "customModelName": "Normal",
     "name": "Knight's Sword",
-    "rarity": "COMMON",
-    "creativeTabs": [],
-    "stackSize": 1,
-    "enchantability": 0,
-    "useDuration": 0,
-    "toolType": 1.0,
-    "damageCount": 3000,
-    "recipeRemainder": {
-      "value": ""
+    "specialInfo": [
+      "--------------------",
+      "info",
+      "> for use in dark autumn spell",
+      "> deal damage in area",
+      "--------------------"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:Tab"
     },
-    "destroyAnyBlock": false,
+    "toolType": "Sword",
+    "harvestLevel": 0,
+    "efficiency": 0.0,
+    "attackSpeed": 0.5,
+    "enchantability": 0,
+    "damageVsEntity": 20.0,
+    "usageCount": 50,
+    "blocksAffected": [],
+    "hasGlow": false,
+    "repairItems": [],
     "immuneToFire": false,
     "stayInGridWhenCrafting": false,
-    "damageOnCrafting": false,
-    "enableMeleeDamage": true,
-    "damageVsEntity": 20.0,
-    "specialInformation": {
-      "fixedValue": []
-    },
-    "glowCondition": {
-      "fixedValue": false
-    },
-    "inventorySize": 9,
-    "inventoryStackSize": 64,
-    "enableRanged": false,
-    "shootConstantly": false,
-    "rangedItemChargesPower": false,
-    "projectile": {
-      "value": "Arrow"
-    },
-    "projectileDisableAmmoCheck": false,
-    "isFood": false,
-    "nutritionalValue": 4,
-    "saturation": 0.3,
-    "eatResultItem": {
-      "value": ""
-    },
-    "isMeat": false,
-    "isAlwaysEdible": false,
-    "animation": "none",
-    "isMusicDisc": false,
-    "musicDiscLengthInTicks": 0,
-    "musicDiscAnalogOutput": 0
+    "damageOnCrafting": false
   }
 }

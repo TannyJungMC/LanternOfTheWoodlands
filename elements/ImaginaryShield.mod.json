@@ -1,0 +1,33 @@
+{
+  "_fv": 33,
+  "_type": "tool",
+  "definition": {
+    "renderType": 0,
+    "texture": "spell4_stone_sword",
+    "customModelName": "Normal",
+    "name": "Forgotten Sword",
+    "specialInfo": [
+      "--------------------",
+      "info",
+      "> for use in dark autumn spell",
+      "> blocking arrow and melee damage in area",
+      "--------------------"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:Tab"
+    },
+    "toolType": "Sword",
+    "harvestLevel": 0,
+    "efficiency": 0.0,
+    "attackSpeed": 0.5,
+    "enchantability": 0,
+    "damageVsEntity": 20.0,
+    "usageCount": 50,
+    "blocksAffected": [],
+    "hasGlow": false,
+    "repairItems": [],
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false
+  }
+}

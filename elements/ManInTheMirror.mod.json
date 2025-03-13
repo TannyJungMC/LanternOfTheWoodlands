@@ -1,0 +1,33 @@
+{
+  "_fv": 33,
+  "_type": "tool",
+  "definition": {
+    "renderType": 0,
+    "texture": "spell4_magic_mirror",
+    "customModelName": "Normal",
+    "name": "Man In The Mirror",
+    "specialInfo": [
+      "--------------------",
+      "info",
+      "> for use in dark autumn spell",
+      "> stop walking in area",
+      "--------------------"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:Tab"
+    },
+    "toolType": "Sword",
+    "harvestLevel": 0,
+    "efficiency": 0.0,
+    "attackSpeed": 0.75,
+    "enchantability": 0,
+    "damageVsEntity": 15.0,
+    "usageCount": 75,
+    "blocksAffected": [],
+    "hasGlow": false,
+    "repairItems": [],
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false
+  }
+}

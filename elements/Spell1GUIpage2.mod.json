@@ -1,0 +1,748 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "spell1remover.png",
+          "use1Xscale": false,
+          "name": "spell1remover.png",
+          "x": 132,
+          "y": 40
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "ClickLanternGround"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 6,
+          "y": 216
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Mana : [ <VAR:mana> /15.0]",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "Mana : [ <VAR:mana> /15.0]",
+          "x": 6,
+          "y": 4
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Close",
+          "onClick": {
+            "name": "CloseGUI"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Close",
+          "x": 374,
+          "y": 216
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Taurus",
+          "onClick": {
+            "name": "Spell1getEffectDamageBoost"
+          },
+          "width": 80,
+          "height": 20,
+          "name": "Taurus",
+          "x": 278,
+          "y": 36
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Leo",
+          "onClick": {
+            "name": "Spell1getEffectGoldenHeart"
+          },
+          "width": 80,
+          "height": 20,
+          "name": "Leo",
+          "x": 294,
+          "y": 152
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Libra",
+          "onClick": {
+            "name": "Spell1getEffectProtection"
+          },
+          "width": 80,
+          "height": 20,
+          "name": "Libra",
+          "x": 174,
+          "y": 208
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Cancer",
+          "onClick": {
+            "name": "Spell1getEffectBarrier"
+          },
+          "width": 80,
+          "height": 20,
+          "name": "Cancer",
+          "x": 306,
+          "y": 108
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": " ",
+          "isCheckedProcedure": {
+            "name": "Spell1checkboxHealing"
+          },
+          "name": "spell1healing",
+          "x": 238,
+          "y": 164
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": " ",
+          "isCheckedProcedure": {
+            "name": "Spell1checkboxDamageBoost"
+          },
+          "name": "spell1damage_boost",
+          "x": 238,
+          "y": 56
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": " ",
+          "isCheckedProcedure": {
+            "name": "Spell1checkboxProtection"
+          },
+          "name": "spell1protection",
+          "x": 202,
+          "y": 172
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": " ",
+          "isCheckedProcedure": {
+            "name": "Spell1checkboxGoldenHeart"
+          },
+          "name": "spell1golden_heart",
+          "x": 258,
+          "y": 140
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "15 mana",
+          "color": {
+            "value": -6684775,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1areadyNotDamageBoost"
+          },
+          "name": "15 mana",
+          "x": 302,
+          "y": 56
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "15 mana",
+          "color": {
+            "value": -6684775,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1areadyNotProtection"
+          },
+          "name": "15 mana",
+          "x": 194,
+          "y": 228
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "15 mana",
+          "color": {
+            "value": -6684775,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1areadyNotGoldenHeart"
+          },
+          "name": "15 mana",
+          "x": 314,
+          "y": 172
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Gemini",
+          "onClick": {
+            "name": "Spell1getEffectClearEffect"
+          },
+          "width": 80,
+          "height": 20,
+          "name": "Gemini",
+          "x": 294,
+          "y": 68
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "5 mana",
+          "color": {
+            "value": -6684775,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1areadyNotClearEffect"
+          },
+          "name": "5 mana",
+          "x": 322,
+          "y": 88
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": " ",
+          "isCheckedProcedure": {
+            "name": "Spell1checkboxClearEffect"
+          },
+          "name": "spell1clear_effect",
+          "x": 258,
+          "y": 80
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Virgo",
+          "onClick": {
+            "name": "Spell1getEffectHealing"
+          },
+          "width": 80,
+          "height": 20,
+          "name": "Virgo",
+          "x": 278,
+          "y": 184
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "15 mana",
+          "color": {
+            "value": -6684775,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1areadyNotHealing"
+          },
+          "name": "15 mana",
+          "x": 302,
+          "y": 204
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell1areadyNotClearEffect"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 258,
+          "y": 80
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell1areadyNotHealing"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 238,
+          "y": 164
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell1areadyNotDamageBoost"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 238,
+          "y": 56
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell1areadyNotProtection"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 202,
+          "y": 172
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell1areadyNotGoldenHeart"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 258,
+          "y": 140
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": " ",
+          "isCheckedProcedure": {
+            "name": "Spell1checkboxMiner"
+          },
+          "name": "spell1miner",
+          "x": 134,
+          "y": 108
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": " ",
+          "isCheckedProcedure": {
+            "name": "Spell1checkboxBarrier"
+          },
+          "name": "spell1barrier",
+          "x": 270,
+          "y": 108
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": " ",
+          "isCheckedProcedure": {
+            "name": "Spell1checkboxCamouflage"
+          },
+          "name": "spell1camouflage",
+          "x": 202,
+          "y": 48
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Capricorn",
+          "onClick": {
+            "name": "Spell1getEffectMiner"
+          },
+          "width": 80,
+          "height": 20,
+          "name": "Capricorn",
+          "x": 38,
+          "y": 108
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Aries",
+          "onClick": {
+            "name": "Spell1getEffectCamouflage"
+          },
+          "width": 80,
+          "height": 20,
+          "name": "Aries",
+          "x": 174,
+          "y": 8
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Sagittarius",
+          "onClick": {
+            "name": "Spell1getEffectAbility"
+          },
+          "width": 80,
+          "height": 20,
+          "name": "Sagittarius",
+          "x": 50,
+          "y": 152
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Scorpio",
+          "onClick": {
+            "name": "Spell1getEffectOrientation"
+          },
+          "width": 80,
+          "height": 20,
+          "name": "Scorpio",
+          "x": 66,
+          "y": 184
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": " ",
+          "isCheckedProcedure": {
+            "name": "Spell1checkboxAbility"
+          },
+          "name": "spell1ability",
+          "x": 146,
+          "y": 140
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": " ",
+          "isCheckedProcedure": {
+            "name": "Spell1checkboxOrientation"
+          },
+          "name": "spell1orientation",
+          "x": 166,
+          "y": 164
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "15 mana",
+          "color": {
+            "value": -6684775,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1areadyNotMiner"
+          },
+          "name": "15 mana",
+          "x": 66,
+          "y": 128
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "10 mana",
+          "color": {
+            "value": -6684775,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1areadyNotBarrier"
+          },
+          "name": "10 mana",
+          "x": 326,
+          "y": 128
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "10 mana",
+          "color": {
+            "value": -6684775,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1areadyNotCamouflage"
+          },
+          "name": "10 mana",
+          "x": 198,
+          "y": 28
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "15 mana",
+          "color": {
+            "value": -6684775,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1areadyNotAbility"
+          },
+          "name": "15 mana",
+          "x": 74,
+          "y": 172
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "10 mana",
+          "color": {
+            "value": -6684775,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1areadyNotOrientation"
+          },
+          "name": "10 mana",
+          "x": 90,
+          "y": 204
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell1areadyNotMiner"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 134,
+          "y": 108
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell1areadyNotBarrier"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 270,
+          "y": 108
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell1areadyNotCamouflage"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 202,
+          "y": 48
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell1areadyNotAbility"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 146,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell1areadyNotOrientation"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 166,
+          "y": 164
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": " ",
+          "isCheckedProcedure": {
+            "name": "Spell1checkboxWater"
+          },
+          "name": "spell1water",
+          "x": 146,
+          "y": 80
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": " ",
+          "isCheckedProcedure": {
+            "name": "Spell1checkboxNightVision"
+          },
+          "name": "spell1night_vision",
+          "x": 166,
+          "y": 56
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell1areadyNotWater"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 146,
+          "y": 80
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell1areadyNotNightvision"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 166,
+          "y": 56
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Aquarius",
+          "onClick": {
+            "name": "Spell1getEffectWater"
+          },
+          "width": 80,
+          "height": 20,
+          "name": "Aquarius",
+          "x": 50,
+          "y": 68
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Pisces",
+          "onClick": {
+            "name": "Spell1getEffectNightVision"
+          },
+          "width": 80,
+          "height": 20,
+          "name": "Pisces",
+          "x": 66,
+          "y": 36
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "10 mana",
+          "color": {
+            "value": -6684775,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1areadyNotWater"
+          },
+          "name": "10 mana",
+          "x": 70,
+          "y": 88
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "10 mana",
+          "color": {
+            "value": -6684775,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell1areadyNotNightvision"
+          },
+          "name": "10 mana",
+          "x": 86,
+          "y": 56
+        }
+      }
+    ],
+    "onTick": {
+      "name": "Spell1GUItest2"
+    },
+    "gridSettings": {
+      "sx": 4,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "_fv": 33,
+  "_type": "tool",
+  "definition": {
+    "renderType": 0,
+    "texture": "spell4_arrow_of_teleportation",
+    "customModelName": "Normal",
+    "name": "Enderow",
+    "specialInfo": [
+      "--------------------",
+      "info",
+      "> for use in dark autumn spell",
+      "> teleport you to arrow position while reload",
+      "--------------------"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:Tab"
+    },
+    "toolType": "Sword",
+    "harvestLevel": 0,
+    "efficiency": 0.0,
+    "attackSpeed": 1.0,
+    "enchantability": 0,
+    "damageVsEntity": 10.0,
+    "usageCount": 100,
+    "blocksAffected": [],
+    "hasGlow": false,
+    "repairItems": [],
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false
+  }
+}

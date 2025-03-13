@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "lantern_of_the_woodlands:items/illusion_block_remover"
+  }
+}

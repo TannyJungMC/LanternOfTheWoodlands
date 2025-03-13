@@ -2,27 +2,99 @@
   "mappings": {
     "default": {
       "map": {
-        "0": "lantern_0"
+        "0": "texture0"
       },
       "name": "default"
     },
-    "stage3": {
+    "state1": {
       "map": {
-        "0": "lantern_3"
+        "0": "texture1"
       },
-      "name": "stage3"
+      "name": "state1"
     },
-    "stage2": {
+    "state2": {
       "map": {
-        "0": "lantern_2"
+        "0": "texture2"
       },
-      "name": "stage2"
+      "name": "state2"
     },
-    "stage1": {
+    "state3": {
       "map": {
-        "0": "lantern_1"
+        "0": "texture3"
       },
-      "name": "stage1"
+      "name": "state3"
+    },
+    "state4": {
+      "map": {
+        "0": "texture4"
+      },
+      "name": "state4"
+    },
+    "state5": {
+      "map": {
+        "0": "texture5"
+      },
+      "name": "state5"
+    },
+    "state6": {
+      "map": {
+        "0": "texture6"
+      },
+      "name": "state6"
+    },
+    "state7": {
+      "map": {
+        "0": "texture7"
+      },
+      "name": "state7"
+    },
+    "state8": {
+      "map": {
+        "0": "texture8"
+      },
+      "name": "state8"
+    },
+    "state9": {
+      "map": {
+        "0": "texture9"
+      },
+      "name": "state9"
+    },
+    "state10": {
+      "map": {
+        "0": "texture10"
+      },
+      "name": "state10"
+    },
+    "state11": {
+      "map": {
+        "0": "texture11"
+      },
+      "name": "state11"
+    },
+    "state12": {
+      "map": {
+        "0": "texture12"
+      },
+      "name": "state12"
+    },
+    "state13": {
+      "map": {
+        "0": "texture13"
+      },
+      "name": "state13"
+    },
+    "state14": {
+      "map": {
+        "0": "texture14"
+      },
+      "name": "state14"
+    },
+    "state15": {
+      "map": {
+        "0": "texture15"
+      },
+      "name": "state15"
     }
   }
 }

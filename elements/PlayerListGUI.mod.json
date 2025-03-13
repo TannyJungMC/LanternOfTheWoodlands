@@ -1,0 +1,318 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "AddPlayerList"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "+",
+          "x": 254,
+          "y": 48
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "",
+          "width": 104,
+          "height": 20,
+          "name": "add_player_list",
+          "x": 150,
+          "y": 48
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "See List",
+          "onClick": {
+            "name": "ShowPlayerList"
+          },
+          "width": 64,
+          "height": 20,
+          "name": "See List",
+          "x": 178,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-",
+          "onClick": {
+            "name": "RemovePlayerList"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "-",
+          "x": 262,
+          "y": 48
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "ALLY LIST",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "ALLY LIST",
+          "x": 186,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "This list support target",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "name": "This list support target",
+          "x": 282,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Ex : @a",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Ex : @a",
+          "x": 282,
+          "y": 56
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "     @a[distance=..3]",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "     @a[distance=..3]",
+          "x": 282,
+          "y": 68
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Back",
+          "onClick": {
+            "name": "OpenBasicSpellGUI"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Back",
+          "x": 374,
+          "y": 192
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "selector and player name",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "name": "selector and player name",
+          "x": 282,
+          "y": 36
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell2_1.png",
+          "use1Xscale": false,
+          "name": "spell2_1.png",
+          "x": 278,
+          "y": 112
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "     @e[type=villager]",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "     @e[type=villager]",
+          "x": 282,
+          "y": 92
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "     TannyJung",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "     TannyJung",
+          "x": 282,
+          "y": 104
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "     @a[team=Red_Team]",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "     @a[team=Red_Team]",
+          "x": 282,
+          "y": 80
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "",
+          "width": 120,
+          "height": 20,
+          "name": "add_player_list2",
+          "x": 150,
+          "y": 84
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "",
+          "width": 120,
+          "height": 20,
+          "name": "add_player_list3",
+          "x": 150,
+          "y": 108
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "",
+          "width": 120,
+          "height": 20,
+          "name": "add_player_list4",
+          "x": 150,
+          "y": 132
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Reset List",
+          "onClick": {
+            "name": "RemoveAllPlayerList"
+          },
+          "width": 64,
+          "height": 20,
+          "name": "Reset List",
+          "x": 314,
+          "y": 156
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "manually",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "name": "manually",
+          "x": 150,
+          "y": 36
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "auto-set",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "name": "auto-set",
+          "x": 150,
+          "y": 72
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell5_remove>",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell5_remove>",
+          "x": 14,
+          "y": 20
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:spell1_effect_water>",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "<VAR:spell1_effect_water>",
+          "x": 6,
+          "y": 36
+        }
+      }
+    ],
+    "onOpen": {
+      "name": "ImputAllyLastSave"
+    },
+    "onTick": {
+      "name": "AllySave"
+    },
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

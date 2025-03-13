@@ -1,0 +1,12 @@
+{
+  "_fv": 33,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "TAB",
+    "keyBindingName": "Autumn of Loss - Reset",
+    "keyBindingCategoryKey": "lotw",
+    "onKeyPressed": {
+      "name": "Spell4reset"
+    }
+  }
+}

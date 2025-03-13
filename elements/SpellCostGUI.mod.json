@@ -1,0 +1,380 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 1,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "button",
+        "data": {
+          "text": "Start Spell",
+          "onClick": {
+            "name": "SpellCostTest"
+          },
+          "width": 126,
+          "height": 20,
+          "name": "Start Spell",
+          "x": 150,
+          "y": 88
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Mana : [ <VAR:mana> /15.0]",
+          "color": {
+            "value": -10027162,
+            "falpha": 0.0
+          },
+          "name": "Mana : [ <VAR:mana> /15.0]",
+          "x": 312,
+          "y": 142
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Charge : [ <VAR:mana_charge> /20.0]",
+          "color": {
+            "value": -39322,
+            "falpha": 0.0
+          },
+          "name": "Charge : [ <VAR:mana_charge> /20.0]",
+          "x": 312,
+          "y": 151
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Close",
+          "onClick": {
+            "name": "CloseGUI"
+          },
+          "width": 54,
+          "height": 20,
+          "name": "Close",
+          "x": 303,
+          "y": 169
+        }
+      },
+      {
+        "type": "inputslot",
+        "data": {
+          "inputLimit": {
+            "value": ""
+          },
+          "color": {
+            "value": -10661603,
+            "falpha": 0.0
+          },
+          "id": 0,
+          "disableStackInteraction": false,
+          "dropItemsWhenNotBound": true,
+          "name": "Slot #0",
+          "x": 186,
+          "y": 61
+        }
+      },
+      {
+        "type": "inputslot",
+        "data": {
+          "inputLimit": {
+            "value": ""
+          },
+          "color": {
+            "value": -10661603,
+            "falpha": 0.0
+          },
+          "id": 1,
+          "disableStackInteraction": false,
+          "dropItemsWhenNotBound": true,
+          "name": "Slot #1",
+          "x": 204,
+          "y": 61
+        }
+      },
+      {
+        "type": "inputslot",
+        "data": {
+          "inputLimit": {
+            "value": ""
+          },
+          "color": {
+            "value": -10661603,
+            "falpha": 0.0
+          },
+          "id": 2,
+          "disableStackInteraction": false,
+          "dropItemsWhenNotBound": true,
+          "name": "Slot #2",
+          "x": 222,
+          "y": 61
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell_costs.png",
+          "use1Xscale": false,
+          "name": "spell_costs.png",
+          "x": -12,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell10.png",
+          "use1Xscale": false,
+          "name": "spell10.png",
+          "x": 33,
+          "y": 61
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell3.png",
+          "use1Xscale": false,
+          "name": "spell3.png",
+          "x": 33,
+          "y": 43
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell9.png",
+          "use1Xscale": false,
+          "name": "spell9.png",
+          "x": 33,
+          "y": 79
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_sunflower.png",
+          "use1Xscale": false,
+          "name": "1_sunflower.png",
+          "x": 60,
+          "y": 43
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_fern.png",
+          "use1Xscale": false,
+          "name": "1_fern.png",
+          "x": 96,
+          "y": 43
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_lily.png",
+          "use1Xscale": false,
+          "name": "1_lily.png",
+          "x": 78,
+          "y": 43
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_sunflower.png",
+          "use1Xscale": false,
+          "name": "1_sunflower.png",
+          "x": 60,
+          "y": 61
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_cornflower.png",
+          "use1Xscale": false,
+          "name": "1_cornflower.png",
+          "x": 78,
+          "y": 61
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_orange_tulip.png",
+          "use1Xscale": false,
+          "name": "1_orange_tulip.png",
+          "x": 96,
+          "y": 61
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_peony.png",
+          "use1Xscale": false,
+          "name": "1_peony.png",
+          "x": 60,
+          "y": 79
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_white_tulip.png",
+          "use1Xscale": false,
+          "name": "1_white_tulip.png",
+          "x": 78,
+          "y": 79
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_azure.png",
+          "use1Xscale": false,
+          "name": "1_azure.png",
+          "x": 96,
+          "y": 79
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_dead_bush.png",
+          "use1Xscale": false,
+          "name": "1_dead_bush.png",
+          "x": 96,
+          "y": 97
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_red_tulip.png",
+          "use1Xscale": false,
+          "name": "1_red_tulip.png",
+          "x": 78,
+          "y": 97
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_rose_bush.png",
+          "use1Xscale": false,
+          "name": "1_rose_bush.png",
+          "x": 60,
+          "y": 97
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell1.png",
+          "use1Xscale": false,
+          "name": "spell1.png",
+          "x": 33,
+          "y": 97
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell2.png",
+          "use1Xscale": false,
+          "name": "spell2.png",
+          "x": 33,
+          "y": 115
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_peony.png",
+          "use1Xscale": false,
+          "name": "1_peony.png",
+          "x": 60,
+          "y": 115
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_brown_mushroom.png",
+          "use1Xscale": false,
+          "name": "1_brown_mushroom.png",
+          "x": 78,
+          "y": 115
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_poppy.png",
+          "use1Xscale": false,
+          "name": "1_poppy.png",
+          "x": 96,
+          "y": 115
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell12.png",
+          "use1Xscale": false,
+          "name": "spell12.png",
+          "x": 33,
+          "y": 133
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_peony.png",
+          "use1Xscale": false,
+          "name": "1_peony.png",
+          "x": 60,
+          "y": 133
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_dandelion.png",
+          "use1Xscale": false,
+          "name": "1_dandelion.png",
+          "x": 78,
+          "y": 133
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "1_blue_orchid.png",
+          "use1Xscale": false,
+          "name": "1_blue_orchid.png",
+          "x": 96,
+          "y": 133
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 9,
+      "sy": 9,
+      "ox": 11,
+      "oy": 12,
+      "snapOnGrid": true
+    }
+  }
+}

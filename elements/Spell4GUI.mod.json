@@ -1,10 +1,10 @@
 {
-  "_fv": 73,
+  "_fv": 33,
   "_type": "gui",
   "definition": {
-    "type": 0,
-    "width": 0,
-    "height": 0,
+    "type": 1,
+    "width": 176,
+    "height": 166,
     "inventoryOffsetX": 0,
     "inventoryOffsetY": 0,
     "renderBgLayer": true,
@@ -13,269 +13,424 @@
       {
         "type": "label",
         "data": {
-          "name": "label_the_spell_of_astrology",
-          "text": {
-            "fixedValue": "The spell of tools and"
-          },
+          "text": "Mana : [ <VAR:mana> /15.0]",
           "color": {
-            "value": -12829636,
+            "value": -6710887,
             "falpha": 0.0
           },
-          "x": 78,
-          "y": 92,
-          "locked": false
+          "name": "Mana : [ <VAR:mana> /15.0]",
+          "x": 164,
+          "y": 206
         }
       },
       {
-        "type": "label",
+        "type": "button",
         "data": {
-          "name": "label_use_all_13_zodiac_cards",
-          "text": {
-            "fixedValue": "weapons manipulation. Move"
-          },
-          "color": {
-            "value": -12829636,
-            "falpha": 0.0
-          },
-          "x": 70,
-          "y": 104,
-          "locked": false
-        }
-      },
-      {
-        "type": "label",
-        "data": {
-          "name": "label_goods_and_bad_effects",
-          "text": {
-            "fixedValue": "them freely in the air and"
-          },
-          "color": {
-            "value": -12829636,
-            "falpha": 0.0
-          },
-          "x": 70,
-          "y": 116,
-          "locked": false
-        }
-      },
-      {
-        "type": "label",
-        "data": {
-          "name": "label_proc_gu_ireturn_mana",
-          "text": {
-            "fixedValue": "",
-            "name": "GUIreturnMana"
-          },
-          "color": {
-            "value": -10066330,
-            "falpha": 0.0
-          },
-          "x": 54,
-          "y": 4,
-          "locked": false
-        }
-      },
-      {
-        "type": "image",
-        "data": {
-          "image": "background_book.png",
-          "use1Xscale": true,
-          "x": 54,
-          "y": 16,
-          "locked": false
-        }
-      },
-      {
-        "type": "imagebutton",
-        "data": {
-          "name": "imagebutton_symbol_exit",
-          "image": "symbol_exit.png",
-          "hoveredImage": "",
+          "text": "Close",
           "onClick": {
-            "name": "GUIClose"
+            "name": "CloseGUI"
           },
-          "x": 358,
-          "y": 208,
-          "locked": false
-        }
-      },
-      {
-        "type": "imagebutton",
-        "data": {
-          "name": "imagebutton_icon_home",
-          "image": "icon_home.png",
-          "hoveredImage": "icon_home_2s.png",
-          "onClick": {
-            "name": "MenuGUIOpen"
-          },
-          "x": 42,
-          "y": 24,
-          "locked": false
-        }
-      },
-      {
-        "type": "imagebutton",
-        "data": {
-          "name": "imagebutton_symbol_next",
-          "image": "symbol_next.png",
-          "hoveredImage": "",
-          "onClick": {
-            "name": "GUInext"
-          },
+          "width": 48,
+          "height": 20,
+          "name": "Close",
           "x": 366,
-          "y": 108,
-          "locked": false
+          "y": 215
         }
       },
       {
-        "type": "imagebutton",
+        "type": "button",
         "data": {
-          "name": "imagebutton_symbol_previous",
-          "image": "symbol_previous.png",
-          "hoveredImage": "",
+          "text": "Cancel Spell",
           "onClick": {
-            "name": "GUIprevious"
+            "name": "Spell4cancel"
           },
-          "x": 54,
-          "y": 108,
-          "locked": false
+          "width": 88,
+          "height": 20,
+          "name": "Cancel Spell",
+          "x": 6,
+          "y": 215
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_proc_gu_ireturn_page_left",
-          "text": {
-            "fixedValue": "",
-            "name": "GUIreturnPageLeft"
-          },
+          "text": "",
           "color": {
-            "value": -3355444,
+            "value": -6750208,
             "falpha": 0.0
           },
-          "x": 130,
-          "y": 208,
-          "locked": false
+          "name": "",
+          "x": 278,
+          "y": 32
         }
       },
       {
         "type": "label",
         "data": {
-          "name": "label_proc_gu_ireturn_page_right",
-          "text": {
-            "fixedValue": "",
-            "name": "GUIreturnPageRight"
-          },
+          "text": "Autumn of Loss",
           "color": {
-            "value": -3355444,
+            "value": -16777216,
             "falpha": 0.0
           },
-          "x": 282,
-          "y": 208,
-          "locked": false
-        }
-      },
-      {
-        "type": "label",
-        "data": {
-          "name": "label_skills",
-          "text": {
-            "fixedValue": "use their abilities."
-          },
-          "color": {
-            "value": -12829636,
-            "falpha": 0.0
-          },
-          "x": 70,
-          "y": 128,
-          "locked": false
-        }
-      },
-      {
-        "type": "imagebutton",
-        "data": {
-          "name": "imagebutton_background_icon",
-          "image": "background_icon.png",
-          "hoveredImage": "",
-          "x": 126,
-          "y": 56,
-          "locked": false
-        }
-      },
-      {
-        "type": "label",
-        "data": {
-          "name": "label_autumn_of_loss",
-          "text": {
-            "fixedValue": "AUTUMN OF LOSS"
-          },
-          "color": {
-            "value": -1,
-            "falpha": 0.0
-          },
-          "x": 98,
-          "y": 32,
-          "locked": false
-        }
-      },
-      {
-        "type": "imagebutton",
-        "data": {
-          "name": "imagebutton_image_tape",
-          "image": "image_tape.png",
-          "hoveredImage": "",
-          "x": 222,
-          "y": 32,
-          "locked": false
-        }
-      },
-      {
-        "type": "imagebutton",
-        "data": {
-          "name": "imagebutton_image_tape_2s",
-          "image": "image_tape_2s.png",
-          "hoveredImage": "",
-          "x": 334,
-          "y": 168,
-          "locked": false
-        }
-      },
-      {
-        "type": "imagebutton",
-        "data": {
-          "name": "imagebutton_icon_advance_spell4",
-          "image": "icon_advance_spell4.png",
-          "hoveredImage": "",
-          "x": 130,
-          "y": 60,
-          "locked": false
-        }
-      },
-      {
-        "type": "imagebutton",
-        "data": {
-          "name": "imagebutton_background_text_purple",
-          "image": "background_text_purple.png",
-          "hoveredImage": "",
-          "x": 70,
-          "y": 28,
-          "locked": false
+          "name": "Autumn of Loss",
+          "x": 153,
+          "y": 47
         }
       },
       {
         "type": "image",
         "data": {
-          "image": "image_spell4.png",
-          "use1Xscale": true,
-          "x": 230,
-          "y": 40,
-          "locked": false
+          "image": "spell1.png",
+          "use1Xscale": false,
+          "name": "spell1.png",
+          "x": 132,
+          "y": 44
+        }
+      },
+      {
+        "type": "inputslot",
+        "data": {
+          "inputLimit": {
+            "value": ""
+          },
+          "color": {
+            "value": -103,
+            "falpha": 0.0
+          },
+          "id": 1,
+          "disableStackInteraction": false,
+          "dropItemsWhenNotBound": true,
+          "onSlotChanged": {
+            "name": "Spell4GUItest"
+          },
+          "name": "Slot #1",
+          "x": 141,
+          "y": 98
+        }
+      },
+      {
+        "type": "inputslot",
+        "data": {
+          "inputLimit": {
+            "value": ""
+          },
+          "color": {
+            "value": -103,
+            "falpha": 0.0
+          },
+          "id": 2,
+          "disableStackInteraction": false,
+          "dropItemsWhenNotBound": true,
+          "onSlotChanged": {
+            "name": "Spell4GUItest2"
+          },
+          "name": "Slot #2",
+          "x": 159,
+          "y": 98
+        }
+      },
+      {
+        "type": "inputslot",
+        "data": {
+          "inputLimit": {
+            "value": ""
+          },
+          "color": {
+            "value": -103,
+            "falpha": 0.0
+          },
+          "id": 3,
+          "disableStackInteraction": false,
+          "dropItemsWhenNotBound": true,
+          "onSlotChanged": {
+            "name": "Spell4GUItest3"
+          },
+          "name": "Slot #3",
+          "x": 177,
+          "y": 98
+        }
+      },
+      {
+        "type": "inputslot",
+        "data": {
+          "inputLimit": {
+            "value": ""
+          },
+          "color": {
+            "value": -103,
+            "falpha": 0.0
+          },
+          "id": 4,
+          "disableStackInteraction": false,
+          "dropItemsWhenNotBound": true,
+          "onSlotChanged": {
+            "name": "Spell4GUItest4"
+          },
+          "name": "Slot #4",
+          "x": 195,
+          "y": 98
+        }
+      },
+      {
+        "type": "inputslot",
+        "data": {
+          "inputLimit": {
+            "value": ""
+          },
+          "color": {
+            "value": -103,
+            "falpha": 0.0
+          },
+          "id": 5,
+          "disableStackInteraction": false,
+          "dropItemsWhenNotBound": true,
+          "onSlotChanged": {
+            "name": "Spell4GUItest5"
+          },
+          "name": "Slot #5",
+          "x": 213,
+          "y": 98
+        }
+      },
+      {
+        "type": "inputslot",
+        "data": {
+          "inputLimit": {
+            "value": ""
+          },
+          "color": {
+            "value": -103,
+            "falpha": 0.0
+          },
+          "id": 6,
+          "disableStackInteraction": false,
+          "dropItemsWhenNotBound": true,
+          "onSlotChanged": {
+            "name": "Spell4GUItest6"
+          },
+          "name": "Slot #6",
+          "x": 231,
+          "y": 98
+        }
+      },
+      {
+        "type": "inputslot",
+        "data": {
+          "inputLimit": {
+            "value": ""
+          },
+          "color": {
+            "value": -103,
+            "falpha": 0.0
+          },
+          "id": 7,
+          "disableStackInteraction": false,
+          "dropItemsWhenNotBound": true,
+          "onSlotChanged": {
+            "name": "Spell4GUItest7"
+          },
+          "name": "Slot #7",
+          "x": 249,
+          "y": 98
+        }
+      },
+      {
+        "type": "inputslot",
+        "data": {
+          "inputLimit": {
+            "value": ""
+          },
+          "color": {
+            "value": -103,
+            "falpha": 0.0
+          },
+          "id": 8,
+          "disableStackInteraction": false,
+          "dropItemsWhenNotBound": true,
+          "onSlotChanged": {
+            "name": "Spell4GUItest8"
+          },
+          "name": "Slot #8",
+          "x": 267,
+          "y": 98
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "The spell of cursed weapons,",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "The spell of cursed weapons,",
+          "x": 142,
+          "y": 68
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "shoot tools with area effects",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "shoot tools with area effects",
+          "x": 134,
+          "y": 80
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Reset",
+          "onClick": {
+            "name": "Spell4clickRESET"
+          },
+          "width": 36,
+          "height": 20,
+          "name": "Reset",
+          "x": 303,
+          "y": 40
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "please, insert/take item slowly",
+          "color": {
+            "value": -3394816,
+            "falpha": 0.0
+          },
+          "name": "please, insert/take item slowly",
+          "x": 135,
+          "y": 21
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "(15 second)",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "(15 second)",
+          "x": 344,
+          "y": 44
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "do not close this page",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "do not close this page",
+          "x": 303,
+          "y": 62
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "while reset the spell",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "while reset the spell",
+          "x": 303,
+          "y": 76
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Ctrl = swap weapon",
+          "color": {
+            "value": -10027162,
+            "falpha": 0.0
+          },
+          "name": "Ctrl = swap weapon",
+          "x": 6,
+          "y": 176
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Shift = shoot",
+          "color": {
+            "value": -10027162,
+            "falpha": 0.0
+          },
+          "name": "Shift = shoot",
+          "x": 6,
+          "y": 188
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Tab = reset",
+          "color": {
+            "value": -10027162,
+            "falpha": 0.0
+          },
+          "name": "Tab = reset",
+          "x": 6,
+          "y": 200
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Get autumn weapons",
+          "color": {
+            "value": -13261,
+            "falpha": 0.0
+          },
+          "name": "Get autumn weapons",
+          "x": 6,
+          "y": 140
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "in basic spell page",
+          "color": {
+            "value": -13261,
+            "falpha": 0.0
+          },
+          "name": "in basic spell page",
+          "x": 6,
+          "y": 152
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": "Around Lantern",
+          "isCheckedProcedure": {
+            "name": "Spell4aroundLanternTRUE"
+          },
+          "name": "spell4_weapon_around_lantern",
+          "x": 6,
+          "y": 40
         }
       }
     ],
+    "onTick": {
+      "name": "Spell4GUIcheckTEST"
+    },
     "gridSettings": {
-      "sx": 8,
-      "sy": 8,
+      "sx": 9,
+      "sy": 9,
       "ox": 11,
       "oy": 15,
       "snapOnGrid": true

@@ -1,0 +1,33 @@
+{
+  "_fv": 33,
+  "_type": "tool",
+  "definition": {
+    "renderType": 0,
+    "texture": "spell4_dual_scythes",
+    "customModelName": "Normal",
+    "name": "Dual Scythes",
+    "specialInfo": [
+      "--------------------",
+      "info",
+      "> for use in dark autumn spell",
+      "> deal damage in area",
+      "--------------------"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:Tab"
+    },
+    "toolType": "Sword",
+    "harvestLevel": 0,
+    "efficiency": 0.0,
+    "attackSpeed": 0.25,
+    "enchantability": 0,
+    "damageVsEntity": 25.0,
+    "usageCount": 25,
+    "blocksAffected": [],
+    "hasGlow": false,
+    "repairItems": [],
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false
+  }
+}

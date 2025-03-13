@@ -1,0 +1,10 @@
+{
+  "parent": "block/grass_block",
+  "textures": {
+    "bottom": "lantern_of_the_woodlands:blocks/dirt",
+    "top": "lantern_of_the_woodlands:blocks/grass_block_top",
+    "side": "lantern_of_the_woodlands:blocks/grass_block_side",
+    "overlay": "lantern_of_the_woodlands:blocks/grass_block_side_overlay",
+    "particle": "lantern_of_the_woodlands:blocks/dirt"
+  }
+}

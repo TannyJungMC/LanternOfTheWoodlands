@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "lantern_of_the_woodlands:illusion_log",
+    "lantern_of_the_woodlands:illusion_stone",
+    "lantern_of_the_woodlands:illusion_dirt",
+    "lantern_of_the_woodlands:illusion_leaves",
+    "lantern_of_the_woodlands:illusion_grass"
+  ]
+}

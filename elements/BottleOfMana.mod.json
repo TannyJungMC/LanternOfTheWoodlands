@@ -1,0 +1,58 @@
+{
+  "_fv": 33,
+  "_type": "item",
+  "definition": {
+    "renderType": 0,
+    "texture": "basicspell12",
+    "customModelName": "Normal",
+    "name": "Bottle of Mana",
+    "rarity": "COMMON",
+    "creativeTab": {
+      "value": "CUSTOM:Tab"
+    },
+    "stackSize": 1,
+    "enchantability": 0,
+    "useDuration": 0,
+    "toolType": 1.0,
+    "damageCount": 0,
+    "recipeRemainder": {
+      "value": ""
+    },
+    "destroyAnyBlock": false,
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "specialInfo": [
+      "--------------------",
+      "info",
+      "> hold lantern in left hand and hold this in right hand to auto-trans mana to the bottle",
+      "> hold in left hand and click to get 1 mana",
+      "> hold in left hand and hold shift and click to fill all mana",
+      "> hold in left hand to see mana",
+      "> can store 60 mana",
+      "> cancel this spell will reset mana in bottle",
+      "--------------------"
+    ],
+    "hasGlow": false,
+    "guiBoundTo": "<NONE>",
+    "inventorySize": 9,
+    "inventoryStackSize": 1,
+    "onRightClickedInAir": {
+      "name": "BasicSpell12whenClick"
+    },
+    "onItemInInventoryTick": {
+      "name": "BasicSpell12repeatSLOW"
+    },
+    "isFood": false,
+    "nutritionalValue": 4,
+    "saturation": 0.3,
+    "eatResultItem": {
+      "value": ""
+    },
+    "isMeat": false,
+    "isAlwaysEdible": false,
+    "animation": "eat"
+  }
+}

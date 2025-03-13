@@ -1,0 +1,554 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Mana : [ <VAR:mana> /15.0]",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "Mana : [ <VAR:mana> /15.0]",
+          "x": 230,
+          "y": 196
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Close",
+          "onClick": {
+            "name": "CloseGUI"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Close",
+          "x": 374,
+          "y": 192
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Cancel Spell",
+          "onClick": {
+            "name": "Spell2cancel"
+          },
+          "width": 88,
+          "height": 20,
+          "name": "Cancel Spell",
+          "x": 134,
+          "y": 192
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Eye of The Sea",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Eye of The Sea",
+          "x": 170,
+          "y": 28
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell10.png",
+          "use1Xscale": false,
+          "name": "spell10.png",
+          "x": 150,
+          "y": 24
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": "Specify Position",
+          "isCheckedProcedure": {
+            "name": "Spell2checkboxshowall"
+          },
+          "name": "spell2show_all",
+          "x": 6,
+          "y": 8
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "",
+          "color": {
+            "value": -6750208,
+            "falpha": 0.0
+          },
+          "name": "",
+          "x": 278,
+          "y": 32
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": "Show Tracker",
+          "isCheckedProcedure": {
+            "name": "Spell2checkboxShowTracker"
+          },
+          "name": "spell2show_tracker",
+          "x": 14,
+          "y": 80
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": "Show Player",
+          "isCheckedProcedure": {
+            "name": "Spell2checkboxShowPlayer"
+          },
+          "name": "spell2show_player",
+          "x": 14,
+          "y": 56
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": "Show Entity",
+          "isCheckedProcedure": {
+            "name": "Spell2checkboxShowEntity"
+          },
+          "name": "spell2show_entity",
+          "x": 14,
+          "y": 32
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Entity",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "name": "Entity",
+          "x": 182,
+          "y": 120
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Tracker",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "name": "Tracker",
+          "x": 182,
+          "y": 168
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "lantern_fire_orb.png",
+          "use1Xscale": false,
+          "name": "lantern_fire_orb.png",
+          "x": 158,
+          "y": 116
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "gold_fireball.png",
+          "use1Xscale": false,
+          "name": "gold_fireball.png",
+          "x": 158,
+          "y": 92
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Lantern",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "name": "Lantern",
+          "x": 182,
+          "y": 96
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "green_fireball.png",
+          "use1Xscale": false,
+          "name": "green_fireball.png",
+          "x": 158,
+          "y": 104
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "You",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "name": "You",
+          "x": 182,
+          "y": 108
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "blue_fireball.png",
+          "use1Xscale": false,
+          "name": "blue_fireball.png",
+          "x": 158,
+          "y": 128
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "red_fireball.png",
+          "use1Xscale": false,
+          "name": "red_fireball.png",
+          "x": 158,
+          "y": 140
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "specifyfireball.png",
+          "use1Xscale": false,
+          "name": "specifyfireball.png",
+          "x": 158,
+          "y": 164
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "purple_fireball.png",
+          "use1Xscale": false,
+          "name": "purple_fireball.png",
+          "x": 158,
+          "y": 152
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Affiliate",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "name": "Affiliate",
+          "x": 182,
+          "y": 132
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Other Team",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "name": "Other Team",
+          "x": 182,
+          "y": 144
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": "Show Buoy",
+          "isCheckedProcedure": {
+            "name": "Spell2checkboxShowWaypoint"
+          },
+          "name": "spell2show_waypoint",
+          "x": 14,
+          "y": 104
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Buoy",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "name": "Buoy",
+          "x": 182,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "Spell2GUIpage2open"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 414,
+          "y": 88
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "The spell of detection,",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "The spell of detection,",
+          "x": 158,
+          "y": 44
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "searching and tracking.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "searching and tracking.",
+          "x": 150,
+          "y": 56
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Detect entity and enemy",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Detect entity and enemy",
+          "x": 150,
+          "y": 68
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell2zone.png",
+          "use1Xscale": false,
+          "name": "spell2zone.png",
+          "x": 246,
+          "y": -8
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "501-1,000 blocks",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell2GUILevel3NotEnable"
+          },
+          "name": "501-1,000 blocks",
+          "x": 306,
+          "y": 160
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "101-500 blocks",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell2GUILevel2NotEnable"
+          },
+          "name": "101-500 blocks",
+          "x": 310,
+          "y": 160
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "10-100 blocks",
+          "color": {
+            "value": -13421773,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell2GUILevel1NotEnable"
+          },
+          "name": "10-100 blocks",
+          "x": 314,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "15 mana / upgrade",
+          "onClick": {
+            "name": "Spell2GUIgetLevel"
+          },
+          "displayCondition": {
+            "name": "Spell2GUILevel3not2"
+          },
+          "width": 104,
+          "height": 20,
+          "name": "15 mana / upgrade",
+          "x": 294,
+          "y": 136
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "around the lantern.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "around the lantern.",
+          "x": 150,
+          "y": 80
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Radius Upgrade",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Spell2GUILevel3not2"
+          },
+          "name": "Radius Upgrade",
+          "x": 310,
+          "y": 124
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": "Notification",
+          "isCheckedProcedure": {
+            "name": "Spell2cheackboxNotif"
+          },
+          "name": "spell2_notification",
+          "x": 6,
+          "y": 136
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": "Tracker",
+          "isCheckedProcedure": {
+            "name": "Spell2cheackboxNotifTracker"
+          },
+          "name": "spell2_notification_tracker",
+          "x": 14,
+          "y": 160
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": "Other Team",
+          "isCheckedProcedure": {
+            "name": "Spell2cheackboxNotifOtherTeam"
+          },
+          "name": "spell2_notification_other_team",
+          "x": 14,
+          "y": 184
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell2_2.png",
+          "use1Xscale": false,
+          "displayCondition": {
+            "name": "Spell2GUILevel4Enable"
+          },
+          "name": "spell2_2.png",
+          "x": 262,
+          "y": 48
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": "Buoy",
+          "isCheckedProcedure": {
+            "name": "Spell2checkboxNotifBUOY"
+          },
+          "name": "spell2_notification_buoy",
+          "x": 14,
+          "y": 208
+        }
+      }
+    ],
+    "onOpen": {
+      "name": "Spell2whenOpenGUI"
+    },
+    "onTick": {
+      "name": "Spell2GUItest"
+    },
+    "gridSettings": {
+      "sx": 16,
+      "sy": 16,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

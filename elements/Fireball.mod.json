@@ -1,0 +1,44 @@
+{
+  "_fv": 33,
+  "_type": "rangeditem",
+  "definition": {
+    "renderType": 0,
+    "texture": "red_fireball",
+    "customModelName": "Normal",
+    "name": "Protector Fireball",
+    "specialInfo": [
+      "--------------------",
+      "info",
+      "> right click to shoot",
+      "--------------------",
+      "damage",
+      "> fireball : 0.5"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:Tab"
+    },
+    "stackSize": 1,
+    "ammoItem": {
+      "value": ""
+    },
+    "shootConstantly": false,
+    "usageCount": 10,
+    "actionSound": {
+      "value": "entity.endereye.death"
+    },
+    "hasGlow": false,
+    "animation": "none",
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "bulletPower": 0.75,
+    "bulletDamage": 0.5,
+    "bulletKnockback": 0,
+    "bulletParticles": false,
+    "bulletIgnitesFire": false,
+    "bulletItemTexture": {
+      "value": "Blocks.AIR"
+    },
+    "bulletModel": "Default",
+    "customBulletModelTexture": ""
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "_fv": 33,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "LCONTROL",
+    "keyBindingName": "Basic Spells",
+    "keyBindingCategoryKey": "lotw",
+    "onKeyPressed": {
+      "name": "OpenBasicSpellGUI"
+    },
+    "onKeyReleased": {
+      "name": "BasicSpellUnpressKey"
+    }
+  }
+}

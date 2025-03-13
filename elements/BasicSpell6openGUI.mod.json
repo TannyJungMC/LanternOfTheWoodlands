@@ -1,0 +1,164 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "spell_costs.png",
+          "use1Xscale": false,
+          "name": "spell_costs.png",
+          "x": 128,
+          "y": 17
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Invitation",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Invitation",
+          "x": 186,
+          "y": 35
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "nature mage's",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "nature mage's",
+          "x": 173,
+          "y": 53
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "invite you to",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "invite you to",
+          "x": 177,
+          "y": 62
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Accept",
+          "onClick": {
+            "name": "BasicSpell6clickAccept"
+          },
+          "width": 54,
+          "height": 20,
+          "name": "Accept",
+          "x": 186,
+          "y": 143
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Refuse",
+          "onClick": {
+            "name": "BasicSpell6clickRefuse"
+          },
+          "width": 54,
+          "height": 20,
+          "name": "Refuse",
+          "x": 186,
+          "y": 166
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Time Left : <VAR:basicspell6_time_left>",
+          "color": {
+            "value": -6724096,
+            "falpha": 0.0
+          },
+          "name": "Time Left : <VAR:basicspell6_time_left>",
+          "x": 177,
+          "y": 125
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "auto cancel when",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "auto cancel when",
+          "x": 168,
+          "y": 89
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "he cancel this",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "he cancel this",
+          "x": 173,
+          "y": 98
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "spell or time out",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "spell or time out",
+          "x": 168,
+          "y": 107
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "teleport to him",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "teleport to him",
+          "x": 173,
+          "y": 71
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

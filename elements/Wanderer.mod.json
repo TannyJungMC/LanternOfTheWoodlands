@@ -1,0 +1,51 @@
+{
+  "_fv": 33,
+  "_type": "rangeditem",
+  "definition": {
+    "renderType": 0,
+    "texture": "wanderer",
+    "customModelName": "Normal",
+    "name": "Wanderer",
+    "specialInfo": [
+      "--------------------",
+      "info",
+      "> right click to shoot",
+      "> it will summon portal door when hit block",
+      "> teleport all entity in circle to your lantern on a stick",
+      "> open the portal for 3 seconds",
+      "> hold shift and shoot to open portal with delay 10 seconds before start",
+      "> hold in left hand to add more radius to 10",
+      "> usable 10 times",
+      "--------------------"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:Tab"
+    },
+    "stackSize": 1,
+    "ammoItem": {
+      "value": ""
+    },
+    "shootConstantly": false,
+    "usageCount": 10,
+    "actionSound": {
+      "value": "block.enchantment_table.use"
+    },
+    "hasGlow": false,
+    "animation": "bow",
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "bulletPower": 10.0,
+    "bulletDamage": 0.0,
+    "bulletKnockback": 0,
+    "bulletParticles": false,
+    "bulletIgnitesFire": false,
+    "bulletItemTexture": {
+      "value": "CUSTOM:InvisibleBlock"
+    },
+    "bulletModel": "Default",
+    "customBulletModelTexture": "",
+    "onBulletHitsBlock": {
+      "name": "BasicSpell5start"
+    }
+  }
+}

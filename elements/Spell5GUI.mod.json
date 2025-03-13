@@ -1,0 +1,710 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Mana : [ <VAR:mana> /15.0]",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "Mana : [ <VAR:mana> /15.0]",
+          "x": 230,
+          "y": 196
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Close",
+          "onClick": {
+            "name": "CloseGUI"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Close",
+          "x": 374,
+          "y": 192
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Cancel Spell",
+          "onClick": {
+            "name": "Spell5cancel"
+          },
+          "width": 88,
+          "height": 20,
+          "name": "Cancel Spell",
+          "x": 134,
+          "y": 192
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "",
+          "color": {
+            "value": -6750208,
+            "falpha": 0.0
+          },
+          "name": "",
+          "x": 278,
+          "y": 32
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Lost in Reality",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Lost in Reality",
+          "x": 170,
+          "y": 28
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "around lantern. Use it",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "around lantern. Use it",
+          "x": 150,
+          "y": 68
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "The spell of security,",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "The spell of security,",
+          "x": 158,
+          "y": 44
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "created the circle maze",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "created the circle maze",
+          "x": 150,
+          "y": 56
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "1 - 300",
+          "width": 52,
+          "height": 20,
+          "name": "spell5_radius",
+          "x": 282,
+          "y": 36
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell2.png",
+          "use1Xscale": false,
+          "name": "spell2.png",
+          "x": 150,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Radius/Safe Zone/Circle",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Radius/Safe Zone/Circle",
+          "x": 282,
+          "y": 24
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "1+",
+          "width": 36,
+          "height": 20,
+          "name": "spell5_circle",
+          "x": 370,
+          "y": 36
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Degree/Down/Height",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Degree/Down/Height",
+          "x": 282,
+          "y": 60
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "",
+          "width": 36,
+          "height": 20,
+          "name": "spell5_height",
+          "x": 370,
+          "y": 72
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "",
+          "width": 36,
+          "height": 20,
+          "name": "spell5_thickness",
+          "x": 282,
+          "y": 108
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Thickness/Room/No Wall",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Thickness/Room/No Wall",
+          "x": 282,
+          "y": 96
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "0 - 100",
+          "width": 44,
+          "height": 20,
+          "name": "spell5_room",
+          "x": 318,
+          "y": 108
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Save",
+          "onClick": {
+            "name": "Spell5saveGUI"
+          },
+          "width": 36,
+          "height": 20,
+          "name": "Save",
+          "x": 338,
+          "y": 144
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "0 - 100",
+          "width": 44,
+          "height": 20,
+          "name": "spell5_no_wall",
+          "x": 362,
+          "y": 108
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Trap",
+          "color": {
+            "value": -10092544,
+            "falpha": 0.0
+          },
+          "name": "Trap",
+          "x": 282,
+          "y": 132
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "0 - 100",
+          "width": 52,
+          "height": 20,
+          "name": "spell5_trap",
+          "x": 282,
+          "y": 144
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "",
+          "width": 36,
+          "height": 20,
+          "name": "spell5_safe_zone",
+          "x": 334,
+          "y": 36
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell5.png",
+          "use1Xscale": false,
+          "name": "spell5.png",
+          "x": 130,
+          "y": 12
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Start",
+          "onClick": {
+            "name": "Spell5clickSTART"
+          },
+          "width": 52,
+          "height": 20,
+          "name": "Start",
+          "x": 150,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Remove",
+          "onClick": {
+            "name": "Spell5clickREMOVE"
+          },
+          "width": 52,
+          "height": 20,
+          "name": "Remove",
+          "x": 202,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Use",
+          "onClick": {
+            "name": "Spell5usePresetMazeRunner"
+          },
+          "width": 24,
+          "height": 20,
+          "name": "Use",
+          "x": 106,
+          "y": 100
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Use",
+          "onClick": {
+            "name": "Spell5usePresetArenaWall"
+          },
+          "width": 24,
+          "height": 20,
+          "name": "Use",
+          "x": 106,
+          "y": 120
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Presets",
+          "color": {
+            "value": -26368,
+            "falpha": 0.0
+          },
+          "name": "Presets",
+          "x": 6,
+          "y": 8
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Giant Wall",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "- Giant Wall",
+          "x": 18,
+          "y": 124
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Maze Runner",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "- Maze Runner",
+          "x": 18,
+          "y": 104
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Default",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "- Default",
+          "x": 18,
+          "y": 24
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Use",
+          "onClick": {
+            "name": "Spell5usePresetDefault"
+          },
+          "width": 24,
+          "height": 20,
+          "name": "Use",
+          "x": 106,
+          "y": 20
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "360/x",
+          "width": 52,
+          "height": 20,
+          "name": "spell5_degree",
+          "x": 282,
+          "y": 72
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "",
+          "width": 36,
+          "height": 20,
+          "name": "spell5_down",
+          "x": 334,
+          "y": 72
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Clear",
+          "onClick": {
+            "name": "Spell5usePresetClear"
+          },
+          "width": 32,
+          "height": 20,
+          "name": "Clear",
+          "x": 374,
+          "y": 144
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- 2 Teams",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "- 2 Teams",
+          "x": 18,
+          "y": 144
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Use",
+          "onClick": {
+            "name": "Spell5usePresetComplex"
+          },
+          "width": 24,
+          "height": 20,
+          "name": "Use",
+          "x": 106,
+          "y": 80
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Complex",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "- Complex",
+          "x": 18,
+          "y": 84
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Use",
+          "onClick": {
+            "name": "Spell5usePresetHungerGame"
+          },
+          "width": 24,
+          "height": 20,
+          "name": "Use",
+          "x": 106,
+          "y": 140
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": "Always Update",
+          "isCheckedProcedure": {
+            "name": "Spell5checkAlwayGenTRUE"
+          },
+          "name": "spell5_always_gen",
+          "x": 6,
+          "y": 184
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Lite",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "- Lite",
+          "x": 18,
+          "y": 44
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Use",
+          "onClick": {
+            "name": "Spell5usePresetLite"
+          },
+          "width": 24,
+          "height": 20,
+          "name": "Use",
+          "x": 106,
+          "y": 40
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Medium",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "- Medium",
+          "x": 18,
+          "y": 64
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Use",
+          "onClick": {
+            "name": "Spell5usePresetMedium"
+          },
+          "width": 24,
+          "height": 20,
+          "name": "Use",
+          "x": 106,
+          "y": 60
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "- Landmine",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "- Landmine",
+          "x": 18,
+          "y": 164
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Use",
+          "onClick": {
+            "name": "Spell5usePresetOnlyTrap"
+          },
+          "width": 24,
+          "height": 20,
+          "name": "Use",
+          "x": 106,
+          "y": 160
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "carefully.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "carefully.",
+          "x": 150,
+          "y": 80
+        }
+      },
+      {
+        "type": "checkbox",
+        "data": {
+          "text": "Show Trap",
+          "isCheckedProcedure": {
+            "name": "Spell5checkShowTrap"
+          },
+          "name": "spell5_show_trap",
+          "x": 6,
+          "y": 208
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "=",
+          "onClick": {
+            "name": "Spell5clickPauseTRUE"
+          },
+          "displayCondition": {
+            "name": "Spell5checkPauseFALSE"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "=",
+          "x": 258,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "Spell5clickPauseFALSE"
+          },
+          "displayCondition": {
+            "name": "Spell5checkPauseTrue"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 266,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell5checkPauseTrue"
+          },
+          "width": 8,
+          "height": 20,
+          "name": " ",
+          "x": 258,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell5checkPauseFALSE"
+          },
+          "width": 8,
+          "height": 20,
+          "name": " ",
+          "x": 266,
+          "y": 156
+        }
+      }
+    ],
+    "onOpen": {
+      "name": "Spell5whenOpenGUI"
+    },
+    "onTick": {
+      "name": "Spell5GUItest"
+    },
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

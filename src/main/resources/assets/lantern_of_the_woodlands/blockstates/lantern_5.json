@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "lantern_of_the_woodlands:block/lantern_5"
+    },
+    "facing=east": {
+      "model": "lantern_of_the_woodlands:block/lantern_5",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "lantern_of_the_woodlands:block/lantern_5",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "lantern_of_the_woodlands:block/lantern_5",
+      "y": 270
+    }
+  }
+}

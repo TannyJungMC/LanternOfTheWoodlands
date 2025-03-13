@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "lantern_of_the_woodlands:blocks/flower_of_life3"
+  }
+}

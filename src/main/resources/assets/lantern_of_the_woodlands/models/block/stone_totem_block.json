@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "lantern_of_the_woodlands:blocks/stone_totem",
+    "particle": "lantern_of_the_woodlands:blocks/stone_totem"
+  }
+}

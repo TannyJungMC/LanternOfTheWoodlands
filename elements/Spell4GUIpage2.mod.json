@@ -1,0 +1,507 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 1,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "text": "Mana : [ <VAR:mana> /15.0]",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "Mana : [ <VAR:mana> /15.0]",
+          "x": 310,
+          "y": 196
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Close",
+          "onClick": {
+            "name": "CloseGUI"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Close",
+          "x": 366,
+          "y": 215
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "",
+          "color": {
+            "value": -6750208,
+            "falpha": 0.0
+          },
+          "name": "",
+          "x": 278,
+          "y": 32
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "OpenBasicSpellGUI"
+          },
+          "width": 9,
+          "height": 20,
+          "name": "<",
+          "x": 132,
+          "y": 89
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Man In The Mirror",
+          "onClick": {
+            "name": "Spell4getManInTheMirror"
+          },
+          "width": 96,
+          "height": 20,
+          "name": "Man In The Mirror",
+          "x": 310,
+          "y": 24
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Knight's Sword",
+          "onClick": {
+            "name": "Spell4getKnightSword"
+          },
+          "width": 96,
+          "height": 20,
+          "name": "Knight's Sword",
+          "x": 174,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Endarow",
+          "onClick": {
+            "name": "Spell4getEnderow"
+          },
+          "width": 96,
+          "height": 20,
+          "name": "Endarow",
+          "x": 174,
+          "y": 48
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "slot.png",
+          "use1Xscale": false,
+          "name": "slot.png",
+          "x": 150,
+          "y": 48
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "slot.png",
+          "use1Xscale": false,
+          "name": "slot.png",
+          "x": 150,
+          "y": 72
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "slot.png",
+          "use1Xscale": false,
+          "name": "slot.png",
+          "x": 150,
+          "y": 96
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "slot.png",
+          "use1Xscale": false,
+          "name": "slot.png",
+          "x": 150,
+          "y": 24
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "slot.png",
+          "use1Xscale": false,
+          "name": "slot.png",
+          "x": 286,
+          "y": 24
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "slot.png",
+          "use1Xscale": false,
+          "name": "slot.png",
+          "x": 150,
+          "y": 120
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "slot.png",
+          "use1Xscale": false,
+          "name": "slot.png",
+          "x": 150,
+          "y": 144
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "slot.png",
+          "use1Xscale": false,
+          "name": "slot.png",
+          "x": 286,
+          "y": 48
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "slot.png",
+          "use1Xscale": false,
+          "name": "slot.png",
+          "x": 286,
+          "y": 72
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell4_knight_sword.png",
+          "use1Xscale": false,
+          "name": "spell4_knight_sword.png",
+          "x": 150,
+          "y": 120
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell4_magic_mirror.png",
+          "use1Xscale": false,
+          "name": "spell4_magic_mirror.png",
+          "x": 286,
+          "y": 24
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell4_arrow_of_teleportation.png",
+          "use1Xscale": false,
+          "name": "spell4_arrow_of_teleportation.png",
+          "x": 150,
+          "y": 48
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell4_anchor.png",
+          "use1Xscale": false,
+          "name": "spell4_anchor.png",
+          "x": 150,
+          "y": 24
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Sea Anchor",
+          "onClick": {
+            "name": "Spell4getSeaAnchor"
+          },
+          "width": 96,
+          "height": 20,
+          "name": "Sea Anchor",
+          "x": 174,
+          "y": 24
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell4_explode.png",
+          "use1Xscale": false,
+          "name": "spell4_explode.png",
+          "x": 150,
+          "y": 72
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Paper Bomb Kunai",
+          "onClick": {
+            "name": "Spell4getPaperBombKunai"
+          },
+          "width": 96,
+          "height": 20,
+          "name": "Paper Bomb Kunai",
+          "x": 174,
+          "y": 72
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell4_glowing_staff.png",
+          "use1Xscale": false,
+          "name": "spell4_glowing_staff.png",
+          "x": 150,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Paraniya Staff",
+          "onClick": {
+            "name": "Spell4getParaniyaStaff"
+          },
+          "width": 96,
+          "height": 20,
+          "name": "Paraniya Staff",
+          "x": 174,
+          "y": 96
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell4_leaf.png",
+          "use1Xscale": false,
+          "name": "spell4_leaf.png",
+          "x": 154,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Whirlwind",
+          "onClick": {
+            "name": "Spell4getWhirlwindSummoner"
+          },
+          "width": 96,
+          "height": 20,
+          "name": "Whirlwind",
+          "x": 174,
+          "y": 144
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell4_forest_staff.png",
+          "use1Xscale": false,
+          "name": "spell4_forest_staff.png",
+          "x": 286,
+          "y": 48
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Forest Staff",
+          "onClick": {
+            "name": "Spell4getForestStaff"
+          },
+          "width": 96,
+          "height": 20,
+          "name": "Forest Staff",
+          "x": 310,
+          "y": 48
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell4_through.png",
+          "use1Xscale": false,
+          "name": "spell4_through.png",
+          "x": 286,
+          "y": 72
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Hell Innovation",
+          "onClick": {
+            "name": "Spell4getHellInnovation"
+          },
+          "width": 96,
+          "height": 20,
+          "name": "Hell Innovation",
+          "x": 310,
+          "y": 72
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "All items needed 15 mana",
+          "color": {
+            "value": -39322,
+            "falpha": 0.0
+          },
+          "name": "All items needed 15 mana",
+          "x": 150,
+          "y": 196
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "slot.png",
+          "use1Xscale": false,
+          "name": "slot.png",
+          "x": 286,
+          "y": 96
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "slot.png",
+          "use1Xscale": false,
+          "name": "slot.png",
+          "x": 286,
+          "y": 120
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell4_dual_scythes.png",
+          "use1Xscale": false,
+          "name": "spell4_dual_scythes.png",
+          "x": 286,
+          "y": 96
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell4_stone_sword.png",
+          "use1Xscale": false,
+          "name": "spell4_stone_sword.png",
+          "x": 286,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Dual Scythes",
+          "onClick": {
+            "name": "Spell4getDualScythes"
+          },
+          "width": 96,
+          "height": 20,
+          "name": "Dual Scythes",
+          "x": 310,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Forgotten Sword",
+          "onClick": {
+            "name": "Spell4getImaginaryShield"
+          },
+          "width": 96,
+          "height": 20,
+          "name": "Forgotten Sword",
+          "x": 310,
+          "y": 120
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "slot.png",
+          "use1Xscale": false,
+          "name": "slot.png",
+          "x": 286,
+          "y": 144
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Adventure Cards",
+          "onClick": {
+            "name": "Spell4getAdventureCards"
+          },
+          "width": 96,
+          "height": 20,
+          "name": "Adventure Cards",
+          "x": 310,
+          "y": 144
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell4_card.png",
+          "use1Xscale": false,
+          "name": "spell4_card.png",
+          "x": 290,
+          "y": 140
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

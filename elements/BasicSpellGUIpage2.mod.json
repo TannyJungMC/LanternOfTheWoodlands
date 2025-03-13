@@ -1,0 +1,448 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Close",
+          "onClick": {
+            "name": "CloseGUI"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Close",
+          "x": 374,
+          "y": 192
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "4 mana",
+          "onClick": {
+            "name": "BasicSpell7get"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "4 mana",
+          "x": 318,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Beehive",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Beehive",
+          "x": 174,
+          "y": 28
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Charge : [ <VAR:mana_charge> /20.0]",
+          "color": {
+            "value": -26317,
+            "falpha": 0.0
+          },
+          "name": "Charge : [ <VAR:mana_charge> /20.0]",
+          "x": 6,
+          "y": 28
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Mana : [ <VAR:mana> /15.0]",
+          "color": {
+            "value": -10027162,
+            "falpha": 0.0
+          },
+          "name": "Mana : [ <VAR:mana> /15.0]",
+          "x": 6,
+          "y": 16
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x",
+          "onClick": {
+            "name": "BasicSpell7cancel"
+          },
+          "width": 16,
+          "height": 20,
+          "name": "x",
+          "x": 374,
+          "y": 24
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "basicspell7.png",
+          "use1Xscale": false,
+          "name": "basicspell7.png",
+          "x": 150,
+          "y": 24
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "OpenBasicSpellGUI"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 134,
+          "y": 92
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-",
+          "onClick": {
+            "name": "BasicSpell7clear"
+          },
+          "width": 16,
+          "height": 20,
+          "name": "-",
+          "x": 390,
+          "y": 24
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "basicspell8.png",
+          "use1Xscale": false,
+          "name": "basicspell8.png",
+          "x": 150,
+          "y": 48
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Roots",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Roots",
+          "x": 174,
+          "y": 52
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "3 mana",
+          "onClick": {
+            "name": "BasicSpell8get"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "3 mana",
+          "x": 318,
+          "y": 48
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x",
+          "onClick": {
+            "name": "BasicSpell8cancel"
+          },
+          "width": 16,
+          "height": 20,
+          "name": "x",
+          "x": 374,
+          "y": 48
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-",
+          "onClick": {
+            "name": "BasicSpell8clear"
+          },
+          "width": 16,
+          "height": 20,
+          "name": "-",
+          "x": 390,
+          "y": 48
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "basicspell10.png",
+          "use1Xscale": false,
+          "name": "basicspell10.png",
+          "x": 150,
+          "y": 72
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Flower of Resurrection",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Flower of Resurrection",
+          "x": 174,
+          "y": 76
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "5 mana",
+          "onClick": {
+            "name": "BasicSpell10get"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "5 mana",
+          "x": 318,
+          "y": 72
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x",
+          "onClick": {
+            "name": "BasicSpell10cancel"
+          },
+          "width": 32,
+          "height": 20,
+          "name": "x",
+          "x": 374,
+          "y": 72
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Flower of Life",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Flower of Life",
+          "x": 174,
+          "y": 100
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "basicspell9.png",
+          "use1Xscale": false,
+          "name": "basicspell9.png",
+          "x": 150,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "15 mana",
+          "onClick": {
+            "name": "BasicSpell9get"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "15 mana",
+          "x": 318,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x",
+          "onClick": {
+            "name": "BasicSpell9cancel"
+          },
+          "width": 32,
+          "height": 20,
+          "name": "x",
+          "x": 374,
+          "y": 96
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "basicspell11.png",
+          "use1Xscale": false,
+          "name": "basicspell11.png",
+          "x": 150,
+          "y": 120
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Stone Totem",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Stone Totem",
+          "x": 174,
+          "y": 124
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "10 mana",
+          "onClick": {
+            "name": "BasicSpell11get"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "10 mana",
+          "x": 318,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x",
+          "onClick": {
+            "name": "BasicSpell11cancel"
+          },
+          "width": 16,
+          "height": 20,
+          "name": "x",
+          "x": 374,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-",
+          "onClick": {
+            "name": "BasicSpell11clear"
+          },
+          "width": 16,
+          "height": 20,
+          "name": "-",
+          "x": 390,
+          "y": 120
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "basicspell12.png",
+          "use1Xscale": false,
+          "name": "basicspell12.png",
+          "x": 150,
+          "y": 144
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Bottle of Mana",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Bottle of Mana",
+          "x": 174,
+          "y": 148
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "15 mana",
+          "onClick": {
+            "name": "BasicSpell12get"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "15 mana",
+          "x": 318,
+          "y": 144
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x",
+          "onClick": {
+            "name": "BasicSpell12cancel"
+          },
+          "width": 32,
+          "height": 20,
+          "name": "x",
+          "x": 374,
+          "y": 144
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "BasicSpellGUI3open"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 414,
+          "y": 92
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 16,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

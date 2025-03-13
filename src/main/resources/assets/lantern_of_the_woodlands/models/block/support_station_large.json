@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "lantern_of_the_woodlands:blocks/invisible_block",
+    "particle": "lantern_of_the_woodlands:blocks/spell3"
+  }
+}

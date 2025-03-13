@@ -1,0 +1,11 @@
+{
+  "_fv": 33,
+  "_type": "tab",
+  "definition": {
+    "name": "Lantern of The Woodlands",
+    "icon": {
+      "value": "CUSTOM:Lantern15"
+    },
+    "showSearch": false
+  }
+}

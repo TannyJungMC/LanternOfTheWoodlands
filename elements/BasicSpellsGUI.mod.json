@@ -1,0 +1,507 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Close",
+          "onClick": {
+            "name": "CloseGUI"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Close",
+          "x": 374,
+          "y": 192
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "2 mana",
+          "onClick": {
+            "name": "BasicSpell1"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "2 mana",
+          "x": 318,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Protector",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Protector",
+          "x": 174,
+          "y": 28
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x All",
+          "onClick": {
+            "name": "BasicSpellCancel"
+          },
+          "width": 56,
+          "height": 20,
+          "name": "x All",
+          "x": 190,
+          "y": 192
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Affiliate List",
+          "onClick": {
+            "name": "OpenPlayerListGUI"
+          },
+          "width": 112,
+          "height": 20,
+          "name": "Affiliate List",
+          "x": 254,
+          "y": 192
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Charge : [ <VAR:mana_charge> /20.0]",
+          "color": {
+            "value": -26317,
+            "falpha": 0.0
+          },
+          "name": "Charge : [ <VAR:mana_charge> /20.0]",
+          "x": 6,
+          "y": 28
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Mana : [ <VAR:mana> /15.0]",
+          "color": {
+            "value": -10027162,
+            "falpha": 0.0
+          },
+          "name": "Mana : [ <VAR:mana> /15.0]",
+          "x": 6,
+          "y": 16
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x",
+          "onClick": {
+            "name": "BasicSpell1Cancel"
+          },
+          "width": 16,
+          "height": 20,
+          "name": "x",
+          "x": 374,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Lantern Light",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Lantern Light",
+          "x": 174,
+          "y": 52
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "1 mana",
+          "onClick": {
+            "name": "BasicSpell2getLight"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "1 mana",
+          "x": 318,
+          "y": 48
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x",
+          "onClick": {
+            "name": "BasicSpell2cancel"
+          },
+          "width": 16,
+          "height": 20,
+          "name": "x",
+          "x": 374,
+          "y": 48
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "basicspell1.png",
+          "use1Xscale": false,
+          "name": "basicspell1.png",
+          "x": 150,
+          "y": 24
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "basicspell2.png",
+          "use1Xscale": false,
+          "name": "basicspell2.png",
+          "x": 150,
+          "y": 48
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "basicspell3.png",
+          "use1Xscale": false,
+          "name": "basicspell3.png",
+          "x": 150,
+          "y": 72
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Winter Wind",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Winter Wind",
+          "x": 174,
+          "y": 76
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "1 mana",
+          "onClick": {
+            "name": "BasicSpell3get"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "1 mana",
+          "x": 318,
+          "y": 72
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x",
+          "onClick": {
+            "name": "BasicSpell3cancel"
+          },
+          "width": 16,
+          "height": 20,
+          "name": "x",
+          "x": 374,
+          "y": 72
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "basicspell4.png",
+          "use1Xscale": false,
+          "name": "basicspell4.png",
+          "x": 150,
+          "y": 96
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Wall of Vines",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Wall of Vines",
+          "x": 174,
+          "y": 100
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "2 mana",
+          "onClick": {
+            "name": "BasicSpell4get"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "2 mana",
+          "x": 318,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x",
+          "onClick": {
+            "name": "BasicSpell4cancel"
+          },
+          "width": 16,
+          "height": 20,
+          "name": "x",
+          "x": 374,
+          "y": 96
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "basicspell5.png",
+          "use1Xscale": false,
+          "name": "basicspell5.png",
+          "x": 150,
+          "y": 120
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Wanderer",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Wanderer",
+          "x": 174,
+          "y": 124
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "3 mana",
+          "onClick": {
+            "name": "BasicSpell5get"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "3 mana",
+          "x": 318,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x",
+          "onClick": {
+            "name": "BasicSpell5cancel"
+          },
+          "width": 32,
+          "height": 20,
+          "name": "x",
+          "x": 374,
+          "y": 120
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Pigeon Post",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "Pigeon Post",
+          "x": 174,
+          "y": 148
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "basicspell6.png",
+          "use1Xscale": false,
+          "name": "basicspell6.png",
+          "x": 150,
+          "y": 144
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "3 mana",
+          "onClick": {
+            "name": "BasicSpell6get"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "3 mana",
+          "x": 318,
+          "y": 144
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x",
+          "onClick": {
+            "name": "BasicSpell6cancel"
+          },
+          "width": 32,
+          "height": 20,
+          "name": "x",
+          "x": 374,
+          "y": 144
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Dark Autumn Weapons",
+          "onClick": {
+            "name": "Spell4GUIpage2open"
+          },
+          "displayCondition": {
+            "name": "Spell4ifSpell4TRUE"
+          },
+          "width": 120,
+          "height": 20,
+          "name": "Dark Autumn Weapons",
+          "x": 6,
+          "y": 44
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "BasicSpellGUI2open"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 414,
+          "y": 92
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-",
+          "onClick": {
+            "name": "BasicSpell1clear"
+          },
+          "width": 16,
+          "height": 20,
+          "name": "-",
+          "x": 390,
+          "y": 24
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "- All",
+          "onClick": {
+            "name": "BasicSpellClear"
+          },
+          "width": 56,
+          "height": 20,
+          "name": "- All",
+          "x": 134,
+          "y": 192
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-",
+          "onClick": {
+            "name": "BasicSpell2clear"
+          },
+          "width": 16,
+          "height": 20,
+          "name": "-",
+          "x": 390,
+          "y": 48
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-",
+          "onClick": {
+            "name": "BasicSpell3clear"
+          },
+          "width": 16,
+          "height": 20,
+          "name": "-",
+          "x": 390,
+          "y": 72
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-",
+          "onClick": {
+            "name": "BasicSpell4clear"
+          },
+          "width": 16,
+          "height": 20,
+          "name": "-",
+          "x": 390,
+          "y": 96
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 16,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

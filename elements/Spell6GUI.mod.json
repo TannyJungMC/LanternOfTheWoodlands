@@ -1,0 +1,415 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "tph_book.png",
+          "use1Xscale": false,
+          "name": "tph_book.png",
+          "x": 134,
+          "y": 8
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Mana : [ <VAR:mana> /15.0]",
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "name": "Mana : [ <VAR:mana> /15.0]",
+          "x": 230,
+          "y": 196
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Close",
+          "onClick": {
+            "name": "CloseGUI"
+          },
+          "width": 48,
+          "height": 20,
+          "name": "Close",
+          "x": 374,
+          "y": 192
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Cancel Spell",
+          "onClick": {
+            "name": "Spell6cancel"
+          },
+          "width": 88,
+          "height": 20,
+          "name": "Cancel Spell",
+          "x": 134,
+          "y": 192
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Moon Shines",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Moon Shines",
+          "x": 170,
+          "y": 28
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell12.png",
+          "use1Xscale": false,
+          "name": "spell12.png",
+          "x": 150,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "The spell of illusion.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "The spell of illusion.",
+          "x": 158,
+          "y": 44
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "and unreal blocks to",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "and unreal blocks to",
+          "x": 150,
+          "y": 68
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "spell6image.png",
+          "use1Xscale": false,
+          "name": "spell6image.png",
+          "x": 130,
+          "y": -4
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "create unreal entities",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "create unreal entities",
+          "x": 150,
+          "y": 56
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "hiding or make a decoy.",
+          "color": {
+            "value": -10079488,
+            "falpha": 0.0
+          },
+          "name": "hiding or make a decoy.",
+          "x": 150,
+          "y": 80
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Show",
+          "onClick": {
+            "name": "Spell6clickSTART"
+          },
+          "width": 52,
+          "height": 20,
+          "name": "Show",
+          "x": 150,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Hide",
+          "onClick": {
+            "name": "Spell6clickREMOVE"
+          },
+          "width": 52,
+          "height": 20,
+          "name": "Hide",
+          "x": 202,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "Spell6clickPAUSEfalse"
+          },
+          "displayCondition": {
+            "name": "Spell6pauseTRUE"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 266,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "=",
+          "onClick": {
+            "name": "Spell6clickPAUSEtrue"
+          },
+          "displayCondition": {
+            "name": "Spell6pauseFALSE"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "=",
+          "x": 258,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "1 mana",
+          "onClick": {
+            "name": "Spell6getOakTree"
+          },
+          "width": 44,
+          "height": 20,
+          "name": "1 mana",
+          "x": 354,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Oak Tree x1",
+          "color": {
+            "value": -10092442,
+            "falpha": 0.0
+          },
+          "name": "Oak Tree x1",
+          "x": 282,
+          "y": 28
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x",
+          "onClick": {
+            "name": "Spell6removeOakTree"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "x",
+          "x": 398,
+          "y": 24
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell6pauseTRUE"
+          },
+          "width": 8,
+          "height": 20,
+          "name": " ",
+          "x": 258,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "displayCondition": {
+            "name": "Spell6pauseFALSE"
+          },
+          "width": 8,
+          "height": 20,
+          "name": " ",
+          "x": 266,
+          "y": 156
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Grass x8",
+          "color": {
+            "value": -10066432,
+            "falpha": 0.0
+          },
+          "name": "Grass x8",
+          "x": 282,
+          "y": 52
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "1 mana",
+          "onClick": {
+            "name": "Spell6getGrass"
+          },
+          "width": 44,
+          "height": 20,
+          "name": "1 mana",
+          "x": 354,
+          "y": 48
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x",
+          "onClick": {
+            "name": "IllusionGrassRemove"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "x",
+          "x": 398,
+          "y": 48
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Dirt x8",
+          "color": {
+            "value": -10066432,
+            "falpha": 0.0
+          },
+          "name": "Dirt x8",
+          "x": 282,
+          "y": 76
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "1 mana",
+          "onClick": {
+            "name": "Spell6getDirt"
+          },
+          "width": 44,
+          "height": 20,
+          "name": "1 mana",
+          "x": 354,
+          "y": 72
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x",
+          "onClick": {
+            "name": "IllusionDirtRemove"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "x",
+          "x": 398,
+          "y": 72
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Stone x8",
+          "color": {
+            "value": -10066432,
+            "falpha": 0.0
+          },
+          "name": "Stone x8",
+          "x": 282,
+          "y": 100
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "1 mana",
+          "onClick": {
+            "name": "Spell6getStone"
+          },
+          "width": 44,
+          "height": 20,
+          "name": "1 mana",
+          "x": 354,
+          "y": 96
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "x",
+          "onClick": {
+            "name": "IllusionStoneRemove"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "x",
+          "x": 398,
+          "y": 96
+        }
+      }
+    ],
+    "onTick": {
+      "name": "Spell1GUItest"
+    },
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "missing": "user_book"
+      },
+      "name": "default"
+    }
+  }
+}

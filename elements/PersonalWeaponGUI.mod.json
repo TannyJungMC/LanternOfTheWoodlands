@@ -1,0 +1,471 @@
+{
+  "_fv": 73,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_mana",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnMana"
+          },
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "x": 54,
+          "y": 4,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "background_book.png",
+          "use1Xscale": true,
+          "x": 54,
+          "y": 16,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_exit",
+          "image": "symbol_exit.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUIClose"
+          },
+          "x": 358,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_icon_home",
+          "image": "icon_home.png",
+          "hoveredImage": "icon_home_2s.png",
+          "onClick": {
+            "name": "MenuGUIOpen"
+          },
+          "x": 42,
+          "y": 24,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_previous",
+          "image": "symbol_previous.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUIprevious"
+          },
+          "x": 54,
+          "y": 108,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_next",
+          "image": "symbol_next.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUInext"
+          },
+          "x": 366,
+          "y": 108,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_upgrades",
+          "text": {
+            "fixedValue": "PERSONAL WEAPON"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "x": 94,
+          "y": 32,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_set_your_primary_weapon_to_spell",
+          "text": {
+            "fixedValue": "Personal weapon is like"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 78,
+          "y": 92,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_to_spell_addon_get_special_effe",
+          "text": {
+            "fixedValue": "spell addon. Can be an"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 104,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_effects_while_holding_it",
+          "text": {
+            "fixedValue": "item or set to nothing."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 116,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_you_can_use_it_as_casting_device",
+          "text": {
+            "fixedValue": "Can use as spell casting"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 78,
+          "y": 132,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_device",
+          "text": {
+            "fixedValue": "device. Allow you to control"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 144,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_function",
+          "text": {
+            "fixedValue": "some spell from far away,"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 156,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_that_have_mark_function",
+          "text": {
+            "fixedValue": "have \"Mark Point\" function."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 180,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_with_spell",
+          "text": {
+            "fixedValue": "only work with spell that"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 168,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_10",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnPageLeft"
+          },
+          "color": {
+            "value": -3355444,
+            "falpha": 0.0
+          },
+          "x": 130,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_11",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnPageRight"
+          },
+          "color": {
+            "value": -3355444,
+            "falpha": 0.0
+          },
+          "x": 282,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_icon_personal_weapon",
+          "image": "icon_personal_weapon.png",
+          "hoveredImage": "",
+          "x": 130,
+          "y": 60,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_background_icon",
+          "image": "background_icon.png",
+          "hoveredImage": "",
+          "x": 126,
+          "y": 56,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_you_can_place_weapon_on",
+          "text": {
+            "fixedValue": "You can place weapon on"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 230,
+          "y": 32,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_ground_by_holding_it_on_left",
+          "text": {
+            "fixedValue": "ground by holding it on left"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 44,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_hand_hold_opened_user",
+          "text": {
+            "fixedValue": "hand, hold opened user"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 56,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_book_on_right_hand_hold",
+          "text": {
+            "fixedValue": "book on right hand, hold"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 68,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_the_main_key_and_right_click",
+          "text": {
+            "fixedValue": "the main key and right click"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 80,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_on_ground",
+          "text": {
+            "fixedValue": "on ground."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 92,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_pick_up_by_empty_right",
+          "text": {
+            "fixedValue": "Pick up by empty right"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 230,
+          "y": 108,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_hand_hold_shift_and_hold",
+          "text": {
+            "fixedValue": "hand, hold shift and hold"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 120,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_the_main_key",
+          "text": {
+            "fixedValue": "the main key."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 132,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_image_personal_weapon",
+          "image": "image_personal_weapon.png",
+          "hoveredImage": "",
+          "x": 234,
+          "y": 148,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_background_text_purple",
+          "image": "background_text_purple.png",
+          "hoveredImage": "",
+          "x": 70,
+          "y": 28,
+          "locked": false
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "_fv": 73,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "3",
+    "keyBindingName": "Spell4 - Distance (-)",
+    "keyBindingCategoryKey": "lanternofthewoodlands",
+    "onKeyPressed": {
+      "name": "KEYSpell4DistanceReduceRun"
+    },
+    "onKeyReleased": {
+      "name": "KEYSpell4DistanceRelease"
+    }
+  }
+}

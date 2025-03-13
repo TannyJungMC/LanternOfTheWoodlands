@@ -1,0 +1,15 @@
+{
+  "_fv": 73,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "NONE",
+    "keyBindingName": "Spell4 - Reverse",
+    "keyBindingCategoryKey": "lanternofthewoodlands",
+    "onKeyPressed": {
+      "name": "KEYSpell4ReverseRun"
+    },
+    "onKeyReleased": {
+      "name": "KEYSpell4ReverseRelease"
+    }
+  }
+}

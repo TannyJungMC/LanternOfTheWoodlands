@@ -1,0 +1,284 @@
+{
+  "_fv": 73,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "name": "label_the_spell_of_astrology",
+          "text": {
+            "fixedValue": "The spell of tools and"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 78,
+          "y": 92,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_use_all_13_zodiac_cards",
+          "text": {
+            "fixedValue": "weapons manipulation. Move"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 104,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_goods_and_bad_effects",
+          "text": {
+            "fixedValue": "them freely in the air and"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 116,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_mana",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnMana"
+          },
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "x": 54,
+          "y": 4,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "background_book.png",
+          "use1Xscale": true,
+          "x": 54,
+          "y": 16,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_exit",
+          "image": "symbol_exit.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUIClose"
+          },
+          "x": 358,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_icon_home",
+          "image": "icon_home.png",
+          "hoveredImage": "icon_home_2s.png",
+          "onClick": {
+            "name": "MenuGUIOpen"
+          },
+          "x": 42,
+          "y": 24,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_next",
+          "image": "symbol_next.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUInext"
+          },
+          "x": 366,
+          "y": 108,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_previous",
+          "image": "symbol_previous.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUIprevious"
+          },
+          "x": 54,
+          "y": 108,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_page_left",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnPageLeft"
+          },
+          "color": {
+            "value": -3355444,
+            "falpha": 0.0
+          },
+          "x": 130,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_page_right",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnPageRight"
+          },
+          "color": {
+            "value": -3355444,
+            "falpha": 0.0
+          },
+          "x": 282,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_skills",
+          "text": {
+            "fixedValue": "use their abilities."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 128,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_background_icon",
+          "image": "background_icon.png",
+          "hoveredImage": "",
+          "x": 126,
+          "y": 56,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_autumn_of_loss",
+          "text": {
+            "fixedValue": "AUTUMN OF LOSS"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "x": 98,
+          "y": 32,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_image_tape",
+          "image": "image_tape.png",
+          "hoveredImage": "",
+          "x": 222,
+          "y": 32,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_image_tape_2s",
+          "image": "image_tape_2s.png",
+          "hoveredImage": "",
+          "x": 334,
+          "y": 168,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_icon_advance_spell4",
+          "image": "icon_advance_spell4.png",
+          "hoveredImage": "",
+          "x": 130,
+          "y": 60,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_background_text_purple",
+          "image": "background_text_purple.png",
+          "hoveredImage": "",
+          "x": 70,
+          "y": 28,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "image_spell4.png",
+          "use1Xscale": true,
+          "x": 230,
+          "y": 40,
+          "locked": false
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

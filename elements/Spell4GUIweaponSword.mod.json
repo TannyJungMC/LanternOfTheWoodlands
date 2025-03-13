@@ -1,0 +1,687 @@
+{
+  "_fv": 73,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "name": "label_false_divination",
+          "text": {
+            "fixedValue": "SWORD"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "x": 122,
+          "y": 32,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_the_spell_of_astrology",
+          "text": {
+            "fixedValue": "Short range weapon with"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 78,
+          "y": 104,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_use_all_13_zodiac_cards",
+          "text": {
+            "fixedValue": "ability to make continuous"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 116,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_goods_and_bad_effects",
+          "text": {
+            "fixedValue": "damage to nearby targets."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 128,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_mana",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnMana"
+          },
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "x": 54,
+          "y": 4,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "background_book.png",
+          "use1Xscale": true,
+          "x": 54,
+          "y": 16,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_exit",
+          "image": "symbol_exit.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUIClose"
+          },
+          "x": 358,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_icon_home",
+          "image": "icon_home.png",
+          "hoveredImage": "icon_home_2s.png",
+          "onClick": {
+            "name": "MenuGUIOpen"
+          },
+          "x": 42,
+          "y": 24,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_previous",
+          "image": "symbol_previous.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUIprevious"
+          },
+          "x": 54,
+          "y": 108,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_next",
+          "image": "symbol_next.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUInext"
+          },
+          "x": 366,
+          "y": 108,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_page_left",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnPageLeft"
+          },
+          "color": {
+            "value": -3355444,
+            "falpha": 0.0
+          },
+          "x": 130,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_page_right",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnPageRight"
+          },
+          "color": {
+            "value": -3355444,
+            "falpha": 0.0
+          },
+          "x": 282,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_supported",
+          "text": {
+            "fixedValue": "Supported to all types of"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 140,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_icon_spell_sword_manipulation",
+          "image": "icon_spell_sword_manipulation.png",
+          "hoveredImage": "",
+          "x": 114,
+          "y": 72,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_background_icon",
+          "image": "background_icon.png",
+          "hoveredImage": "",
+          "x": 110,
+          "y": 68,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_manipulation",
+          "text": {
+            "fixedValue": "MANIPULATION"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "x": 106,
+          "y": 44,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_add",
+          "image": "symbol_add.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "Spell4GUIbuttonSwordActivate"
+          },
+          "x": 82,
+          "y": 172,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_activate_weapons_on_ground_near1",
+          "text": {
+            "fixedValue": "Activate all nearby items if supported"
+          },
+          "width": 8,
+          "height": 8,
+          "x": 82,
+          "y": 172,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_remove",
+          "image": "symbol_remove.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "Spell4GUIbuttonSwordClear"
+          },
+          "x": 94,
+          "y": 172,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_remove_all_active_weapon_in_this",
+          "text": {
+            "fixedValue": "Remove all active weapon in this type and drop item"
+          },
+          "width": 8,
+          "height": 8,
+          "x": 94,
+          "y": 172,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_upgrade",
+          "image": "symbol_upgrade.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "Spell4GUIbuttonSwordCountUpgrade"
+          },
+          "x": 106,
+          "y": 172,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_1_count_max_10_mana",
+          "text": {
+            "fixedValue": "+1 Max Count (20 Mana)"
+          },
+          "width": 8,
+          "height": 8,
+          "x": 106,
+          "y": 172,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_spell_4_gu_ireturn_count_sw",
+          "text": {
+            "fixedValue": "",
+            "name": "Spell4GUIreturnSwordCount"
+          },
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "x": 82,
+          "y": 184,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_level",
+          "text": {
+            "fixedValue": "Level"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 234,
+          "y": 52,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_line_2s1",
+          "image": "symbol_line_2s.png",
+          "hoveredImage": "",
+          "x": 222,
+          "y": 52,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_upgrade2",
+          "image": "symbol_upgrade.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "Spell4GUIbuttonSwordLevelUpgrade"
+          },
+          "x": 222,
+          "y": 64,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_upgrades",
+          "text": {
+            "fixedValue": "UPGRADE"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "x": 270,
+          "y": 32,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_awdedae",
+          "text": {
+            "fixedValue": "",
+            "name": "Spell4GUIreturnSwordLevel"
+          },
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "x": 234,
+          "y": 64,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_line1",
+          "image": "symbol_line.png",
+          "hoveredImage": "",
+          "x": 222,
+          "y": 72,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_cooldown",
+          "text": {
+            "fixedValue": "Cooldown"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 88,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_duration",
+          "text": {
+            "fixedValue": "Duration"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 112,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_damage",
+          "text": {
+            "fixedValue": "Damage"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 160,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_10s",
+          "text": {
+            "fixedValue": "20s"
+          },
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 100,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_10s1",
+          "text": {
+            "fixedValue": "",
+            "name": "Spell4GUIreturnSwordStatus"
+          },
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 124,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_999",
+          "text": {
+            "fixedValue": "1 / 1 / 2 / 2 / 3 / 5"
+          },
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 172,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_background_icon1",
+          "image": "background_icon.png",
+          "hoveredImage": "",
+          "x": 142,
+          "y": 68,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_icon_spell_hidden_objects",
+          "image": "icon_spell_hidden_objects.png",
+          "hoveredImage": "",
+          "x": 146,
+          "y": 72,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_hidden_objects_temporary_make",
+          "text": {
+            "fixedValue": "Hidden Objects : Temporary make swords invisible"
+          },
+          "width": 16,
+          "height": 16,
+          "x": 146,
+          "y": 72,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_1_level_30_mana",
+          "text": {
+            "fixedValue": "+1 Level (20 Mana)"
+          },
+          "width": 8,
+          "height": 8,
+          "x": 222,
+          "y": 64,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_vanilla_swords",
+          "text": {
+            "fixedValue": "vanilla swords."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 152,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_radius",
+          "text": {
+            "fixedValue": "Radius"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 136,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_2",
+          "text": {
+            "fixedValue": "4"
+          },
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 148,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_1_2_3_4_5_10",
+          "text": {
+            "fixedValue": "(x4 When Constant is ON)"
+          },
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "x": 222,
+          "y": 184,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_background_text_red",
+          "image": "background_text_red.png",
+          "hoveredImage": "",
+          "x": 222,
+          "y": 28,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_background_text_blue_2s",
+          "image": "background_text_blue_2s.png",
+          "hoveredImage": "",
+          "x": 70,
+          "y": 28,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_line_5s",
+          "image": "symbol_line_5s.png",
+          "hoveredImage": "",
+          "x": 70,
+          "y": 172,
+          "locked": false
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

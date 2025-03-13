@@ -1,0 +1,12 @@
+{
+  "_fv": 73,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "Z",
+    "keyBindingName": "Spell4 - Lock Target",
+    "keyBindingCategoryKey": "lanternofthewoodlands",
+    "onKeyPressed": {
+      "name": "KEYSPell4LockTargetRun"
+    }
+  }
+}

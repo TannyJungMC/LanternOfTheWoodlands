@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "lanternofthewoodlands:item/spell4_stone_sword"
+  }
+}

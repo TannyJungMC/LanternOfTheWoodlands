@@ -1,0 +1,22 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "1": "spell_zodiac_circle"
+      },
+      "name": "default"
+    },
+    "healing": {
+      "map": {
+        "1": "spell_healing_circle"
+      },
+      "name": "healing"
+    },
+    "teleport": {
+      "map": {
+        "1": "spell_teleport_circle"
+      },
+      "name": "teleport"
+    }
+  }
+}

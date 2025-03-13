@@ -1,0 +1,603 @@
+{
+  "_fv": 73,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "gui_component_background.png",
+          "use1Xscale": true,
+          "x": 14,
+          "y": 0,
+          "locked": true
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_gui_component_close",
+          "image": "gui_component_close.png",
+          "hoveredImage": "gui_component_close_hovered.png",
+          "onClick": {
+            "name": "GUIClose"
+          },
+          "x": 418,
+          "y": 232,
+          "locked": true
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_gui_component_page_previous",
+          "image": "gui_component_page_previous.png",
+          "hoveredImage": "gui_component_page_previous_hovered.png",
+          "onClick": {
+            "name": "GUIPagePrevious"
+          },
+          "x": 26,
+          "y": 212,
+          "locked": true
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_gui_component_page_next",
+          "image": "gui_component_page_next.png",
+          "hoveredImage": "gui_component_page_next_hovered.png",
+          "onClick": {
+            "name": "GUIPageNext"
+          },
+          "x": 386,
+          "y": 212,
+          "locked": true
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gui_page_number_left",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIPageNumberLeft"
+          },
+          "color": {
+            "value": -4017518,
+            "falpha": 0.0
+          },
+          "x": 44,
+          "y": 218,
+          "locked": true
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gui_page_number_right",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIPageNumberRight"
+          },
+          "color": {
+            "value": -4017518,
+            "falpha": 0.0
+          },
+          "x": 370,
+          "y": 218,
+          "locked": true
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "gui_component_mana_bar.png",
+          "spritesCount": 151,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "GUIMana"
+          },
+          "x": 409,
+          "y": 12,
+          "locked": true
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "gui_component_mana_bar_charge.png",
+          "spritesCount": 61,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "GUIManaCharge"
+          },
+          "x": 409,
+          "y": 166,
+          "locked": true
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_gui_component_shortcut_home",
+          "image": "gui_component_shortcut_home.png",
+          "hoveredImage": "gui_component_shortcut_home_hovered.png",
+          "onClick": {
+            "name": "GUIMenuOpen"
+          },
+          "x": 2,
+          "y": 12,
+          "locked": true
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_gui_component_shortcut_custom",
+          "image": "gui_component_shortcut_custom.png",
+          "hoveredImage": "gui_component_shortcut_custom_hovered.png",
+          "onClick": {
+            "name": "GUIShortcutCustom"
+          },
+          "x": 2,
+          "y": 24,
+          "locked": true
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_gui_component_shortcut_custom_set",
+          "image": "gui_component_shortcut_custom_set.png",
+          "hoveredImage": "gui_component_shortcut_custom_set_hovered.png",
+          "onClick": {
+            "name": "GUIShortcutCustomSet"
+          },
+          "x": 17,
+          "y": 33,
+          "locked": true
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_gui_component_shortcut_ally_list",
+          "image": "gui_component_shortcut_ally_list.png",
+          "hoveredImage": "gui_component_shortcut_ally_list_hovered.png",
+          "x": 2,
+          "y": 48,
+          "locked": true
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_gui_component_shortcut_basic_spell",
+          "image": "gui_component_shortcut_basic_spells.png",
+          "hoveredImage": "gui_component_shortcut_basic_spells_hovered.png",
+          "x": 2,
+          "y": 60,
+          "locked": true
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_gui_component_shortcut_spell_contr",
+          "image": "gui_component_shortcut_spell_control.png",
+          "hoveredImage": "gui_component_shortcut_spell_control_hovered.png",
+          "x": 2,
+          "y": 72,
+          "locked": true
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "gui_component_log_type.png",
+          "spritesCount": 4,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "GUILogType"
+          },
+          "x": 220,
+          "y": 230,
+          "locked": true
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_gui_component_log_type_set",
+          "image": "gui_component_log_type_set.png",
+          "hoveredImage": "gui_component_log_type_set_hovered.png",
+          "onClick": {
+            "name": "GUILogTypeSet"
+          },
+          "x": 220,
+          "y": 230,
+          "locked": true
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gui_log",
+          "text": {
+            "fixedValue": "",
+            "name": "GUILog"
+          },
+          "color": {
+            "value": -3368704,
+            "falpha": 0.0
+          },
+          "x": 230,
+          "y": 229,
+          "locked": true
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "gui_component_clock.png",
+          "spritesCount": 24,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "GUIClock"
+          },
+          "x": 25,
+          "y": 230,
+          "locked": true
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "gui_component_compass.png",
+          "spritesCount": 8,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "GUICompass"
+          },
+          "x": 33,
+          "y": 230,
+          "locked": true
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "gui_component_compass_custom.png",
+          "spritesCount": 8,
+          "spriteIndex": {
+            "fixedValue": 0.0,
+            "name": "GUICompassCustom"
+          },
+          "x": 41,
+          "y": 230,
+          "locked": true
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_gui_component_compass_custom_set",
+          "image": "gui_component_compass_custom_set.png",
+          "hoveredImage": "gui_component_compass_custom_set_hovered.png",
+          "onClick": {
+            "name": "GUICompassCustomSet"
+          },
+          "x": 50,
+          "y": 232,
+          "locked": true
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "name": "button_empty",
+          "text": "",
+          "isUndecorated": true,
+          "width": 12,
+          "height": 20,
+          "x": 230,
+          "y": 148,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "z.png",
+          "use1Xscale": true,
+          "x": 234,
+          "y": 24,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_sword_manipulation",
+          "text": {
+            "fixedValue": "SWORD MANIPULATION"
+          },
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "x": 54,
+          "y": 40,
+          "locked": false
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "name": "button_select",
+          "text": "Select",
+          "isUndecorated": false,
+          "width": 48,
+          "height": 20,
+          "x": 94,
+          "y": 184,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_autumn_of_loss1",
+          "text": {
+            "fixedValue": "AUTUMN OF LOSS"
+          },
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "x": 54,
+          "y": 20,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_damage",
+          "text": {
+            "fixedValue": "Attack"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 34,
+          "y": 108,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_defense",
+          "text": {
+            "fixedValue": "Defense"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 34,
+          "y": 120,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_accuracy",
+          "text": {
+            "fixedValue": "Accuracy"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 34,
+          "y": 132,
+          "locked": false
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "name": "button_empty1",
+          "text": "<",
+          "isUndecorated": false,
+          "width": 8,
+          "height": 20,
+          "x": 82,
+          "y": 184,
+          "locked": false
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "name": "button_empty2",
+          "text": ">",
+          "isUndecorated": false,
+          "width": 8,
+          "height": 20,
+          "x": 146,
+          "y": 184,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_adaptability",
+          "text": {
+            "fixedValue": "Adaptability"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 34,
+          "y": 144,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_performance_impact",
+          "text": {
+            "fixedValue": "Performance Impact"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 34,
+          "y": 168,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_difficulty",
+          "text": {
+            "fixedValue": "Usability Complexity"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 34,
+          "y": 156,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "gui_component_chart.png",
+          "spritesCount": 6,
+          "spriteIndex": {
+            "fixedValue": 5.0
+          },
+          "x": 146,
+          "y": 76,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "gui_component_chart.png",
+          "spritesCount": 6,
+          "spriteIndex": {
+            "fixedValue": 0.0
+          },
+          "x": 146,
+          "y": 88,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "gui_component_chart.png",
+          "spritesCount": 6,
+          "spriteIndex": {
+            "fixedValue": 3.0
+          },
+          "x": 146,
+          "y": 100,
+          "locked": false
+        }
+      },
+      {
+        "type": "sprite",
+        "data": {
+          "sprite": "gui_component_chart.png",
+          "spritesCount": 6,
+          "spriteIndex": {
+            "fixedValue": 0.0
+          },
+          "x": 146,
+          "y": 112,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_spell_of_sword_control",
+          "text": {
+            "fixedValue": "Spell of sword control..."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 42,
+          "y": 64,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_icon_spell_sword_manipulation",
+          "image": "icon_spell_sword_manipulation.png",
+          "hoveredImage": "",
+          "x": 34,
+          "y": 36,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_icon_advance_spell4",
+          "image": "icon_advance_spell4.png",
+          "hoveredImage": "",
+          "x": 34,
+          "y": 16,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_gui_component_line",
+          "image": "gui_component_line.png",
+          "hoveredImage": "",
+          "x": 34,
+          "y": 52,
+          "locked": false
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 3,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

@@ -1,0 +1,924 @@
+{
+  "_fv": 73,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 0,
+    "height": 0,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_mana",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnMana"
+          },
+          "color": {
+            "value": -10066330,
+            "falpha": 0.0
+          },
+          "x": 54,
+          "y": 4,
+          "locked": false
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "background_book.png",
+          "use1Xscale": true,
+          "x": 54,
+          "y": 16,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_exit",
+          "image": "symbol_exit.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUIClose"
+          },
+          "x": 358,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_icon_home",
+          "image": "icon_home.png",
+          "hoveredImage": "icon_home_2s.png",
+          "onClick": {
+            "name": "MenuGUIOpen"
+          },
+          "x": 42,
+          "y": 24,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_previous",
+          "image": "symbol_previous.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUIprevious"
+          },
+          "x": 54,
+          "y": 108,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_next",
+          "image": "symbol_next.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "GUInext"
+          },
+          "x": 366,
+          "y": 108,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_set_weapon",
+          "text": {
+            "fixedValue": "IDENTIFICATION"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "x": 102,
+          "y": 32,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_item_id",
+          "text": {
+            "fixedValue": "Item ID"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 148,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_item_display_name",
+          "text": {
+            "fixedValue": "Item Display Name"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 172,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_personal_weapon_gu_ireturn",
+          "text": {
+            "fixedValue": "",
+            "name": "PersonalWeaponGUIreturnID"
+          },
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 160,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_personal_weapon_gu_ireturn1",
+          "text": {
+            "fixedValue": "",
+            "name": "PersonalWeaponGUIreturnName"
+          },
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 184,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_add",
+          "image": "symbol_add.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonSet"
+          },
+          "x": 126,
+          "y": 124,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_set_item_on_your_left_hand_as_pe",
+          "text": {
+            "fixedValue": "Set item on your left hand as personal weapon"
+          },
+          "width": 8,
+          "height": 8,
+          "x": 126,
+          "y": 124,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_reset_your_personal_weapon_to_no",
+          "text": {
+            "fixedValue": "Reset your personal weapon to nothing"
+          },
+          "width": 8,
+          "height": 8,
+          "x": 142,
+          "y": 124,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_page_left1",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnPageLeft"
+          },
+          "color": {
+            "value": -3355444,
+            "falpha": 0.0
+          },
+          "x": 130,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_gu_ireturn_page_right",
+          "text": {
+            "fixedValue": "",
+            "name": "GUIreturnPageRight"
+          },
+          "color": {
+            "value": -3355444,
+            "falpha": 0.0
+          },
+          "x": 282,
+          "y": 208,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_remove",
+          "image": "symbol_remove.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonReset"
+          },
+          "x": 142,
+          "y": 124,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_set_your_personal_weapon",
+          "text": {
+            "fixedValue": "Set personal weapon by"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 78,
+          "y": 52,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_by_holding_your_weapon_on",
+          "text": {
+            "fixedValue": "holding your weapon on"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 64,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_left_hand_and_click_button_you",
+          "text": {
+            "fixedValue": "left hand and click button."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 76,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_empty_left_hand_to_set_it_to",
+          "text": {
+            "fixedValue": "Empty left hand to set it"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 88,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_to_nothing",
+          "text": {
+            "fixedValue": "to nothing."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 70,
+          "y": 100,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_settings",
+          "text": {
+            "fixedValue": "SETTINGS"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "x": 266,
+          "y": 32,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_checkbox",
+          "image": "symbol_checkbox.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonShowCenter"
+          },
+          "x": 222,
+          "y": 52,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_checkbox1",
+          "image": "symbol_checkbox.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonRotation"
+          },
+          "x": 222,
+          "y": 64,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_checkbox2",
+          "image": "symbol_checkbox.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonReverseRotation"
+          },
+          "x": 222,
+          "y": 76,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_show_center",
+          "text": {
+            "fixedValue": "Show Center"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 234,
+          "y": 52,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_rotation",
+          "text": {
+            "fixedValue": "Rotation"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 234,
+          "y": 64,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_reverse_rotation",
+          "text": {
+            "fixedValue": "Reverse Rotation"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 234,
+          "y": 76,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_position_and_pose",
+          "text": {
+            "fixedValue": "POSITION AND POSE"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "x": 246,
+          "y": 128,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_reset",
+          "image": "symbol_reset.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonPosReset"
+          },
+          "x": 222,
+          "y": 148,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_reset1",
+          "image": "symbol_reset.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonPoseReset"
+          },
+          "x": 290,
+          "y": 148,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_reset_position_to_default_values",
+          "text": {
+            "fixedValue": "Reset position to default values"
+          },
+          "width": 8,
+          "height": 8,
+          "x": 222,
+          "y": 148,
+          "locked": false
+        }
+      },
+      {
+        "type": "tooltip",
+        "data": {
+          "name": "tooltip_reset_pose_to_default_values",
+          "text": {
+            "fixedValue": "Reset pose to default values"
+          },
+          "width": 8,
+          "height": 8,
+          "x": 290,
+          "y": 148,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_increase",
+          "image": "symbol_increase.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonPosXincrease"
+          },
+          "x": 222,
+          "y": 160,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_increase1",
+          "image": "symbol_increase.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonPosYincrease"
+          },
+          "x": 222,
+          "y": 172,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_increase2",
+          "image": "symbol_increase.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonPosZincrease"
+          },
+          "x": 222,
+          "y": 184,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_increase3",
+          "image": "symbol_increase.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonPoseXincrease"
+          },
+          "x": 290,
+          "y": 160,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_increase4",
+          "image": "symbol_increase.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonPoseYincrease"
+          },
+          "x": 290,
+          "y": 172,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_increase5",
+          "image": "symbol_increase.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonPoseZincrease"
+          },
+          "x": 290,
+          "y": 184,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_reduce",
+          "image": "symbol_reduce.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonPosXreduce"
+          },
+          "x": 230,
+          "y": 160,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_reduce1",
+          "image": "symbol_reduce.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonPosYreduce"
+          },
+          "x": 230,
+          "y": 172,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_reduce2",
+          "image": "symbol_reduce.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonPosZreduce"
+          },
+          "x": 230,
+          "y": 184,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_reduce3",
+          "image": "symbol_reduce.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonPoseXreduce"
+          },
+          "x": 298,
+          "y": 160,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_reduce4",
+          "image": "symbol_reduce.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonPoseYreduce"
+          },
+          "x": 298,
+          "y": 172,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_reduce5",
+          "image": "symbol_reduce.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonPoseZreduce"
+          },
+          "x": 298,
+          "y": 184,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_personal_weapon_gu_ireturn2",
+          "text": {
+            "fixedValue": "",
+            "name": "PersonalWeaponGUIreturnPosX"
+          },
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "x": 242,
+          "y": 160,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_personal_weapon_gu_ireturn3",
+          "text": {
+            "fixedValue": "",
+            "name": "PersonalWeaponGUIreturnPosY"
+          },
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "x": 242,
+          "y": 172,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_personal_weapon_gu_ireturn4",
+          "text": {
+            "fixedValue": "",
+            "name": "PersonalWeaponGUIreturnPosZ"
+          },
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "x": 242,
+          "y": 184,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_personal_weapon_gu_ireturn5",
+          "text": {
+            "fixedValue": "",
+            "name": "PersonalWeaponGUIreturnPoseX"
+          },
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "x": 310,
+          "y": 160,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_personal_weapon_gu_ireturn6",
+          "text": {
+            "fixedValue": "",
+            "name": "PersonalWeaponGUIreturnPoseY"
+          },
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "x": 310,
+          "y": 172,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_proc_personal_weapon_gu_ireturn7",
+          "text": {
+            "fixedValue": "",
+            "name": "PersonalWeaponGUIreturnPoseZ"
+          },
+          "color": {
+            "value": -6710887,
+            "falpha": 0.0
+          },
+          "x": 310,
+          "y": 184,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_true",
+          "image": "symbol_true.png",
+          "hoveredImage": "",
+          "displayCondition": {
+            "name": "PersonalWeaponGUIreturnShowCenterTrue"
+          },
+          "x": 222,
+          "y": 52,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_true1",
+          "image": "symbol_true.png",
+          "hoveredImage": "",
+          "displayCondition": {
+            "name": "PersonalWeaponGUIreturnRotationTrue"
+          },
+          "x": 222,
+          "y": 64,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_true2",
+          "image": "symbol_true.png",
+          "hoveredImage": "",
+          "displayCondition": {
+            "name": "PersonalWeaponGUIreturnReverseRotationTrue"
+          },
+          "x": 222,
+          "y": 76,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_checkbox3",
+          "image": "symbol_checkbox.png",
+          "hoveredImage": "",
+          "onClick": {
+            "name": "PersonalWeaponGUIbuttonFlying"
+          },
+          "x": 222,
+          "y": 88,
+          "locked": false
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_flying",
+          "text": {
+            "fixedValue": "Flying"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 234,
+          "y": 88,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_symbol_true3",
+          "image": "symbol_true.png",
+          "hoveredImage": "",
+          "displayCondition": {
+            "name": "PersonalWeaponGUIreturnFlying"
+          },
+          "x": 222,
+          "y": 88,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_background_text_red",
+          "image": "background_text_red.png",
+          "hoveredImage": "",
+          "x": 222,
+          "y": 28,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_background_text_orange",
+          "image": "background_text_orange.png",
+          "hoveredImage": "",
+          "x": 222,
+          "y": 124,
+          "locked": false
+        }
+      },
+      {
+        "type": "imagebutton",
+        "data": {
+          "name": "imagebutton_background_text_green",
+          "image": "background_text_green.png",
+          "hoveredImage": "",
+          "x": 70,
+          "y": 28,
+          "locked": false
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 8,
+      "sy": 8,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "_fv": 73,
+  "_fv": 79,
   "_type": "gui",
   "definition": {
     "type": 0,
@@ -485,6 +485,18 @@
           "height": 20,
           "x": 86,
           "y": 144,
+          "locked": false
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "",
+          "name": "xxxddd",
+          "width": 120,
+          "height": 20,
+          "x": 254,
+          "y": 88,
           "locked": false
         }
       }

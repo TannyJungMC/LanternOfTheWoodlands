@@ -1,9 +1,0 @@
-{
-  "parent": "lanternofthewoodlands:custom/target_arrow",
-  "textures": {
-    "all": "lanternofthewoodlands:block/target_arrow",
-    "particle": "lanternofthewoodlands:block/target_arrow",
-    "1": "lanternofthewoodlands:block/target_arrow"
-  },
-  "render_type": "cutout"
-}

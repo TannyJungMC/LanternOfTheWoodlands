@@ -1,9 +1,0 @@
-{
-  "parent": "lanternofthewoodlands:custom/book_open",
-  "textures": {
-    "all": "lanternofthewoodlands:block/user_book",
-    "particle": "lanternofthewoodlands:block/user_book",
-    "0": "lanternofthewoodlands:block/user_book"
-  },
-  "render_type": "solid"
-}

@@ -1,0 +1,8 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "tanscomplexmagic:block/rejuvenating_mushroom",
+    "particle": "tanscomplexmagic:block/rejuvenating_mushroom"
+  },
+  "render_type": "cutout"
+}

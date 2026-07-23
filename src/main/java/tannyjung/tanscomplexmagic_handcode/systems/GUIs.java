@@ -1,44 +1,43 @@
 package tannyjung.tanscomplexmagic_handcode.systems;
 
-import tannyjung.tanscomplexmagic_core.game.GUIManager;
+import tannyjung.tanscomplexmagic_core.game.GUIMaker;
+import tannyjung.tanscomplexmagic_core.game.NBTManager;
 
 public class GUIs {
 
-    public static void createText (String gui) {
+    public static void create (GUIMaker manager, String gui, String component) {
 
         if (gui.equals("test") == true) {
 
-            GUIManager.Components.addText(160, 0, 0.75, "§cText Static -> " + Math.random());
+            {
 
-        }
+                if (component.equals("Text") == true) {
 
-    }
+                    // GUIManager.Components.Text.add(160, 32, 1.0, "§6Test Number -> " + GameUtils.Data.getEntityNumber(manager.player, "number"));
+                    GUIMaker.Components.Text.add(128, -36, 1.0, "§fShow");
+                    GUIMaker.Components.Text.add(128, -52, 1.0, "§fBig Size");
+                    GUIMaker.Components.Text.add(128, -68, 1.0, "§fReadable");
 
-    public static void createTextDynamic (String gui) {
+                    String effect = "§a§l";
+                    double size = 1.0;
 
-        if (gui.equals("test") == true) {
+                    if (NBTManager.getEntityLogic(manager.player, "readable") == false) effect = "§6§k§l";
+                    if (NBTManager.getEntityLogic(manager.player, "size") == true) size = 2.0;
+                    if (NBTManager.getEntityLogic(manager.player, "show") == true) GUIMaker.Components.Text.add(160, 60, size, effect + "❤ You can now read this ❤");
 
-            GUIManager.Components.addTextDynamic(160, 16, 0.75, "§6Text Dynamic -> " + Math.random());
+                } else if (component.equals("ButtonExecute") == true) {
 
-        }
+                    // GUIManager.Components.ButtonExecute.add(manager, 32, -68, 64, 16, 1, "Done");
 
-    }
+                } else if (component.equals("Switch") == true) {
 
-    public static String test1 = "OFF";
+                    GUIMaker.Components.Switch.add(manager, 64, -32, "show");
+                    GUIMaker.Components.Switch.add(manager, 64, -48, "size");
+                    GUIMaker.Components.Switch.add(manager, 64, -64, "readable");
 
-    public static void createButton (String gui) {
+                }
 
-        if (gui.equals("test") == true) {
-
-            if (GUIs.test1.equals("ON") == true) {
-                GUIs.test1 = "OFF";
-            } else {
-                GUIs.test1 = "ON";
             }
-
-            GUIManager.Components.addButton(128, -48, 32, 16, 1, test1);
-            GUIManager.Components.addButton(32, -68, 64, 16, 5, "Done");
-            GUIManager.Components.addButton(-32, -68, 64, 16, 6, "Cancel");
 
         }
 

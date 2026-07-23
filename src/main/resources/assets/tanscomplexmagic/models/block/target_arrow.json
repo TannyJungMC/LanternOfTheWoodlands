@@ -1,0 +1,9 @@
+{
+  "parent": "tanscomplexmagic:custom/target_arrow",
+  "textures": {
+    "all": "tanscomplexmagic:block/target_arrow",
+    "particle": "tanscomplexmagic:block/target_arrow",
+    "1": "tanscomplexmagic:block/target_arrow"
+  },
+  "render_type": "cutout"
+}

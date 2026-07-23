@@ -1,0 +1,9 @@
+{
+  "parent": "tanscomplexmagic:custom/sword_knight",
+  "textures": {
+    "all": "tanscomplexmagic:block/sword_knight",
+    "particle": "tanscomplexmagic:block/sword_knight",
+    "0": "tanscomplexmagic:block/sword_knight"
+  },
+  "render_type": "solid"
+}

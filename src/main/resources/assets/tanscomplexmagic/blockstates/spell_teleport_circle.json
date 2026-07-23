@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tanscomplexmagic:block/spell_teleport_circle"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "tanscomplexmagic:block/user_book_open_block"
+    },
+    "facing=east": {
+      "model": "tanscomplexmagic:block/user_book_open_block",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "tanscomplexmagic:block/user_book_open_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tanscomplexmagic:block/user_book_open_block",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "tanscomplexmagic:custom/book_open",
+  "textures": {
+    "0": "tanscomplexmagic:block/user_book",
+    "particle": "minecraft:item/knowledge_book"
+  }
+}

@@ -221,7 +221,7 @@ public class NBTManager {
 
     }
 
-    public static String getEntityText (Entity entity, String name) {
+    public static String getEntityText (Entity entity, String type, String name) {
 
         /*
         (1.20.1) (1.21.1)
@@ -229,11 +229,11 @@ public class NBTManager {
         (1.21.8)
         return entity.getPersistentData().getCompound(Core.mod_id).getString(name).get();
         */
-        return entity.getPersistentData().getCompound(Core.mod_id).getString(name);
+        return entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getString(name);
 
     }
 
-    public static Boolean getEntityLogic (Entity entity, String name) {
+    public static Boolean getEntityLogic (Entity entity, String type, String name) {
 
         /*
         (1.20.1) (1.21.1)
@@ -241,7 +241,7 @@ public class NBTManager {
         (1.21.8)
         return entity.getPersistentData().getCompound(Core.mod_id).getBoolean(name).get();
         */
-        return entity.getPersistentData().getCompound(Core.mod_id).getBoolean(name);
+        return entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getBoolean(name);
 
     }
 
@@ -313,26 +313,37 @@ public class NBTManager {
 
     }
 
-    public static void setEntityText (Entity entity, String name, String value) {
+    public static void setEntityText (Entity entity, String type, String name, String value) {
 
         CompoundTag tag = new CompoundTag();
-        CompoundTag tag_add = new CompoundTag();
-        tag_add.putString(name, value);
-        tag.put(Core.mod_id, tag_add);
-        entity.getPersistentData().merge(tag);
-
-    }
-
-    public static void setEntityLogic (Entity entity, String name, boolean value) {
-
-        CompoundTag tag = new CompoundTag();
-        tag.put(Core.mod_id, new CompoundTag());
-        tag.getCompound(Core.mod_id).putBoolean(name, value);
-        entity.getPersistentData().merge(tag);
+        CompoundTag tag_type = new CompoundTag();
+        CompoundTag tag_mod = new CompoundTag();
+        tag.putString(name, value);
+        tag_type.put(type, tag);
+        tag_mod.put(Core.mod_id, tag_type);
+        entity.getPersistentData().merge(tag_mod);
 
         if (entity instanceof ServerPlayer player) {
 
-            NetworkManager.runClientCore(player, "nbt", "sync_all", player.getPersistentData().getCompound(Core.mod_id));
+            Network.syncOne(player, tag_mod);
+
+        }
+
+    }
+
+    public static void setEntityLogic (Entity entity, String type, String name, boolean value) {
+
+        CompoundTag tag = new CompoundTag();
+        CompoundTag tag_type = new CompoundTag();
+        CompoundTag tag_mod = new CompoundTag();
+        tag.putBoolean(name, value);
+        tag_type.put(type, tag);
+        tag_mod.put(Core.mod_id, tag_type);
+        entity.getPersistentData().merge(tag_mod);
+
+        if (entity instanceof ServerPlayer player) {
+
+            Network.syncOne(player, tag_mod);
 
         }
 
@@ -545,6 +556,24 @@ public class NBTManager {
         CustomData.update(DataComponents.CUSTOM_DATA, Item.getSlot(entity, slot), create -> create.merge(tag));
         */
         CustomData.update(DataComponents.CUSTOM_DATA, GameUtils.Item.getSlot(entity, slot), create -> create.merge(tag));
+
+    }
+
+    public static class Network {
+
+        public static void syncAll (ServerPlayer player) {
+
+            CompoundTag tag = new CompoundTag();
+            tag.put(Core.mod_id, player.getPersistentData().getCompound(Core.mod_id));
+            NetworkManager.runClientCore(player, "nbt", "sync", tag);
+
+        }
+
+        public static void syncOne (ServerPlayer player, CompoundTag tag) {
+
+            NetworkManager.runClientCore(player, "nbt", "sync", tag);
+
+        }
 
     }
 

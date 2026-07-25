@@ -7,6 +7,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import org.apache.logging.log4j.Logger;
 import tannyjung.tanscomplexmagic_core.game.*;
+import tannyjung.tanscomplexmagic_core.game.screen.GUIScreen;
 import tannyjung.tanscomplexmagic_core.game.world_gen.FeatureAreaDirt;
 import tannyjung.tanscomplexmagic_core.game.world_gen.FeatureAreaGrass;
 import tannyjung.tanscomplexmagic_core.game.world_gen.WorldGenStepBeforePlants;
@@ -212,7 +213,7 @@ public class Core {
 
     public static void register (IEventBus bus) {
 
-        GUIMaker.Register.bus(bus);
+        GUIScreen.Register.bus(bus);
 
         // Features
         {

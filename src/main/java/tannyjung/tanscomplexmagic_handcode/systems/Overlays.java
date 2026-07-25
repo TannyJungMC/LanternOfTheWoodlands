@@ -11,7 +11,7 @@ public class Overlays {
 
     }
 
-    public static void eventInGame (GuiGraphics graphic, int screen_width, int screen_height) {
+    public static void eventInGame (GuiGraphics graphic) {
 
 
 

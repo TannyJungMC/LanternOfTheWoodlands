@@ -1,39 +1,76 @@
 package tannyjung.tanscomplexmagic_handcode.systems;
 
-import tannyjung.tanscomplexmagic_core.game.GUIMaker;
+import net.minecraft.client.gui.GuiGraphics;
+import tannyjung.tanscomplexmagic_core.game.screen.GUIMisc;
+import tannyjung.tanscomplexmagic_core.game.screen.GUIScreen;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
+import tannyjung.tanscomplexmagic_core.game.screen.ScreenDrawing;
 
 public class GUIs {
 
-    public static void create (GUIMaker manager, String gui, String component) {
+    public static void render (GUIScreen screen, GuiGraphics graphic, String gui, String type) {
+
+        // Global
+        {
+
+            if (type.equals("widget") == true) {
+
+                ScreenDrawing.GUI.drawButtonClientRunnable(screen, -202, -104, 10, 16, ">", () -> {
+
+                    GUIMisc.close(screen.player);
+
+                });
+
+            }
+
+        }
 
         if (gui.equals("test") == true) {
 
             {
 
-                if (component.equals("Text") == true) {
+                if (type.equals("text") == true) {
 
-                    // GUIManager.Components.Text.add(160, 32, 1.0, "§6Test Number -> " + GameUtils.Data.getEntityNumber(manager.player, "number"));
-                    GUIMaker.Components.Text.add(128, -36, 1.0, "§fShow");
-                    GUIMaker.Components.Text.add(128, -52, 1.0, "§fBig Size");
-                    GUIMaker.Components.Text.add(128, -68, 1.0, "§fReadable");
+                    ScreenDrawing.Basic.drawText(graphic, "", 165, -50 - 3, 0.6, false, "Show");
+                    ScreenDrawing.Basic.drawText(graphic, "", 165, -60 - 3, 0.6, false, "Big Size");
+                    ScreenDrawing.Basic.drawText(graphic, "", 165, -70 - 3, 0.6, false, "Bold");
+                    ScreenDrawing.Basic.drawText(graphic, "", 165, -80 - 3, 0.6, false, "Readable");
 
-                    String effect = "§a§l";
-                    double size = 1.0;
+                    ScreenDrawing.Basic.drawText(graphic, "", 128, -35 - 3, 0.6, true, "§fSend Message to Chat");
 
-                    if (NBTManager.getEntityLogic(manager.player, "readable") == false) effect = "§6§k§l";
-                    if (NBTManager.getEntityLogic(manager.player, "size") == true) size = 2.0;
-                    if (NBTManager.getEntityLogic(manager.player, "show") == true) GUIMaker.Components.Text.add(160, 60, size, effect + "❤ You can now read this ❤");
 
-                } else if (component.equals("ButtonExecute") == true) {
 
-                    // GUIManager.Components.ButtonExecute.add(manager, 32, -68, 64, 16, 1, "Done");
 
-                } else if (component.equals("Switch") == true) {
+                    ScreenDrawing.Basic.drawText(graphic, "", 180, 45, 0.6, false, "I'm not sure is this too hard to read, or not. Hope you");
+                    ScreenDrawing.Basic.drawText(graphic, "", 180, 35, 0.6, false, "can read this without eyes attack. This is normal font");
+                    ScreenDrawing.Basic.drawText(graphic, "", 180, 25, 0.6, false, "with scale 60%, not too small to unreadable and not too");
+                    ScreenDrawing.Basic.drawText(graphic, "", 180, 15, 0.6, false, "big then not fit the book.");
 
-                    GUIMaker.Components.Switch.add(manager, 64, -32, "show");
-                    GUIMaker.Components.Switch.add(manager, 64, -48, "size");
-                    GUIMaker.Components.Switch.add(manager, 64, -64, "readable");
+
+
+                    String effect = "";
+                    double size = 0.6;
+
+                    if (NBTManager.getEntityLogic(screen.player, "gui", "readable") == false) effect = effect + "§k";
+                    if (NBTManager.getEntityLogic(screen.player, "gui", "size") == true) size = 2.0;
+                    if (NBTManager.getEntityLogic(screen.player, "gui", "bold") == true) effect = effect + "§l";
+                    if (NBTManager.getEntityLogic(screen.player, "gui", "show") == true) ScreenDrawing.Basic.drawText(graphic, "", 180, 80, size, false, effect + NBTManager.getEntityText(screen.player, "gui", "box"));
+
+                } else if (type.equals("image") == true) {
+
+                    // ScreenDrawing.drawImage(graphic, true, "https://media.forgecdn.net/attachments/1628/396/2026-04-12_21.png", "tanscomplexmagic:textures/screens/background_book.png", "", 0, 0, 248, 288, 1, 1, 1);
+                    ScreenDrawing.Basic.drawImage(graphic, false, "tanscomplexmagic:textures/screens/background_book.png", "tanscomplexmagic:textures/screens/background_book.png", "", -200, -120, 400, 240, 1, 1, 1);
+
+                } else if (type.equals("widget") == true) {
+
+                    ScreenDrawing.GUI.drawSwitch(screen, 180, -50, "show");
+                    ScreenDrawing.GUI.drawSwitch(screen, 180, -60, "size");
+                    ScreenDrawing.GUI.drawSwitch(screen, 180, -70, "bold");
+                    ScreenDrawing.GUI.drawSwitch(screen, 180, -80, "readable");
+
+                    ScreenDrawing.GUI.drawButtonNetwork(screen, 180, -35, 170, 10, "", "button");
+
+                    ScreenDrawing.GUI.drawTextBox(screen, 180, -10, "box");
 
                 }
 

@@ -1,7 +1,5 @@
 package tannyjung.tanscomplexmagic.procedures;
 
-import tannyjung.tanscomplexmagic_core.game.GUIMaker;
-
 import tannyjung.tanscomplexmagic.TanscomplexmagicMod;
 
 import net.minecraft.world.entity.player.Player;
@@ -9,6 +7,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
+import tannyjung.tanscomplexmagic_core.game.screen.GUIMisc;
 
 public class GUIOpenProcedure {
 	public static void execute(Entity entity) {
@@ -25,6 +24,6 @@ public class GUIOpenProcedure {
 						_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "playsound minecraft:item.book.page_turn ambient @a[distance=..100] ~ ~ ~ 1 0.75 0.025");
 			}
 		}
-		GUIMaker.open((Player) entity);
+		GUIMisc.open((Player) entity);
 	}
 }

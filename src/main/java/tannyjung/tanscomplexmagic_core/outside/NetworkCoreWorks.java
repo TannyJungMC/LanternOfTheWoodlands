@@ -1,0 +1,121 @@
+package tannyjung.tanscomplexmagic_core.outside;
+
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import tannyjung.tanscomplexmagic_core.game.screen.GUIScreen;
+import tannyjung.tanscomplexmagic_core.game.GameUtils;
+import tannyjung.tanscomplexmagic_core.game.NBTManager;
+import tannyjung.tanscomplexmagic_core.game.screen.ScreenDrawing;
+
+public class NetworkCoreWorks {
+
+    public static void sorting (Player player, String type, String work, CompoundTag extra) {
+
+        boolean is_client = player.level().isClientSide;
+
+        if (type.equals("gui") == true) {
+
+            {
+
+                if (is_client == true) {
+
+                    GUI.client((LocalPlayer) player, work, extra);
+
+                } else {
+
+                    GUI.server((ServerPlayer) player, work, extra);
+
+                }
+
+            }
+
+        } else if (type.equals("nbt") == true) {
+
+            {
+
+                if (is_client == true) {
+
+                    NBT.client((LocalPlayer) player, work, extra);
+
+                } else {
+
+                    NBT.server((ServerPlayer) player, work, extra);
+
+                }
+
+            }
+
+        }
+
+    }
+
+    private static class GUI {
+
+        private static void client (LocalPlayer player, String work, CompoundTag extra) {
+
+
+
+        }
+
+        private static void server (ServerPlayer player, String work, CompoundTag extra) {
+
+            if (work.equals("button") == true) {
+
+                {
+
+                    GameUtils.Misc.sendChatMessage(player.serverLevel(), NBTManager.getEntityText(player, "gui", "box"));
+
+                }
+
+            } else if (work.equals("switch") == true) {
+
+                {
+
+                    String name = extra.getString("name");
+                    NBTManager.setEntityLogic(player, "gui", name, !NBTManager.getEntityLogic(player, "gui", name));
+
+                }
+
+            } else if (work.equals("text_box") == true) {
+
+                {
+
+                    String name = extra.getString("name");
+                    String value = extra.getString("value");
+                    NBTManager.setEntityText(player, "gui", name, value);
+
+                }
+
+            }
+
+        }
+
+    }
+
+    private static class NBT {
+
+        private static void client (LocalPlayer player, String work, CompoundTag extra) {
+
+            if (work.equals("sync") == true) {
+
+                {
+
+                    player.getPersistentData().merge(extra);
+                    ScreenDrawing.refresh();
+
+                }
+
+            }
+
+        }
+
+        private static void server (ServerPlayer player, String work, CompoundTag extra) {
+
+
+        }
+
+    }
+
+}

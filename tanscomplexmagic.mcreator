@@ -10497,7 +10497,10 @@
       "gui.tanscomplexmagic.gui_index.sliderxxx_suffix": "",
       "gui.tanscomplexmagic.gui_index.sliderxxx_prefix": "",
       "gui.tanscomplexmagic.gui_index.asd": "",
-      "gui.tanscomplexmagic.gui_index.xxxddd": ""
+      "gui.tanscomplexmagic.gui_index.xxxddd": "",
+      "gui.tanscomplexmagic.gui_index.button_hello": "hello",
+      "gui.tanscomplexmagic.gui_index.slider_suffix": "",
+      "gui.tanscomplexmagic.gui_index.slider_prefix": ""
     }
   },
   "metadata": {

@@ -10,6 +10,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.storage.LevelResource;
 
 import tannyjung.tanscomplexmagic_core.Core;
+import tannyjung.tanscomplexmagic_core.game.screen.ScreenDrawing;
 import tannyjung.tanscomplexmagic_core.game.world_gen.WorldGenStepEnd;
 import tannyjung.tanscomplexmagic_core.outside.CustomPackOrganizing;
 import tannyjung.tanscomplexmagic_core.outside.TXTFunction;
@@ -87,13 +88,11 @@ public class EventCenter {
             }
 
             GuiGraphics graphic = event.getGuiGraphics();
-            int screen_width = event.getGuiGraphics().guiWidth();
-            int screen_height = event.getGuiGraphics().guiHeight();
-            Overlays.eventInGame(graphic, screen_width, screen_height);
+            Overlays.eventInGame(graphic);
 
             if (Core.developer_mode == true) {
 
-                OverlayMaker.drawText(graphic, screen_width, screen_height, "top-left", 8, 58, 0.75, "§9Delayed Command = " + TXTFunction.count_delayed_command);
+                // ScreenDrawing.Basic.drawText(graphic, "top-left", 8, 58, 0.75, "§9Delayed Command = " + TXTFunction.count_delayed_command);
 
             }
 

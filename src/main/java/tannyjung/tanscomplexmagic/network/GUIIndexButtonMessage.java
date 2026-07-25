@@ -1,6 +1,6 @@
 package tannyjung.tanscomplexmagic.network;
 
-import tannyjung.tanscomplexmagic.procedures.*;
+import tannyjung.tanscomplexmagic.procedures.GUIMenuOpenProcedure;
 import tannyjung.tanscomplexmagic.TanscomplexmagicMod;
 
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -47,41 +47,9 @@ public record GUIIndexButtonMessage(int buttonID, int x, int y, int z) implement
 		// security measure to prevent arbitrary chunk generation
 		if (!world.hasChunkAt(new BlockPos(x, y, z)))
 			return;
-		if (buttonID == 0) {
-
-			SetRoleProcedure.execute(entity);
-		}
 		if (buttonID == 1) {
 
-			GUICloseProcedure.execute(entity);
-		}
-		if (buttonID == 2) {
-
-			GUIPagePreviousProcedure.execute(entity);
-		}
-		if (buttonID == 3) {
-
-			GUIPageNextProcedure.execute(entity);
-		}
-		if (buttonID == 4) {
-
 			GUIMenuOpenProcedure.execute(entity);
-		}
-		if (buttonID == 5) {
-
-			GUIShortcutCustomProcedure.execute(entity);
-		}
-		if (buttonID == 6) {
-
-			GUIShortcutCustomSetProcedure.execute(entity);
-		}
-		if (buttonID == 10) {
-
-			GUILogTypeSetProcedure.execute(entity);
-		}
-		if (buttonID == 11) {
-
-			GUICompassCustomSetProcedure.execute(entity);
 		}
 	}
 

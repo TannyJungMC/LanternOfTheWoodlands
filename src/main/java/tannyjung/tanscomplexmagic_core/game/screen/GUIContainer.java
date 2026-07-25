@@ -1,35 +1,24 @@
-package tannyjung.tanscomplexmagic_core.game;
+package tannyjung.tanscomplexmagic_core.game.screen;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
-import tannyjung.tanscomplexmagic_core.Core;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class GUIMakerContainer extends AbstractContainerMenu {
+public class GUIContainer extends AbstractContainerMenu {
 
     public final Level world;
     public final Player entity;
@@ -53,8 +42,8 @@ public class GUIMakerContainer extends AbstractContainerMenu {
 
     };
 
-    public GUIMakerContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
-        super(GUIMaker.Register.gui.get(), id);
+    public GUIContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
+        super(GUIScreen.Register.gui.get(), id);
         this.entity = inv.player;
         this.world = inv.player.level();
         this.internal = new ItemStackHandler(0);

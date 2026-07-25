@@ -4,12 +4,12 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import tannyjung.tanscomplexmagic_core.game.screen.GUIScreen;
+import tannyjung.tanscomplexmagic_core.Core;
 import tannyjung.tanscomplexmagic_core.game.GameUtils;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
 import tannyjung.tanscomplexmagic_core.game.screen.ScreenDrawing;
 
-public class NetworkCoreWorks {
+public class NetworkWorksCore {
 
     public static void sorting (Player player, String type, String work, CompoundTag extra) {
 
@@ -55,7 +55,15 @@ public class NetworkCoreWorks {
 
         private static void client (LocalPlayer player, String work, CompoundTag extra) {
 
+            if (work.equals("refresh") == true) {
 
+                {
+
+                    ScreenDrawing.refresh();
+
+                }
+
+            }
 
         }
 
@@ -66,6 +74,7 @@ public class NetworkCoreWorks {
                 {
 
                     GameUtils.Misc.sendChatMessage(player.serverLevel(), NBTManager.getEntityText(player, "gui", "box"));
+                    NetworkManager.runClientCore(player, "gui", "refresh", new CompoundTag());
 
                 }
 
@@ -78,7 +87,7 @@ public class NetworkCoreWorks {
 
                 }
 
-            } else if (work.equals("text_box") == true) {
+            } else if (work.equals("text_box_save") == true) {
 
                 {
 
@@ -113,6 +122,25 @@ public class NetworkCoreWorks {
 
         private static void server (ServerPlayer player, String work, CompoundTag extra) {
 
+            if (work.equals("sync_all") == true) {
+
+                {
+
+                    CompoundTag tag = new CompoundTag();
+                    tag.put(Core.mod_id, player.getPersistentData().getCompound(Core.mod_id));
+                    NetworkManager.runClientCore(player, "nbt", "sync", tag);
+
+                }
+
+            } else if (work.equals("sync_one") == true) {
+
+                {
+
+                    NetworkManager.runClientCore(player, "nbt", "sync", extra);
+
+                }
+
+            }
 
         }
 

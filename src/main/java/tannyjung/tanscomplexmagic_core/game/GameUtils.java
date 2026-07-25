@@ -197,7 +197,7 @@ public class GameUtils {
 
 		}
 
-	}
+    }
 
 	public static class Command {
 

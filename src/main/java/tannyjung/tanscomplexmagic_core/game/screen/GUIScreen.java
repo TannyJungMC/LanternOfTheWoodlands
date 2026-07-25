@@ -1,14 +1,12 @@
 package tannyjung.tanscomplexmagic_core.game.screen;
 
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.api.distmarker.Dist;
@@ -19,15 +17,18 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.apache.logging.log4j.core.util.NanoClock;
+import org.apache.logging.log4j.core.util.SystemNanoClock;
 import tannyjung.tanscomplexmagic.TanscomplexmagicMod;
+import tannyjung.tanscomplexmagic_core.game.GameUtils;
+import tannyjung.tanscomplexmagic_core.game.NBTManager;
 import tannyjung.tanscomplexmagic_handcode.systems.GUIs;
 
 public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
 
-    public static String id = "test";
-    public static boolean refresh = false;
     public final LocalPlayer player;
-
+    public static int id = 0;
+    public static boolean refresh = false;
 
     public GUIScreen (GUIContainer container, Inventory inventory, Component text) {
 
@@ -102,8 +103,7 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
         if (refresh == true) {
 
             refresh = false;
-            this.clearWidgets();
-            GUIs.render(this, null, id, "widget");
+            refresh();
 
         }
 
@@ -120,6 +120,7 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
     protected void renderLabels (GuiGraphics graphic, int mouseX, int mouseY) {
 
         GUIs.render(this, graphic, id, "text");
+        ScreenDrawing.Ingredient.renderText(graphic);
 
     }
 
@@ -127,7 +128,17 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
     public void init () {
 
         super.init();
-        refresh = true;
+        refresh();
+
+    }
+
+    private void refresh () {
+
+        this.clearWidgets();
+        ScreenDrawing.Ingredient.clear();
+
+        id = (int) NBTManager.getEntityNumber(player, "gui", "id");
+        GUIs.render(this, null, id, "widget");
 
     }
 

@@ -225,7 +225,7 @@ public class NBTManager {
 
         /*
         (1.20.1) (1.21.1)
-        return entity.getPersistentData().getCompound(Core.mod_id).getString(name);
+        return entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getString(name);
         (1.21.8)
         return entity.getPersistentData().getCompound(Core.mod_id).getString(name).get();
         */
@@ -237,7 +237,7 @@ public class NBTManager {
 
         /*
         (1.20.1) (1.21.1)
-        return entity.getPersistentData().getCompound(Core.mod_id).getBoolean(name);
+        return entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getBoolean(name);
         (1.21.8)
         return entity.getPersistentData().getCompound(Core.mod_id).getBoolean(name).get();
         */
@@ -245,15 +245,15 @@ public class NBTManager {
 
     }
 
-    public static double getEntityNumber (Entity entity, String name) {
+    public static double getEntityNumber (Entity entity, String type, String name) {
 
         /*
         (1.20.1) (1.21.1)
-        return entity.getPersistentData().getCompound(Core.mod_id).getDouble(name);
+        return entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getDouble(name);
         (1.21.8)
         return entity.getPersistentData().getCompound(Core.mod_id).getDouble(name).get();
         */
-        return entity.getPersistentData().getCompound(Core.mod_id).getDouble(name);
+        return entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getDouble(name);
 
     }
 
@@ -325,7 +325,7 @@ public class NBTManager {
 
         if (entity instanceof ServerPlayer player) {
 
-            Network.syncOne(player, tag_mod);
+            NetworkManager.runServerCore(player, "nbt", "sync_one", tag_mod);
 
         }
 
@@ -343,31 +343,33 @@ public class NBTManager {
 
         if (entity instanceof ServerPlayer player) {
 
-            Network.syncOne(player, tag_mod);
+            NetworkManager.runServerCore(player, "nbt", "sync_one", tag_mod);
 
         }
 
     }
 
-    public static void setEntityNumber (Entity entity, String name, double value) {
+    public static void setEntityNumber (Entity entity, String type, String name, double value) {
 
         CompoundTag tag = new CompoundTag();
-        CompoundTag tag_add = new CompoundTag();
-        tag_add.putDouble(name, value);
-        tag.put(Core.mod_id, tag_add);
-        entity.getPersistentData().merge(tag);
+        CompoundTag tag_type = new CompoundTag();
+        CompoundTag tag_mod = new CompoundTag();
+        tag.putDouble(name, value);
+        tag_type.put(type, tag);
+        tag_mod.put(Core.mod_id, tag_type);
+        entity.getPersistentData().merge(tag_mod);
+
+        if (entity instanceof ServerPlayer player) {
+
+            NetworkManager.runServerCore(player, "nbt", "sync_one", tag_mod);
+
+        }
 
     }
 
-    public static void addEntityNumber (Entity entity, String name, double value) {
+    public static void addEntityNumber (Entity entity, String type, String name, double value) {
 
-        /*
-        (1.20.1) (1.21.1)
-        entity.getPersistentData().getCompound(Core.mod_id).putDouble(name, entity.getPersistentData().getCompound(Core.mod_id).getDouble(name) + value);
-        (1.21.8)
-        entity.getPersistentData().getCompound(Core.mod_id).putDouble(name, entity.getPersistentData().getCompound(Core.mod_id).getDouble(name).get() + value);
-        */
-        entity.getPersistentData().getCompound(Core.mod_id).putDouble(name, entity.getPersistentData().getCompound(Core.mod_id).getDouble(name) + value);
+        setEntityNumber(entity, type, name, getEntityNumber(entity, type, name) + value);
 
     }
 
@@ -556,24 +558,6 @@ public class NBTManager {
         CustomData.update(DataComponents.CUSTOM_DATA, Item.getSlot(entity, slot), create -> create.merge(tag));
         */
         CustomData.update(DataComponents.CUSTOM_DATA, GameUtils.Item.getSlot(entity, slot), create -> create.merge(tag));
-
-    }
-
-    public static class Network {
-
-        public static void syncAll (ServerPlayer player) {
-
-            CompoundTag tag = new CompoundTag();
-            tag.put(Core.mod_id, player.getPersistentData().getCompound(Core.mod_id));
-            NetworkManager.runClientCore(player, "nbt", "sync", tag);
-
-        }
-
-        public static void syncOne (ServerPlayer player, CompoundTag tag) {
-
-            NetworkManager.runClientCore(player, "nbt", "sync", tag);
-
-        }
 
     }
 

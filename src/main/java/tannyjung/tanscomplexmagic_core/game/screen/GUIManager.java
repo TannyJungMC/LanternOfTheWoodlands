@@ -1,23 +1,22 @@
 package tannyjung.tanscomplexmagic_core.game.screen;
 
 import io.netty.buffer.Unpooled;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import tannyjung.tanscomplexmagic_core.game.NBTManager;
+import tannyjung.tanscomplexmagic_core.outside.NetworkManager;
+import tannyjung.tanscomplexmagic_core.outside.NetworkWorksCore;
 
-public class GUIMisc {
+public class GUIManager {
 
     public static void open (Player player) {
 
         // TODO -> Delete this later
         if (player.level().isClientSide == true) return;
-
-        NBTManager.Network.syncAll((ServerPlayer) player);
 
         MenuProvider provider = new MenuProvider() {
 
@@ -46,6 +45,7 @@ public class GUIMisc {
 
         };
 
+        NetworkManager.runServerCore(player, "nbt", "sync_all", new CompoundTag());
         player.openMenu(provider, player.blockPosition());
 
     }

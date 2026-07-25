@@ -51,17 +51,17 @@ public record NetworkManager (CompoundTag tag) implements CustomPacketPayload {
 
         if (is_core == true) {
 
-            NetworkCoreWorks.sorting(player, type, work, extra);
+            NetworkWorksCore.sorting(player, type, work, extra);
 
         } else {
 
             if (is_client == true) {
 
-                NetworkWorks.client(player, work);
+                NetworkWorks.client(player, type, work, extra);
 
             } else {
 
-                NetworkWorks.server(player, work);
+                NetworkWorks.server(player, type, work, extra);
 
             }
 
@@ -69,47 +69,83 @@ public record NetworkManager (CompoundTag tag) implements CustomPacketPayload {
 
     }
 
-    public static void runClient (ServerPlayer player, String type, String work, CompoundTag extra) {
+    public static void runClient (Player player, String type, String work, CompoundTag extra) {
 
         CompoundTag data = new CompoundTag();
         data.putBoolean("is_core", false);
         data.putString("type", type);
         data.putString("work", work);
         data.put("extra", extra);
-        PacketDistributor.sendToPlayer(player, new NetworkManager(data));
+
+        if (player instanceof ServerPlayer player_server) {
+
+            PacketDistributor.sendToPlayer(player_server, new NetworkManager(data));
+
+        } else {
+
+            // NetworkWorks.sorting(player, type, work, extra);
+
+        }
 
     }
 
-    public static void runServer (LocalPlayer player, String type, String work, CompoundTag extra) {
+    public static void runServer (Player player, String type, String work, CompoundTag extra) {
 
         CompoundTag data = new CompoundTag();
         data.putBoolean("is_core", false);
         data.putString("type", type);
         data.putString("work", work);
         data.put("extra", extra);
-        PacketDistributor.sendToServer(new NetworkManager(data));
+
+        if (player instanceof LocalPlayer) {
+
+            PacketDistributor.sendToServer(new NetworkManager(data));
+
+        } else {
+
+            // NetworkWorks.sorting(player, type, work, extra);
+
+        }
 
     }
 
-    public static void runClientCore (ServerPlayer player, String type, String work, CompoundTag extra) {
+    public static void runClientCore (Player player, String type, String work, CompoundTag extra) {
 
         CompoundTag data = new CompoundTag();
         data.putBoolean("is_core", true);
         data.putString("type", type);
         data.putString("work", work);
         data.put("extra", extra);
-        PacketDistributor.sendToPlayer(player, new NetworkManager(data));
+
+        if (player instanceof ServerPlayer player_server) {
+
+            PacketDistributor.sendToPlayer(player_server, new NetworkManager(data));
+
+        } else {
+
+            NetworkWorksCore.sorting(player, type, work, extra);
+
+        }
 
     }
 
-    public static void runServerCore (LocalPlayer player, String type, String work, CompoundTag extra) {
+    public static void runServerCore (Player player, String type, String work, CompoundTag extra) {
 
         CompoundTag data = new CompoundTag();
         data.putBoolean("is_core", true);
         data.putString("type", type);
         data.putString("work", work);
         data.put("extra", extra);
-        PacketDistributor.sendToServer(new NetworkManager(data));
+
+        if (player instanceof LocalPlayer) {
+
+            PacketDistributor.sendToServer(new NetworkManager(data));
+
+        } else {
+
+            NetworkWorksCore.sorting(player, type, work, extra);
+
+        }
 
     }
 

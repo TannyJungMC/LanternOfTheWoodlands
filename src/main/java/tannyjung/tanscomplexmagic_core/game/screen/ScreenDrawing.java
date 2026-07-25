@@ -2,43 +2,33 @@ package tannyjung.tanscomplexmagic_core.game.screen;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.font.FontManager;
-import net.minecraft.client.gui.font.FontOption;
-import net.minecraft.client.gui.font.FontSet;
-import net.minecraft.client.renderer.texture.AbstractTexture;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.neoforged.neoforge.client.model.DynamicFluidContainerModel;
 import tannyjung.tanscomplexmagic_core.Core;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
 import tannyjung.tanscomplexmagic_core.outside.NetworkManager;
 import tannyjung.tanscomplexmagic_core.outside.OutsideUtils;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.net.URI;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class ScreenDrawing {
-
-    private static final Map<String, String> image_status = new HashMap<>();
-    private static final Map<String, Integer> image_online_id = new HashMap<>();
 
     public static void refresh () {
 
         GUIScreen.refresh = true;
-        image_status.clear();
-        image_online_id.clear();
 
     }
 
@@ -81,7 +71,43 @@ public class ScreenDrawing {
 
     }
 
-    public static class Basic {
+    private static int[] convertPosTextCenter (int centerX, int centerZ, double scale, String text) {
+
+        int font_width = (int) (Minecraft.getInstance().font.width(text) * scale);
+        int font_height = (int) (Minecraft.getInstance().font.lineHeight * scale);
+        int convertX = centerX + (font_width / 2);
+        int convertZ = centerZ - (font_height / 2);
+        convertZ = convertZ + 1;
+        return new int[]{convertX, convertZ};
+
+    }
+
+    public static class Ingredient {
+
+        private static final Set<Object[]> text = new HashSet<>();
+
+        public static void clear () {
+
+            text.clear();
+
+        }
+
+        public static void renderText (GuiGraphics graphic) {
+
+            for (Object[] objects : text) {
+
+                Overlay.drawText(graphic, (String) objects[0], (int) objects[1], (int) objects[2], (double) objects[3], (boolean) objects[4], (String) objects[5]);
+
+            }
+
+        }
+
+    }
+
+    public static class Overlay {
+
+        private static final Map<String, String> online_image_id = new HashMap<>();
+        private static final Map<String, String> online_image_status = new HashMap<>();
 
         public static void drawText (GuiGraphics graphic, String pos_anchor, int posX, int posZ, double scale, boolean shadow, String text) {
 
@@ -111,167 +137,149 @@ public class ScreenDrawing {
 
         }
 
-        public static void drawImage (GuiGraphics graphic, boolean internet, String path, String path_load, String path_fail, int posX, int posZ, int sizeX, int sizeZ, int piece_countX, int piece_countZ, int choose) {
+        private static void drawImage (GuiGraphics graphic, int posX, int posZ, int overall_sizeX, int overall_sizeZ, int slideX, int slideZ, int split_sizeX, int split_sizeZ, String path) {
+
+            graphic.blit(ResourceLocation.parse(path), (graphic.guiWidth() / 2) + posX, (graphic.guiHeight() / 2) + posZ, slideX,slideZ, split_sizeX, split_sizeZ, overall_sizeX, overall_sizeZ);
+
+        }
+
+        public static void drawImageBasic (GuiGraphics graphic, int posX, int posZ, int sizeX, int sizeZ, String path) {
 
             posX = -posX;
             posZ = -posZ;
-            posX = posX - sizeX;
-            posZ = posZ - sizeZ;
+            drawImage(graphic, posX, posZ, sizeX, sizeZ, 0, 0, sizeX, sizeZ, path);
 
-            String name = "";
+        }
 
-            // Get Name
-            {
+        public static void drawImageSplit (GuiGraphics graphic, int posX, int posZ, int overall_sizeX, int overall_sizeZ, boolean is_horizontal, int piece_count, int choose, String path) {
 
-                if (internet == true) {
+            posX = -posX;
+            posZ = -posZ;
 
-                    if (image_online_id.containsKey(path) == false) {
+            int split_sizeX = 0;
+            int split_sizeZ = 0;
+            int slideX = 0;
+            int slideZ = 0;
 
-                        image_online_id.put(path, image_online_id.size() + 1);
+            if (is_horizontal == true) {
 
-                    }
+                split_sizeX = overall_sizeX / piece_count;
+                split_sizeZ = overall_sizeZ;
+                slideX = split_sizeX * choose;
+                slideZ = overall_sizeX;
 
-                    name = "tannyjung:online_image_" + image_online_id.get(path) + ".png";
+            } else {
 
-                } else {
-
-                    name = path;
-
-                }
+                split_sizeX = overall_sizeX;
+                split_sizeZ = overall_sizeZ / piece_count;
+                slideX = overall_sizeX;
+                slideZ = split_sizeZ * choose;
 
             }
 
-            ResourceLocation location = null;
+            drawImage(graphic, posX, posZ, overall_sizeX, overall_sizeZ, slideX, slideZ, split_sizeX, split_sizeZ, path);
 
-            if (image_status.containsKey(name) == false) {
+        }
 
-                // Load
-                {
+        public static void drawImageOnline (GuiGraphics graphic, int posX, int posZ, int sizeX, int sizeZ, String url, String path_loading, String path_fail) {
 
-                    image_status.put(name, "load");
+            String id = online_image_id.get(url);
 
-                    if (internet == true) {
+            if (id == null) {
 
-                        String name_final = name;
+                id = "tannyjung:online_image_" + online_image_id.size() + ".png";
+                online_image_id.put(url, id);
+                online_image_status.put(id, "loading");
+                String id_final = id;
 
-                        Core.thread_main.submit(() -> {
+                Core.thread_main.submit(() -> {
 
-                            {
+                    {
 
-                                if (OutsideUtils.isURLAvailable(path) == true) {
+                        if (OutsideUtils.isURLAvailable(url) == true) {
 
-                                    // Download Online
-                                    {
+                            try {
 
-                                        try {
+                                BufferedImage buffer = ImageIO.read(URI.create(url).toURL());
+                                NativeImage native_image = new NativeImage(buffer.getWidth(), buffer.getHeight(), false);
 
-                                            BufferedImage buffer = ImageIO.read(URI.create(path).toURL());
-                                            NativeImage native_image = new NativeImage(buffer.getWidth(), buffer.getHeight(), false);
+                                // Color Convert
+                                {
 
-                                            // Color Convert
-                                            {
+                                    int argb = 0;
+                                    int a = 0;
+                                    int r = 0;
+                                    int g = 0;
+                                    int b = 0;
+                                    int abgr = 0;
 
-                                                int argb = 0;
-                                                int a = 0;
-                                                int r = 0;
-                                                int g = 0;
-                                                int b = 0;
-                                                int abgr = 0;
+                                    for (int scanY = 0; scanY < buffer.getHeight(); scanY++) {
 
-                                                for (int scanY = 0; scanY < buffer.getHeight(); scanY++) {
+                                        for (int scanX = 0; scanX < buffer.getWidth(); scanX++) {
 
-                                                    for (int scanX = 0; scanX < buffer.getWidth(); scanX++) {
+                                            argb = buffer.getRGB(scanX, scanY);
+                                            a = (argb >>> 24) & 0xFF;
+                                            r = (argb >>> 16) & 0xFF;
+                                            g = (argb >>> 8) & 0xFF;
+                                            b = (argb) & 0xFF;
+                                            abgr = (a << 24) | (b << 16) | (g << 8) | r;
 
-                                                        argb = buffer.getRGB(scanX, scanY);
-                                                        a = (argb >>> 24) & 0xFF;
-                                                        r = (argb >>> 16) & 0xFF;
-                                                        g = (argb >>> 8) & 0xFF;
-                                                        b = (argb) & 0xFF;
-                                                        abgr = (a << 24) | (b << 16) | (g << 8) | r;
-
-                                                    /*
-                                                    (1.20.1) (1.21.1)
-                                                    native_image.setPixelRGBA(scanX, scanY, abgr);
-                                                    (1.21.8)
-                                                    native_image.setPixelABGR(scanX, scanY, abgr);
-                                                    */
-                                                        native_image.setPixelRGBA(scanX, scanY, abgr);
-
-                                                    }
-
-                                                }
-
-                                            }
-
-                                        /*
-                                        (1.20.1) (1.21.1)
-                                        Minecraft.getInstance().getTextureManager().register(location, new DynamicTexture(native_image));
-                                        (1.21.8)
-                                        Minecraft.getInstance().getTextureManager().register(location, new DynamicTexture(() -> "test", native_image));
-                                        */
-                                            Minecraft.getInstance().getTextureManager().register(ResourceLocation.parse(name_final), new DynamicTexture(native_image));
-
-                                            image_status.put(name_final, "available");
-
-                                        } catch (Exception exception) {
-
-                                            OutsideUtils.exception(new Exception(), exception, "");
-                                            image_status.put(name_final, "fail");
+                                            /*
+                                            (1.20.1) (1.21.1)
+                                            native_image.setPixelRGBA(scanX, scanY, abgr);
+                                            (1.21.8)
+                                            native_image.setPixelABGR(scanX, scanY, abgr);
+                                            */
+                                            native_image.setPixelRGBA(scanX, scanY, abgr);
 
                                         }
 
                                     }
 
-                                } else {
-
-                                    image_status.put(name_final, "fail");
-
                                 }
+
+                                    /*
+                                    (1.20.1) (1.21.1)
+                                    Minecraft.getInstance().getTextureManager().register(location, new DynamicTexture(native_image));
+                                    (1.21.8)
+                                    Minecraft.getInstance().getTextureManager().register(location, new DynamicTexture(() -> "test", native_image));
+                                    */
+                                Minecraft.getInstance().getTextureManager().register(ResourceLocation.parse(id_final), new DynamicTexture(native_image));
+
+                                online_image_status.put(id_final, "available");
+
+                            } catch (Exception exception) {
+
+                                OutsideUtils.exception(new Exception(), exception, "");
+                                online_image_status.put(id_final, "fail");
 
                             }
 
-                        });
-
-                    } else {
-
-                        AbstractTexture texture = Minecraft.getInstance().getTextureManager().getTexture(ResourceLocation.parse(name));
-
-                        if (texture.getId() == -1) {
-
-                            image_status.put(name, "fail");
-
                         } else {
 
-                            image_status.put(name, "available");
+                            online_image_status.put(id_final, "fail");
 
                         }
 
                     }
 
-                }
+                });
 
             }
 
-            if (image_status.get(name).equals("available") == true) {
+            String status = online_image_status.get(id);
 
-                location = ResourceLocation.parse(name);
+            if (status.equals("loading") == true) {
 
-            } else if (image_status.get(name).equals("load") == true) {
+                id = path_loading;
 
-                location = ResourceLocation.parse(path_load);
+            } else if (status.equals("fail") == true) {
 
-            } else {
-
-                location = ResourceLocation.parse(path_fail);
+                id = path_fail;
 
             }
 
-            int piece_sizeX = sizeX / piece_countX;
-            int piece_sizeZ = sizeZ / piece_countZ;
-            int startX = Mth.clamp(choose * piece_sizeX, 0, sizeX - piece_sizeX);
-            int startZ = Mth.clamp(choose * piece_sizeZ, 0, sizeZ - piece_sizeZ);
-
-            graphic.blit(location, (graphic.guiWidth() / 2) + posX, (graphic.guiHeight() / 2) + posZ, startX, startZ, piece_sizeX, piece_sizeZ, sizeX, sizeZ);
+            drawImageBasic(graphic, posX, posZ, sizeX, sizeZ, id);
 
         }
 
@@ -279,38 +287,67 @@ public class ScreenDrawing {
 
     public static class GUI {
 
-        public static void drawButtonClientRunnable (GUIScreen screen, int posX, int posZ, int sizeX, int sizeZ, String text, Runnable runnable) {
+        private static void drawButton (GUIScreen screen, int posX, int posZ, int length, String text, Button button) {
 
             posX = -posX;
             posZ = -posZ;
 
-            Button button = Button.builder(Component.literal(text), create -> {
-
-                runnable.run();
-                ScreenDrawing.refresh();
-
-            }).bounds(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ, sizeX, sizeZ).build();
+            button.setSize(length, 12);
+            button.setPosition(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ + 4);
 
             GUIScreen.addWidget(screen, button);
 
-        }
+            // Ingredient
+            {
 
-        public static void drawButtonNetwork (GUIScreen screen, int posX, int posZ, int sizeX, int sizeZ, String text, String work) {
+                posX = -posX;
+                posZ = -posZ;
+                int[] pos_convert = convertPosTextCenter(posX - (length / 2), posZ - (12 / 2), 0.67, text);
+                Ingredient.text.add(new Object[]{"", pos_convert[0], pos_convert[1], 0.67, true, text});
 
-            posX = -posX;
-            posZ = -posZ;
-
-            Button button = Button.builder(Component.literal(text), create -> {
-
-                NetworkManager.runServerCore(screen.player, "gui", work, new CompoundTag());
-
-            }).bounds(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ, sizeX, sizeZ).build();
-
-            GUIScreen.addWidget(screen, button);
+            }
 
         }
 
-        public static void drawSwitch (GUIScreen screen, int posX, int posZ, String nbt) {
+        public static void drawButtonBasic (GUIScreen screen, int posX, int posZ, int length, String text, String network, String work_type, String work) {
+
+            Button button = Button.builder(Component.empty(), create -> {
+
+                create.setFocused(false);
+
+                if (network.equals("client") == true) {
+
+                    NetworkManager.runClient(screen.player, work_type, work, new CompoundTag());
+
+                } else if (network.equals("server") == true) {
+
+                    NetworkManager.runServer(screen.player, work_type, work, new CompoundTag());
+
+                } else if (network.equals("client_core") == true) {
+
+                    NetworkManager.runClientCore(screen.player, work_type, work, new CompoundTag());
+
+                } else if (network.equals("server_core") == true) {
+
+                    NetworkManager.runServerCore(screen.player, work_type, work, new CompoundTag());
+
+                }
+
+            }).build();
+
+            drawButton(screen, posX, posZ, length, text, button);
+
+        }
+
+        public static void drawButtonLocked (GUIScreen screen, int posX, int posZ, int length, String text) {
+
+            Button button = Button.builder(Component.empty(), create -> {}).build();
+            button.active = false;
+            drawButton(screen, posX, posZ, length, text, button);
+
+        }
+
+        public static void drawSwitch (GUIScreen screen, int posX, int posZ, String nbt, String text) {
 
             posX = -posX;
             posZ = -posZ;
@@ -321,7 +358,7 @@ public class ScreenDrawing {
                 extra_data.putString("name", nbt);
                 NetworkManager.runServerCore(screen.player, "gui", "switch", extra_data);
 
-            }).bounds(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ, 5, 10).build();
+            }).bounds(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ - 1, 5, 6).build();
 
             Button button_right = Button.builder(Component.empty(), create -> {
 
@@ -329,7 +366,7 @@ public class ScreenDrawing {
                 extra_data.putString("name", nbt);
                 NetworkManager.runServerCore(screen.player, "gui", "switch", extra_data);
 
-            }).bounds(screen.getGuiLeft() + posX + 5, screen.getGuiTop() + posZ, 5, 10).build();
+            }).bounds(screen.getGuiLeft() + posX + 5, screen.getGuiTop() + posZ - 1, 5, 6).build();
 
             if (NBTManager.getEntityLogic(screen.player, "gui", nbt) == true) {
 
@@ -346,6 +383,13 @@ public class ScreenDrawing {
             GUIScreen.addWidget(screen, button_left);
             GUIScreen.addWidget(screen, button_right);
 
+            // Ingredient
+            {
+
+                Ingredient.text.add(new Object[]{"", -(posX) - 14, -(posZ) - 0, 0.67, false, text});
+
+            }
+
         }
 
         public static void drawTextBox (GUIScreen screen, int posX, int posZ, String nbt) {
@@ -353,28 +397,72 @@ public class ScreenDrawing {
             posX = -posX;
             posZ = -posZ;
 
-            EditBox box = new EditBox(Minecraft.getInstance().font, screen.getGuiLeft() + posX + 10, screen.getGuiTop() + posZ, 170 - 10, 20, Component.literal("Hello"));
+            EditBox box = new EditBox(Minecraft.getInstance().font, screen.getGuiLeft() + posX + 10, screen.getGuiTop() + posZ + 4, 160 - 10, 8 + 6, Component.literal("Hello"));
             box.setValue(NBTManager.getEntityText(screen.player, "gui", nbt));
             box.setMaxLength(8192);
             box.setTextShadow(false);
-
-            box.setEditable(true);
-
-
-
-
-
 
             Button button = Button.builder(Component.literal("{"), create -> {
 
                 CompoundTag extra_data = new CompoundTag();
                 extra_data.putString("name", nbt);
                 extra_data.putString("value", box.getValue());
-                NetworkManager.runServerCore(screen.player, "gui", "text_box", extra_data);
+                NetworkManager.runServerCore(screen.player, "gui", "text_box_save", extra_data);
 
-            }).bounds(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ, 10, 20).build();
+            }).bounds(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ + 4, 10, 8 + 6).build();
 
             GUIScreen.addWidget(screen, box);
+            GUIScreen.addWidget(screen, button);
+
+        }
+
+        public static void drawImageButton (GUIScreen screen, int posX, int posZ, int sizeX, int sizeZ, String network, String work_type, String work, String path) {
+
+            posX = -posX;
+            posZ = -posZ;
+            ResourceLocation location = ResourceLocation.parse(path);
+
+            ImageButton button = new ImageButton(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ, sizeX, sizeZ / 2, new WidgetSprites(location, location), create -> {
+
+                create.setFocused(false);
+
+                if (network.equals("client") == true) {
+
+                    NetworkManager.runClient(screen.player, work_type, work, new CompoundTag());
+
+                } else if (network.equals("server") == true) {
+
+                    NetworkManager.runServer(screen.player, work_type, work, new CompoundTag());
+
+                } else if (network.equals("client_core") == true) {
+
+                    NetworkManager.runClientCore(screen.player, work_type, work, new CompoundTag());
+
+                } else if (network.equals("server_core") == true) {
+
+                    NetworkManager.runServerCore(screen.player, work_type, work, new CompoundTag());
+
+                }
+
+            }) {
+
+                @Override
+                public void renderWidget (GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+
+                    int offset = 0;
+
+                    if (isHoveredOrFocused() == true) {
+
+                        offset = height;
+
+                    }
+
+                    guiGraphics.blit(sprites.get(true, isHoveredOrFocused()), getX(), getY(), 0, offset, width, height, width, height * 2);
+
+                }
+
+            };
+
             GUIScreen.addWidget(screen, button);
 
         }

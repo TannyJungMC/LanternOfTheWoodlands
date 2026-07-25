@@ -1,76 +1,103 @@
 package tannyjung.tanscomplexmagic_handcode.systems;
 
 import net.minecraft.client.gui.GuiGraphics;
-import tannyjung.tanscomplexmagic_core.game.screen.GUIMisc;
 import tannyjung.tanscomplexmagic_core.game.screen.GUIScreen;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
 import tannyjung.tanscomplexmagic_core.game.screen.ScreenDrawing;
 
 public class GUIs {
 
-    public static void render (GUIScreen screen, GuiGraphics graphic, String gui, String type) {
+    public static void render (GUIScreen screen, GuiGraphics graphic, int id, String type) {
 
         // Global
         {
 
-            if (type.equals("widget") == true) {
+            if (type.equals("text") == true) {
 
-                ScreenDrawing.GUI.drawButtonClientRunnable(screen, -202, -104, 10, 16, ">", () -> {
+                ScreenDrawing.Overlay.drawText(graphic, "", 8 * -10, 8 * 8, 0.67, false, "Page -> " + (int) NBTManager.getEntityNumber(screen.player, "gui", "id"));
 
-                    GUIMisc.close(screen.player);
+            } else if (type.equals("image") == true) {
 
-                });
+                ScreenDrawing.Overlay.drawImageBasic(graphic, 8 * 25, 8 * 15, 400, 240, "tanscomplexmagic:textures/screens/gui_component_background.png");
+
+                ScreenDrawing.Overlay.drawImageSplit(graphic, 8 * -2, 8 * -10, 56 * 2, 7 * 2, true, 8, (int) Math.floor(Math.random() * 8), "tanscomplexmagic:textures/screens/gui_component_compass.png");
+                ScreenDrawing.Overlay.drawImageSplit(graphic, 8 * -4, 8 * -10, 168 * 2, 7 * 2, true, 24, (int) Math.floor(Math.random() * 24), "tanscomplexmagic:textures/screens/gui_component_clock.png");
+
+            } else if (type.equals("widget") == true) {
+
+                ScreenDrawing.GUI.drawImageButton(screen, (8 * 23) + 4, (8 * -11) - 4, 16, 32, "server", "book", "page_previous", "tanscomplexmagic:textures/screens/gui_component_page_previous.png");
+                ScreenDrawing.GUI.drawImageButton(screen, (8 * -22) + 4, (8 * -11) - 4, 16, 32, "server", "book", "page_next", "tanscomplexmagic:textures/screens/gui_component_page_next.png");
+
+                ScreenDrawing.GUI.drawImageButton(screen, 8 * 27, (8 * 12) - 0, 24, 16, "server", "book", "", "tanscomplexmagic:textures/screens/icon_home.png");
+                ScreenDrawing.GUI.drawImageButton(screen, 8 * 27, (8 * 11) - 4, 24, 16, "server", "book", "", "tanscomplexmagic:textures/screens/gui_component_shortcut_ally_list.png");
+                ScreenDrawing.GUI.drawImageButton(screen, 8 * 27, (8 * 10) - 8, 24, 16, "server", "book", "", "tanscomplexmagic:textures/screens/gui_component_shortcut_basic_spells.png");
+                ScreenDrawing.GUI.drawImageButton(screen, 8 * 27, (8 * 9) - 12, 24, 16, "server", "book", "", "tanscomplexmagic:textures/screens/gui_component_shortcut_spell_control.png");
+                ScreenDrawing.GUI.drawImageButton(screen, 8 * 27, (8 * 8) - 16, 24, 16, "server", "book", "", "tanscomplexmagic:textures/screens/gui_component_shortcut_custom.png");
 
             }
 
         }
 
-        if (gui.equals("test") == true) {
+        if (id == 1) {
+
+            // Main
+            {
+
+                if (type.equals("text") == true) {
+
+                    ScreenDrawing.Overlay.drawText(graphic, "", 8 * 22, 8 * 8, 0.67, false, "Oh yeah this is font with scale 67%, looks better");
+                    ScreenDrawing.Overlay.drawText(graphic, "", 8 * 22, 8 * 7, 0.67, false, "than 60% one in previous screenshot. More");
+                    ScreenDrawing.Overlay.drawText(graphic, "", 8 * 22, 8 * 6, 0.67, false, "readable, lower eyes attack. But it also reduces");
+                    ScreenDrawing.Overlay.drawText(graphic, "", 8 * 22, 8 * 5, 0.67, false, "number of words I can write down in single line.");
+
+                    String effect = "";
+                    double scale = 0.67;
+                    if (NBTManager.getEntityLogic(screen.player, "gui", "readable") == false) effect = effect + "§k";
+                    if (NBTManager.getEntityLogic(screen.player, "gui", "size") == true) scale = 2.0;
+                    if (NBTManager.getEntityLogic(screen.player, "gui", "bold") == true) effect = effect + "§l";
+                    if (NBTManager.getEntityLogic(screen.player, "gui", "show") == true) ScreenDrawing.Overlay.drawText(graphic, "", 8 * 22, 8 * 12, scale, false, effect + NBTManager.getEntityText(screen.player, "gui", "box"));
+
+                } else if (type.equals("image") == true) {
+
+
+
+                } else if (type.equals("widget") == true) {
+
+                    ScreenDrawing.GUI.drawTextBox(screen, 8 * 22, 8 * 2, "box");
+
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * 22, 8 * -1, "show", "Show");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * 22, 8 * -2, "size", "Big Size");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * 22, 8 * -3, "bold", "Bold");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * 22, 8 * -4, "readable", "Readable");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * 22, 8 * -5, "special", "Special");
+
+                    ScreenDrawing.GUI.drawButtonBasic(screen, 8 * 22, 8 * -6, 8 * 20, "§fSend to Chat", "server_core", "gui", "button");
+
+                    if (NBTManager.getEntityLogic(screen.player, "gui", "special") == true) {
+
+                        ScreenDrawing.GUI.drawButtonBasic(screen, 8 * 22, 8 * -8, 8 * 20, "§fGet Small Support Station with 10 Mana", "server_core", "gui", "button");
+
+                    } else {
+
+                        ScreenDrawing.GUI.drawButtonLocked(screen, 8 * 22, 8 * -8, 8 * 20, "§cTurn on special to unlock this option");
+
+                    }
+
+                }
+
+            }
+
+        } else if (id == 2) {
 
             {
 
                 if (type.equals("text") == true) {
 
-                    ScreenDrawing.Basic.drawText(graphic, "", 165, -50 - 3, 0.6, false, "Show");
-                    ScreenDrawing.Basic.drawText(graphic, "", 165, -60 - 3, 0.6, false, "Big Size");
-                    ScreenDrawing.Basic.drawText(graphic, "", 165, -70 - 3, 0.6, false, "Bold");
-                    ScreenDrawing.Basic.drawText(graphic, "", 165, -80 - 3, 0.6, false, "Readable");
-
-                    ScreenDrawing.Basic.drawText(graphic, "", 128, -35 - 3, 0.6, true, "§fSend Message to Chat");
-
-
-
-
-                    ScreenDrawing.Basic.drawText(graphic, "", 180, 45, 0.6, false, "I'm not sure is this too hard to read, or not. Hope you");
-                    ScreenDrawing.Basic.drawText(graphic, "", 180, 35, 0.6, false, "can read this without eyes attack. This is normal font");
-                    ScreenDrawing.Basic.drawText(graphic, "", 180, 25, 0.6, false, "with scale 60%, not too small to unreadable and not too");
-                    ScreenDrawing.Basic.drawText(graphic, "", 180, 15, 0.6, false, "big then not fit the book.");
-
-
-
-                    String effect = "";
-                    double size = 0.6;
-
-                    if (NBTManager.getEntityLogic(screen.player, "gui", "readable") == false) effect = effect + "§k";
-                    if (NBTManager.getEntityLogic(screen.player, "gui", "size") == true) size = 2.0;
-                    if (NBTManager.getEntityLogic(screen.player, "gui", "bold") == true) effect = effect + "§l";
-                    if (NBTManager.getEntityLogic(screen.player, "gui", "show") == true) ScreenDrawing.Basic.drawText(graphic, "", 180, 80, size, false, effect + NBTManager.getEntityText(screen.player, "gui", "box"));
+                    ScreenDrawing.Overlay.drawText(graphic, "", 8 * -2, 8 * -5, 0.67, false, "Hello this is second page of this big book");
 
                 } else if (type.equals("image") == true) {
 
-                    // ScreenDrawing.drawImage(graphic, true, "https://media.forgecdn.net/attachments/1628/396/2026-04-12_21.png", "tanscomplexmagic:textures/screens/background_book.png", "", 0, 0, 248, 288, 1, 1, 1);
-                    ScreenDrawing.Basic.drawImage(graphic, false, "tanscomplexmagic:textures/screens/background_book.png", "tanscomplexmagic:textures/screens/background_book.png", "", -200, -120, 400, 240, 1, 1, 1);
-
-                } else if (type.equals("widget") == true) {
-
-                    ScreenDrawing.GUI.drawSwitch(screen, 180, -50, "show");
-                    ScreenDrawing.GUI.drawSwitch(screen, 180, -60, "size");
-                    ScreenDrawing.GUI.drawSwitch(screen, 180, -70, "bold");
-                    ScreenDrawing.GUI.drawSwitch(screen, 180, -80, "readable");
-
-                    ScreenDrawing.GUI.drawButtonNetwork(screen, 180, -35, 170, 10, "", "button");
-
-                    ScreenDrawing.GUI.drawTextBox(screen, 180, -10, "box");
+                    ScreenDrawing.Overlay.drawImageOnline(graphic, 8 * 22, 8 * 10, 160, 160, "https://i1.sndcdn.com/artworks-gUQT4s0ygfyktcMf-yWJuPw-t1080x1080.jpg", "", "");
 
                 }
 

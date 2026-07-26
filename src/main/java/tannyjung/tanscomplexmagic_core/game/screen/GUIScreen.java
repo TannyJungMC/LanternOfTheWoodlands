@@ -1,27 +1,28 @@
 package tannyjung.tanscomplexmagic_core.game.screen;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ISystemReportExtender;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.apache.logging.log4j.core.util.NanoClock;
-import org.apache.logging.log4j.core.util.SystemNanoClock;
 import tannyjung.tanscomplexmagic.TanscomplexmagicMod;
-import tannyjung.tanscomplexmagic_core.game.GameUtils;
+import tannyjung.tanscomplexmagic_core.Core;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
+import tannyjung.tanscomplexmagic_core.outside.NetworkManager;
 import tannyjung.tanscomplexmagic_handcode.systems.GUIs;
 
 public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
@@ -91,6 +92,19 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
         }
 
         return super.keyPressed(key, scan, modifier);
+
+    }
+
+    @Override
+    public boolean mouseDragged (double mouseX, double mouseY, int button, double dragX, double dragY) {
+
+        if (this.isDragging() == true && button == 0) {
+
+            return this.getFocused().mouseDragged(mouseX, mouseY, button, dragX, dragY);
+
+        }
+
+        return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
 
     }
 

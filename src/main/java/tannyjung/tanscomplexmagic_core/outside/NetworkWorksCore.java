@@ -73,7 +73,7 @@ public class NetworkWorksCore {
 
                 {
 
-                    GameUtils.Misc.sendChatMessage(player.serverLevel(), NBTManager.getEntityText(player, "gui", "box"));
+                    GameUtils.Misc.sendChatMessage(player.serverLevel(), NBTManager.getEntityText(player, "test", "box"));
                     NetworkManager.runClientCore(player, "gui", "refresh", new CompoundTag());
 
                 }
@@ -82,8 +82,20 @@ public class NetworkWorksCore {
 
                 {
 
-                    String name = extra.getString("name");
-                    NBTManager.setEntityLogic(player, "gui", name, !NBTManager.getEntityLogic(player, "gui", name));
+                    String nbt_type = extra.getString("nbt_type");
+                    String nbt_name = extra.getString("nbt_name");
+                    NBTManager.setEntityLogic(player, nbt_type, nbt_name, !NBTManager.getEntityLogic(player, nbt_type, nbt_name));
+
+                }
+
+            } else if (work.equals("slider") == true) {
+
+                {
+
+                    String nbt_type = extra.getString("nbt_type");
+                    String nbt_name = extra.getString("nbt_name");
+                    double nbt_value = extra.getDouble("nbt_value");
+                    NBTManager.setEntityNumber(player, nbt_type, nbt_name, nbt_value);
 
                 }
 
@@ -91,9 +103,10 @@ public class NetworkWorksCore {
 
                 {
 
-                    String name = extra.getString("name");
-                    String value = extra.getString("value");
-                    NBTManager.setEntityText(player, "gui", name, value);
+                    String nbt_type = extra.getString("nbt_type");
+                    String nbt_name = extra.getString("nbt_name");
+                    String nbt_value = extra.getString("nbt_value");
+                    NBTManager.setEntityText(player, nbt_type, nbt_name, nbt_value);
 
                 }
 

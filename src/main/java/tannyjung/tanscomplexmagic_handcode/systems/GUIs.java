@@ -1,6 +1,7 @@
 package tannyjung.tanscomplexmagic_handcode.systems;
 
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
 import tannyjung.tanscomplexmagic_core.game.screen.GUIScreen;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
 import tannyjung.tanscomplexmagic_core.game.screen.ScreenDrawing;
@@ -14,14 +15,14 @@ public class GUIs {
 
             if (type.equals("text") == true) {
 
-                ScreenDrawing.Overlay.drawText(graphic, "", 8 * -10, 8 * 8, 0.67, false, "Page -> " + (int) NBTManager.getEntityNumber(screen.player, "gui", "id"));
+                ScreenDrawing.Overlay.drawText(graphic, "", 8 * -18, 8 * -11, 0.67, false, "Page " + (int) NBTManager.getEntityNumber(screen.player, "gui", "id"));
 
             } else if (type.equals("image") == true) {
 
                 ScreenDrawing.Overlay.drawImageBasic(graphic, 8 * 25, 8 * 15, 400, 240, "tanscomplexmagic:textures/screens/gui_component_background.png");
 
-                ScreenDrawing.Overlay.drawImageSplit(graphic, 8 * -2, 8 * -10, 56 * 2, 7 * 2, true, 8, (int) Math.floor(Math.random() * 8), "tanscomplexmagic:textures/screens/gui_component_compass.png");
-                ScreenDrawing.Overlay.drawImageSplit(graphic, 8 * -4, 8 * -10, 168 * 2, 7 * 2, true, 24, (int) Math.floor(Math.random() * 24), "tanscomplexmagic:textures/screens/gui_component_clock.png");
+                ScreenDrawing.Overlay.drawImageSplit(graphic, 8 * -2, 8 * -11, 56, 7, true, 8, (int) Math.floor(Math.random() * 8), "tanscomplexmagic:textures/screens/gui_component_compass.png");
+                ScreenDrawing.Overlay.drawImageSplit(graphic, 8 * -3, 8 * -11, 168, 7, true, 24, (int) Math.floor(Math.random() * 24), "tanscomplexmagic:textures/screens/gui_component_clock.png");
 
             } else if (type.equals("widget") == true) {
 
@@ -45,17 +46,13 @@ public class GUIs {
 
                 if (type.equals("text") == true) {
 
-                    ScreenDrawing.Overlay.drawText(graphic, "", 8 * 22, 8 * 8, 0.67, false, "Oh yeah this is font with scale 67%, looks better");
-                    ScreenDrawing.Overlay.drawText(graphic, "", 8 * 22, 8 * 7, 0.67, false, "than 60% one in previous screenshot. More");
-                    ScreenDrawing.Overlay.drawText(graphic, "", 8 * 22, 8 * 6, 0.67, false, "readable, lower eyes attack. But it also reduces");
-                    ScreenDrawing.Overlay.drawText(graphic, "", 8 * 22, 8 * 5, 0.67, false, "number of words I can write down in single line.");
-
                     String effect = "";
-                    double scale = 0.67;
-                    if (NBTManager.getEntityLogic(screen.player, "gui", "readable") == false) effect = effect + "§k";
-                    if (NBTManager.getEntityLogic(screen.player, "gui", "size") == true) scale = 2.0;
-                    if (NBTManager.getEntityLogic(screen.player, "gui", "bold") == true) effect = effect + "§l";
-                    if (NBTManager.getEntityLogic(screen.player, "gui", "show") == true) ScreenDrawing.Overlay.drawText(graphic, "", 8 * 22, 8 * 12, scale, false, effect + NBTManager.getEntityText(screen.player, "gui", "box"));
+                    double scale = NBTManager.getEntityNumber(screen.player, "test", "slider");
+                    if (NBTManager.getEntityLogic(screen.player, "test", "readable") == false) effect = effect + "§k";
+                    if (NBTManager.getEntityLogic(screen.player, "test", "size") == true) scale = 0.67;
+                    if (NBTManager.getEntityLogic(screen.player, "test", "bold") == true) effect = effect + "§l";
+                    if (NBTManager.getEntityLogic(screen.player, "test", "show") == true) ScreenDrawing.Overlay.drawTextParagraph(graphic, 8 * -2, 8 * 12, scale, 160, effect + NBTManager.getEntityText(screen.player, "test", "box"));
+                    if (NBTManager.getEntityLogic(screen.player, "test", "show") == true) ScreenDrawing.Overlay.drawTextParagraph(graphic, 8 * -2, 8 * 3, scale, 160, effect + NBTManager.getEntityText(screen.player, "test", "box"));
 
                 } else if (type.equals("image") == true) {
 
@@ -63,25 +60,18 @@ public class GUIs {
 
                 } else if (type.equals("widget") == true) {
 
-                    ScreenDrawing.GUI.drawTextBox(screen, 8 * 22, 8 * 2, "box");
+                    ScreenDrawing.GUI.drawTextBox(screen, 8 * 22, 8 * 13, "test", "box");
 
-                    ScreenDrawing.GUI.drawSwitch(screen, 8 * 22, 8 * -1, "show", "Show");
-                    ScreenDrawing.GUI.drawSwitch(screen, 8 * 22, 8 * -2, "size", "Big Size");
-                    ScreenDrawing.GUI.drawSwitch(screen, 8 * 22, 8 * -3, "bold", "Bold");
-                    ScreenDrawing.GUI.drawSwitch(screen, 8 * 22, 8 * -4, "readable", "Readable");
-                    ScreenDrawing.GUI.drawSwitch(screen, 8 * 22, 8 * -5, "special", "Special");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * 22, 8 * 10, "test", "show", "Show");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * 22, 8 * 9, "test", "size", "Big Size");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * 22, 8 * 8, "test", "bold", "Bold");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * 22, 8 * 7, "test", "readable", "Readable");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * 22, 8 * 6, "test", "special", "Special");
 
-                    ScreenDrawing.GUI.drawButtonBasic(screen, 8 * 22, 8 * -6, 8 * 20, "§fSend to Chat", "server_core", "gui", "button");
+                    ScreenDrawing.GUI.drawButtonBasic(screen, 8 * 22, 8 * 5, 8 * 20, "§fSend to Chat", "server_core", "gui", "button");
+                    ScreenDrawing.GUI.drawButtonLockable(screen, 8 * 22, 8 * 3, 8 * 20, NBTManager.getEntityLogic(screen.player, "test", "special") == false, "§cTurn on special to unlock this option", "§fGet Small Support Station with 10 Mana", "server_core", "gui", "button");
 
-                    if (NBTManager.getEntityLogic(screen.player, "gui", "special") == true) {
-
-                        ScreenDrawing.GUI.drawButtonBasic(screen, 8 * 22, 8 * -8, 8 * 20, "§fGet Small Support Station with 10 Mana", "server_core", "gui", "button");
-
-                    } else {
-
-                        ScreenDrawing.GUI.drawButtonLocked(screen, 8 * 22, 8 * -8, 8 * 20, "§cTurn on special to unlock this option");
-
-                    }
+                    ScreenDrawing.GUI.drawSlider(screen, 8 * -2, 8 * -8, 160, 8, 0.5, 1.0, 0.01, "test", "slider", "Font Scale " + NBTManager.getEntityNumber(screen.player, "test", "slider"));
 
                 }
 
@@ -97,7 +87,7 @@ public class GUIs {
 
                 } else if (type.equals("image") == true) {
 
-                    ScreenDrawing.Overlay.drawImageOnline(graphic, 8 * 22, 8 * 10, 160, 160, "https://i1.sndcdn.com/artworks-gUQT4s0ygfyktcMf-yWJuPw-t1080x1080.jpg", "", "");
+                    ScreenDrawing.Overlay.drawImageOnline(graphic, 8 * 22, 8 * 12, 160, 160, "https://i1.sndcdn.com/artworks-gUQT4s0ygfyktcMf-yWJuPw-t1080x1080.jpg", "", "");
 
                 }
 

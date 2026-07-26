@@ -3,10 +3,7 @@ package tannyjung.tanscomplexmagic_core.game.screen;
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.components.WidgetSprites;
+import net.minecraft.client.gui.components.*;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -19,10 +16,7 @@ import tannyjung.tanscomplexmagic_core.outside.OutsideUtils;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.net.URI;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ScreenDrawing {
 
@@ -65,19 +59,25 @@ public class ScreenDrawing {
 
         }
 
-        pos[0] = (int) (pos[0] / scale);
-        pos[1] = (int) (pos[1] / scale);
+        pos[0] = (int) Math.round(pos[0] / scale);
+        pos[1] = (int) Math.round(pos[1] / scale);
         return pos;
 
     }
 
     private static int[] convertPosTextCenter (int centerX, int centerZ, double scale, String text) {
 
-        int font_width = (int) (Minecraft.getInstance().font.width(text) * scale);
-        int font_height = (int) (Minecraft.getInstance().font.lineHeight * scale);
-        int convertX = centerX + (font_width / 2);
-        int convertZ = centerZ - (font_height / 2);
-        convertZ = convertZ + 1;
+        int width = (int) Math.round(Minecraft.getInstance().font.width(text) * 0.5 * scale);
+        int height = (int) Math.round(Minecraft.getInstance().font.lineHeight * 0.1 * scale);
+        int convertX = centerX + width;
+        int convertZ = centerZ - height;
+
+        if (centerZ < 0) {
+
+            convertZ = convertZ - 1;
+
+        }
+
         return new int[]{convertX, convertZ};
 
     }
@@ -137,6 +137,45 @@ public class ScreenDrawing {
 
         }
 
+        public static void drawTextParagraph (GuiGraphics graphic, int posX, int posZ, double scale, int length_per_line, String text) {
+
+            posX = -posX;
+            posZ = -posZ;
+
+            Map<Integer, StringBuilder> paragraph = new HashMap<>();
+            StringBuilder builder = new StringBuilder();
+            int line = 0;
+            int width = 0;
+            int width_all = 0;
+
+            for (String word : text.split(" ")) {
+
+                word = word + " ";
+                width = (int) (Minecraft.getInstance().font.width(word) * scale);
+
+                if (width_all + width < length_per_line) {
+
+                    width_all = width_all + width;
+
+                } else {
+
+                    line = line + 1;
+                    width_all = width;
+
+                }
+
+                paragraph.computeIfAbsent(line, create -> new StringBuilder()).append(word);
+
+            }
+
+            for (Map.Entry<Integer, StringBuilder> entry : paragraph.entrySet()) {
+
+                drawText(graphic, "", -posX, -(posZ) - (entry.getKey() * 8), scale, false, entry.getValue().toString());
+
+            }
+
+        }
+
         private static void drawImage (GuiGraphics graphic, int posX, int posZ, int overall_sizeX, int overall_sizeZ, int slideX, int slideZ, int split_sizeX, int split_sizeZ, String path) {
 
             graphic.blit(ResourceLocation.parse(path), (graphic.guiWidth() / 2) + posX, (graphic.guiHeight() / 2) + posZ, slideX,slideZ, split_sizeX, split_sizeZ, overall_sizeX, overall_sizeZ);
@@ -187,7 +226,7 @@ public class ScreenDrawing {
 
             if (id == null) {
 
-                id = "tannyjung:online_image_" + online_image_id.size() + ".png";
+                id = "tannyjung:online_image_" + (online_image_id.size() + 1) + ".png";
                 online_image_id.put(url, id);
                 online_image_status.put(id, "loading");
                 String id_final = id;
@@ -238,12 +277,12 @@ public class ScreenDrawing {
 
                                 }
 
-                                    /*
-                                    (1.20.1) (1.21.1)
-                                    Minecraft.getInstance().getTextureManager().register(location, new DynamicTexture(native_image));
-                                    (1.21.8)
-                                    Minecraft.getInstance().getTextureManager().register(location, new DynamicTexture(() -> "test", native_image));
-                                    */
+                                /*
+                                (1.20.1) (1.21.1)
+                                Minecraft.getInstance().getTextureManager().register(ResourceLocation.parse(id_final), new DynamicTexture(native_image));
+                                (1.21.8)
+                                Minecraft.getInstance().getTextureManager().register(location, new DynamicTexture(() -> "test", native_image));
+                                */
                                 Minecraft.getInstance().getTextureManager().register(ResourceLocation.parse(id_final), new DynamicTexture(native_image));
 
                                 online_image_status.put(id_final, "available");
@@ -276,6 +315,12 @@ public class ScreenDrawing {
             } else if (status.equals("fail") == true) {
 
                 id = path_fail;
+
+            }
+
+            if (id.isEmpty() == true) {
+
+                return;
 
             }
 
@@ -339,36 +384,72 @@ public class ScreenDrawing {
 
         }
 
-        public static void drawButtonLocked (GUIScreen screen, int posX, int posZ, int length, String text) {
+        public static void drawButtonLockable (GUIScreen screen, int posX, int posZ, int length, boolean is_lock, String text_lock, String text_unlock, String network, String work_type, String work) {
 
-            Button button = Button.builder(Component.empty(), create -> {}).build();
-            button.active = false;
+            Button button = Button.builder(Component.empty(), create -> {
+
+                create.setFocused(false);
+
+                if (network.equals("client") == true) {
+
+                    NetworkManager.runClient(screen.player, work_type, work, new CompoundTag());
+
+                } else if (network.equals("server") == true) {
+
+                    NetworkManager.runServer(screen.player, work_type, work, new CompoundTag());
+
+                } else if (network.equals("client_core") == true) {
+
+                    NetworkManager.runClientCore(screen.player, work_type, work, new CompoundTag());
+
+                } else if (network.equals("server_core") == true) {
+
+                    NetworkManager.runServerCore(screen.player, work_type, work, new CompoundTag());
+
+                }
+
+            }).build();
+
+            String text = "";
+
+            if (is_lock == true) {
+
+                button.active = false;
+                text = text_lock;
+
+            } else {
+
+                button.active = true;
+                text = text_unlock;
+
+            }
+
             drawButton(screen, posX, posZ, length, text, button);
 
         }
 
-        public static void drawSwitch (GUIScreen screen, int posX, int posZ, String nbt, String text) {
+        public static void drawSwitch (GUIScreen screen, int posX, int posZ, String nbt_type, String nbt_name, String text) {
 
             posX = -posX;
             posZ = -posZ;
 
+            CompoundTag extra_data = new CompoundTag();
+            extra_data.putString("nbt_type", nbt_type);
+            extra_data.putString("nbt_name", nbt_name);
+
             Button button_left = Button.builder(Component.empty(), create -> {
 
-                CompoundTag extra_data = new CompoundTag();
-                extra_data.putString("name", nbt);
                 NetworkManager.runServerCore(screen.player, "gui", "switch", extra_data);
 
-            }).bounds(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ - 1, 5, 6).build();
+            }).bounds(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ, 5, 6).build();
 
             Button button_right = Button.builder(Component.empty(), create -> {
 
-                CompoundTag extra_data = new CompoundTag();
-                extra_data.putString("name", nbt);
                 NetworkManager.runServerCore(screen.player, "gui", "switch", extra_data);
 
-            }).bounds(screen.getGuiLeft() + posX + 5, screen.getGuiTop() + posZ - 1, 5, 6).build();
+            }).bounds(screen.getGuiLeft() + posX + 5, screen.getGuiTop() + posZ, 5, 6).build();
 
-            if (NBTManager.getEntityLogic(screen.player, "gui", nbt) == true) {
+            if (NBTManager.getEntityLogic(screen.player, nbt_type, nbt_name) == true) {
 
                 button_left.active = false;
                 button_right.active = true;
@@ -386,27 +467,28 @@ public class ScreenDrawing {
             // Ingredient
             {
 
-                Ingredient.text.add(new Object[]{"", -(posX) - 14, -(posZ) - 0, 0.67, false, text});
+                Ingredient.text.add(new Object[]{"", -(posX) - 14, -(posZ), 0.67, false, text});
 
             }
 
         }
 
-        public static void drawTextBox (GUIScreen screen, int posX, int posZ, String nbt) {
+        public static void drawTextBox (GUIScreen screen, int posX, int posZ, String nbt_type, String nbt_name) {
 
             posX = -posX;
             posZ = -posZ;
 
             EditBox box = new EditBox(Minecraft.getInstance().font, screen.getGuiLeft() + posX + 10, screen.getGuiTop() + posZ + 4, 160 - 10, 8 + 6, Component.literal("Hello"));
-            box.setValue(NBTManager.getEntityText(screen.player, "gui", nbt));
-            box.setMaxLength(8192);
+            box.setMaxLength(10000);
             box.setTextShadow(false);
+            box.setValue(NBTManager.getEntityText(screen.player, nbt_type, nbt_name));
 
             Button button = Button.builder(Component.literal("{"), create -> {
 
                 CompoundTag extra_data = new CompoundTag();
-                extra_data.putString("name", nbt);
-                extra_data.putString("value", box.getValue());
+                extra_data.putString("nbt_type", nbt_type);
+                extra_data.putString("nbt_name", nbt_name);
+                extra_data.putString("nbt_value", box.getValue());
                 NetworkManager.runServerCore(screen.player, "gui", "text_box_save", extra_data);
 
             }).bounds(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ + 4, 10, 8 + 6).build();
@@ -464,6 +546,62 @@ public class ScreenDrawing {
             };
 
             GUIScreen.addWidget(screen, button);
+
+        }
+
+        public static void drawSlider (GUIScreen screen, int posX, int posZ, int sizeX, int sizeZ, double value_min, double value_max, double value_move, String nbt_type, String nbt_name, String text) {
+
+            posX = -posX;
+            posZ = -posZ;
+
+            double range = value_max - value_min;
+            double value_default = NBTManager.getEntityNumber(screen.player, nbt_type, nbt_name);
+            value_default = (value_default - value_min) / range;
+
+            if (value_default < 0.0 || value_default > 1.0) {
+
+                value_default = 0.0;
+
+            }
+
+            AbstractSliderButton slider = new AbstractSliderButton(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ, sizeX, sizeZ, Component.empty(), value_default) {
+
+                private double value_previous = value_min - 1.0;
+
+                @Override
+                protected void updateMessage () {
+                }
+
+                @Override
+                protected void applyValue () {
+
+                    double value = this.value;
+                    value = value * range;
+                    value = Math.round(value / value_move) * value_move;
+                    value = value + value_min;
+
+                    if (value != value_previous) {
+
+                        CompoundTag extra_data = new CompoundTag();
+                        extra_data.putString("nbt_type", nbt_type);
+                        extra_data.putString("nbt_name", nbt_name);
+                        extra_data.putDouble("nbt_value", value);
+                        NetworkManager.runServerCore(screen.player, "gui", "slider", extra_data);
+
+                    }
+
+                }
+
+            };
+
+            GUIScreen.addWidget(screen, slider);
+
+            // Ingredient
+            {
+
+                Ingredient.text.add(new Object[]{"", -(posX), -(posZ) + 8, 0.67, false, text});
+
+            }
 
         }
 

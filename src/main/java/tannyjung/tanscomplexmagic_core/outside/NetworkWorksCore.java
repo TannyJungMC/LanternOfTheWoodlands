@@ -69,16 +69,7 @@ public class NetworkWorksCore {
 
         private static void server (ServerPlayer player, String work, CompoundTag extra) {
 
-            if (work.equals("button") == true) {
-
-                {
-
-                    GameUtils.Misc.sendChatMessage(player.serverLevel(), NBTManager.getEntityText(player, "test", "box"));
-                    NetworkManager.runClientCore(player, "gui", "refresh", new CompoundTag());
-
-                }
-
-            } else if (work.equals("switch") == true) {
+            if (work.equals("switch") == true) {
 
                 {
 
@@ -99,7 +90,18 @@ public class NetworkWorksCore {
 
                 }
 
-            } else if (work.equals("text_box_save") == true) {
+            } else if (work.equals("radio") == true) {
+
+                {
+
+                    String nbt_type = extra.getString("nbt_type");
+                    String nbt_name = extra.getString("nbt_name");
+                    String nbt_value = extra.getString("nbt_value");
+                    NBTManager.setEntityText(player, nbt_type, nbt_name, nbt_value);
+
+                }
+
+            } else if (work.equals("text_box") == true) {
 
                 {
 

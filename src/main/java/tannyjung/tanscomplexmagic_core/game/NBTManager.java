@@ -233,7 +233,7 @@ public class NBTManager {
 
     }
 
-    public static Boolean getEntityLogic (Entity entity, String type, String name) {
+    public static boolean getEntityLogic (Entity entity, String type, String name) {
 
         /*
         (1.20.1) (1.21.1)

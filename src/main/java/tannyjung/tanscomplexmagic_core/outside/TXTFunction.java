@@ -9,7 +9,9 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import tannyjung.tanscomplexmagic_core.Core;
+import tannyjung.tanscomplexmagic_core.game.EntityManager;
 import tannyjung.tanscomplexmagic_core.game.GameUtils;
+import tannyjung.tanscomplexmagic_core.outside.config.CacheManager;
 
 public class TXTFunction {
 
@@ -489,7 +491,7 @@ public class TXTFunction {
                 }
 
                 String command_final = command.replace("'", "*").replace("\"", "$");
-                GameUtils.Mob.summonWorldGen(level_server, pos.getCenter(), "marker", "Delayed Command", "TANNYJUNG-delayed_command", "{NeoForgeData:{" + Core.mod_id + ":{command:\"" + command_final + "\"}}}");
+                EntityManager.summonWorldGen(level_server, pos.getCenter(), "marker", "Delayed Command", "TANNYJUNG-delayed_command", "{NeoForgeData:{" + Core.mod_id + ":{command:\"" + command_final + "\"}}}");
                 
             }
 
@@ -521,7 +523,7 @@ public class TXTFunction {
 
         count_delayed_command = 0;
 
-        for (Entity entity : GameUtils.Mob.getAtEverywhere(level_server, "minecraft:marker", "TANNYJUNG-delayed_command")) {
+        for (Entity entity : EntityManager.Import.fromEverywhere(level_server, "minecraft:marker", new String[]{"TANNYJUNG-delayed_command"})) {
 
             count_delayed_command = count_delayed_command + 1;
             TXTFunction.runDelayedCommand(level_server, entity);

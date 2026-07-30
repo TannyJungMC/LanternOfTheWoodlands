@@ -248,7 +248,7 @@ public class ScreenDrawing {
                 split_sizeX = overall_sizeX / piece_count;
                 split_sizeZ = overall_sizeZ;
                 slideX = split_sizeX * choose;
-                slideZ = overall_sizeX;
+                slideZ = overall_sizeZ;
 
             } else {
 
@@ -509,7 +509,7 @@ public class ScreenDrawing {
 
                 } else {
 
-                    if (NBTManager.getEntityLogic(screen.player, nbt_type, nbt_name) == true) {
+                    if (NBTManager.Mob.getLogic(screen.player, nbt_type, nbt_name) == true) {
 
                         button_left.active = false;
                         button_right.active = true;
@@ -553,7 +553,7 @@ public class ScreenDrawing {
 
             } else {
 
-                box.setValue(NBTManager.getEntityText(screen.player, nbt_type, nbt_name));
+                box.setValue(NBTManager.Mob.getText(screen.player, nbt_type, nbt_name));
 
             }
 
@@ -597,11 +597,21 @@ public class ScreenDrawing {
 
         }
 
-        public static void drawImageButton (GUIScreen screen, int posX, int posZ, int sizeX, int sizeZ, boolean is_active, boolean is_lock, String network, String work_type, String work, String path) {
+        public static void drawImageButton (GUIScreen screen, int posX, int posZ, int sizeX, int sizeZ, boolean is_horizontal, boolean is_active, boolean is_lock, String network, String work_type, String work, String path) {
 
             ResourceLocation location = ResourceLocation.parse(path);
 
-            ImageButton button = new ImageButton(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ, sizeX, sizeZ / 2, new WidgetSprites(location, location), create -> {
+            if (is_horizontal == true) {
+
+                sizeX = sizeX / 2;
+
+            } else {
+
+                sizeZ = sizeZ / 2;
+
+            }
+
+            ImageButton button = new ImageButton(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ, sizeX, sizeZ, new WidgetSprites(location, location), create -> {
 
                 create.setFocused(false);
 
@@ -628,15 +638,36 @@ public class ScreenDrawing {
                 @Override
                 public void renderWidget (GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
 
-                    int offset = 0;
+                    int offsetX = 0;
+                    int offsetZ = 0;
+                    int multiply_width = 1;
+                    int multiply_height = 1;
 
                     if (isHoveredOrFocused() == true) {
 
-                        offset = height;
+                        if (is_horizontal == true) {
+
+                            offsetX = width;
+
+                        } else {
+
+                            offsetZ = height;
+
+                        }
 
                     }
 
-                    guiGraphics.blit(sprites.get(true, isHoveredOrFocused()), getX(), getY(), 0, offset, width, height, width, height * 2);
+                    if (is_horizontal == true) {
+
+                        multiply_width = 2;
+
+                    } else {
+
+                        multiply_height = 2;
+
+                    }
+
+                    guiGraphics.blit(sprites.get(true, isHoveredOrFocused()), getX(), getY(), offsetX, offsetZ, width, height, width * multiply_width, height * multiply_height);
 
                 }
 
@@ -653,7 +684,7 @@ public class ScreenDrawing {
             posZ = AutoLine.test(posZ, "slider", 8);
 
             double range = value_max - value_min;
-            double value_default = NBTManager.getEntityNumber(screen.player, nbt_type, nbt_name);
+            double value_default = NBTManager.Mob.getNumber(screen.player, nbt_type, nbt_name);
             double value_default_percent = (value_default - value_min) / range;
 
             if (value_default_percent < 0.0 || value_default_percent > 1.0) {
@@ -733,20 +764,19 @@ public class ScreenDrawing {
 
             boolean is_select = false;
             int[] pos_convert = new int[0];
-            boolean first = true;
 
             for (String scan : nbt_value.split(" / ")) {
 
                 posZ = AutoLine.test(posZ, "radio", 8);
 
-                is_select = NBTManager.getEntityText(screen.player, nbt_type, nbt_name).equals(scan) == true;
+                is_select = NBTManager.Mob.getText(screen.player, nbt_type, nbt_name).equals(scan) == true;
 
                 CompoundTag extra_data = new CompoundTag();
                 extra_data.putString("nbt_type", nbt_type);
                 extra_data.putString("nbt_name", nbt_name);
                 extra_data.putString("nbt_value", scan);
 
-                drawButton(screen, posX + 6, posZ + 1, 6, 6, 0.0, is_active, is_lock == true || is_select == true, "", "", () -> {
+                drawButton(screen, posX, posZ + 1, 6, 6, 0.0, is_active, is_lock == true || is_select == true, "", "", () -> {
 
                     NetworkManager.runServerCore(screen.player, "gui", "radio", extra_data);
 
@@ -755,14 +785,6 @@ public class ScreenDrawing {
                 // Ingredient
                 {
 
-                    if (first == false) {
-
-                        drawButton(screen, posX, posZ - 3, 1, 7, 0.0, false, false, "", "", null);
-
-                    }
-
-                    drawButton(screen, posX, posZ + 4, 4, 1, 0.0, false, false, "", "", null);
-
                     if (is_select == false) {
 
                         scan = "§7" + scan;
@@ -770,13 +792,7 @@ public class ScreenDrawing {
                     }
 
                     pos_convert = convertPosTextCenter(0, posZ + 4, normal_font_scale, scan);
-                    Ingredient.text.add(new Object[]{"", posX + 16, pos_convert[1], normal_font_scale, false, scan});
-
-                }
-
-                if (first == true) {
-
-                    first = false;
+                    Ingredient.text.add(new Object[]{"", posX + 10, pos_convert[1], normal_font_scale, false, scan});
 
                 }
 

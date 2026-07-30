@@ -71,19 +71,6 @@
       "path": "~/Spell4/..."
     },
     {
-      "name": "Spell4keyType",
-      "type": "keybind",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "spell_4key_type",
-      "metadata": {
-        "files": [
-          "src/main/java/tannyjung/tanscomplexmagic/network/Spell4keyTypeMessage.java"
-        ]
-      },
-      "path": "~/Spell4/.../Key Binding"
-    },
-    {
       "name": "Spell4tp",
       "type": "procedure",
       "compiles": true,
@@ -958,19 +945,6 @@
         ]
       },
       "path": "~/.../GUI"
-    },
-    {
-      "name": "MainKey",
-      "type": "keybind",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "main_key",
-      "metadata": {
-        "files": [
-          "src/main/java/tannyjung/tanscomplexmagic/network/MainKeyMessage.java"
-        ]
-      },
-      "path": "~/.Other"
     },
     {
       "name": "MainKeyRun",
@@ -5881,32 +5855,6 @@
       "path": "~/Spell4"
     },
     {
-      "name": "KEYSpell4Reverse",
-      "type": "keybind",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "key_spell_4_reverse",
-      "metadata": {
-        "files": [
-          "src/main/java/tannyjung/tanscomplexmagic/network/KEYSpell4ReverseMessage.java"
-        ]
-      },
-      "path": "~/Spell4/KEY"
-    },
-    {
-      "name": "KEYSpell4Shoot",
-      "type": "keybind",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "key_spell_4_shoot",
-      "metadata": {
-        "files": [
-          "src/main/java/tannyjung/tanscomplexmagic/network/KEYSpell4ShootMessage.java"
-        ]
-      },
-      "path": "~/Spell4/KEY"
-    },
-    {
       "name": "KEYSpell4ShootRun",
       "type": "procedure",
       "compiles": true,
@@ -6010,19 +5958,6 @@
             "name": "entity",
             "type": "entity"
           }
-        ]
-      },
-      "path": "~/Spell4/KEY"
-    },
-    {
-      "name": "KEYSpell4Activate",
-      "type": "keybind",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "key_spell_4_activate",
-      "metadata": {
-        "files": [
-          "src/main/java/tannyjung/tanscomplexmagic/network/KEYSpell4ActivateMessage.java"
         ]
       },
       "path": "~/Spell4/KEY"
@@ -6345,19 +6280,6 @@
       "path": "~/Spell4/COMMAND"
     },
     {
-      "name": "KEYSpell4Homing",
-      "type": "keybind",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "key_spell_4_homing",
-      "metadata": {
-        "files": [
-          "src/main/java/tannyjung/tanscomplexmagic/network/KEYSpell4HomingMessage.java"
-        ]
-      },
-      "path": "~/Spell4/KEY"
-    },
-    {
       "name": "KEYSpell4HomingRun",
       "type": "procedure",
       "compiles": true,
@@ -6401,19 +6323,6 @@
       "path": "~/.Other"
     },
     {
-      "name": "KEYSpell4Constant",
-      "type": "keybind",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "key_spell_4_constant",
-      "metadata": {
-        "files": [
-          "src/main/java/tannyjung/tanscomplexmagic/network/KEYSpell4ConstantMessage.java"
-        ]
-      },
-      "path": "~/Spell4/KEY"
-    },
-    {
       "name": "KEYSpell4ConstantRun",
       "type": "procedure",
       "compiles": true,
@@ -6444,19 +6353,6 @@
         ]
       },
       "path": "~/Spell4/OVERLAY"
-    },
-    {
-      "name": "KEYSpell4Mode",
-      "type": "keybind",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "key_spell_4_mode",
-      "metadata": {
-        "files": [
-          "src/main/java/tannyjung/tanscomplexmagic/network/KEYSpell4ModeMessage.java"
-        ]
-      },
-      "path": "~/Spell4/KEY"
     },
     {
       "name": "KEYSpell4ModeRun",
@@ -6498,19 +6394,6 @@
       "path": "~/Spell4/OVERLAY"
     },
     {
-      "name": "KEYSPell4LockTarget",
-      "type": "keybind",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "keys_pell_4_lock_target",
-      "metadata": {
-        "files": [
-          "src/main/java/tannyjung/tanscomplexmagic/network/KEYSPell4LockTargetMessage.java"
-        ]
-      },
-      "path": "~/Spell4/KEY"
-    },
-    {
       "name": "KEYSPell4LockTargetRun",
       "type": "procedure",
       "compiles": true,
@@ -6541,32 +6424,6 @@
             "name": "world",
             "type": "world"
           }
-        ]
-      },
-      "path": "~/Spell4/KEY"
-    },
-    {
-      "name": "KEYSpell4DistanceAdd",
-      "type": "keybind",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "key_spell_4_distance_add",
-      "metadata": {
-        "files": [
-          "src/main/java/tannyjung/tanscomplexmagic/network/KEYSpell4DistanceAddMessage.java"
-        ]
-      },
-      "path": "~/Spell4/KEY"
-    },
-    {
-      "name": "KEYSpell4DistanceReduce",
-      "type": "keybind",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "key_spell_4_distance_reduce",
-      "metadata": {
-        "files": [
-          "src/main/java/tannyjung/tanscomplexmagic/network/KEYSpell4DistanceReduceMessage.java"
         ]
       },
       "path": "~/Spell4/KEY"
@@ -6731,19 +6588,6 @@
         ]
       },
       "path": "~/Spell4/OVERLAY"
-    },
-    {
-      "name": "KEYSpell4Ability",
-      "type": "keybind",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "key_spell_4_ability",
-      "metadata": {
-        "files": [
-          "src/main/java/tannyjung/tanscomplexmagic/network/KEYSpell4AbilityMessage.java"
-        ]
-      },
-      "path": "~/Spell4/KEY"
     },
     {
       "name": "KEYSpell4AbilityRun",
@@ -9975,7 +9819,6 @@
       "gui.tanscomplexmagic.spell_4_gui.label_autumn_of_loss": "AUTUMN OF LOSS",
       "gui.tanscomplexmagic.spell_4_gui.label_use_all_13_zodiac_cards": "weapons manipulation. Move",
       "gui.tanscomplexmagic.spell_4_gui.label_skills": "use their abilities.",
-      "key.tanscomplexmagic.spell_4key_type": "Spell4 - Type",
       "item_group.tanscomplexmagic.lotw_tab": "Lantern of The Woodlands",
       "block.tanscomplexmagic.target_arrow": "Target Arrow",
       "gui.tanscomplexmagic.ally_list_gui.label_typevillager": "type\u003dvillager",
@@ -9996,7 +9839,6 @@
       "gui.tanscomplexmagic.ally_list_gui.label_need_alternative_keyboard": "selector. Need custom text",
       "gui.tanscomplexmagic.ally_list_gui.label_all_online_players": "All players",
       "gui.tanscomplexmagic.ally_list_gui.label_all_online_players_in_10_blocks": "All players in 10 blocks",
-      "key.tanscomplexmagic.main_key": "Main Key",
       "item.tanscomplexmagic.user_book.description_6": "- Pick Up Placed Book : Hold shift and hold the main key",
       "item.tanscomplexmagic.user_book.description_7": "- Open Book GUI : Hold opened book on right hand and right click, or stay near placed book and hold the main key.",
       "item.tanscomplexmagic.user_book.description_4": "- Open/Close Book : Hold on right hand, hold the main key and right click.",
@@ -10483,17 +10325,7 @@
       "gui.tanscomplexmagic.gui_index.button_set_role": "Set Role",
       "gui.tanscomplexmagic.gui_spell_4.button_cancel": "Cancel",
       "gui.tanscomplexmagic.gui_spell_4.button_start": "Start",
-      "key.tanscomplexmagic.key_spell_4_reverse": "Spell4 - Reverse",
-      "key.tanscomplexmagic.key_spell_4_shoot": "Spell4 - Shoot",
-      "key.tanscomplexmagic.key_spell_4_activate": "Spell4 - Activate / Deactivate",
       "block.tanscomplexmagic.sword_knight": "Sword Knight",
-      "key.tanscomplexmagic.key_spell_4_homing": "Spell4 - Homing",
-      "key.tanscomplexmagic.key_spell_4_constant": "Spell4 - Constant",
-      "key.tanscomplexmagic.key_spell_4_mode": "Spell4 - Mode",
-      "key.tanscomplexmagic.keys_pell_4_lock_target": "Spell4 - Lock Target",
-      "key.tanscomplexmagic.key_spell_4_distance_add": "Spell4 - Distance (+)",
-      "key.tanscomplexmagic.key_spell_4_distance_reduce": "Spell4 - Distance (-)",
-      "key.tanscomplexmagic.key_spell_4_ability": "Spell4 - Ability",
       "gui.tanscomplexmagic.gui_index.sliderxxx_suffix": "",
       "gui.tanscomplexmagic.gui_index.sliderxxx_prefix": "",
       "gui.tanscomplexmagic.gui_index.asd": "",
@@ -10508,7 +10340,6 @@
       "src/main/java/tannyjung/tanscomplexmagic/network/MenuStateUpdateMessage.java",
       "src/main/java/tannyjung/tanscomplexmagic/init/TanscomplexmagicModScreens.java",
       "src/main/java/tannyjung/tanscomplexmagic/init/TanscomplexmagicModMenus.java",
-      "src/main/java/tannyjung/tanscomplexmagic/init/TanscomplexmagicModKeyMappings.java",
       "src/main/java/tannyjung/tanscomplexmagic/init/TanscomplexmagicModBlocks.java",
       "src/main/java/tannyjung/tanscomplexmagic/init/TanscomplexmagicModBlockEntities.java",
       "src/main/java/tannyjung/tanscomplexmagic/init/TanscomplexmagicModItems.java",

@@ -3,7 +3,7 @@ package tannyjung.tanscomplexmagic_core.game.world_gen;
 import net.minecraft.world.level.ChunkPos;
 import tannyjung.tanscomplexmagic_core.Core;
 import tannyjung.tanscomplexmagic_core.outside.FileManager;
-import tannyjung.tanscomplexmagic_handcode.systems.world_gen.WorldGen;
+import tannyjung.tanscomplexmagic_handcode.core.WorldGen;
 
 import java.io.File;
 import java.util.ArrayList;

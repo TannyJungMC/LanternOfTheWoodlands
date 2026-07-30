@@ -1,31 +1,24 @@
 package tannyjung.tanscomplexmagic_core.game.screen;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ISystemReportExtender;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import tannyjung.tanscomplexmagic.TanscomplexmagicMod;
-import tannyjung.tanscomplexmagic_core.Core;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
-import tannyjung.tanscomplexmagic_core.outside.NetworkManager;
-import tannyjung.tanscomplexmagic_handcode.systems.GUIs;
+import tannyjung.tanscomplexmagic_handcode.core.GUIs;
 
 public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
+
+    public static final DeferredRegister<MenuType<?>> register = DeferredRegister.create(Registries.MENU, TanscomplexmagicMod.MODID);
+    public static final DeferredHolder<MenuType<?>, MenuType<GUIContainer>> gui = register.register("gui", () -> IMenuTypeExtension.create(GUIContainer::new));
 
     public final LocalPlayer player;
     public static int id = 0;
@@ -37,31 +30,6 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
         this.player = (LocalPlayer) container.entity;
         this.imageWidth = 0;
         this.imageHeight = 0;
-
-    }
-
-    public static class Register {
-
-        public static final DeferredRegister<MenuType<?>> register = DeferredRegister.create(Registries.MENU, TanscomplexmagicMod.MODID);
-        public static final DeferredHolder<MenuType<?>, MenuType<GUIContainer>> gui = register.register("gui", () -> IMenuTypeExtension.create(GUIContainer::new));
-
-        @EventBusSubscriber(Dist.CLIENT)
-        public static class Event {
-
-            @SubscribeEvent
-            public static void event (RegisterMenuScreensEvent event) {
-
-                event.register(gui.get(), GUIScreen::new);
-
-            }
-
-        }
-
-        public static void bus (IEventBus bus) {
-
-            register.register(bus);
-
-        }
 
     }
 
@@ -153,11 +121,11 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
 
 
 
-        ScreenDrawing.normal_font_scale = NBTManager.getEntityNumber(player, "test", "size") * 0.01;
+        ScreenDrawing.normal_font_scale = NBTManager.Mob.getNumber(player, "test", "size") * 0.01;
 
 
 
-        id = (int) NBTManager.getEntityNumber(player, "gui", "id");
+        id = (int) NBTManager.Mob.getNumber(player, "gui", "id");
         GUIs.render(this, null, id, "widget");
 
     }

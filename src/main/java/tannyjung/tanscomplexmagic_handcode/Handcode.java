@@ -4,6 +4,9 @@ import net.minecraft.server.level.ServerLevel;
 import tannyjung.tanscomplexmagic_core.Core;
 import tannyjung.tanscomplexmagic_core.game.*;
 import tannyjung.tanscomplexmagic_core.outside.*;
+import tannyjung.tanscomplexmagic_core.outside.config.ConfigClassic;
+import tannyjung.tanscomplexmagic_core.outside.config.ConfigDynamic;
+import tannyjung.tanscomplexmagic_core.outside.config.CustomPackOrganizing;
 
 import java.util.HashSet;
 import java.util.List;

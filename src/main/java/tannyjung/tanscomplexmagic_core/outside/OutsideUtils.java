@@ -3,6 +3,7 @@ package tannyjung.tanscomplexmagic_core.outside;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ChunkPos;
 import tannyjung.tanscomplexmagic_core.Core;
+import tannyjung.tanscomplexmagic_core.game.NBTManager;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -367,7 +368,7 @@ public class OutsideUtils {
 
                 }
 
-                return data.toArray(new String[0]);
+                return data.toArray(new String[]{});
 
             } catch (Exception exception) {
 
@@ -377,7 +378,7 @@ public class OutsideUtils {
 
         }
 
-        return new String[0];
+        return new String[]{};
 
     }
 
@@ -466,7 +467,7 @@ public class OutsideUtils {
 
     }
 
-    public static class Mathematics {
+    public static class Mathematic {
 
         public static boolean isNumberStartWith (int number, int test) {
 
@@ -506,6 +507,57 @@ public class OutsideUtils {
 
             double test = Math.pow(10.0, decimal);
             return Math.ceil(number * test) / test;
+
+        }
+
+    }
+
+    public static class Calculation {
+
+        public static double getDegreeDestination (double posX, double posZ, double destinationX, double destinationZ, double rotationY) {
+
+            posX = posX - destinationX;
+            posZ = posZ - destinationZ;
+            double degree = Math.floor((Math.toDegrees(Math.atan2(posZ, posX)) + 360) % 360) + 90;
+            double current_direction = Math.floor(((-rotationY % 360) + 360) % 360);
+            degree = degree + current_direction;
+
+            while (degree > 360.0) {
+
+                degree = degree - 360.0;
+
+            }
+
+            return degree;
+
+        }
+
+        public static String convertSecondToTime (int seconds) {
+
+            seconds = seconds - 0;
+            String hour = String.valueOf((seconds / 60 / 60) % 60);
+            String minute = String.valueOf((seconds / 60) % 60);
+            String second = String.valueOf(seconds % 60);
+
+            if (hour.length() == 1) {
+
+                hour = "0" + hour;
+
+            }
+
+            if (minute.length() == 1) {
+
+                minute = "0" + minute;
+
+            }
+
+            if (second.length() == 1) {
+
+                second = "0" + second;
+
+            }
+
+            return hour + ":" + minute + ":" + second;
 
         }
 

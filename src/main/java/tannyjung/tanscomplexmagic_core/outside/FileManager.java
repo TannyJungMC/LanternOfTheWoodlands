@@ -184,7 +184,7 @@ public class FileManager {
 
 			try {
 
-				return Files.readAllLines(file.toPath()).toArray(new String[0]);
+				return Files.readAllLines(file.toPath()).toArray(new String[]{});
 
 			} catch (Exception exception) {
 
@@ -194,7 +194,7 @@ public class FileManager {
 
 		}
 
-		return new String[0];
+		return new String[]{};
 
 	}
 

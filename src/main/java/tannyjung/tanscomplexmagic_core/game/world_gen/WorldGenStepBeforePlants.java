@@ -8,7 +8,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import tannyjung.tanscomplexmagic_core.game.GameUtils;
-import tannyjung.tanscomplexmagic_handcode.systems.world_gen.WorldGen;
+import tannyjung.tanscomplexmagic_handcode.core.WorldGen;
 
 public class WorldGenStepBeforePlants extends Feature <NoneFeatureConfiguration> {
 

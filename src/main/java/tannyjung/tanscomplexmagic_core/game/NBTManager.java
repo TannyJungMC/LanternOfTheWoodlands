@@ -221,7 +221,9 @@ public class NBTManager {
 
     }
 
-    public static String getEntityText (Entity entity, String type, String name) {
+    public static class Mob {
+
+        public static String getText (Entity entity, String type, String name) {
 
         /*
         (1.20.1) (1.21.1)
@@ -229,11 +231,11 @@ public class NBTManager {
         (1.21.8)
         return entity.getPersistentData().getCompound(Core.mod_id).getString(name).get();
         */
-        return entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getString(name);
+            return entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getString(name);
 
-    }
+        }
 
-    public static boolean getEntityLogic (Entity entity, String type, String name) {
+        public static boolean getLogic (Entity entity, String type, String name) {
 
         /*
         (1.20.1) (1.21.1)
@@ -241,11 +243,11 @@ public class NBTManager {
         (1.21.8)
         return entity.getPersistentData().getCompound(Core.mod_id).getBoolean(name).get();
         */
-        return entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getBoolean(name);
+            return entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getBoolean(name);
 
-    }
+        }
 
-    public static double getEntityNumber (Entity entity, String type, String name) {
+        public static double getNumber (Entity entity, String type, String name) {
 
         /*
         (1.20.1) (1.21.1)
@@ -253,11 +255,11 @@ public class NBTManager {
         (1.21.8)
         return entity.getPersistentData().getCompound(Core.mod_id).getDouble(name).get();
         */
-        return entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getDouble(name);
+            return entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getDouble(name);
 
-    }
+        }
 
-    public static double[] getEntityListNumber (Entity entity, String name) {
+        public static double[] getListNumber (Entity entity, String name) {
 
         /*
         (1.20.1) (1.21.1)
@@ -265,11 +267,11 @@ public class NBTManager {
         (1.21.8)
         ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getList(name).get();
         */
-        ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getList(name, Tag.TAG_DOUBLE);
+            ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getList(name, Tag.TAG_DOUBLE);
 
-        double[] convert = new double[list.size()];
+            double[] convert = new double[list.size()];
 
-        for (int count = 0; count <= list.size() - 1; count++) {
+            for (int count = 0; count <= list.size() - 1; count++) {
 
 				/*
 				(1.20.1) (1.21.1)
@@ -277,15 +279,15 @@ public class NBTManager {
 				(1.21.8)
 				convert[count] = list.getDouble(count).get();
 				*/
-            convert[count] = list.getDouble(count);
+                convert[count] = list.getDouble(count);
+
+            }
+
+            return convert;
 
         }
 
-        return convert;
-
-    }
-
-    public static double[] getEntityListNumberFloat (Entity entity, String name) {
+        public static double[] getListNumberFloat (Entity entity, String name) {
 
         /*
         (1.20.1) (1.21.1)
@@ -293,11 +295,11 @@ public class NBTManager {
         (1.21.8)
         ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getList(name).get();
         */
-        ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getList(name, Tag.TAG_FLOAT);
+            ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getList(name, Tag.TAG_FLOAT);
 
-        double[] convert = new double[list.size()];
+            double[] convert = new double[list.size()];
 
-        for (int count = 0; count <= list.size() - 1; count++) {
+            for (int count = 0; count <= list.size() - 1; count++) {
 
             /*
             (1.20.1) (1.21.1)
@@ -305,87 +307,91 @@ public class NBTManager {
             (1.21.8)
             convert[count] = list.getFloat(count).get();
             */
-            convert[count] = list.getFloat(count);
+                convert[count] = list.getFloat(count);
+
+            }
+
+            return convert;
 
         }
 
-        return convert;
+        public static void setText (Entity entity, String type, String name, String value) {
 
-    }
+            CompoundTag tag = new CompoundTag();
+            CompoundTag tag_type = new CompoundTag();
+            CompoundTag tag_mod = new CompoundTag();
+            tag.putString(name, value);
+            tag_type.put(type, tag);
+            tag_mod.put(Core.mod_id, tag_type);
+            entity.getPersistentData().merge(tag_mod);
 
-    public static void setEntityText (Entity entity, String type, String name, String value) {
+            if (entity instanceof ServerPlayer player) {
 
-        CompoundTag tag = new CompoundTag();
-        CompoundTag tag_type = new CompoundTag();
-        CompoundTag tag_mod = new CompoundTag();
-        tag.putString(name, value);
-        tag_type.put(type, tag);
-        tag_mod.put(Core.mod_id, tag_type);
-        entity.getPersistentData().merge(tag_mod);
+                NetworkManager.runServerCore(player, "nbt", "sync_one", tag_mod);
 
-        if (entity instanceof ServerPlayer player) {
+            }
 
-            NetworkManager.runServerCore(player, "nbt", "sync_one", tag_mod);
+        }
+
+        public static void setLogic (Entity entity, String type, String name, boolean value) {
+
+            CompoundTag tag = new CompoundTag();
+            CompoundTag tag_type = new CompoundTag();
+            CompoundTag tag_mod = new CompoundTag();
+            tag.putBoolean(name, value);
+            tag_type.put(type, tag);
+            tag_mod.put(Core.mod_id, tag_type);
+            entity.getPersistentData().merge(tag_mod);
+
+            if (entity instanceof ServerPlayer player) {
+
+                NetworkManager.runServerCore(player, "nbt", "sync_one", tag_mod);
+
+            }
+
+        }
+
+        public static void setNumber (Entity entity, String type, String name, double value) {
+
+            CompoundTag tag = new CompoundTag();
+            CompoundTag tag_type = new CompoundTag();
+            CompoundTag tag_mod = new CompoundTag();
+            tag.putDouble(name, value);
+            tag_type.put(type, tag);
+            tag_mod.put(Core.mod_id, tag_type);
+            entity.getPersistentData().merge(tag_mod);
+
+            if (entity instanceof ServerPlayer player) {
+
+                NetworkManager.runServerCore(player, "nbt", "sync_one", tag_mod);
+
+            }
+
+        }
+
+        public static void addNumber (Entity entity, String type, String name, double value) {
+
+            setNumber(entity, type, name, getNumber(entity, type, name) + value);
 
         }
 
     }
 
-    public static void setEntityLogic (Entity entity, String type, String name, boolean value) {
+    public static class Tile {
 
-        CompoundTag tag = new CompoundTag();
-        CompoundTag tag_type = new CompoundTag();
-        CompoundTag tag_mod = new CompoundTag();
-        tag.putBoolean(name, value);
-        tag_type.put(type, tag);
-        tag_mod.put(Core.mod_id, tag_type);
-        entity.getPersistentData().merge(tag_mod);
+        public static String getText (LevelAccessor level_accessor, BlockPos pos, String name) {
 
-        if (entity instanceof ServerPlayer player) {
+            return new Object() {
 
-            NetworkManager.runServerCore(player, "nbt", "sync_one", tag_mod);
+                public String getValue (LevelAccessor level_accessor, BlockPos pos, String name) {
 
-        }
+                    BlockEntity block_entity = level_accessor.getBlockEntity(pos);
 
-    }
+                    if (block_entity == null) {
 
-    public static void setEntityNumber (Entity entity, String type, String name, double value) {
+                        return "";
 
-        CompoundTag tag = new CompoundTag();
-        CompoundTag tag_type = new CompoundTag();
-        CompoundTag tag_mod = new CompoundTag();
-        tag.putDouble(name, value);
-        tag_type.put(type, tag);
-        tag_mod.put(Core.mod_id, tag_type);
-        entity.getPersistentData().merge(tag_mod);
-
-        if (entity instanceof ServerPlayer player) {
-
-            NetworkManager.runServerCore(player, "nbt", "sync_one", tag_mod);
-
-        }
-
-    }
-
-    public static void addEntityNumber (Entity entity, String type, String name, double value) {
-
-        setEntityNumber(entity, type, name, getEntityNumber(entity, type, name) + value);
-
-    }
-
-    public static String getBlockText (LevelAccessor level_accessor, BlockPos pos, String name) {
-
-        return new Object() {
-
-            public String getValue (LevelAccessor level_accessor, BlockPos pos, String name) {
-
-                BlockEntity block_entity = level_accessor.getBlockEntity(pos);
-
-                if (block_entity == null) {
-
-                    return "";
-
-                }
+                    }
 
                 /*
                 (1.20.1) (1.21.1)
@@ -393,27 +399,27 @@ public class NBTManager {
                 (1.21.8)
                 return block_entity.getPersistentData().getCompound(Core.mod_id).getString(name).get();
                 */
-                return block_entity.getPersistentData().getCompound(Core.mod_id).getString(name);
-
-            }
-
-        }.getValue(level_accessor, pos, name);
-
-    }
-
-    public static double getBlockNumber (LevelAccessor level_accessor, BlockPos pos, String name) {
-
-        return new Object() {
-
-            public double getValue (LevelAccessor level_accessor, BlockPos pos, String name) {
-
-                BlockEntity block_entity = level_accessor.getBlockEntity(pos);
-
-                if (block_entity == null) {
-
-                    return 0.0;
+                    return block_entity.getPersistentData().getCompound(Core.mod_id).getString(name);
 
                 }
+
+            }.getValue(level_accessor, pos, name);
+
+        }
+
+        public static double getNumber (LevelAccessor level_accessor, BlockPos pos, String name) {
+
+            return new Object() {
+
+                public double getValue (LevelAccessor level_accessor, BlockPos pos, String name) {
+
+                    BlockEntity block_entity = level_accessor.getBlockEntity(pos);
+
+                    if (block_entity == null) {
+
+                        return 0.0;
+
+                    }
 
                 /*
                 (1.20.1) (1.21.1)
@@ -421,23 +427,23 @@ public class NBTManager {
                 (1.21.8)
                 return block_entity.getPersistentData().getCompound(Core.mod_id).getDouble(name).get();
                 */
-                return block_entity.getPersistentData().getCompound(Core.mod_id).getDouble(name);
+                    return block_entity.getPersistentData().getCompound(Core.mod_id).getDouble(name);
 
-            }
+                }
 
-        }.getValue(level_accessor, pos, name);
+            }.getValue(level_accessor, pos, name);
 
-    }
+        }
 
-    public static boolean getBlockLogic (LevelAccessor level_accessor, BlockPos pos, String name) {
+        public static boolean getLogic (LevelAccessor level_accessor, BlockPos pos, String name) {
 
-        return new Object() {
+            return new Object() {
 
-            public boolean getValue (LevelAccessor level_accessor, BlockPos pos, String name) {
+                public boolean getValue (LevelAccessor level_accessor, BlockPos pos, String name) {
 
-                BlockEntity blockEntity = level_accessor.getBlockEntity(pos);
+                    BlockEntity blockEntity = level_accessor.getBlockEntity(pos);
 
-                if (blockEntity != null) {
+                    if (blockEntity != null) {
 
                     /*
                     (1.20.1) (1.21.1)
@@ -445,77 +451,77 @@ public class NBTManager {
                     (1.21.8)
                     return blockEntity.getPersistentData().getCompound(Core.mod_id).getBoolean(name).get();
                     */
-                    return blockEntity.getPersistentData().getCompound(Core.mod_id).getBoolean(name);
+                        return blockEntity.getPersistentData().getCompound(Core.mod_id).getBoolean(name);
+
+                    }
+
+                    return false;
 
                 }
 
-                return false;
+            }.getValue(level_accessor, pos, name);
+
+        }
+
+        public static void setText (LevelAccessor level_accessor, ServerLevel level_server, BlockPos pos, String name, String value) {
+
+            BlockEntity block_entity = level_accessor.getBlockEntity(pos);
+
+            if (block_entity != null) {
+
+                CompoundTag tag = new CompoundTag();
+                CompoundTag tag_add = new CompoundTag();
+                tag_add.putString(name, value);
+                tag.put(Core.mod_id, tag_add);
+                block_entity.getPersistentData().merge(tag);
+                BlockState block = level_accessor.getBlockState(pos);
+                level_server.sendBlockUpdated(pos, block, block, 2);
 
             }
 
-        }.getValue(level_accessor, pos, name);
+        }
 
-    }
+        public static void setLogic (LevelAccessor level_accessor, ServerLevel level_server, BlockPos pos, String name, boolean value) {
 
-    public static void setBlockText (LevelAccessor level_accessor, ServerLevel level_server, BlockPos pos, String name, String value) {
+            BlockEntity block_entity = level_accessor.getBlockEntity(pos);
 
-        BlockEntity block_entity = level_accessor.getBlockEntity(pos);
+            if (block_entity != null) {
 
-        if (block_entity != null) {
+                CompoundTag tag = new CompoundTag();
+                CompoundTag tag_add = new CompoundTag();
+                tag_add.putBoolean(name, value);
+                tag.put(Core.mod_id, tag_add);
+                block_entity.getPersistentData().merge(tag);
+                BlockState block = level_accessor.getBlockState(pos);
+                level_server.sendBlockUpdated(pos, block, block, 2);
 
-            CompoundTag tag = new CompoundTag();
-            CompoundTag tag_add = new CompoundTag();
-            tag_add.putString(name, value);
-            tag.put(Core.mod_id, tag_add);
-            block_entity.getPersistentData().merge(tag);
-            BlockState block = level_accessor.getBlockState(pos);
-            level_server.sendBlockUpdated(pos, block, block, 2);
+            }
 
         }
 
-    }
+        public static void setNumber (LevelAccessor level_accessor, ServerLevel level_server, BlockPos pos, String name, double value) {
 
-    public static void setBlockLogic (LevelAccessor level_accessor, ServerLevel level_server, BlockPos pos, String name, boolean value) {
+            BlockEntity block_entity = level_accessor.getBlockEntity(pos);
 
-        BlockEntity block_entity = level_accessor.getBlockEntity(pos);
+            if (block_entity != null) {
 
-        if (block_entity != null) {
+                CompoundTag tag = new CompoundTag();
+                CompoundTag tag_add = new CompoundTag();
+                tag_add.putDouble(name, value);
+                tag.put(Core.mod_id, tag_add);
+                block_entity.getPersistentData().merge(tag);
+                BlockState block = level_accessor.getBlockState(pos);
+                level_server.sendBlockUpdated(pos, block, block, 2);
 
-            CompoundTag tag = new CompoundTag();
-            CompoundTag tag_add = new CompoundTag();
-            tag_add.putBoolean(name, value);
-            tag.put(Core.mod_id, tag_add);
-            block_entity.getPersistentData().merge(tag);
-            BlockState block = level_accessor.getBlockState(pos);
-            level_server.sendBlockUpdated(pos, block, block, 2);
-
-        }
-
-    }
-
-    public static void setBlockNumber (LevelAccessor level_accessor, ServerLevel level_server, BlockPos pos, String name, double value) {
-
-        BlockEntity block_entity = level_accessor.getBlockEntity(pos);
-
-        if (block_entity != null) {
-
-            CompoundTag tag = new CompoundTag();
-            CompoundTag tag_add = new CompoundTag();
-            tag_add.putDouble(name, value);
-            tag.put(Core.mod_id, tag_add);
-            block_entity.getPersistentData().merge(tag);
-            BlockState block = level_accessor.getBlockState(pos);
-            level_server.sendBlockUpdated(pos, block, block, 2);
+            }
 
         }
 
-    }
+        public static void addNumber (LevelAccessor level_accessor, ServerLevel level_server, BlockPos pos, String name, double value) {
 
-    public static void addBlockNumber (LevelAccessor level_accessor, ServerLevel level_server, BlockPos pos, String name, double value) {
+            BlockEntity block_entity = level_accessor.getBlockEntity(pos);
 
-        BlockEntity block_entity = level_accessor.getBlockEntity(pos);
-
-        if (block_entity != null) {
+            if (block_entity != null) {
 
             /*
             (1.20.1) (1.21.1)
@@ -523,16 +529,20 @@ public class NBTManager {
             (1.21.8)
             block_entity.getPersistentData().getCompound(Core.mod_id).putDouble(name, block_entity.getPersistentData().getCompound(Core.mod_id).getDouble(name).get() + value);
             */
-            block_entity.getPersistentData().getCompound(Core.mod_id).putDouble(name, block_entity.getPersistentData().getCompound(Core.mod_id).getDouble(name) + value);
+                block_entity.getPersistentData().getCompound(Core.mod_id).putDouble(name, block_entity.getPersistentData().getCompound(Core.mod_id).getDouble(name) + value);
 
-            BlockState block = level_accessor.getBlockState(pos);
-            level_server.sendBlockUpdated(pos, block, block, 2);
+                BlockState block = level_accessor.getBlockState(pos);
+                level_server.sendBlockUpdated(pos, block, block, 2);
+
+            }
 
         }
 
     }
 
-    public static String getItemText (Entity entity, EquipmentSlot slot, String name) {
+    public static class Item {
+
+        public static String getItemText (Entity entity, EquipmentSlot slot, String name) {
 
         /*
         (1.20.1)
@@ -540,16 +550,16 @@ public class NBTManager {
         (1.21.1)
         return Item.getSlot(entity, slot).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getCompound(Core.mod_id).getString(name);
         */
-        return GameUtils.Item.getSlot(entity, slot).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getCompound(Core.mod_id).getString(name);
+            return GameUtils.Item.getSlot(entity, slot).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getCompound(Core.mod_id).getString(name);
 
-    }
+        }
 
-    public static void setItemText (Entity entity, EquipmentSlot slot, String name, String value) {
+        public static void setItemText (Entity entity, EquipmentSlot slot, String name, String value) {
 
-        CompoundTag tag = new CompoundTag();
-        CompoundTag tag_add = new CompoundTag();
-        tag_add.putString(name, value);
-        tag.put(Core.mod_id, tag_add);
+            CompoundTag tag = new CompoundTag();
+            CompoundTag tag_add = new CompoundTag();
+            tag_add.putString(name, value);
+            tag.put(Core.mod_id, tag_add);
 
         /*
         (1.20.1)
@@ -557,7 +567,9 @@ public class NBTManager {
         (1.21.1)
         CustomData.update(DataComponents.CUSTOM_DATA, Item.getSlot(entity, slot), create -> create.merge(tag));
         */
-        CustomData.update(DataComponents.CUSTOM_DATA, GameUtils.Item.getSlot(entity, slot), create -> create.merge(tag));
+            CustomData.update(DataComponents.CUSTOM_DATA, GameUtils.Item.getSlot(entity, slot), create -> create.merge(tag));
+
+        }
 
     }
 

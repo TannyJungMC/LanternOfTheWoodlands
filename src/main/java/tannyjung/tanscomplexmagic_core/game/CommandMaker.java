@@ -22,13 +22,15 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import tannyjung.tanscomplexmagic_core.outside.OutsideUtils;
 import tannyjung.tanscomplexmagic_core.outside.TXTFunction;
-import tannyjung.tanscomplexmagic_core.outside.TannyPackManager;
+import tannyjung.tanscomplexmagic_core.outside.config.TannyPackManager;
 
 public class CommandMaker {
 
     public static void create (Object event_object, int permission, String structure, Consumer<CommandContext<CommandSourceStack>> consumer) {
 
         RegisterCommandsEvent event = (RegisterCommandsEvent) event_object;
+
+        structure = Core.mod_id_big + " / " + structure;
         String[] split = structure.split(" / ");
         String structure_short = "";
 
@@ -244,10 +246,10 @@ public class CommandMaker {
 
         public static void registry (Object event_object) {
 
-            CommandMaker.create(event_object, 2, Core.mod_id_big + " / command / txt_function / <text>", run.command::txt_function);
-            CommandMaker.create(event_object, 2, Core.mod_id_big + " / pack / check_update_main", run.pack::check_update_main);
-            CommandMaker.create(event_object, 2, Core.mod_id_big + " / pack / update_main", run.pack::update_main);
-            CommandMaker.create(event_object, 2, Core.mod_id_big + " / restart", run::restart);
+            CommandMaker.create(event_object, 2, "command / txt_function / <text>", run.command::txt_function);
+            CommandMaker.create(event_object, 2, "pack / check_update_main", run.pack::check_update_main);
+            CommandMaker.create(event_object, 2, "pack / update_main", run.pack::update_main);
+            CommandMaker.create(event_object, 2, "restart", run::restart);
 
         }
 

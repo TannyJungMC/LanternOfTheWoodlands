@@ -1,20 +1,15 @@
 package tannyjung.tanscomplexmagic_core;
 
-import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.levelgen.feature.Feature;
 import org.apache.logging.log4j.Logger;
 import tannyjung.tanscomplexmagic_core.game.*;
-import tannyjung.tanscomplexmagic_core.game.screen.GUIScreen;
-import tannyjung.tanscomplexmagic_core.game.world_gen.FeatureAreaDirt;
-import tannyjung.tanscomplexmagic_core.game.world_gen.FeatureAreaGrass;
-import tannyjung.tanscomplexmagic_core.game.world_gen.WorldGenStepBeforePlants;
-import tannyjung.tanscomplexmagic_core.game.world_gen.WorldGenStepLast;
 import tannyjung.tanscomplexmagic_core.outside.*;
+import tannyjung.tanscomplexmagic_core.outside.config.CacheManager;
+import tannyjung.tanscomplexmagic_core.outside.config.ConfigClassic;
+import tannyjung.tanscomplexmagic_core.outside.config.CustomPackOrganizing;
 import tannyjung.tanscomplexmagic_handcode.Handcode;
-import tannyjung.tanscomplexmagic_handcode.systems.Loops;
+import tannyjung.tanscomplexmagic_handcode.core.Loops;
 
 import java.io.File;
 import java.util.*;
@@ -34,7 +29,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 */
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.loading.FMLPaths;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class Core {
 
@@ -83,7 +77,7 @@ public class Core {
         logger = LogManager.getLogger(mod_id);
         path_config = FMLPaths.GAMEDIR.get().toString() + "/config/" + mod_id;
 
-        register(bus);
+        EventCenter.bus(bus);
         DataMigration.run(false);
         restart(null, true, true);
 
@@ -213,19 +207,7 @@ public class Core {
 
     public static void register (IEventBus bus) {
 
-        GUIScreen.Register.bus(bus);
 
-        // Features
-        {
-
-            DeferredRegister<Feature<?>> register = DeferredRegister.create(Registries.FEATURE, mod_id);
-            register.register("world_gen_before_plants", WorldGenStepBeforePlants::new);
-            register.register("world_gen_last", WorldGenStepLast::new);
-            register.register("area_grass", FeatureAreaGrass::new);
-            register.register("area_dirt", FeatureAreaDirt::new);
-            register.register(bus);
-
-        }
 
     }
     
@@ -318,53 +300,38 @@ public class Core {
         private static int second = 0;
         private static int minute = 0;
 
-        public static void loopTick (LevelAccessor level_accessor, ServerLevel level_server) {
+        public static void loopTick (ServerLevel level_server) {
 
-            Loops.tick(level_accessor, level_server);
+            Loops.tick(level_server);
             second = second + 1;
 
             if (second > 20) {
 
                 second = 0;
-                loopSecond(level_accessor, level_server);
+                loopSecond(level_server);
 
             }
 
         }
 
-        private static void loopSecond (LevelAccessor level_accessor, ServerLevel level_server) {
-
-            // Developer Mode
-            {
-
-                if (developer_mode == true) {
-
-                    for (Entity entity : GameUtils.Mob.getAtEverywhere(level_server, "", mod_id_big)) {
-
-                        GameUtils.Misc.spawnParticle(level_server, entity.position(), 0, 0, 0, 0, 1, "minecraft:end_rod");
-
-                    }
-
-                }
-
-            }
+        private static void loopSecond (ServerLevel level_server) {
 
             TXTFunction.loop(level_server);
-            Loops.second(level_accessor, level_server);
+            Loops.second(level_server);
             minute = minute + 1;
 
             if (minute > 60) {
 
                 minute = 0;
-                loopMinute(level_accessor, level_server);
+                loopMinute(level_server);
 
             }
 
         }
 
-        private static void loopMinute (LevelAccessor level_accessor, ServerLevel level_server) {
+        private static void loopMinute (ServerLevel level_server) {
 
-            Loops.minute(level_accessor, level_server);
+            Loops.minute(level_server);
 
         }
 

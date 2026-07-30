@@ -37,13 +37,11 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.chunk.ProtoChunk;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.scores.Objective;
 import net.minecraft.world.scores.Scoreboard;
 import net.minecraft.world.scores.criteria.ObjectiveCriteria;
-import tannyjung.tanscomplexmagic.init.TanscomplexmagicModMenus.MenuAccessor;
 import tannyjung.tanscomplexmagic_core.Core;
 
 import java.util.*;
@@ -64,7 +62,7 @@ import net.minecraft.world.level.chunk.status.ChunkStatus;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.scores.ScoreHolder;
-import tannyjung.tanscomplexmagic_core.outside.CacheManager;
+import tannyjung.tanscomplexmagic_core.outside.config.CacheManager;
 import tannyjung.tanscomplexmagic_core.outside.FileManager;
 import tannyjung.tanscomplexmagic_core.outside.OutsideUtils;
 
@@ -166,7 +164,7 @@ public class GameUtils {
 
 		public static Entity summonText (ServerLevel level_server, Vec3 vec3, String tag, double size, String data) {
 
-            return Mob.summon(level_server, vec3, "minecraft:text_display", "Display Text", Core.mod_id_big + "-display_text / " + tag, "{billboard:vertical,alignment:\"center\",see_through:true,brightness:{block:15, sky:15},text_opacity:0,line_width:1000,transformation:{left_rotation:[0f,0f,0f,1f],right_rotation:[0f,0f,0f,1f],translation:[0f,0f,0f],scale:[" + size + "f," + size + "f," + size + "f]},text:'" + Data.createText(data) + "'}");
+            return EntityManager.summon(level_server, vec3, "minecraft:text_display", "Display Text", Core.mod_id_big + "-display_text / " + tag, "{billboard:vertical,alignment:\"center\",see_through:true,brightness:{block:15, sky:15},text_opacity:0,line_width:1000,transformation:{left_rotation:[0f,0f,0f,1f],right_rotation:[0f,0f,0f,1f],translation:[0f,0f,0f],scale:[" + size + "f," + size + "f," + size + "f]},text:'" + Data.createText(data) + "'}");
 
 		}
 
@@ -176,7 +174,7 @@ public class GameUtils {
 
 			Core.DelayedWork.create(false, 200, () -> {
 
-				for (Entity scan : Mob.getAtArea(level_server, vec3, 1, true, 0, "minecraft:text_display", Core.mod_id_big + "-display_text")) {
+				for (Entity scan : EntityManager.Import.fromArea(level_server, vec3, 1, true, "minecraft:text_display", new String[]{Core.mod_id_big + "-display_text"})) {
 
 					scan.discard();
 
@@ -193,7 +191,7 @@ public class GameUtils {
 			offsetX = offsetX - (sizeX / 2);
 			offsetZ = offsetZ - (sizeZ / 2);
 			offsetY = offsetY - 0.5;
-			return Mob.summon(level_server, vec3, "minecraft:block_display", name, tag, "{transformation:{left_rotation:[0.0f,0.0f,0.0f,1.0f],right_rotation:[0.0f,0.0f,0.0f,1.0f],translation:[" + offsetX + "f," + offsetY + "f," + offsetZ + "f],scale:[" + sizeX + "f," + sizeY + "f," + sizeZ + "f]},Rotation:[" + rotate_horizontal + "f," + rotate_vertical + "f],block_state:{Name:\"" + id + "\"}}");
+			return EntityManager.summon(level_server, vec3, "minecraft:block_display", name, tag, "{transformation:{left_rotation:[0.0f,0.0f,0.0f,1.0f],right_rotation:[0.0f,0.0f,0.0f,1.0f],translation:[" + offsetX + "f," + offsetY + "f," + offsetZ + "f],scale:[" + sizeX + "f," + sizeY + "f," + sizeZ + "f]},Rotation:[" + rotate_horizontal + "f," + rotate_vertical + "f],block_state:{Name:\"" + id + "\"}}");
 
 		}
 
@@ -764,201 +762,6 @@ public class GameUtils {
 
 	}
 
-	public static class Mob {
-
-		public static List<Entity> getAtArea (ServerLevel level_server, Vec3 vec3, int distance, boolean is_box, int count, String id, String tag) {
-
-			List<String> tags = Arrays.stream(tag.split(" / ")).toList();
-
-			List<Entity> entities = level_server.getEntitiesOfClass(Entity.class, new AABB(vec3, vec3).inflate(distance), entity -> {
-
-				boolean test = false;
-
-				if (is_box == true || entity.position().distanceTo(vec3) <= distance) {
-
-					if (id.isEmpty() == true || EntityType.getKey(entity.getType()).toString().equals(id) == true) {
-
-						if (tag.isEmpty() == true || entity.getTags().containsAll(tags) == true) {
-
-							test = true;
-
-						}
-
-					}
-
-				}
-
-				return test;
-
-			});
-
-			if (distance > 0) {
-
-				entities = entities.stream().sorted(Comparator.comparingDouble(entity -> entity.position().distanceTo(vec3))).toList();
-
-			}
-
-			if (count > 0) {
-
-				if (entities.size() > count) {
-
-					entities = entities.subList(0, count);
-
-				}
-
-			}
-
-			return entities;
-
-		}
-
-		public static List<Entity> getAtEverywhere (ServerLevel level_server, String id, String tag) {
-
-			List<Entity> entities = new ArrayList<>();
-			List<String> tags = Arrays.stream(tag.split(" / ")).toList();
-
-			level_server.getAllEntities().forEach(entity -> {
-
-				if (id.isEmpty() == true || EntityType.getKey(entity.getType()).toString().equals(id) == true) {
-
-					if (tag.isEmpty() == true || entity.getTags().containsAll(tags) == true) {
-
-						entities.add(entity);
-
-					}
-
-				}
-
-			});
-
-			return entities;
-
-		}
-
-		public static Entity getAtAreaOne (ServerLevel level_server, Vec3 vec3, int distance, boolean is_box, String id, String tag) {
-
-			List<Entity> entities = Mob.getAtArea(level_server, vec3, distance, is_box, 1, id, tag);
-
-			if (entities.isEmpty() == false) {
-
-				return entities.get(0);
-
-			} else {
-
-				return null;
-
-			}
-
-		}
-
-		public static Entity getAtEverywhereOne (ServerLevel level_server, String id, String tag) {
-
-			List<Entity> entities = Mob.getAtEverywhere(level_server, id, tag);
-
-			if (entities.isEmpty() == false) {
-
-				return entities.get(0);
-
-			} else {
-
-				return null;
-
-			}
-
-		}
-
-		public static Entity summon (ServerLevel level_server, Vec3 vec3, String id, String name, String tag, String custom) {
-
-			EntityType<?> type = level_server.registryAccess().registryOrThrow(Registries.ENTITY_TYPE).get(ResourceLocation.parse(id));
-
-			if (type == null) {
-
-				return null;
-
-			}
-
-			Entity entity = type.create(level_server);
-
-			if (entity == null) {
-
-				return null;
-
-			}
-
-			if (custom.isEmpty() == false) {
-
-				entity.load(Data.convertJSONToTag(custom));
-
-			}
-
-			MutableComponent component = Data.convertJSONToComponent("[" + Data.createText(name) + "]");
-
-			if (component == null) {
-
-				return null;
-
-			}
-
-			entity.setCustomName(component);
-
-			if (name.contains(" / ") == true) {
-
-				entity.setCustomNameVisible(true);
-
-			}
-
-			entity.addTag("TANNYJUNG");
-			entity.addTag(Core.mod_id_big);
-
-			for (String get : tag.split(" / ")) {
-
-				entity.addTag(get);
-
-			}
-
-			entity.setPos(vec3);
-			level_server.addFreshEntity(entity);
-
-			return entity;
-
-		}
-
-		public static void summonWorldGen (ServerLevel level_server, Vec3 vec3, String id, String name, String tag, String custom) {
-
-			level_server.getServer().execute(() -> {
-
-				Mob.summon(level_server, vec3, id, name, tag, custom);
-
-			});
-
-		}
-
-		public static boolean isCreativeMode (Entity entity) {
-
-			if (entity instanceof Player player) {
-
-				return player.getAbilities().instabuild;
-
-			}
-
-			return false;
-
-		}
-
-		public static boolean isSneaking (Entity entity) {
-
-			if (entity instanceof Player player) {
-
-				return player.isShiftKeyDown();
-
-			}
-
-			return false;
-
-		}
-
-	}
-
 	public static class Item {
 
 		public static ItemStack getSlot (Entity entity, EquipmentSlot equipment_slot) {
@@ -1312,32 +1115,6 @@ public class GameUtils {
 			} else {
 
 				return level_accessor.getUncachedNoiseBiome(pos.getX() >> 2, pos.getY() >> 2, pos.getZ() >> 2);
-
-			}
-
-		}
-
-	}
-
-	public static class GUI {
-
-		public static String getTextBox (Player player, String name) {
-
-			if (player.containerMenu instanceof MenuAccessor menu) {
-
-				return menu.getMenuState(0, name, "");
-
-			}
-
-			return "";
-
-		}
-
-		public static void setTextBox (Player player, String name, String value) {
-
-			if (player.containerMenu instanceof MenuAccessor menu) {
-
-				menu.sendMenuStateUpdate(player, 0, name, value, true);
 
 			}
 

@@ -1,0 +1,88 @@
+{
+  "mappings": {
+    "default": {
+      "name": "default",
+      "map": {
+        "0": ""
+      }
+    },
+    "card1": {
+      "name": "card1",
+      "map": {
+        "0": "zodiac_card1"
+      }
+    },
+    "card2": {
+      "name": "card2",
+      "map": {
+        "0": "zodiac_card2"
+      }
+    },
+    "card3": {
+      "name": "card3",
+      "map": {
+        "0": "zodiac_card3"
+      }
+    },
+    "card4": {
+      "name": "card4",
+      "map": {
+        "0": "zodiac_card4"
+      }
+    },
+    "card5": {
+      "name": "card5",
+      "map": {
+        "0": "zodiac_card5"
+      }
+    },
+    "card6": {
+      "name": "card6",
+      "map": {
+        "0": "zodiac_card6"
+      }
+    },
+    "card7": {
+      "name": "card7",
+      "map": {
+        "0": "zodiac_card7"
+      }
+    },
+    "card8": {
+      "name": "card8",
+      "map": {
+        "0": "zodiac_card8"
+      }
+    },
+    "card9": {
+      "name": "card9",
+      "map": {
+        "0": "zodiac_card9"
+      }
+    },
+    "card10": {
+      "name": "card10",
+      "map": {
+        "0": "zodiac_card10"
+      }
+    },
+    "card11": {
+      "name": "card11",
+      "map": {
+        "0": "zodiac_card11"
+      }
+    },
+    "card12": {
+      "name": "card12",
+      "map": {
+        "0": "zodiac_card12"
+      }
+    },
+    "card13": {
+      "name": "card13",
+      "map": {
+        "0": "zodiac_card13"
+      }
+    }
+  }
+}

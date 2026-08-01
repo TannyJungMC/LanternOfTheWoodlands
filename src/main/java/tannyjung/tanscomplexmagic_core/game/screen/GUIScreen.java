@@ -119,12 +119,6 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
         this.clearWidgets();
         ScreenDrawing.Ingredient.clear();
 
-
-
-        ScreenDrawing.normal_font_scale = NBTManager.Mob.getNumber(player, "test", "size") * 0.01;
-
-
-
         id = (int) NBTManager.Mob.getNumber(player, "gui", "id");
         GUIs.render(this, null, id, "widget");
 

@@ -29,7 +29,7 @@ public class PersonalSkillGUIbuttonSkillCircleOfHealingProcedure {
 						_vars.personal_skill_radius = 2.5;
 						_vars.personal_skill_custom = "Health Recovery";
 						_vars.personal_skill_custom_value = "4";
-						_vars.personal_skill_upgrade = "Components";
+						_vars.personal_skill_upgrade = "Custom";
 						_vars.markSyncDirty();
 					}
 				}

@@ -29,7 +29,7 @@ public class PersonalSkillGUIbuttonSkillBlinkProcedure {
 						_vars.personal_skill_radius = 0;
 						_vars.personal_skill_custom = "Distance";
 						_vars.personal_skill_custom_value = "5";
-						_vars.personal_skill_upgrade = "Components";
+						_vars.personal_skill_upgrade = "Custom";
 						_vars.markSyncDirty();
 					}
 				}

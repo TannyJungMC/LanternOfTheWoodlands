@@ -6,11 +6,13 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
+import tannyjung.tanscomplexmagic_core.Core;
 import tannyjung.tanscomplexmagic_core.game.EntityManager;
 import tannyjung.tanscomplexmagic_core.game.GameUtils;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
 import tannyjung.tanscomplexmagic_core.game.screen.GUIManager;
 import tannyjung.tanscomplexmagic_handcode.systems.Book;
+import tannyjung.tanscomplexmagic_handcode.systems.Spell1;
 
 public class Networks {
 
@@ -40,7 +42,7 @@ public class Networks {
                     {
 
                         GameUtils.Misc.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 0.75, "minecraft:item.book.page_turn");
-                        NBTManager.Mob.addNumber(player_server, "gui", "id", -1);
+                        NBTManager.Mob.addNumber(player_server, "gui", "id", -2);
 
                     }
 
@@ -49,7 +51,7 @@ public class Networks {
                     {
 
                         GameUtils.Misc.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 0.75, "minecraft:item.book.page_turn");
-                        NBTManager.Mob.addNumber(player_server, "gui", "id", 1);
+                        NBTManager.Mob.addNumber(player_server, "gui", "id", 2);
 
                     }
 
@@ -106,30 +108,33 @@ public class Networks {
 
         public static void server (ServerPlayer player_server, String work, CompoundTag extra) {
 
-            if (work.equals("test") == true) {
+            if (work.equals("main_key") == true) {
 
                 {
 
                     ServerLevel level_server = player_server.serverLevel();
 
-                    if (NBTManager.Mob.getLogic(player_server, "status", "main_key") == false) {
-
-                        NBTManager.Mob.setLogic(player_server, "status", "main_key", true);
-
-                        Vec3 vec3 = GameUtils.Space.getPosRay(player_server, 10);
-                        EntityManager.summon(level_server, vec3, "minecraft:marker", "§aHello", "main", "");
-
-                    } else {
+                    if (NBTManager.Mob.getLogic(player_server, "status", "main_key") == true) {
 
                         NBTManager.Mob.setLogic(player_server, "status", "main_key", false);
 
-                        for (Entity entity : EntityManager.Import.fromEverywhere(level_server, "", new String[]{"main"})) {
+                        Spell1.cancel(level_server);
 
-                            entity.discard();
+                    } else {
 
-                        }
+                        NBTManager.Mob.setLogic(player_server, "status", "main_key", true);
+
+                        Spell1.start(level_server, player_server);
 
                     }
+
+                }
+
+            } else if (work.equals("test") == true) {
+
+                {
+
+                    NBTManager.Mob.setLogic(player_server, "spell1", "is_enable_all", NBTManager.Mob.getLogic(player_server, "spell1", "is_enable_all") == false);
 
                 }
 

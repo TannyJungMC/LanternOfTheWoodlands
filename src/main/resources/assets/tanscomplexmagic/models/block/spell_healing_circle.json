@@ -3,7 +3,7 @@
   "textures": {
     "all": "tanscomplexmagic:block/spell_healing_circle",
     "particle": "tanscomplexmagic:block/spell_healing_circle",
-    "1": "tanscomplexmagic:block/spell_healing_circle"
+    "1": "tanscomplexmagic:block/magic_circle_heal"
   },
   "render_type": "translucent"
 }

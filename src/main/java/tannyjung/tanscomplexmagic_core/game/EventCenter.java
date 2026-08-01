@@ -209,7 +209,7 @@ public class EventCenter {
 
         }
 
-        EntityManager.Import.eventAddRemove(event.getEntity(), true);
+        EntityManager.Get.eventAddRemove(event.getEntity(), true);
 
     }
 
@@ -222,7 +222,7 @@ public class EventCenter {
 
         }
 
-        EntityManager.Import.eventAddRemove(event.getEntity(), false);
+        EntityManager.Get.eventAddRemove(event.getEntity(), false);
 
     }
 

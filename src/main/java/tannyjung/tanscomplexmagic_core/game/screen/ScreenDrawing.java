@@ -21,7 +21,7 @@ import java.util.*;
 public class ScreenDrawing {
 
 
-    public static double normal_font_scale = 0.64;
+    public static double normal_font_scale = 0.68;
 
     public static void refresh () {
 
@@ -96,6 +96,12 @@ public class ScreenDrawing {
 
             start = false;
             
+        }
+
+        public static void addSpaceMark () {
+
+            save_pos = save_pos + 8;
+
         }
 
         private static int test (int original_posZ, String type, int distance) {
@@ -374,6 +380,12 @@ public class ScreenDrawing {
     }
 
     public static class GUI {
+
+        public static void drawShape (GUIScreen screen, int posX, int posZ, int sizeX, int sizeZ) {
+
+            drawButton(screen, posX, posZ, sizeX, sizeZ, 0, false, true, "", "", () -> {});
+
+        }
 
         private static void drawButton (GUIScreen screen, int posX, int posZ, int sizeX, int sizeZ, double font_scale, boolean is_active, boolean is_lock, String text_lock, String text_unlock, Runnable runnable) {
 
@@ -681,7 +693,7 @@ public class ScreenDrawing {
 
         public static void drawSlider (GUIScreen screen, int posX, int posZ, double value_min, double value_max, double value_move, boolean is_active, boolean is_lock, String nbt_type, String nbt_name, String text) {
 
-            posZ = AutoLine.test(posZ, "slider", 8);
+            posZ = AutoLine.test(posZ, "slider", 16);
 
             double range = value_max - value_min;
             double value_default = NBTManager.Mob.getNumber(screen.player, nbt_type, nbt_name);
@@ -698,7 +710,7 @@ public class ScreenDrawing {
 
             }
 
-            AbstractSliderButton slider = new AbstractSliderButton(screen.getGuiLeft() + posX + 80, screen.getGuiTop() + posZ + 1, 80, 6, Component.empty(), value_default_percent) {
+            AbstractSliderButton slider = new AbstractSliderButton(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ + 8, 160, 6, Component.empty(), value_default_percent) {
 
                 private final double value_previous = value_min - 1.0;
 
@@ -711,8 +723,9 @@ public class ScreenDrawing {
 
                     double value = this.value;
                     value = value * range;
-                    value = Math.round(value / value_move) * value_move;
-                    value = value + value_min;
+                    value = Math.round(value / value_move);
+
+                    value = (value * value_move) + value_min;
 
                     if (value != value_previous) {
 
@@ -734,18 +747,20 @@ public class ScreenDrawing {
             // Ingredient
             {
 
+                text = text + " (";
+
                 if (value_default % 1 == 0) {
 
-                    text = text + " (" + (int) value_default + ")";
+                    text = text + (int) value_default;
 
                 } else {
 
-                    text = text + " (" + value_default + ")";
+                    text = text + value_default;
 
                 }
 
-                int[] pos_convert = convertPosTextCenter(posX + 120, posZ + 4, normal_font_scale, text);
-                Ingredient.text.add(new Object[]{"", posX, pos_convert[1], normal_font_scale, false, text});
+                text = text + ")";
+                Ingredient.text.add(new Object[]{"", posX, posZ, normal_font_scale, false, text});
 
             }
 

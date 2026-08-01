@@ -3,7 +3,7 @@
   "textures": {
     "all": "tanscomplexmagic:block/spell_teleport_circle",
     "particle": "tanscomplexmagic:block/spell_teleport_circle",
-    "1": "tanscomplexmagic:block/spell_teleport_circle"
+    "1": "tanscomplexmagic:block/magic_circle_teleport"
   },
   "render_type": "translucent"
 }

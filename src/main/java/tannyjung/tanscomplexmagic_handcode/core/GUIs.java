@@ -19,8 +19,8 @@ public class GUIs {
                 // Page Number
                 {
 
-                    StringBuilder page_left = new StringBuilder().append(id - 1);
-                    StringBuilder page_right = new StringBuilder().append(id);
+                    StringBuilder page_left = new StringBuilder().append(id);
+                    StringBuilder page_right = new StringBuilder().append(id + 1);
 
                     while (page_left.length() < 3) {
 
@@ -39,12 +39,12 @@ public class GUIs {
 
                 }
 
-                ScreenDrawing.Overlay.drawText(graphic, "", 8 * 2 + 0, 8 * 13 + 7, ScreenDrawing.normal_font_scale, false, NBTManager.Mob.getText(screen.player, "book", "log_text"));
+                ScreenDrawing.Overlay.drawText(graphic, "", 8 * -22 + 0, 8 * 13 + 7, 0.54, false, NBTManager.Mob.getText(screen.player, "book", "log_text"));
 
             } else if (type.equals("image") == true) {
 
                 ScreenDrawing.Overlay.drawImageBasic(graphic, 8 * -25 + 0, 8 * -15 + 0, 400, 240, "tanscomplexmagic:textures/screens/gui_component_background.png");
-                ScreenDrawing.Overlay.drawImageSplit(graphic, 8 * -23 - 5, 8 * 13 + 6, 168, 7, true, 24, (int) ((screen.player.clientLevel.dayTime() % 24000) / 1000), "tanscomplexmagic:textures/screens/gui_component_clock.png");
+                ScreenDrawing.Overlay.drawImageSplit(graphic, 8 * 1 + 0, 8 * 13 + 6, 168, 7, true, 24, (int) ((screen.player.clientLevel.dayTime() % 24000) / 1000), "tanscomplexmagic:textures/screens/gui_component_clock.png");
 
                 // Compass
                 {
@@ -54,13 +54,13 @@ public class GUIs {
 
                     destination_pos = screen.player.clientLevel.getSharedSpawnPos().getCenter();
                     degree = (int) OutsideUtils.Calculation.getDegreeDestination(screen.player.getX(), screen.player.getZ(), destination_pos.x, destination_pos.z, screen.player.getYRot());
-                    degree = degree / 45;
-                    ScreenDrawing.Overlay.drawImageSplit(graphic, 8 * -22 - 5, 8 * 13 + 6, 56, 7, true, 8, degree, "tanscomplexmagic:textures/screens/gui_component_compass.png");
+                    degree = (int) Math.round(degree / 45.0);
+                    ScreenDrawing.Overlay.drawImageSplit(graphic, 8 * 2 - 0, 8 * 13 + 6, 56, 7, true, 8, degree, "tanscomplexmagic:textures/screens/gui_component_compass.png");
 
                     destination_pos = new Vec3(NBTManager.Mob.getNumber(screen.player, "book", "compassX"), 0, NBTManager.Mob.getNumber(screen.player, "book", "compassZ"));
                     degree = (int) OutsideUtils.Calculation.getDegreeDestination(screen.player.getX(), screen.player.getZ(), destination_pos.x, destination_pos.z, screen.player.getYRot());
-                    degree = degree / 45;
-                    ScreenDrawing.Overlay.drawImageSplit(graphic, 8 * -21 - 5, 8 * 13 + 6, 56, 7, true, 8, degree, "tanscomplexmagic:textures/screens/gui_component_compass_custom.png");
+                    degree = (int) Math.round(degree / 45.0);
+                    ScreenDrawing.Overlay.drawImageSplit(graphic, 8 * 3 - 0, 8 * 13 + 6, 56, 7, true, 8, degree, "tanscomplexmagic:textures/screens/gui_component_compass_custom.png");
 
                 }
 
@@ -86,7 +86,7 @@ public class GUIs {
 
                     }
 
-                    ScreenDrawing.Overlay.drawImageSplit(graphic, 8 * 0 + 6, 8 * 13 + 6, 28, 7, true, 4, log, "tanscomplexmagic:textures/screens/gui_component_log_type.png");
+                    ScreenDrawing.Overlay.drawImageSplit(graphic, 8 * -23 - 4, 8 * 13 + 6, 28, 7, true, 4, log, "tanscomplexmagic:textures/screens/gui_component_log_type.png");
 
                 }
 
@@ -102,8 +102,8 @@ public class GUIs {
                 ScreenDrawing.GUI.drawImageButton(screen, 8 * -27 + 0, 8 * -9 + 12, 24, 16, false, true, false, "server", "book", "", "tanscomplexmagic:textures/screens/gui_component_shortcut_spell_control.png");
                 ScreenDrawing.GUI.drawImageButton(screen, 8 * -27 + 0, 8 * -8 + 16, 24, 16, false, true, false, "server", "book", "", "tanscomplexmagic:textures/screens/gui_component_shortcut_custom.png");
 
-                ScreenDrawing.GUI.drawImageButton(screen, 8 * -20 - 4, 8 * 13 + 8, 6, 3, true, true, false, "server", "book", "compass", "tanscomplexmagic:textures/screens/gui_component_compass_custom_set.png");
-                ScreenDrawing.GUI.drawImageButton(screen, 8 * 0 + 6, 8 * 13 + 6, 14, 7, true, true, false, "server", "book", "log", "tanscomplexmagic:textures/screens/gui_component_log_type_set.png");
+                ScreenDrawing.GUI.drawImageButton(screen, 8 * -23 - 4, 8 * 13 + 6, 14, 7, true, true, false, "server", "book", "log", "tanscomplexmagic:textures/screens/gui_component_log_type_set.png");
+                ScreenDrawing.GUI.drawImageButton(screen, 8 * 4 + 0, 8 * 13 + 8, 6, 3, true, true, false, "server", "book", "compass", "tanscomplexmagic:textures/screens/gui_component_compass_custom_set.png");
 
             }
 
@@ -137,7 +137,69 @@ public class GUIs {
                     ScreenDrawing.GUI.drawRadio(screen, 8 * -22, 0, is_active, false, "Radio Option Style", "server_core", "radio", "Fire / Water / Earth / Nature / Wind / Light");
                     ScreenDrawing.GUI.drawSwitch(screen, 8 * -22, 0, true, false, "test", "active", "Active");
                     ScreenDrawing.GUI.drawSwitch(screen, 8 * -22, 0, true, false, "test", "lock", "Lock");
-                    ScreenDrawing.GUI.drawSlider(screen, 8 * -22, 0, 50, 70, 1, true, false, "test", "size", "Font Size");
+                    ScreenDrawing.GUI.drawSlider(screen, 8 * -22, 0, 10, 100, 1, true, false, "test", "size", "Size");
+                    ScreenDrawing.AutoLine.stop();
+
+                }
+
+            }
+
+        } else if (id == 3) {
+
+            // Zodiac
+            {
+
+                if (type.equals("image") == true) {
+
+                    ScreenDrawing.Overlay.drawImageBasic(graphic, 8 * 2 + 0, 8 * -12 + 0, 40, 72, "tanscomplexmagic:textures/screens/background.png");
+                    ScreenDrawing.Overlay.drawImageBasic(graphic, 8 * 2 + 4, 8 * -12 + 4, 64, 64, "tanscomplexmagic:textures/block/zodiac_card" + (int) (Math.floor(Math.random() * 13) + 1) + ".png");
+
+                } else if (type.equals("widget") == true) {
+
+                    ScreenDrawing.AutoLine.start(8 * -12);
+                    ScreenDrawing.GUI.drawSlider(screen, 8 * -22 + 0, 0, 1, 100, 1, true, false, "spell1", "distance", "Distance");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -22 + 0, 0, true, false, "spell1", "is_enable_all", "> Enable All");
+                    ScreenDrawing.AutoLine.addSpaceMark();
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -22 + 0, 0, true, false, "spell1", "is_enable1", "Enable 1");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -22 + 0, 0, true, false, "spell1", "is_negative1", "> Negative 1");
+                    ScreenDrawing.AutoLine.addSpaceMark();
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -22 + 0, 0, true, false, "spell1", "is_enable2", "Enable 2");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -22 + 0, 0, true, false, "spell1", "is_negative2", "> Negative 2");
+                    ScreenDrawing.AutoLine.addSpaceMark();
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -22 + 0, 0, true, false, "spell1", "is_enable3", "Enable 3");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -22 + 0, 0, true, false, "spell1", "is_negative3", "> Negative 3");
+                    ScreenDrawing.AutoLine.addSpaceMark();
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -22 + 0, 0, true, false, "spell1", "is_enable4", "Enable 4");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -22 + 0, 0, true, false, "spell1", "is_negative4", "> Negative 4");
+                    ScreenDrawing.AutoLine.addSpaceMark();
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -22 + 0, 0, true, false, "spell1", "is_enable5", "Enable 5");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -22 + 0, 0, true, false, "spell1", "is_negative5", "> Negative 5");
+                    ScreenDrawing.AutoLine.addSpaceMark();
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -22 + 0, 0, true, false, "spell1", "is_enable6", "Enable 6");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -22 + 0, 0, true, false, "spell1", "is_negative6", "> Negative 6");
+                    ScreenDrawing.AutoLine.stop();
+
+                    ScreenDrawing.AutoLine.start(8 * -9);
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -12 + 0, 0, true, false, "spell1", "is_enable7", "Enable 7");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -12 + 0, 0, true, false, "spell1", "is_negative7", "> Negative 7");
+                    ScreenDrawing.AutoLine.addSpaceMark();
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -12 + 0, 0, true, false, "spell1", "is_enable8", "Enable 8");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -12 + 0, 0, true, false, "spell1", "is_negative8", "> Negative 8");
+                    ScreenDrawing.AutoLine.addSpaceMark();
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -12 + 0, 0, true, false, "spell1", "is_enable9", "Enable 9");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -12 + 0, 0, true, false, "spell1", "is_negative9", "> Negative 9");
+                    ScreenDrawing.AutoLine.addSpaceMark();
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -12 + 0, 0, true, false, "spell1", "is_enable10", "Enable 10");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -12 + 0, 0, true, false, "spell1", "is_negative10", "> Negative 10");
+                    ScreenDrawing.AutoLine.addSpaceMark();
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -12 + 0, 0, true, false, "spell1", "is_enable11", "Enable 11");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -12 + 0, 0, true, false, "spell1", "is_negative11", "> Negative 11");
+                    ScreenDrawing.AutoLine.addSpaceMark();
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -12 + 0, 0, true, false, "spell1", "is_enable12", "Enable 12");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -12 + 0, 0, true, false, "spell1", "is_negative12", "> Negative 12");
+                    ScreenDrawing.AutoLine.addSpaceMark();
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -12 + 0, 0, true, false, "spell1", "is_enable13", "Enable 13");
+                    ScreenDrawing.GUI.drawSwitch(screen, 8 * -12 + 0, 0, true, false, "spell1", "is_negative13", "> Negative 13");
                     ScreenDrawing.AutoLine.stop();
 
                 }

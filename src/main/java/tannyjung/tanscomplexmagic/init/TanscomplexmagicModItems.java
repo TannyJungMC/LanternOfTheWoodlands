@@ -38,6 +38,21 @@ public class TanscomplexmagicModItems {
 	public static final DeferredItem<Item> KNIGHT_SWORD;
 	public static final DeferredItem<Item> FORGOTTEN_SWORD;
 	public static final DeferredItem<Item> SWORD_KNIGHT;
+	public static final DeferredItem<Item> MAGIC_CIRCLE_WEATHER;
+	public static final DeferredItem<Item> ZODIAC_CARD_1;
+	public static final DeferredItem<Item> ZODIAC_CARD_2;
+	public static final DeferredItem<Item> ZODIAC_CARD_3;
+	public static final DeferredItem<Item> ZODIAC_CARD_4;
+	public static final DeferredItem<Item> ZODIAC_CARD_5;
+	public static final DeferredItem<Item> ZODIAC_CARD_6;
+	public static final DeferredItem<Item> ZODIAC_CARD_7;
+	public static final DeferredItem<Item> ZODIAC_CARD_8;
+	public static final DeferredItem<Item> ZODIAC_CARD_9;
+	public static final DeferredItem<Item> ZODIAC_CARD_10;
+	public static final DeferredItem<Item> ZODIAC_CARD_11;
+	public static final DeferredItem<Item> ZODIAC_CARD_12;
+	public static final DeferredItem<Item> ZODIAC_CARD_13;
+	public static final DeferredItem<Item> MAGIC_CIRCLE_ZODIAC;
 	static {
 		TARGET_ARROW = block(TanscomplexmagicModBlocks.TARGET_ARROW);
 		USER_BOOK = REGISTRY.register("user_book", UserBookItem::new);
@@ -60,6 +75,21 @@ public class TanscomplexmagicModItems {
 		KNIGHT_SWORD = REGISTRY.register("knight_sword", KnightSwordItem::new);
 		FORGOTTEN_SWORD = REGISTRY.register("forgotten_sword", ForgottenSwordItem::new);
 		SWORD_KNIGHT = block(TanscomplexmagicModBlocks.SWORD_KNIGHT);
+		MAGIC_CIRCLE_WEATHER = REGISTRY.register("magic_circle_weather", MagicCircleWeatherItem::new);
+		ZODIAC_CARD_1 = REGISTRY.register("zodiac_card_1", ZodiacCard1Item::new);
+		ZODIAC_CARD_2 = REGISTRY.register("zodiac_card_2", ZodiacCard2Item::new);
+		ZODIAC_CARD_3 = REGISTRY.register("zodiac_card_3", ZodiacCard3Item::new);
+		ZODIAC_CARD_4 = REGISTRY.register("zodiac_card_4", ZodiacCard4Item::new);
+		ZODIAC_CARD_5 = REGISTRY.register("zodiac_card_5", ZodiacCard5Item::new);
+		ZODIAC_CARD_6 = REGISTRY.register("zodiac_card_6", ZodiacCard6Item::new);
+		ZODIAC_CARD_7 = REGISTRY.register("zodiac_card_7", ZodiacCard7Item::new);
+		ZODIAC_CARD_8 = REGISTRY.register("zodiac_card_8", ZodiacCard8Item::new);
+		ZODIAC_CARD_9 = REGISTRY.register("zodiac_card_9", ZodiacCard9Item::new);
+		ZODIAC_CARD_10 = REGISTRY.register("zodiac_card_10", ZodiacCard10Item::new);
+		ZODIAC_CARD_11 = REGISTRY.register("zodiac_card_11", ZodiacCard11Item::new);
+		ZODIAC_CARD_12 = REGISTRY.register("zodiac_card_12", ZodiacCard12Item::new);
+		ZODIAC_CARD_13 = REGISTRY.register("zodiac_card_13", ZodiacCard13Item::new);
+		MAGIC_CIRCLE_ZODIAC = REGISTRY.register("magic_circle_zodiac", MagicCircleZodiacItem::new);
 	}
 
 	// Start of user code block custom items

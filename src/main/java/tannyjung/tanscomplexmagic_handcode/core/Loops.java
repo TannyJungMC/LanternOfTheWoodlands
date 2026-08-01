@@ -6,15 +6,15 @@ import net.minecraft.world.entity.Entity;
 import tannyjung.tanscomplexmagic_core.game.EntityManager;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
 import tannyjung.tanscomplexmagic_handcode.systems.Book;
-import tannyjung.tanscomplexmagic_handcode.systems.Spell2;
+import tannyjung.tanscomplexmagic_handcode.systems.Spell1;
 
 public class Loops {
 
     public static void tick (ServerLevel level_server) {
 
-        for (Entity user : EntityManager.Import.fromEverywhere(level_server, "minecraft:player", new String[]{})) {
+        for (Entity user : EntityManager.Get.fromEverywhere(level_server, "minecraft:player", new String[]{})) {
 
-            Spell2.loopTick(level_server, (ServerPlayer) user);
+            Spell1.loopTick(level_server, (ServerPlayer) user);
 
         }
 
@@ -22,7 +22,7 @@ public class Loops {
 
     public static void second (ServerLevel level_server) {
 
-        for (Entity user : EntityManager.Import.fromEverywhere(level_server, "minecraft:player", new String[]{})) {
+        for (Entity user : EntityManager.Get.fromEverywhere(level_server, "minecraft:player", new String[]{})) {
 
             // Mana Regeneration
             {
@@ -56,7 +56,7 @@ public class Loops {
 
             }
 
-            Spell2.loopSecond(level_server, (ServerPlayer) user);
+            Spell1.loopSecond(level_server, (ServerPlayer) user);
 
         }
 

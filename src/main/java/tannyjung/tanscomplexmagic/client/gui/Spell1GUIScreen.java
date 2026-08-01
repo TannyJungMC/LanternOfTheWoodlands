@@ -62,7 +62,7 @@ public class Spell1GUIScreen extends AbstractContainerScreen<Spell1GUIMenu> impl
 		RenderSystem.enableBlend();
 		RenderSystem.defaultBlendFunc();
 		guiGraphics.blit(texture, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
-		guiGraphics.blit(ResourceLocation.parse("tanscomplexmagic:textures/screens/background_book.png"), this.leftPos + -112, this.topPos + -112, 0, 0, 400, 240, 400, 240);
+		guiGraphics.blit(ResourceLocation.parse("tanscomplexmagic:textures/screens/background_book.png"), this.leftPos + -112, this.topPos + -112, 0, 0, 0, 0, 0, 0);
 		RenderSystem.disableBlend();
 	}
 

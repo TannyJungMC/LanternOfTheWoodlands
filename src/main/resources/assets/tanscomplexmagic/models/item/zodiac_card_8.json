@@ -1,0 +1,7 @@
+{
+  "parent": "tanscomplexmagic:custom/zodiac_card",
+  "textures": {
+    "0": "tanscomplexmagic:block/zodiac_card8",
+    "particle": "minecraft:item/oxidized_copper_door"
+  }
+}

@@ -11,7 +11,7 @@ public class PersonalSkillGUIreturnCustomValueProcedure {
 		if (entity == null)
 			return "";
 		String variable_text = "";
-		if ((entity.getData(TanscomplexmagicModVariables.PLAYER_VARIABLES).personal_skill_upgrade).equals("Components")) {
+		if ((entity.getData(TanscomplexmagicModVariables.PLAYER_VARIABLES).personal_skill_upgrade).equals("Custom")) {
 			variable_text = (new java.text.DecimalFormat("##.##").format(new Object() {
 				double convert(String s) {
 					try {

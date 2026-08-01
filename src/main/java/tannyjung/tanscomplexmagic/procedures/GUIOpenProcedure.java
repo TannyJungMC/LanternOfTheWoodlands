@@ -1,5 +1,7 @@
 package tannyjung.tanscomplexmagic.procedures;
 
+import tannyjung.tanscomplexmagic_core.game.screen.GUIManager;
+
 import tannyjung.tanscomplexmagic.TanscomplexmagicMod;
 
 import net.minecraft.world.entity.player.Player;
@@ -7,7 +9,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
-import tannyjung.tanscomplexmagic_core.game.screen.GUIManager;
 
 public class GUIOpenProcedure {
 	public static void execute(Entity entity) {

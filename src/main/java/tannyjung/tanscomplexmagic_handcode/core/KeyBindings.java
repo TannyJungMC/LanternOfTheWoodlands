@@ -7,10 +7,9 @@ public class KeyBindings {
 
     public static void add () {
 
-        KeyBindingMaker.add("Main Key", GLFW.GLFW_KEY_LEFT_ALT, false, true, "key", "test");
+        KeyBindingMaker.add("Main Key", GLFW.GLFW_KEY_LEFT_ALT, false, true, "key", "main_key");
         KeyBindingMaker.add("Test", GLFW.GLFW_MOUSE_BUTTON_LEFT, false, true, "key", "test");
-        KeyBindingMaker.add("Test 2", GLFW.GLFW_MOUSE_BUTTON_MIDDLE, false, true, "key", "test");
-        KeyBindingMaker.add("Test 3", GLFW.GLFW_MOUSE_BUTTON_RIGHT, false, true, "key", "test");
+        KeyBindingMaker.add("Test", GLFW.GLFW_KEY_1, false, true, "key", "test");
 
     }
 

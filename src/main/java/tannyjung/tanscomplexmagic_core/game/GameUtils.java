@@ -162,39 +162,6 @@ public class GameUtils {
 
 		}
 
-		public static Entity summonText (ServerLevel level_server, Vec3 vec3, String tag, double size, String data) {
-
-            return EntityManager.summon(level_server, vec3, "minecraft:text_display", "Display Text", Core.mod_id_big + "-display_text / " + tag, "{billboard:vertical,alignment:\"center\",see_through:true,brightness:{block:15, sky:15},text_opacity:0,line_width:1000,transformation:{left_rotation:[0f,0f,0f,1f],right_rotation:[0f,0f,0f,1f],translation:[0f,0f,0f],scale:[" + size + "f," + size + "f," + size + "f]},text:'" + Data.createText(data) + "'}");
-
-		}
-
-		public static Entity summonTextTemporary (ServerLevel level_server, Vec3 vec3, String tag, double size, String data) {
-
-			Entity entity = summonText(level_server, vec3, tag, size, data);
-
-			Core.DelayedWork.create(false, 200, () -> {
-
-				for (Entity scan : EntityManager.Import.fromArea(level_server, vec3, 1, true, "minecraft:text_display", new String[]{Core.mod_id_big + "-display_text"})) {
-
-					scan.discard();
-
-				}
-
-			});
-
-			return entity;
-
-		}
-
-		public static Entity summonBlock (ServerLevel level_server, Vec3 vec3, String name, String tag, double offsetX, double offsetY, double offsetZ, double sizeX, double sizeY, double sizeZ, int rotate_horizontal, int rotate_vertical, String id) {
-
-			offsetX = offsetX - (sizeX / 2);
-			offsetZ = offsetZ - (sizeZ / 2);
-			offsetY = offsetY - 0.5;
-			return EntityManager.summon(level_server, vec3, "minecraft:block_display", name, tag, "{transformation:{left_rotation:[0.0f,0.0f,0.0f,1.0f],right_rotation:[0.0f,0.0f,0.0f,1.0f],translation:[" + offsetX + "f," + offsetY + "f," + offsetZ + "f],scale:[" + sizeX + "f," + sizeY + "f," + sizeZ + "f]},Rotation:[" + rotate_horizontal + "f," + rotate_vertical + "f],block_state:{Name:\"" + id + "\"}}");
-
-		}
-
     }
 
 	public static class Command {

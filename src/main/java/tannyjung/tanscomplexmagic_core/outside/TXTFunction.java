@@ -491,7 +491,7 @@ public class TXTFunction {
                 }
 
                 String command_final = command.replace("'", "*").replace("\"", "$");
-                EntityManager.summonWorldGen(level_server, pos.getCenter(), "marker", "Delayed Command", "TANNYJUNG-delayed_command", "{NeoForgeData:{" + Core.mod_id + ":{command:\"" + command_final + "\"}}}");
+                EntityManager.summonWorldGen(level_server, pos.getCenter(), "marker", "Delayed Command", new String[]{Core.mod_id_big + "-delayed_command"}, "{NeoForgeData:{" + Core.mod_id + ":{command:\"" + command_final + "\"}}}");
                 
             }
 
@@ -523,7 +523,7 @@ public class TXTFunction {
 
         count_delayed_command = 0;
 
-        for (Entity entity : EntityManager.Import.fromEverywhere(level_server, "minecraft:marker", new String[]{"TANNYJUNG-delayed_command"})) {
+        for (Entity entity : EntityManager.Get.fromEverywhere(level_server, "minecraft:marker", new String[]{"TANNYJUNG-delayed_command"})) {
 
             count_delayed_command = count_delayed_command + 1;
             TXTFunction.runDelayedCommand(level_server, entity);

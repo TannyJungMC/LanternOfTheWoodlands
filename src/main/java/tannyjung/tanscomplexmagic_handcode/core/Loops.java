@@ -14,7 +14,7 @@ public class Loops {
 
         for (Entity user : EntityManager.Get.fromEverywhere(level_server, "minecraft:player", new String[]{})) {
 
-            Spell1.loopTick(level_server, (ServerPlayer) user);
+            Spell1.tick(level_server, (ServerPlayer) user);
 
         }
 
@@ -55,8 +55,6 @@ public class Loops {
                 }
 
             }
-
-            Spell1.loopSecond(level_server, (ServerPlayer) user);
 
         }
 

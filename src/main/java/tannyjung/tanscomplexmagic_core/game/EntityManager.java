@@ -4,6 +4,10 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Display;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.phys.AABB;
@@ -16,6 +20,8 @@ public class EntityManager {
 
     public static class Get {
 
+        // TODO - Check if I add ally tag, will it bug here because tag not update?
+
         private static final Map<String, Map<List<String>, List<Entity>>> cache_entities = new HashMap<>();
 
         public static void eventAddRemove (Entity entity, boolean is_join) {
@@ -23,29 +29,58 @@ public class EntityManager {
             Map<List<String>, List<Entity>> map_tag_entity = new HashMap<>();
             String id = "";
 
-            {
+            for (int loop = 2; loop > 0; loop--) {
 
                 map_tag_entity = cache_entities.get(id);
 
                 if (map_tag_entity != null) {
 
+                    test:
                     for (Map.Entry<List<String>, List<Entity>> entry : map_tag_entity.entrySet()) {
 
-                        if (entry.getKey().equals("[]") == true || entity.getTags().containsAll(entry.getKey()) == true) {
+                        if (entry.getKey().equals("[]") == false) {
 
-                            if (is_join == true) {
+                            for (String scan : entry.getKey()) {
 
-                                entry.getValue().add(entity);
+                                if (scan.startsWith("!") == true) {
 
-                            } else {
+                                    if (entity.getTags().contains(scan) == true) {
 
-                                Core.DelayedWork.create(false, 1, () -> {
+                                        continue test;
+
+                                    }
+
+                                } else {
+
+                                    if (entity.getTags().contains(scan) == false) {
+
+                                        continue test;
+
+                                    }
+
+                                }
+
+                            }
+
+                        }
+
+                        if (is_join == true) {
+
+                            entry.getValue().add(entity);
+
+                        } else {
+
+                            Core.DelayedWork.create(false, 1, () -> {
+
+                                // Fix entities remove by re-enter the chunks, caused by status not instant update.
+                                // When re-enter the chunks, the game will send some entity leave event, some is new created entities with status null, do not delete them.
+                                if (entity.isRemoved() == true) {
 
                                     entry.getValue().remove(entity);
 
-                                });
+                                }
 
-                            }
+                            });
 
                         }
 
@@ -53,37 +88,13 @@ public class EntityManager {
 
                 }
 
-            }
+                if (id.isEmpty() == true) {
 
-            id = EntityType.getKey(entity.getType()).toString();
+                    id = EntityType.getKey(entity.getType()).toString();
 
-            {
+                } else {
 
-                map_tag_entity = cache_entities.get(id);
-
-                if (map_tag_entity != null) {
-
-                    for (Map.Entry<List<String>, List<Entity>> entry : map_tag_entity.entrySet()) {
-
-                        if (entry.getKey().equals("[]") == true || entity.getTags().containsAll(entry.getKey()) == true) {
-
-                            if (is_join == true) {
-
-                                entry.getValue().add(entity);
-
-                            } else {
-
-                                Core.DelayedWork.create(false, 1, () -> {
-
-                                    entry.getValue().remove(entity);
-
-                                });
-
-                            }
-
-                        }
-
-                    }
+                    break;
 
                 }
 
@@ -141,21 +152,46 @@ public class EntityManager {
 
         }
 
-        public static List<Entity> fromArea (ServerLevel level_server, Vec3 vec3, int distance, boolean is_box, String id, String[] tags) {
-
-            List<String> tag_convert = List.of(tags);
+        public static List<Entity> fromArea (ServerLevel level_server, Vec3 vec3, double distance, boolean is_box, String id, String[] tags) {
 
             return level_server.getEntitiesOfClass(Entity.class, new AABB(vec3, vec3).inflate(distance), entity -> {
 
                 if (is_box == true || entity.position().distanceTo(vec3) <= distance) {
 
-                    if (id.isEmpty() == true || EntityType.getKey(entity.getType()).toString().equals(id) == true) {
+                    if (id.isEmpty() == false && EntityType.getKey(entity.getType()).toString().equals(id) == false) {
 
-                        return tag_convert.isEmpty() == true || entity.getTags().containsAll(tag_convert) == true;
+                        return false;
 
                     }
 
-                    return false;
+                    test:
+                    {
+
+                        for (String scan : tags) {
+
+                            if (scan.startsWith("!") == true) {
+
+                                if (entity.getTags().contains(scan) == true) {
+
+                                    break test;
+
+                                }
+
+                            } else {
+
+                                if (entity.getTags().contains(scan) == false) {
+
+                                    break test;
+
+                                }
+
+                            }
+
+                        }
+
+                        return true;
+
+                    }
 
                 }
 
@@ -169,11 +205,29 @@ public class EntityManager {
 
             if (id.isEmpty() == true || EntityType.getKey(entity.getType()).toString().equals(id) == true) {
 
-                if (tag_convert.isEmpty() == true || entity.getTags().containsAll(tag_convert) == true) {
+                for (String scan : tag_convert) {
 
-                    return true;
+                    if (scan.startsWith("!") == true) {
+
+                        if (entity.getTags().contains(scan) == true) {
+
+                            return false;
+
+                        }
+
+                    } else {
+
+                        if (entity.getTags().contains(scan) == false) {
+
+                            return false;
+
+                        }
+
+                    }
 
                 }
+
+                return true;
 
             }
 
@@ -208,62 +262,6 @@ public class EntityManager {
             return sorted_entities;
 
         }
-
-    }
-
-    public static Entity summon (ServerLevel level_server, Vec3 vec3, boolean is_always_show_name, String id, String name, String[] tags, String custom) {
-
-        EntityType<?> type = level_server.registryAccess().registryOrThrow(Registries.ENTITY_TYPE).get(ResourceLocation.parse(id));
-
-        if (type == null) {
-
-            return null;
-
-        }
-
-        Entity entity = type.create(level_server);
-
-        if (entity == null) {
-
-            return null;
-
-        }
-
-        if (custom.isEmpty() == false) {
-
-            entity.load(GameUtils.Data.convertJSONToTag(custom));
-
-        }
-
-        if (is_always_show_name == true) {
-
-            entity.setCustomNameVisible(true);
-
-        }
-
-        entity.setCustomName(Component.literal(name));
-        entity.addTag("TANNYJUNG");
-        entity.addTag(Core.mod_id_big);
-
-        for (String get : tags) {
-
-            entity.addTag(get);
-
-        }
-
-        entity.setPos(vec3);
-        level_server.addFreshEntity(entity);
-        return entity;
-
-    }
-
-    public static void summonWorldGen (ServerLevel level_server, Vec3 vec3, String id, String name, String[] tags, String custom) {
-
-        level_server.getServer().execute(() -> {
-
-            summon(level_server, vec3, false, id, name, tags, custom);
-
-        });
 
     }
 
@@ -304,7 +302,7 @@ public class EntityManager {
         public static Entity summonItem (ServerLevel level_server, Vec3 vec3, int rotate_horizontal, int rotate_vertical, double scale, boolean is_luminous, String name, String[] tags, String id) {
 
             StringBuilder builder = new StringBuilder();
-            builder.append("item:{id:\"").append(id).append("\",Count:1b}, teleport_duration:10");
+            builder.append("item:{id:\"").append(id).append("\",Count:1b},teleport_duration:10");
             builder.append(",Rotation:[").append(rotate_horizontal).append("f,").append(rotate_vertical).append("f]");
             builder.append(",transformation:{left_rotation:[0.0f,0.0f,0.0f,1.0f],right_rotation:[0.0f,0.0f,0.0f,1.0f],translation:[0.0f,0.0f,0.0f],scale:[").append(scale).append("f,").append(scale).append("f,").append(scale).append("f]}");
 
@@ -340,15 +338,71 @@ public class EntityManager {
 
             }
 
-            GameUtils.Command.runEntity(entity, "data modify entity @s transformation.left_rotation set value " + data);
+            GameUtils.runCommandEntity(entity, "data modify entity @s transformation.left_rotation set value " + data);
 
         }
 
         public static void setItemScale (Entity entity, double scale) {
 
-            GameUtils.Command.runEntity(entity, "data modify entity @s transformation.scale set value [" + scale + "f," + scale + "f," + scale + "f]");
+            GameUtils.runCommandEntity(entity, "data modify entity @s transformation.scale set value [" + scale + "f," + scale + "f," + scale + "f]");
 
         }
+
+    }
+
+    public static Entity summon (ServerLevel level_server, Vec3 vec3, boolean is_always_show_name, String id, String name, String[] tags, String custom) {
+
+        EntityType<?> type = level_server.registryAccess().registryOrThrow(Registries.ENTITY_TYPE).get(ResourceLocation.parse(id));
+
+        if (type == null) {
+
+            return null;
+
+        }
+
+        Entity entity = type.create(level_server);
+
+        if (entity == null) {
+
+            return null;
+
+        }
+
+        if (custom.isEmpty() == false) {
+
+            entity.load(NBTManager.convertJSONToTag(custom));
+
+        }
+
+        if (is_always_show_name == true) {
+
+            entity.setCustomNameVisible(true);
+
+        }
+
+        entity.setCustomName(Component.literal(name));
+        entity.addTag("TANNYJUNG");
+        entity.addTag(Core.mod_id_big);
+
+        for (String get : tags) {
+
+            entity.addTag(get);
+
+        }
+
+        entity.setPos(vec3);
+        level_server.addFreshEntity(entity);
+        return entity;
+
+    }
+
+    public static void summonWorldGen (ServerLevel level_server, Vec3 vec3, String id, String name, String[] tags, String custom) {
+
+        level_server.getServer().execute(() -> {
+
+            summon(level_server, vec3, false, id, name, tags, custom);
+
+        });
 
     }
 

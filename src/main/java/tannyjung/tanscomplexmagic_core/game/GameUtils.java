@@ -12,6 +12,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.ServerScoreboard;
@@ -68,748 +69,155 @@ import tannyjung.tanscomplexmagic_core.outside.OutsideUtils;
 
 public class GameUtils {
 
-	public static class Misc {
+	public static boolean isModLoaded (String id) {
 
-        public static boolean isModLoaded (String id) {
+		return ModList.get().isLoaded(id);
 
-            return ModList.get().isLoaded(id);
+	}
 
-        }
+	public static String randomChooseVariant (String test) {
 
-		public static String testVariant (String test) {
+		if (test.isEmpty() == false) {
 
-			if (test.isEmpty() == false) {
+			String[] split = null;
 
-				String[] split = null;
+			for (String variant : test.split(" \\| ")) {
 
-				for (String variant : test.split(" \\| ")) {
+				split = variant.split(" / ");
 
-					split = variant.split(" / ");
+				if (Math.random() < Double.parseDouble(split[0])) {
 
-					if (Math.random() < Double.parseDouble(split[0])) {
-
-						return split[1];
-
-					}
+					return split[1];
 
 				}
 
 			}
 
-			return "";
+		}
+
+		return "";
+
+	}
+
+	public static void sendChatMessage (ServerLevel level_server, String data) {
+
+		String[] split = data.split(" \\| ")[0].split(" / ");
+		String prefix_color = "white";
+
+		if (split.length > 1) {
+
+			prefix_color = split[1];
 
 		}
 
-		public static void sendChatMessage (ServerLevel level_server, String data) {
+		runCommand(level_server, Vec3.ZERO, "tellraw @a [{\"text\":\"\"}," + Data.createText("[" + Core.mod_id_short + "] / " + prefix_color + " / This message was sent from " + Core.mod_name + " mod (Global) |   | " + data) + "]");
 
-			String[] split = data.split(" \\| ")[0].split(" / ");
-			String prefix_color = "white";
+	}
 
-			if (split.length > 1) {
+	public static void sendChatMessagePrivate (Player player, String data) {
 
-				prefix_color = split[1];
+		String[] split = data.split(" \\| ")[0].split(" / ");
+		String prefix_color = "white";
 
-			}
+		if (split.length > 1) {
 
-            Command.run(level_server, Vec3.ZERO, "tellraw @a [{\"text\":\"\"}," + Data.createText("[" + Core.mod_id_short + "] / " + prefix_color + " / This message was sent from " + Core.mod_name + " mod (Global) |   | " + data) + "]");
-
-        }
-
-		public static void sendChatMessagePrivate (Player player, String data) {
-
-			String[] split = data.split(" \\| ")[0].split(" / ");
-			String prefix_color = "white";
-
-			if (split.length > 1) {
-
-				prefix_color = split[1];
-
-			}
-
-			Command.runEntity(player, "tellraw @s [{\"text\":\"\"}," + Data.createText("[" + Core.mod_id_short + "] / " + prefix_color + " / This message was sent from " + Core.mod_name + " mod (Private) |   | " + data) + "]");
+			prefix_color = split[1];
 
 		}
 
-		public static void spawnParticle (ServerLevel level_server, Vec3 vec3, double spreadX, double spreadY, double spreadZ, double speed, int count, String id) {
+		runCommandEntity(player, "tellraw @s [{\"text\":\"\"}," + Data.createText("[" + Core.mod_id_short + "] / " + prefix_color + " / This message was sent from " + Core.mod_name + " mod (Private) |   | " + data) + "]");
 
-			ParticleType<?> particle = level_server.registryAccess().registryOrThrow(Registries.PARTICLE_TYPE).get(ResourceLocation.parse(id));
+	}
 
-			if (particle == null) {
+	public static void runCommand (ServerLevel level_server, Vec3 vec3, String command) {
 
-				return;
+		/*
+		(1.20.1) (1.21.1)
+		level_server.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, vec3, Vec2.ZERO, level_server, 4, "", Component.literal(""), level_server.getServer(), null).withSuppressedOutput(), command);
+		(1.21.8)
+		level_server.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, vec3, Vec2.ZERO, level_server, PermissionSet.ALL_PERMISSIONS, "", Component.literal(""), level_server.getServer(), null).withSuppressedOutput(), command);
+		*/
+		level_server.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, vec3, Vec2.ZERO, level_server, 4, "", Component.literal(""), level_server.getServer(), null).withSuppressedOutput(), command);
 
-			}
+	}
 
-			for (ServerPlayer player : level_server.players()) {
+	public static void runCommandEntity (Entity entity, String command) {
 
-				level_server.sendParticles(player, (ParticleOptions) particle, true, vec3.x, vec3.y, vec3.z, count, spreadX, spreadY, spreadZ, speed);
-
-			}
-
-		}
-
-		public static void playSound (ServerLevel level_server, BlockPos pos, double volume, double pitch, String id) {
-
-			SoundEvent sound = level_server.registryAccess().registryOrThrow(Registries.SOUND_EVENT).get(ResourceLocation.parse(id));
-
-			if (sound == null) {
-
-				return;
-
-			}
-
-			level_server.playSound(null, pos, sound, SoundSource.NEUTRAL, (float) volume, (float) pitch);
-
-		}
-
-    }
-
-	public static class Command {
-
-		public static void run (ServerLevel level_server, Vec3 vec3, String command) {
-			
-			/*
-			(1.20.1) (1.21.1)
-			level_server.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, vec3, Vec2.ZERO, level_server, 4, "", Component.literal(""), level_server.getServer(), null).withSuppressedOutput(), command);
-			(1.21.8)
-			level_server.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, vec3, Vec2.ZERO, level_server, PermissionSet.ALL_PERMISSIONS, "", Component.literal(""), level_server.getServer(), null).withSuppressedOutput(), command);
-			*/
-			level_server.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, vec3, Vec2.ZERO, level_server, 4, "", Component.literal(""), level_server.getServer(), null).withSuppressedOutput(), command);
-
-		}
-
-		public static void runEntity (Entity entity, String command) {
-
-			if (entity.level() instanceof ServerLevel level_server) {
-
-				/*
-				(1.20.1) (1.21.1)
-				level_server.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, entity.position(), entity.getRotationVector(), level_server, 4, entity.getName().getString(), entity.getDisplayName(), level_server.getServer(), entity), command);
-				(1.21.8)
-				level_server.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, entity.position(), entity.getRotationVector(), level_server, PermissionSet.ALL_PERMISSIONS, entity.getName().getString(), entity.getDisplayName(), level_server.getServer(), entity), command);
-				*/
-				level_server.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, entity.position(), entity.getRotationVector(), level_server, 4, entity.getName().getString(), entity.getDisplayName(), level_server.getServer(), entity), command);
-
-			}
-
-		}
-
-		public static boolean result (ServerLevel level_server, Vec3 vec3, String command) {
-
-			StringBuilder result = new StringBuilder();
-
-			CommandSource data_consumer = new CommandSource() {
-
-				@Override
-				public boolean acceptsSuccess() {
-					result.append("pass");
-					return true;
-				}
-
-				@Override
-				public void sendSystemMessage(Component component) {
-				}
-
-				@Override
-				public boolean acceptsFailure() {
-					return false;
-				}
-
-				@Override
-				public boolean shouldInformAdmins() {
-					return false;
-				}
-
-			};
+		if (entity.level() instanceof ServerLevel level_server) {
 
 			/*
 			(1.20.1) (1.21.1)
-			level_server.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(data_consumer, vec3, Vec2.ZERO, level_server, 4, "", Component.literal(""), level_server.getServer(), null), command);
+			level_server.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, entity.position(), entity.getRotationVector(), level_server, 4, entity.getName().getString(), entity.getDisplayName(), level_server.getServer(), entity), command);
 			(1.21.8)
-			level_server.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(data_consumer, vec3, Vec2.ZERO, level_server, PermissionSet.ALL_PERMISSIONS, "", Component.literal(""), level_server.getServer(), null), command);
+			level_server.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, entity.position(), entity.getRotationVector(), level_server, PermissionSet.ALL_PERMISSIONS, entity.getName().getString(), entity.getDisplayName(), level_server.getServer(), entity), command);
 			*/
-			level_server.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(data_consumer, vec3, Vec2.ZERO, level_server, 4, "", Component.literal(""), level_server.getServer(), null), command);
-
-			return result.toString().equals("pass");
-
-		}
-
-		public static boolean resultEntity (Entity entity, String command) {
-
-			StringBuilder result = new StringBuilder();
-
-			CommandSource data_consumer = new CommandSource() {
-
-				@Override
-				public boolean acceptsSuccess() {
-					result.append("pass");
-					return true;
-				}
-
-				@Override
-				public void sendSystemMessage(Component component) {
-				}
-
-				@Override
-				public boolean acceptsFailure() {
-					return false;
-				}
-
-				@Override
-				public boolean shouldInformAdmins() {
-					return false;
-				}
-
-			};
-
-			if (entity.level() instanceof ServerLevel level_server) {
-
-				level_server.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(data_consumer, entity.position(), entity.getRotationVector(), level_server, 4, entity.getName().getString(), entity.getDisplayName(), level_server.getServer(), entity), command);
-
-			}
-
-			return result.toString().equals("pass");
+			level_server.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, entity.position(), entity.getRotationVector(), level_server, 4, entity.getName().getString(), entity.getDisplayName(), level_server.getServer(), entity), command);
 
 		}
 
 	}
 
-	public static class Tile {
+	public static void spawnParticle (ServerLevel level_server, Vec3 vec3, double spreadX, double spreadY, double spreadZ, double speed, int count, String id) {
 
-		public static boolean test (BlockState block, String test) {
+		ParticleType<?> particle = level_server.registryAccess().registryOrThrow(Registries.PARTICLE_TYPE).get(ResourceLocation.parse(id));
 
-			if (test.isEmpty() == true) {
+		if (particle == null) {
 
-				return false;
-
-			} else if (test.equals("all") == true) {
-
-				return true;
-
-			} else {
-
-				String key = block + " -> " + test;
-
-				if (CacheManager.DataLogic.existNormal("test_block", key) == false) {
-
-					boolean result = false;
-
-					{
-
-						String[] data = Tile.toText(block);
-						String block_id = data[0];
-						List<String> properties = new ArrayList<>();
-
-						if (data[1].isEmpty() == false) {
-
-							properties = Arrays.stream(data[1].substring(1, data[1].length() - 1).split(",")).toList();
-
-						}
-
-						String value = "";
-						int index = 0;
-						String block_test = "";
-
-						for (String split : test.split(" / ")) {
-
-							result = true;
-
-							for (String split2 : split.split(", ")) {
-
-								value = split2.replaceAll("[#!]", "");
-
-								{
-
-									if (split2.startsWith("#") == true || split2.startsWith("!#") == true) {
-
-										try {
-
-											if (block.is(BlockTags.create(ResourceLocation.parse(value))) == false) {
-
-												result = false;
-
-											}
-
-										} catch (Exception ignored) {
-
-											result = false;
-
-										}
-
-									} else {
-
-										index = value.indexOf("[");
-
-										if (index == -1) {
-
-											block_test = value;
-
-											if (block_id.equals(block_test) == false) {
-
-												result = false;
-
-											}
-
-										} else {
-
-											block_test = value.substring(0, index);
-
-											if (block_id.equals(block_test) == false) {
-
-												result = false;
-
-											} else {
-
-												for (String property : value.substring(index + 1, value.length() - 1).split(",")) {
-
-													if (properties.contains(property) == false) {
-
-														result = false;
-														break;
-
-													}
-
-												}
-
-											}
-
-										}
-
-									}
-
-									if (split2.startsWith("!") == true) {
-
-										result = !result;
-
-									}
-
-								}
-
-								if (result == false) {
-
-									break;
-
-								}
-
-							}
-
-							if (result == true) {
-
-								break;
-
-							}
-
-						}
-
-					}
-
-					CacheManager.DataLogic.setNormal("test_block", key, result);
-
-				}
-
-				return CacheManager.DataLogic.getNormal("test_block").get(key);
-
-			}
+			return;
 
 		}
 
-		public static void set (LevelAccessor level_accessor, BlockPos pos, BlockState block, boolean is_world_gen) {
+		for (ServerPlayer player : level_server.players()) {
 
-			// World Height Limit
-			{
-
-				if (Space.getBuildHeight(level_accessor, false) > pos.getY()) {
-
-					return;
-
-				} else if (Space.getBuildHeight(level_accessor, true) < pos.getY()) {
-
-					return;
-
-				}
-
-			}
-
-			// Waterlogged
-			{
-
-				if (level_accessor.isWaterAt(pos) == true) {
-
-					block = Tile.setPropertyLogic(block, "waterlogged", true);
-
-				}
-
-			}
-
-			int type = 0;
-
-			if (is_world_gen == false) {
-
-				type = 2;
-
-			}
-
-			level_accessor.setBlock(pos, block, type);
-
-		}
-
-		public static void remove (LevelAccessor level_accessor, ServerLevel level_server, BlockPos pos, boolean is_world_gen) {
-
-			// World Height Limit
-			{
-
-				if (Space.getBuildHeight(level_accessor, false) > pos.getY()) {
-
-					return;
-
-				} else if (Space.getBuildHeight(level_accessor, true) < pos.getY()) {
-
-					return;
-
-				}
-
-			}
-
-			BlockState block = null;
-
-			if (level_accessor.isWaterAt(pos) == true) {
-
-				block = Blocks.WATER.defaultBlockState();
-
-			} else {
-
-				block = Blocks.AIR.defaultBlockState();
-
-			}
-
-			set(level_accessor, pos, block, is_world_gen);
-
-			if (is_world_gen == false) {
-
-				level_server.neighborChanged(pos.above(), level_server.getBlockState(pos.above()).getBlock(), pos);
-
-			}
-
-		}
-
-		public static void removeDrop (LevelAccessor level_accessor, ServerLevel level_server, BlockPos pos) {
-
-			Item.spawn(level_server, pos.getCenter(), level_accessor.getBlockState(pos).getBlock().asItem().getDefaultInstance());
-			remove(level_accessor, level_server, pos, false);
-
-		}
-
-		public static BlockState fromText (ServerLevel level_server, String data) {
-
-			BlockState block = null;
-
-			// Get Block
-			{
-
-				Block get = null;
-				String id = data;
-
-				if (id.endsWith("}") == true) {
-
-					id = id.substring(0, id.indexOf("{"));
-
-				}
-
-				if (id.endsWith("]") == true) {
-
-					id = id.substring(0, id.indexOf("["));
-
-				}
-
-				get = level_server.registryAccess().registryOrThrow(Registries.BLOCK).get(ResourceLocation.parse(id));
-
-				if (get == null) {
-
-					return Blocks.AIR.defaultBlockState();
-
-				}
-
-				block = get.defaultBlockState();
-
-			}
-
-			if (data.endsWith("}") == true) {
-
-				data = data.substring(0, data.indexOf("{"));
-				// TODO -> Put "{...}" from data into the block
-
-			}
-
-			if (data.endsWith("]") == true) {
-
-				{
-
-					String[] properties = data.substring(data.indexOf("[") + 1, data.length() - 1).split(",");
-
-					for (String scan : properties) {
-
-						String[] get = scan.split("=");
-						Property<?> test = block.getBlock().getStateDefinition().getProperty(get[0]);
-
-						if (test instanceof BooleanProperty == true) {
-
-							block = setPropertyLogic(block, get[0], Boolean.parseBoolean(get[1]));
-
-						} else if (test instanceof IntegerProperty == true) {
-
-							block = setPropertyNumber(block, get[0], Integer.parseInt(get[1]));
-
-						} else if (test instanceof EnumProperty<?> == true) {
-
-							block = setPropertyCustom(block, get[0], get[1]);
-
-						}
-
-					}
-
-				}
-
-			}
-
-			return block;
-
-		}
-
-		public static String[] toText (BlockState block) {
-
-			String[] split = block.toString().substring("Block{".length()).split("}");
-
-			if (split.length == 1) {
-
-				split = new String[]{split[0], ""};
-
-			}
-
-			return split;
-
-		}
-
-		public static BlockState randomRotation (BlockState block) {
-
-			if (Math.random() < 0.25) {
-
-				return Tile.setPropertyCustom(block, "facing", "north");
-
-			} else if (Math.random() < 0.25) {
-
-				return Tile.setPropertyCustom(block, "facing", "west");
-
-			} else if (Math.random() < 0.25) {
-
-				return Tile.setPropertyCustom(block, "facing", "east");
-
-			} else {
-
-				return Tile.setPropertyCustom(block, "facing", "south");
-
-			}
-
-		}
-
-		public static void setScheduleTick (ServerLevel level_server, BlockPos pos, int value) {
-
-			level_server.scheduleTick(pos, level_server.getBlockState(pos).getBlock(), value);
-
-		}
-
-		public static boolean isPassable (LevelAccessor level_accessor, BlockPos pos) {
-
-			return level_accessor.getBlockState(pos).getCollisionShape(level_accessor, pos).isEmpty() == true;
-
-		}
-
-		public static boolean getPropertyLogic (BlockState block, String name) {
-
-			Property<?> property = block.getBlock().getStateDefinition().getProperty(name);
-
-			if (property instanceof BooleanProperty == true) {
-
-				return Boolean.parseBoolean(block.getValue(property).toString());
-
-			}
-
-			return false;
-
-		}
-
-		public static int getPropertyNumber (BlockState block, String name) {
-
-			Property<?> property = block.getBlock().getStateDefinition().getProperty(name);
-
-			if (property instanceof IntegerProperty == true) {
-
-				return Integer.parseInt(block.getValue(property).toString());
-
-			}
-
-			return 0;
-
-		}
-
-		public static String getPropertyCustom (BlockState block, String name) {
-
-			Property<?> property = block.getBlock().getStateDefinition().getProperty(name);
-
-			if (property instanceof EnumProperty<?> == true) {
-
-				return block.getValue(property).toString();
-
-			}
-
-			return "";
-
-		}
-
-		public static BlockState setPropertyLogic (BlockState block, String name, boolean value) {
-
-			Property<?> property = block.getBlock().getStateDefinition().getProperty(name);
-
-			if (block.hasProperty(property) == true) {
-
-				if (property instanceof BooleanProperty property_instance) {
-
-					if (property_instance.getValue(String.valueOf(value)).isPresent() == true) {
-
-						block = block.setValue(property_instance, value);
-
-					}
-
-				}
-
-			}
-
-			return block;
-
-		}
-
-		public static BlockState setPropertyNumber (BlockState block, String name, int value) {
-
-			Property<?> property = block.getBlock().getStateDefinition().getProperty(name);
-
-			if (block.hasProperty(property) == true) {
-
-				if (property instanceof IntegerProperty property_instance) {
-
-					if (property_instance.getValue(String.valueOf(value)).isPresent() == true) {
-
-						block = block.setValue(property_instance, value);
-
-					}
-
-				}
-
-			}
-
-			return block;
-
-		}
-
-		public static BlockState setPropertyCustom (BlockState block, String name, String value) {
-
-			Property<?> property = block.getBlock().getStateDefinition().getProperty(name);
-
-			if (property instanceof EnumProperty property_instance) {
-
-				if (property_instance.getValue(value).isPresent() == true) {
-
-					block = block.setValue(property_instance, (Enum) property_instance.getValue(value).get());
-
-				}
-
-			}
-
-			return block;
+			level_server.sendParticles(player, (ParticleOptions) particle, true, vec3.x, vec3.y, vec3.z, count, spreadX, spreadY, spreadZ, speed);
 
 		}
 
 	}
 
-	public static class Item {
+	public static void playSound (ServerLevel level_server, BlockPos pos, double pitch, double max_distance, String id) {
 
-		public static ItemStack getSlot (Entity entity, EquipmentSlot equipment_slot) {
+		SoundEvent sound = level_server.registryAccess().registryOrThrow(Registries.SOUND_EVENT).get(ResourceLocation.parse(id));
 
-			if (entity instanceof LivingEntity living_entity) {
+		if (sound == null) {
 
-				return living_entity.getItemBySlot(equipment_slot);
+			return;
+
+		}
+
+		double distance = 0.0;
+		double volume_min = max_distance / 50.0;
+		double volume_max = 0.0;
+		double percent = 0.0;
+		int delay = 0;
+
+		for (ServerPlayer player_server : level_server.players()) {
+
+			distance = player_server.position().distanceTo(pos.getCenter());
+
+			if (distance > max_distance) {
+
+				continue;
 
 			}
 
-			return ItemStack.EMPTY;
+			percent = distance / max_distance;
+			volume_min = volume_min * (1.0 - percent);
+			volume_max = percent * (max_distance / 15.0);
+			double volume = volume_min + volume_max;
 
-		}
+			delay = (int) Math.round(distance / 20.0);
+			Runnable runnable = () -> player_server.connection.send(new ClientboundSoundPacket(Holder.direct(sound), SoundSource.AMBIENT, pos.getX(), pos.getY(), pos.getZ(), (float) volume, (float) pitch, level_server.getRandom().nextLong()));
 
-		public static boolean isTaggedAs (ItemStack item, String tag) {
+			if (delay == 0) {
 
-			return item.is(ItemTags.create(ResourceLocation.parse(tag))) == true;
+				runnable.run();
 
-		}
+			} else {
 
-		public static void setCount (Entity entity, EquipmentSlot equipment_slot, int value) {
-
-			if (entity instanceof LivingEntity living_entity) {
-
-				ItemStack item = living_entity.getItemBySlot(equipment_slot);
-				item.setCount(value);
-
-			}
-
-		}
-
-		public static void addCount (Entity entity, EquipmentSlot equipment_slot, int value) {
-
-			if (entity instanceof LivingEntity living_entity) {
-
-				ItemStack item = living_entity.getItemBySlot(equipment_slot);
-				item.setCount(item.getCount() + value);
+				Core.DelayedWork.create(false, delay, runnable);
 
 			}
-
-		}
-
-		public static void setCooldown (Entity entity, ItemStack item, int tick) {
-
-			if (entity instanceof Player player) {
-
-				player.getCooldowns().addCooldown(item.getItem(), tick);
-
-			}
-
-		}
-
-		public static void addDamage (ItemStack item, int value) {
-
-			item.setDamageValue(item.getDamageValue() + value);
-
-			if (item.getMaxDamage() < item.getDamageValue()) {
-
-				item.shrink(1);
-
-			}
-
-		}
-
-		public static void spawn (ServerLevel level_server, Vec3 vec3, ItemStack item) {
-
-			ItemEntity entityToSpawn = new ItemEntity(level_server, vec3.x, vec3.y, vec3.z, item);
-			level_server.addFreshEntity(entityToSpawn);
-
-		}
-
-		public static String toID (ItemStack item) {
-
-			String id = item.getDescriptionId();
-			return id.substring(id.indexOf(".") + 1).replace(".", ":");
-
-		}
-
-		public static ItemStack fromID (ServerLevel level_server, String id) {
-
-			return level_server.registryAccess().registryOrThrow(Registries.ITEM).get(ResourceLocation.parse(id)).getDefaultInstance();
 
 		}
 
@@ -1089,111 +497,7 @@ public class GameUtils {
 
 	}
 
-	public static class Score {
-
-		public static void create (ServerLevel level_server, String name) {
-
-			Scoreboard scoreboard = level_server.getServer().getScoreboard();
-			Objective objective = scoreboard.getObjective(name);
-
-			if (objective != null) {
-
-				return;
-
-			}
-
-			/*
-            (1.20.1)
-            scoreboard.addObjective(name, ObjectiveCriteria.DUMMY, Component.literal(name), ObjectiveCriteria.RenderType.INTEGER);
-            (1.21.1)
-            scoreboard.addObjective(name, ObjectiveCriteria.DUMMY, Component.literal(name), ObjectiveCriteria.RenderType.INTEGER, true, null);
-            */
-			scoreboard.addObjective(name, ObjectiveCriteria.DUMMY, Component.literal(name), ObjectiveCriteria.RenderType.INTEGER, true, null);
-
-		}
-
-		public static int get (ServerLevel level_server, String objective, String player) {
-
-			ServerScoreboard score = level_server.getServer().getScoreboard();
-			Objective objective_test = score.getObjective(objective);
-
-			if (objective_test == null) {
-
-				return 0;
-
-			}
-
-			/*
-            (1.20.1)
-            return score.getOrCreatePlayerScore(player, objective_test).getScore();
-            (1.21.1)
-            return score.getOrCreatePlayerScore(ScoreHolder.forNameOnly(player), objective_test, false).get();
-            */
-			return score.getOrCreatePlayerScore(ScoreHolder.forNameOnly(player), objective_test, false).get();
-
-		}
-
-		public static void set (ServerLevel level_server, String objective, String player, int value) {
-
-			ServerScoreboard score = level_server.getServer().getScoreboard();
-			Objective objective_test = score.getObjective(objective);
-
-			if (objective_test == null) {
-
-				return;
-
-			}
-
-			/*
-            (1.20.1)
-            score.getOrCreatePlayerScore(player, objective_test).setScore(value);
-            (1.21.1)
-            score.getOrCreatePlayerScore(ScoreHolder.forNameOnly(player), objective_test, false).set(value);
-            */
-			score.getOrCreatePlayerScore(ScoreHolder.forNameOnly(player), objective_test, false).set(value);
-
-		}
-
-		public static void add (ServerLevel level_server, String objective, String player, int value) {
-
-			ServerScoreboard score = level_server.getServer().getScoreboard();
-			Objective objective_test = score.getObjective(objective);
-
-			if (objective_test == null) {
-
-				return;
-
-			}
-
-			int old_value = get(level_server, objective, player);
-
-            /*
-            (1.20.1)
-            score.getOrCreatePlayerScore(player, objective_test).setScore(old_value + value);
-            (1.21.1)
-            score.getOrCreatePlayerScore(ScoreHolder.forNameOnly(player), objective_test, false).set(old_value + value);
-            */
-			score.getOrCreatePlayerScore(ScoreHolder.forNameOnly(player), objective_test, false).set(old_value + value);
-
-		}
-
-	}
-
 	public static class Data {
-
-		public static CompoundTag convertJSONToTag (String data) {
-
-			try {
-
-				return TagParser.parseTag(data);
-
-			} catch (Exception ignored) {
-
-				return new CompoundTag();
-
-			}
-
-		}
 
 		public static MutableComponent convertJSONToComponent (String data) {
 
@@ -1371,328 +675,6 @@ public class GameUtils {
 			if (custom_data.isEmpty() == false) write.append(part_custom_data);
 			if (forge_data.isEmpty() == false) write.append(part_forge_data);
 			return write.toString();
-
-		}
-
-		public static String getEntityText (Entity entity, String name) {
-
-			/*
-			(1.20.1) (1.21.1)
-			return entity.getPersistentData().getCompound(Core.mod_id).getString(name);
-			(1.21.8)
-			return entity.getPersistentData().getCompound(Core.mod_id).getString(name).get();
-			*/
-			return entity.getPersistentData().getCompound(Core.mod_id).getString(name);
-
-		}
-
-		public static Boolean getEntityLogic (Entity entity, String name) {
-
-			/*
-			(1.20.1) (1.21.1)
-			return entity.getPersistentData().getCompound(Core.mod_id).getBoolean(name);
-			(1.21.8)
-			return entity.getPersistentData().getCompound(Core.mod_id).getBoolean(name).get();
-			*/
-			return entity.getPersistentData().getCompound(Core.mod_id).getBoolean(name);
-
-		}
-
-		public static double getEntityNumber (Entity entity, String name) {
-
-			/*
-			(1.20.1) (1.21.1)
-			return entity.getPersistentData().getCompound(Core.mod_id).getDouble(name);
-			(1.21.8)
-			return entity.getPersistentData().getCompound(Core.mod_id).getDouble(name).get();
-			*/
-			return entity.getPersistentData().getCompound(Core.mod_id).getDouble(name);
-
-		}
-
-		public static double[] getEntityListNumber (Entity entity, String name) {
-
-			/*
-			(1.20.1) (1.21.1)
-			ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getList(name, Tag.TAG_DOUBLE);
-			(1.21.8)
-			ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getList(name).get();
-			*/
-			ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getList(name, Tag.TAG_DOUBLE);
-
-			double[] convert = new double[list.size()];
-
-			for (int count = 0; count <= list.size() - 1; count++) {
-
-				/*
-				(1.20.1) (1.21.1)
-				convert[count] = list.getDouble(count);
-				(1.21.8)
-				convert[count] = list.getDouble(count).get();
-				*/
-				convert[count] = list.getDouble(count);
-
-			}
-
-			return convert;
-
-		}
-
-		public static double[] getEntityListNumberFloat (Entity entity, String name) {
-
-			/*
-			(1.20.1) (1.21.1)
-			ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getList(name, Tag.TAG_FLOAT);
-			(1.21.8)
-			ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getList(name).get();
-			*/
-			ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getList(name, Tag.TAG_FLOAT);
-
-			double[] convert = new double[list.size()];
-
-			for (int count = 0; count <= list.size() - 1; count++) {
-
-				/*
-				(1.20.1) (1.21.1)
-				convert[count] = list.getFloat(count);
-				(1.21.8)
-				convert[count] = list.getFloat(count).get();
-				*/
-				convert[count] = list.getFloat(count);
-
-			}
-
-			return convert;
-
-		}
-
-		public static void setEntityText (Entity entity, String name, String value) {
-
-			CompoundTag tag = new CompoundTag();
-			CompoundTag tag_add = new CompoundTag();
-			tag_add.putString(name, value);
-			tag.put(Core.mod_id, tag_add);
-			entity.getPersistentData().merge(tag);
-
-		}
-
-		public static void setEntityLogic (Entity entity, String name, boolean value) {
-
-			CompoundTag tag = new CompoundTag();
-			CompoundTag tag_add = new CompoundTag();
-			tag_add.putBoolean(name, value);
-			tag.put(Core.mod_id, tag_add);
-			entity.getPersistentData().merge(tag);
-
-		}
-
-		public static void setEntityNumber (Entity entity, String name, double value) {
-
-			CompoundTag tag = new CompoundTag();
-			CompoundTag tag_add = new CompoundTag();
-			tag_add.putDouble(name, value);
-			tag.put(Core.mod_id, tag_add);
-			entity.getPersistentData().merge(tag);
-
-		}
-
-		public static void addEntityNumber (Entity entity, String name, double value) {
-
-			/*
-			(1.20.1) (1.21.1)
-			entity.getPersistentData().getCompound(Core.mod_id).putDouble(name, entity.getPersistentData().getCompound(Core.mod_id).getDouble(name) + value);
-			(1.21.8)
-			entity.getPersistentData().getCompound(Core.mod_id).putDouble(name, entity.getPersistentData().getCompound(Core.mod_id).getDouble(name).get() + value);
-			*/
-			entity.getPersistentData().getCompound(Core.mod_id).putDouble(name, entity.getPersistentData().getCompound(Core.mod_id).getDouble(name) + value);
-
-		}
-
-		public static String getBlockText (LevelAccessor level_accessor, BlockPos pos, String name) {
-
-			return new Object() {
-
-				public String getValue (LevelAccessor level_accessor, BlockPos pos, String name) {
-
-					BlockEntity block_entity = level_accessor.getBlockEntity(pos);
-
-					if (block_entity == null) {
-
-                        return "";
-
-					}
-
-					/*
-                    (1.20.1) (1.21.1)
-                    return block_entity.getPersistentData().getCompound(Core.mod_id).getString(name);
-                    (1.21.8)
-                    return block_entity.getPersistentData().getCompound(Core.mod_id).getString(name).get();
-                    */
-					return block_entity.getPersistentData().getCompound(Core.mod_id).getString(name);
-
-				}
-
-			}.getValue(level_accessor, pos, name);
-
-		}
-
-		public static double getBlockNumber (LevelAccessor level_accessor, BlockPos pos, String name) {
-
-			return new Object() {
-
-				public double getValue (LevelAccessor level_accessor, BlockPos pos, String name) {
-
-					BlockEntity block_entity = level_accessor.getBlockEntity(pos);
-
-					if (block_entity == null) {
-
-                        return 0.0;
-
-					}
-
-					/*
-                    (1.20.1) (1.21.1)
-                    return block_entity.getPersistentData().getCompound(Core.mod_id).getDouble(name);
-                    (1.21.8)
-                    return block_entity.getPersistentData().getCompound(Core.mod_id).getDouble(name).get();
-                    */
-					return block_entity.getPersistentData().getCompound(Core.mod_id).getDouble(name);
-
-				}
-
-			}.getValue(level_accessor, pos, name);
-
-		}
-
-		public static boolean getBlockLogic (LevelAccessor level_accessor, BlockPos pos, String name) {
-
-			return new Object() {
-
-				public boolean getValue (LevelAccessor level_accessor, BlockPos pos, String name) {
-
-					BlockEntity blockEntity = level_accessor.getBlockEntity(pos);
-
-					if (blockEntity != null) {
-
-                        /*
-                        (1.20.1) (1.21.1)
-                        return blockEntity.getPersistentData().getCompound(Core.mod_id).getBoolean(name);
-                        (1.21.8)
-                        return blockEntity.getPersistentData().getCompound(Core.mod_id).getBoolean(name).get();
-                        */
-						return blockEntity.getPersistentData().getCompound(Core.mod_id).getBoolean(name);
-
-					}
-
-					return false;
-
-				}
-
-			}.getValue(level_accessor, pos, name);
-
-		}
-
-		public static void setBlockText (LevelAccessor level_accessor, ServerLevel level_server, BlockPos pos, String name, String value) {
-
-			BlockEntity block_entity = level_accessor.getBlockEntity(pos);
-
-			if (block_entity != null) {
-
-				CompoundTag tag = new CompoundTag();
-				CompoundTag tag_add = new CompoundTag();
-				tag_add.putString(name, value);
-				tag.put(Core.mod_id, tag_add);
-				block_entity.getPersistentData().merge(tag);
-				BlockState block = level_accessor.getBlockState(pos);
-				level_server.sendBlockUpdated(pos, block, block, 2);
-
-			}
-
-		}
-
-		public static void setBlockLogic (LevelAccessor level_accessor, ServerLevel level_server, BlockPos pos, String name, boolean value) {
-
-			BlockEntity block_entity = level_accessor.getBlockEntity(pos);
-
-			if (block_entity != null) {
-
-				CompoundTag tag = new CompoundTag();
-				CompoundTag tag_add = new CompoundTag();
-				tag_add.putBoolean(name, value);
-				tag.put(Core.mod_id, tag_add);
-				block_entity.getPersistentData().merge(tag);
-				BlockState block = level_accessor.getBlockState(pos);
-				level_server.sendBlockUpdated(pos, block, block, 2);
-
-			}
-
-		}
-
-		public static void setBlockNumber (LevelAccessor level_accessor, ServerLevel level_server, BlockPos pos, String name, double value) {
-
-			BlockEntity block_entity = level_accessor.getBlockEntity(pos);
-
-			if (block_entity != null) {
-
-				CompoundTag tag = new CompoundTag();
-				CompoundTag tag_add = new CompoundTag();
-				tag_add.putDouble(name, value);
-				tag.put(Core.mod_id, tag_add);
-				block_entity.getPersistentData().merge(tag);
-				BlockState block = level_accessor.getBlockState(pos);
-				level_server.sendBlockUpdated(pos, block, block, 2);
-
-			}
-
-		}
-
-		public static void addBlockNumber (LevelAccessor level_accessor, ServerLevel level_server, BlockPos pos, String name, double value) {
-
-			BlockEntity block_entity = level_accessor.getBlockEntity(pos);
-
-			if (block_entity != null) {
-
-				/*
-				(1.20.1) (1.21.1)
-				block_entity.getPersistentData().getCompound(Core.mod_id).putDouble(name, block_entity.getPersistentData().getCompound(Core.mod_id).getDouble(name) + value);
-				(1.21.8)
-				block_entity.getPersistentData().getCompound(Core.mod_id).putDouble(name, block_entity.getPersistentData().getCompound(Core.mod_id).getDouble(name).get() + value);
-				*/
-				block_entity.getPersistentData().getCompound(Core.mod_id).putDouble(name, block_entity.getPersistentData().getCompound(Core.mod_id).getDouble(name) + value);
-
-				BlockState block = level_accessor.getBlockState(pos);
-				level_server.sendBlockUpdated(pos, block, block, 2);
-
-			}
-
-		}
-
-		public static String getItemText (Entity entity, EquipmentSlot slot, String name) {
-
-			/*
-			(1.20.1)
-			return Item.getSlot(entity, slot).getOrCreateTag().getCompound(Core.mod_id).getString(name);
-			(1.21.1)
-			return Item.getSlot(entity, slot).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getCompound(Core.mod_id).getString(name);
-			*/
-			return Item.getSlot(entity, slot).getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getCompound(Core.mod_id).getString(name);
-
-		}
-
-		public static void setItemText (Entity entity, EquipmentSlot slot, String name, String value) {
-
-			CompoundTag tag = new CompoundTag();
-			CompoundTag tag_add = new CompoundTag();
-			tag_add.putString(name, value);
-			tag.put(Core.mod_id, tag_add);
-
-			/*
-			(1.20.1)
-			Item.getSlot(entity, slot).getOrCreateTag().merge(tag);
-			(1.21.1)
-			CustomData.update(DataComponents.CUSTOM_DATA, Item.getSlot(entity, slot), create -> create.merge(tag));
-			*/
-			CustomData.update(DataComponents.CUSTOM_DATA, Item.getSlot(entity, slot), create -> create.merge(tag));
 
 		}
 

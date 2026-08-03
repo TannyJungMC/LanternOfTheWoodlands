@@ -3,7 +3,6 @@ package tannyjung.tanscomplexmagic_core.outside;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ChunkPos;
 import tannyjung.tanscomplexmagic_core.Core;
-import tannyjung.tanscomplexmagic_core.game.NBTManager;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -514,7 +513,7 @@ public class OutsideUtils {
 
     public static class Calculation {
 
-        public static double getDegreeDestination (double posX, double posZ, double destinationX, double destinationZ, double rotationY) {
+        public static double getDegreeDestinationX (float rotationY, double posX, double posZ, double destinationX, double destinationZ) {
 
             posX = posX - destinationX;
             posZ = posZ - destinationZ;

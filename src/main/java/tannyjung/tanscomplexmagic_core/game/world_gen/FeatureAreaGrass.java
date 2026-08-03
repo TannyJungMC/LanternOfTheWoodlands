@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import tannyjung.tanscomplexmagic_core.game.BlockManager;
 import tannyjung.tanscomplexmagic_core.game.GameUtils;
 
 public class FeatureAreaGrass extends Feature <NoneFeatureConfiguration> {
@@ -51,7 +52,7 @@ public class FeatureAreaGrass extends Feature <NoneFeatureConfiguration> {
                             pos = new BlockPos(center_pos.getX() + scanX, center_pos.getY() + scanY, center_pos.getZ() + scanZ);
                             previous_block = level_accessor.getBlockState(pos);
 
-                            if (GameUtils.Tile.test(previous_block, "#minecraft:sand / #minecraft:base_stone_overworld") == true) {
+                            if (BlockManager.test(previous_block, "#minecraft:sand / #minecraft:base_stone_overworld") == true) {
 
                                 if (Math.random() < 0.5) {
 
@@ -71,7 +72,7 @@ public class FeatureAreaGrass extends Feature <NoneFeatureConfiguration> {
 
                                 }
 
-                                GameUtils.Tile.set(level_accessor, pos, block, false);
+                                BlockManager.set(level_accessor, pos, block, false);
 
                             }
 

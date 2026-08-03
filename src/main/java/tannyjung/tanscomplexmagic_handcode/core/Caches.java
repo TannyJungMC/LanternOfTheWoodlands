@@ -3,6 +3,7 @@ package tannyjung.tanscomplexmagic_handcode.core;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import tannyjung.tanscomplexmagic_core.Core;
+import tannyjung.tanscomplexmagic_core.game.BlockManager;
 import tannyjung.tanscomplexmagic_core.game.GameUtils;
 import tannyjung.tanscomplexmagic_core.outside.config.CacheManager;
 import tannyjung.tanscomplexmagic_core.outside.FileManager;
@@ -275,7 +276,7 @@ public class Caches {
 
             for (Map.Entry<String, String> entry : data.entrySet()) {
 
-                convert.put(Short.parseShort(entry.getKey()), GameUtils.Tile.fromText(level_server, entry.getValue()));
+                convert.put(Short.parseShort(entry.getKey()), BlockManager.fromText(level_server, entry.getValue()));
 
             }
 

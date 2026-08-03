@@ -32,7 +32,7 @@ public class Networks {
 
                     {
 
-                        GameUtils.Misc.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 0.75, "minecraft:item.book.page_turn");
+                        GameUtils.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 0.75, "minecraft:item.book.page_turn");
                         GUIManager.close(player_server);
 
                     }
@@ -41,8 +41,14 @@ public class Networks {
 
                     {
 
-                        GameUtils.Misc.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 0.75, "minecraft:item.book.page_turn");
+                        GameUtils.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 0.75, "minecraft:item.book.page_turn");
                         NBTManager.Mob.addNumber(player_server, "gui", "id", -2);
+
+                        if (NBTManager.Mob.getNumber(player_server, "gui", "id") < 0) {
+
+                            NBTManager.Mob.setNumber(player_server, "gui", "id", 0);
+
+                        }
 
                     }
 
@@ -50,7 +56,7 @@ public class Networks {
 
                     {
 
-                        GameUtils.Misc.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 0.75, "minecraft:item.book.page_turn");
+                        GameUtils.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 0.75, "minecraft:item.book.page_turn");
                         NBTManager.Mob.addNumber(player_server, "gui", "id", 2);
 
                     }
@@ -118,7 +124,7 @@ public class Networks {
 
                         NBTManager.Mob.setLogic(player_server, "status", "main_key", false);
 
-                        Spell1.cancel(level_server);
+                        Spell1.cancel(level_server, player_server);
 
                     } else {
 
@@ -134,7 +140,7 @@ public class Networks {
 
                 {
 
-                    NBTManager.Mob.setLogic(player_server, "spell1", "is_enable_all", NBTManager.Mob.getLogic(player_server, "spell1", "is_enable_all") == false);
+                    NBTManager.Mob.setLogic(player_server, "spell1", "pause", NBTManager.Mob.getLogic(player_server, "spell1", "pause") == false);
 
                 }
 

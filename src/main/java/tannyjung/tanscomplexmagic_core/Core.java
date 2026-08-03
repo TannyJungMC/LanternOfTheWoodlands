@@ -94,7 +94,7 @@ public class Core {
 
                     if (level_server != null) {
 
-                        GameUtils.Misc.sendChatMessage(level_server, "Restarting the mod... / gray");
+                        GameUtils.sendChatMessage(level_server, "Restarting the mod... / gray");
 
                     }
 
@@ -120,7 +120,7 @@ public class Core {
 
                     if (level_server != null) {
 
-                        GameUtils.Misc.sendChatMessage(level_server, "Restarted and cleared main caches about " + cache_size + " / gray");
+                        GameUtils.sendChatMessage(level_server, "Restarted and cleared main caches about " + cache_size + " / gray");
 
                     }
 
@@ -144,7 +144,7 @@ public class Core {
                 DelayedWork.create(true, 20, () -> {
 
                     runnable.run();
-                    GameUtils.Score.create(level_server, mod_id_big);
+                    ScoreManager.create(level_server, mod_id_big);
 
                     GlobalLocking.unlock();
 

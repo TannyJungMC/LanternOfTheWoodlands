@@ -724,7 +724,6 @@ public class ScreenDrawing {
                     double value = this.value;
                     value = value * range;
                     value = Math.round(value / value_move);
-
                     value = (value * value_move) + value_min;
 
                     if (value != value_previous) {

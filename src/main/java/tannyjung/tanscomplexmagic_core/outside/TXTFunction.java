@@ -9,8 +9,10 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import tannyjung.tanscomplexmagic_core.Core;
+import tannyjung.tanscomplexmagic_core.game.BlockManager;
 import tannyjung.tanscomplexmagic_core.game.EntityManager;
 import tannyjung.tanscomplexmagic_core.game.GameUtils;
+import tannyjung.tanscomplexmagic_core.game.NBTManager;
 import tannyjung.tanscomplexmagic_core.outside.config.CacheManager;
 
 public class TXTFunction {
@@ -267,7 +269,7 @@ public class TXTFunction {
 
                                                                 if (GameUtils.Space.testChunkStatus(level_accessor, new ChunkPos(pos_convert), "surface") == true) {
 
-                                                                    if (GameUtils.Tile.test(level_accessor.getBlockState(pos_convert), variable_text) == true) {
+                                                                    if (BlockManager.test(level_accessor.getBlockState(pos_convert), variable_text) == true) {
 
                                                                         continue;
 
@@ -310,7 +312,7 @@ public class TXTFunction {
                                                                     maxY = Integer.parseInt(min_max[4]);
                                                                     maxZ = Integer.parseInt(min_max[5]);
 
-                                                                    block = GameUtils.Tile.fromText(level_server, split[3]);
+                                                                    block = BlockManager.fromText(level_server, split[3]);
                                                                     variable_text = split[4];
 
                                                                 } catch (Exception ignored) {
@@ -331,13 +333,13 @@ public class TXTFunction {
 
                                                                                     pos_convert = pos.offset(offset_posX + testX, offset_posY + testY, offset_posZ + testZ);
 
-                                                                                    if (GameUtils.Tile.test(level_accessor.getBlockState(pos_convert), variable_text) == false) {
+                                                                                    if (BlockManager.test(level_accessor.getBlockState(pos_convert), variable_text) == false) {
 
                                                                                         continue;
 
                                                                                     }
 
-                                                                                    GameUtils.Tile.set(level_accessor, pos_convert, block, false);
+                                                                                    BlockManager.set(level_accessor, pos_convert, block, false);
 
                                                                                 }
 
@@ -437,7 +439,7 @@ public class TXTFunction {
 
                                                                         level_server.getServer().execute(() -> {
 
-                                                                            GameUtils.Command.run(level_server, pos.getCenter(), variable_text_final);
+                                                                            GameUtils.runCommand(level_server, pos.getCenter(), variable_text_final);
 
                                                                         });
 
@@ -491,7 +493,7 @@ public class TXTFunction {
                 }
 
                 String command_final = command.replace("'", "*").replace("\"", "$");
-                EntityManager.summonWorldGen(level_server, pos.getCenter(), "marker", "Delayed Command", new String[]{Core.mod_id_big + "-delayed_command"}, "{NeoForgeData:{" + Core.mod_id + ":{command:\"" + command_final + "\"}}}");
+                EntityManager.summonWorldGen(level_server, pos.getCenter(), "marker", "Delayed Command", new String[]{Core.mod_id_big + "-delayed_command"}, "{NeoForgeData:{" + Core.mod_id + ":{core:{command:\"" + command_final + "\"}}}}");
                 
             }
 
@@ -503,13 +505,9 @@ public class TXTFunction {
 
         if (level_server.isPositionEntityTicking(entity.blockPosition()) == true) {
 
-            for (String command : GameUtils.Data.getEntityText(entity, "command").replace("*", "'").replace("$", "\"").split("\\|")) {
+            for (String command : NBTManager.Mob.getText(entity, "core", "command").replace("*", "'").replace("$", "\"").split("\\|")) {
 
-                level_server.getServer().execute(() -> {
-
-                    GameUtils.Command.run(level_server, entity.position(), command);
-
-                });
+                level_server.getServer().execute(() -> GameUtils.runCommand(level_server, entity.position(), command));
 
             }
 
@@ -523,7 +521,7 @@ public class TXTFunction {
 
         count_delayed_command = 0;
 
-        for (Entity entity : EntityManager.Get.fromEverywhere(level_server, "minecraft:marker", new String[]{"TANNYJUNG-delayed_command"})) {
+        for (Entity entity : EntityManager.Get.fromEverywhere(level_server, "minecraft:marker", new String[]{Core.mod_id_big + "-delayed_command"})) {
 
             count_delayed_command = count_delayed_command + 1;
             TXTFunction.runDelayedCommand(level_server, entity);

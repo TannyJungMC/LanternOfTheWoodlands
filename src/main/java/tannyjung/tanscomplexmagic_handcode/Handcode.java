@@ -32,7 +32,7 @@ public class Handcode {
 
         Core.have_world_data_cleaner = true;
 
-        compatibility_serene_seasons = Config.compatibility_serene_seasons && GameUtils.Misc.isModLoaded("sereneseasons");
+        compatibility_serene_seasons = Config.compatibility_serene_seasons && GameUtils.isModLoaded("sereneseasons");
 
     }
 

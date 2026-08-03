@@ -6,25 +6,34 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
-import tannyjung.tanscomplexmagic_core.Core;
+import tannyjung.tanscomplexmagic_core.game.EffectManager;
 import tannyjung.tanscomplexmagic_core.game.EntityManager;
 import tannyjung.tanscomplexmagic_core.game.GameUtils;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Spell1 {
 
     public static void start (ServerLevel level_server, ServerPlayer player_server) {
 
-        Vec3 vec3 = BlockPos.containing(GameUtils.Space.getPosRay(player_server, 100)).getCenter().add(0.0, -0.5, 0.0);
+        BlockPos pos = BlockPos.containing(GameUtils.Space.getPosRay(player_server, 100));
+
+        if (level_server.getBlockState(pos).isAir() == false || level_server.getBlockState(pos.below()).isAir() == true) {
+
+            return;
+
+        }
+
+        Vec3 vec3 = pos.getCenter();
 
 
 
 
-        Entity entity_main = EntityManager.summon(level_server, vec3, false, "minecraft:marker", "Main", new String[]{Core.mod_id_big + "-main"}, "");
+
+
+        Entity entity_main = EntityManager.summon(level_server, vec3, false, "minecraft:marker", "Main", Utils.Tag.convertSystem(player_server, new String[]{"main"}), "");
 
         if (entity_main == null) {
 
@@ -40,22 +49,29 @@ public class Spell1 {
 
             }
 
-            EntityManager.Display.summonItem(level_server, entity_main.position(), (360 / 13) * number, 90, 0, true, "Zodiac Card", new String[]{Core.mod_id_big + "-spell1", Core.mod_id_big + "-spell1_card", Core.mod_id_big + "-spell1_card" + number}, "tanscomplexmagic:zodiac_card_" + number);
+            EntityManager.Display.summonItem(level_server, entity_main.position().add(0.0, -0.5, 0.0), ((360 / 13) * number) + 180 - 15, 90, 0, true, "Zodiac Card " + number, Utils.Tag.convertSystem(player_server, new String[]{"spell1", "spell1_card", "spell1_card" + number}), "tanscomplexmagic:zodiac_card_" + number);
 
         }
 
-        if (NBTManager.Mob.getLogic(player_server, "spell1", "is_enable_all") == true) {
-
-            NBTManager.Mob.setLogic(player_server, "spell1", "is_enable_all", false);
-            NBTManager.Mob.setNumber(player_server, "spell1", "start_delay", 40);
-
-        }
+        double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
+        GameUtils.spawnParticle(level_server, entity_main.position(), 0, 0, 0, 0, 1, "minecraft:flash");
+        GameUtils.playSound(level_server, entity_main.blockPosition(), 0, radius * 5, "minecraft:entity.evoker.prepare_summon");
+        GameUtils.playSound(level_server, entity_main.blockPosition(), 0, radius * 10, "minecraft:block.enchantment_table.use");
 
     }
 
-    public static void cancel (ServerLevel level_server) {
+    public static void cancel (ServerLevel level_server, ServerPlayer player_server) {
 
-        for (Entity entity : EntityManager.Get.fromEverywhere(level_server, "", new String[]{"TANNYJUNG"})) {
+        double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
+
+        for (Entity entity : EntityManager.Get.fromEverywhere(level_server, "minecraft:item_display", Utils.Tag.convertSystem(player_server, new String[]{"spell1_card"}))) {
+
+            GameUtils.spawnParticle(level_server, entity.position(), 0, 0, 0, 0, 1, "minecraft:flash");
+            GameUtils.playSound(level_server, entity.blockPosition(), 0, radius * 4, "minecraft:entity.evoker.cast_spell");
+
+        }
+
+        for (Entity entity : EntityManager.Get.fromEverywhere(level_server, "", Utils.Tag.convertSystemAll(player_server))) {
 
             entity.discard();
 
@@ -63,29 +79,9 @@ public class Spell1 {
 
     }
 
-    public static void loopTick (ServerLevel level_server, ServerPlayer player_server) {
+    public static void tick (ServerLevel level_server, ServerPlayer player_server) {
 
-        // Delay Before Card Jump
-        {
-
-            int delay = (int) NBTManager.Mob.getNumber(player_server, "spell1", "start_delay");
-
-            if (delay > 0) {
-
-                delay = delay - 1;
-                NBTManager.Mob.setNumber(player_server, "spell1", "start_delay", delay);
-
-                if (delay == 0) {
-
-                    NBTManager.Mob.setLogic(player_server, "spell1", "is_enable_all", true);
-
-                }
-
-            }
-
-        }
-
-        Entity entity_main = EntityManager.Get.fromEverywhereOne(level_server, "minecraft:marker", new String[]{Core.mod_id_big + "-main"});
+        Entity entity_main = EntityManager.Get.fromEverywhereOne(level_server, "minecraft:marker", Utils.Tag.convertSystem(player_server, new String[]{"main"}));
 
         if (entity_main == null) {
 
@@ -93,7 +89,14 @@ public class Spell1 {
 
         }
 
-        entity_main.setYRot(entity_main.getYRot() + (float) 0.1);
+        entity_main.setYRot(entity_main.getYRot() + (float) 0.05);
+
+        updateCard(level_server, player_server, entity_main);
+
+    }
+
+    private static void updateCard (ServerLevel level_server, ServerPlayer player_server, Entity entity_main) {
+
         Map<Integer, Entity> map_entity_card = new HashMap<>();
 
         // Import Card
@@ -103,7 +106,7 @@ public class Spell1 {
 
             for (int number = 1; number <= 13; number++) {
 
-                entity = EntityManager.Get.fromEverywhereOne(level_server, "minecraft:item_display", new String[]{Core.mod_id_big + "-spell1_card" + number});
+                entity = EntityManager.Get.fromEverywhereOne(level_server, "minecraft:item_display", Utils.Tag.convertSystem(player_server, new String[]{"spell1_card" + number}));
 
                 if (entity != null) {
 
@@ -115,20 +118,37 @@ public class Spell1 {
 
         }
 
-        double distance = NBTManager.Mob.getNumber(player_server, "spell1", "distance");
+        double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
 
         for (Map.Entry<Integer, Entity> entry : map_entity_card.entrySet()) {
 
-            setCardPosition(player_server, entity_main, entry.getValue(), map_entity_card.size());
-            setCardPose(level_server, player_server, entry.getValue(), entry.getKey());
-
-            // When Update Distance
+            // When Update Radius
             {
 
-                if (NBTManager.Mob.getNumber(entry.getValue(), "spell1", "distance_save") != distance) {
+                if (NBTManager.Mob.getNumber(entry.getValue(), "", "radius_previous") != radius) {
 
-                    NBTManager.Mob.setNumber(entry.getValue(), "spell1", "distance_save", distance);
-                    setCardSize(level_server, player_server, entry.getValue());
+                    NBTManager.Mob.setNumber(entry.getValue(), "", "radius_previous", radius);
+                    setCardSize(player_server, entry.getValue());
+
+                }
+
+            }
+
+            setCardPosition(player_server, entity_main, entry.getValue(), map_entity_card.size());
+            setCardPose(level_server, player_server, entity_main, entry.getValue(), entry.getKey());
+
+            if (NBTManager.Mob.getText(entry.getValue(), "", "status").equals("effect") == true) {
+
+                int effect_tick = (int) NBTManager.Mob.getNumber(entry.getValue(), "", "effect_tick");
+
+                if (effect_tick < 20) {
+
+                    NBTManager.Mob.setNumber(entry.getValue(), "", "effect_tick", effect_tick + 1);
+
+                } else {
+
+                    NBTManager.Mob.setNumber(entry.getValue(), "", "effect_tick", 1);
+                    giveEffect(level_server, player_server, entity_main, entry.getValue(), entry.getKey());
 
                 }
 
@@ -138,50 +158,41 @@ public class Spell1 {
 
     }
 
-    public static void loopSecond (ServerLevel level_server, ServerPlayer player_server) {
+    private static void setCardPosition (ServerPlayer player_server, Entity entity_main, Entity entity_card, int card_count) {
 
-        // Use custom tick instead? Not from this. But create own NBT for loop
-
-    }
-
-    public static void setCardPosition (ServerPlayer player_server, Entity entity_main, Entity entity_card, int card_count) {
-
-        double distance = NBTManager.Mob.getNumber(player_server, "spell1", "distance");
+        double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
         double height = 0.0;
 
-        if (NBTManager.Mob.getNumber(entity_card, "spell1", "degree") == 0) {
+        if (NBTManager.Mob.getText(entity_card, "", "status").isEmpty() == true) {
 
-            if (distance <= 10) {
+            if (radius <= 10) {
 
                 height = 0.1;
 
             } else {
 
-                height = (distance / 100.0) * 95;
+                height = (radius / 100.0) * 95;
 
             }
 
         } else {
 
-            if (distance <= 10) {
+            if (radius <= 10) {
 
-                height = distance / 4;
+                height = radius / 4;
 
             } else {
 
-                height = distance / 1.5;
+                height = radius / 1.5;
 
             }
 
         }
 
-        entity_card.setPos(GameUtils.Space.getPosLook(entity_main, 0, height, distance));
-        entity_card.lookAt(EntityAnchorArgument.Anchor.FEET, entity_main.position());
-        entity_card.setXRot(90);
-
+        entity_card.setPos(GameUtils.Space.getPosLook(entity_main, 0, height - 0.5, radius));
         entity_main.setYRot(entity_main.getYRot() + (float) (360.0 / card_count));
 
-        while (entity_main.getYRot() >= 360) {
+        if (entity_main.getYRot() >= 360) {
 
             entity_main.setYRot(entity_main.getYRot() - 360);
 
@@ -189,71 +200,122 @@ public class Spell1 {
 
     }
 
-    public static void setCardPose (ServerLevel level_server, ServerPlayer player_server, Entity entity_card, int card_number) {
+    private static void setCardPose (ServerLevel level_server, ServerPlayer player_server, Entity entity_main, Entity entity_card, int card_number) {
 
-        double degree = NBTManager.Mob.getNumber(entity_card, "spell1", "degree");
-        int degree_set = 0;
+        float rotX_save = entity_card.getXRot();
+        entity_card.lookAt(EntityAnchorArgument.Anchor.FEET, entity_main.position());
+        entity_card.setXRot(rotX_save);
 
-        if (NBTManager.Mob.getLogic(player_server, "spell1", "is_enable_all") == true && NBTManager.Mob.getLogic(player_server, "spell1", "is_enable" + card_number) == true) {
+        int degree_set = 90;
 
-            if (NBTManager.Mob.getLogic(player_server, "spell1", "is_negative" + card_number) == true) {
+        if (NBTManager.Mob.getLogic(player_server, "spell1", "pause") == false) {
 
-                degree_set = 90;
+            if (NBTManager.Mob.getLogic(player_server, "spell1", "is_enable" + card_number) == true) {
 
-            } else {
+                if (NBTManager.Mob.getLogic(player_server, "spell1", "is_negative" + card_number) == true) {
 
-                degree_set = 270;
+                    degree_set = -180;
+
+                } else {
+
+                    degree_set = 0;
+
+                }
 
             }
 
         }
 
-        if (degree != degree_set) {
+        if (entity_card.getXRot() != degree_set) {
 
-            // Add Degree
+            // Flipping
             {
 
-                double degree_add = 0.0;
-                double test = degree;
+                double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
+                double sound_distance = radius + 2.5;
 
-                if (test < degree_set) {
+                if (NBTManager.Mob.getText(entity_card, "", "status").equals("flip") == false) {
 
-                    test = test + 360;
+                    // At Start of Flipping
+                    {
 
-                }
+                        NBTManager.Mob.setText(entity_card, "", "status", "flip");
 
-                if (Math.abs(test - degree_set) > 180) {
+                        if (entity_card.getXRot() != 90) {
 
-                    degree_add = 1;
+                            GameUtils.playSound(level_server, entity_card.blockPosition(), (Math.random() * 0.5) + 0.5, sound_distance * 5.0, "minecraft:block.bell.use");
 
-                } else {
+                        } else {
 
-                    degree_add = -1;
+                            GameUtils.playSound(level_server, entity_card.blockPosition(), (Math.random() * 0.5) + 0.5, sound_distance * 5.0, "minecraft:block.ender_chest.open");
 
-                }
+                        }
 
-                degree = degree + degree_add;
-
-                if (degree >= 360) {
-
-                    degree = degree - 360;
-
-                } else if (degree < 0) {
-
-                    degree = degree + 360;
+                    }
 
                 }
 
-                NBTManager.Mob.setNumber(entity_card, "spell1", "degree", degree);
-                EntityManager.Display.setItemRotation(entity_card, "x", degree);
+                // Add Degree
+                {
 
-            }
+                    double degree = 1.0 - (radius / 200.0);
+                    degree = (degree * 0.6) + 0.4;
 
-            // GameUtils.Misc.spawnParticle(level_server, entity_card.position(), 0.1, 0.1, 0.1, 0, 1, "minecraft:instant_effect");
+                    if (entity_card.getXRot() > degree_set && entity_card.getXRot() - (float) degree > degree_set) {
 
-            if (degree == degree_set) {
+                        entity_card.setXRot(entity_card.getXRot() - (float) degree);
 
-                // GameUtils.Misc.spawnParticle(level_server, entity_card.position(), 0, 0, 0, 0.01, 5, "minecraft:end_rod");
+                    } else if (entity_card.getXRot() < degree_set && entity_card.getXRot() + (float) degree < degree_set) {
+
+                        entity_card.setXRot(entity_card.getXRot() + (float) degree);
+
+                    } else {
+
+                        entity_card.setXRot((float) degree_set);
+
+                    }
+
+                }
+
+                // Gear Sound
+                {
+
+                    int tick = (int) NBTManager.Mob.getNumber(entity_card, "", "gear_sound_tick");
+
+                    if (tick < 13) {
+
+                        NBTManager.Mob.setNumber(entity_card, "", "gear_sound_tick", tick + 1);
+
+                    } else {
+
+                        NBTManager.Mob.setNumber(entity_card, "", "gear_sound_tick", 1);
+                        GameUtils.playSound(level_server, entity_card.blockPosition(), 0, sound_distance * 5.0, "minecraft:block.wooden_door.open");
+
+
+                    }
+
+                }
+
+                if (entity_card.getXRot() == degree_set || entity_card.getXRot() == -180) {
+
+                    // Finish Flipping
+                    {
+
+                        if (degree_set == 90) {
+
+                            NBTManager.Mob.setText(entity_card, "", "status", "");
+                            GameUtils.playSound(level_server, entity_card.blockPosition(), (Math.random() * 0.5) + 0.5, sound_distance * 5.0, "minecraft:block.note_block.chime");
+
+                        } else {
+
+                            NBTManager.Mob.setText(entity_card, "", "status", "effect");
+                            GameUtils.playSound(level_server, entity_card.blockPosition(), 0, sound_distance * 5.0, "minecraft:block.iron_door.open");
+
+                        }
+
+                    }
+
+                }
 
             }
 
@@ -261,10 +323,63 @@ public class Spell1 {
 
     }
 
-    public static void setCardSize (ServerLevel level_server, ServerPlayer player_server, Entity entity_card) {
+    private static void setCardSize (ServerPlayer player_server, Entity entity_card) {
 
-        double scale = NBTManager.Mob.getNumber(player_server, "spell1", "distance") / 5.0;
+        double scale = NBTManager.Mob.getNumber(player_server, "spell1", "radius") / 5.0;
         EntityManager.Display.setItemScale(entity_card, scale);
+
+    }
+
+    private static void giveEffect (ServerLevel level_server, ServerPlayer player_server, Entity entity_main, Entity entity_card, int card_number) {
+
+        String effect = "";
+        int duration = 0;
+        int level = 0;
+
+        // Effects
+        {
+
+            boolean is_positive = entity_card.getXRot() == 0;
+
+            if (card_number == 1) {
+
+                {
+
+                    if (is_positive == true) {
+
+                        effect = "glowing";
+                        duration = 2;
+                        level = 1;
+
+                    } else {
+
+                        effect = "speed";
+                        duration = 2;
+                        level = 5;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        if (effect.isEmpty() == false) {
+
+            double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
+
+            for (Entity entity : EntityManager.Get.fromArea(level_server, entity_main.position(), radius, false, "", new String[]{})) {
+
+                if (EffectManager.has(level_server, entity, effect, 3, 0) == false) {
+
+                    EffectManager.give(level_server, entity, effect, duration, level);
+
+                }
+
+            }
+
+        }
 
     }
 

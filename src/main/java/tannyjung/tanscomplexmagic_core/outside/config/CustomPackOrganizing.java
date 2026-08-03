@@ -2,6 +2,7 @@ package tannyjung.tanscomplexmagic_core.outside.config;
 
 import net.minecraft.server.level.ServerLevel;
 import tannyjung.tanscomplexmagic_core.Core;
+import tannyjung.tanscomplexmagic_core.game.BlockManager;
 import tannyjung.tanscomplexmagic_core.game.GameUtils;
 import tannyjung.tanscomplexmagic_core.outside.FileManager;
 import tannyjung.tanscomplexmagic_core.outside.OutsideUtils;
@@ -332,7 +333,7 @@ public class CustomPackOrganizing {
 
                         for (String scan : required_mods.split(" / ")) {
 
-                            if (GameUtils.Misc.isModLoaded(scan) == false) {
+                            if (GameUtils.isModLoaded(scan) == false) {
 
                                 Error.add("pack", "packs / required mods not found. This will results skipping these packs. Make sure you install required mods to allow these packs to work.", pack.getPath(), pack.getName() + " > " + scan);
                                 pass = false;
@@ -550,7 +551,7 @@ public class CustomPackOrganizing {
 
                                             value = value.replace(" keep", "");
 
-                                            if (GameUtils.Tile.fromText(level_server, value).isAir() == true) {
+                                            if (BlockManager.fromText(level_server, value).isAir() == true) {
 
                                                 Error.add("file", "settings file / unknown block IDs. This will results skipping them in mod systems.", file.getPath(), id + " > " + value);
                                                 pass = false;
@@ -650,7 +651,7 @@ public class CustomPackOrganizing {
 
                         if (to_chat == true) {
 
-                            GameUtils.Misc.sendChatMessage(level_server, message + " / red");
+                            GameUtils.sendChatMessage(level_server, message + " / red");
 
                         } else {
 
@@ -662,7 +663,7 @@ public class CustomPackOrganizing {
 
                             if (to_chat == true) {
 
-                                GameUtils.Misc.sendChatMessage(level_server, get + " / dark_gray");
+                                GameUtils.sendChatMessage(level_server, get + " / dark_gray");
 
                             } else {
 

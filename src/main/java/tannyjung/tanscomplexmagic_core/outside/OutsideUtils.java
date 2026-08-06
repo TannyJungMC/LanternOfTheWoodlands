@@ -533,30 +533,45 @@ public class OutsideUtils {
 
         public static String convertSecondToTime (int seconds) {
 
-            seconds = seconds - 0;
-            String hour = String.valueOf((seconds / 60 / 60) % 60);
-            String minute = String.valueOf((seconds / 60) % 60);
-            String second = String.valueOf(seconds % 60);
+            seconds = seconds - 60;
 
-            if (hour.length() == 1) {
+            int hour = (seconds / 60 / 60) % 60;
+            int minute = (seconds / 60) % 60;
+            int second = seconds % 60;
+            StringBuilder builder = new StringBuilder();
 
-                hour = "0" + hour;
+            if (hour > 0) {
 
-            }
+                if (hour < 10) {
 
-            if (minute.length() == 1) {
+                    builder.append("0");
 
-                minute = "0" + minute;
+                }
 
-            }
-
-            if (second.length() == 1) {
-
-                second = "0" + second;
+                builder.append(hour).append("h ");
 
             }
 
-            return hour + ":" + minute + ":" + second;
+            if (hour > 0 || minute > 0) {
+
+                if (minute < 10) {
+
+                    builder.append("0");
+
+                }
+
+                builder.append(minute).append("m ");
+
+            }
+
+            if (second < 10) {
+
+                builder.append("0");
+
+            }
+
+            builder.append(second).append("s");
+            return builder.toString();
 
         }
 

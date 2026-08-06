@@ -4,10 +4,6 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.phys.Vec3;
-import tannyjung.tanscomplexmagic_core.Core;
-import tannyjung.tanscomplexmagic_core.game.EntityManager;
 import tannyjung.tanscomplexmagic_core.game.GameUtils;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
 import tannyjung.tanscomplexmagic_core.game.screen.GUIManager;
@@ -32,7 +28,7 @@ public class Networks {
 
                     {
 
-                        GameUtils.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 0.75, "minecraft:item.book.page_turn");
+                        GameUtils.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 10, "minecraft:item.book.page_turn");
                         GUIManager.close(player_server);
 
                     }
@@ -41,7 +37,7 @@ public class Networks {
 
                     {
 
-                        GameUtils.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 0.75, "minecraft:item.book.page_turn");
+                        GameUtils.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 10, "minecraft:item.book.page_turn");
                         NBTManager.Mob.addNumber(player_server, "gui", "id", -2);
 
                         if (NBTManager.Mob.getNumber(player_server, "gui", "id") < 0) {
@@ -56,7 +52,7 @@ public class Networks {
 
                     {
 
-                        GameUtils.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 0.75, "minecraft:item.book.page_turn");
+                        GameUtils.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 10, "minecraft:item.book.page_turn");
                         NBTManager.Mob.addNumber(player_server, "gui", "id", 2);
 
                     }
@@ -124,13 +120,13 @@ public class Networks {
 
                         NBTManager.Mob.setLogic(player_server, "status", "main_key", false);
 
-                        Spell1.cancel(level_server, player_server);
+                        Spell1.deactivate(level_server, player_server);
 
                     } else {
 
                         NBTManager.Mob.setLogic(player_server, "status", "main_key", true);
 
-                        Spell1.start(level_server, player_server);
+                        Spell1.activate(level_server, player_server);
 
                     }
 

@@ -48,10 +48,6 @@ public class Loops {
 
                     Book.updateLog((ServerPlayer) user);
 
-                } else {
-
-                    NBTManager.Mob.setNumber(user, "status", "mana", 0);
-
                 }
 
             }

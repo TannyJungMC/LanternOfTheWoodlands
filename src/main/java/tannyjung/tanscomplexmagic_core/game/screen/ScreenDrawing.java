@@ -20,7 +20,6 @@ import java.util.*;
 
 public class ScreenDrawing {
 
-
     public static double normal_font_scale = 0.68;
 
     public static void refresh () {
@@ -29,9 +28,56 @@ public class ScreenDrawing {
 
     }
 
+    public static class Anchor {
+
+        public static int[] getWindowPoint (int windowX, int windowZ, boolean is_top, boolean is_bottom, boolean is_left, boolean is_right) {
+
+            windowX = windowX / 2;
+            windowZ = windowZ / 2;
+
+            if (is_top == true && is_bottom == false) {
+
+                if (is_left == true && is_right == false) {
+
+                    return new int[]{-windowX, -windowZ};
+
+                } else if (is_left == false && is_right == true) {
+
+                    return new int[]{windowX, -windowZ};
+
+                } else {
+
+                    return new int[]{(int) (windowX * 1.5), (int) (windowZ * 1.5)};
+
+                }
+
+            }
+
+            return new int[]{0, 0};
+
+        }
+
+        public static int[] convertPosCenter (int centerX, int centerZ, int sizeX, int sizeZ) {
+
+            return new int[]{centerX - sizeX, centerZ - sizeZ};
+
+        }
+
+        private static int[] convertPosCenterText (int centerX, int centerZ, double scale, String text) {
+
+            int sizeX = Minecraft.getInstance().font.width(text) / 2;
+            int sizeZ = (Minecraft.getInstance().font.lineHeight - 1) / 2;
+            sizeX = (int) Math.floor(sizeX * scale);
+            sizeZ = (int) Math.floor(sizeZ * scale);
+            return Anchor.convertPosCenter(centerX, centerZ, sizeX, sizeZ);
+
+        }
+
+    }
+
     private static int[] convertPosAnchor (GuiGraphics graphic, int posX, int posZ, String pos_anchor, double scale) {
 
-        int[] pos = new int[2];
+        int[] pos = new int[]{0, 0};
 
         if (pos_anchor.isEmpty() == true) {
 
@@ -65,16 +111,6 @@ public class ScreenDrawing {
         pos[0] = (int) Math.round(pos[0] / scale);
         pos[1] = (int) Math.round(pos[1] / scale);
         return pos;
-
-    }
-
-    private static int[] convertPosTextCenter (int centerX, int centerZ, double scale, String text) {
-
-        int convertX = Minecraft.getInstance().font.width(text) / 2;
-        int convertZ = (Minecraft.getInstance().font.lineHeight - 1) / 2;
-        convertX = centerX - (int) Math.floor(convertX * scale);
-        convertZ = centerZ - (int) Math.floor(convertZ * scale);
-        return new int[]{convertX, convertZ};
 
     }
 
@@ -153,7 +189,7 @@ public class ScreenDrawing {
 
             for (Object[] objects : text) {
 
-                Overlay.drawText(graphic, (String) objects[0], (int) objects[1], (int) objects[2], (double) objects[3], (boolean) objects[4], (String) objects[5]);
+                ComponentBasic.drawText(graphic, (int) objects[1], (int) objects[2], (double) objects[3], (boolean) objects[4], (String) objects[5]);
 
             }
 
@@ -161,16 +197,15 @@ public class ScreenDrawing {
 
     }
 
-    public static class Overlay {
+    public static class ComponentBasic {
 
         private static final Map<String, String> online_image_id = new HashMap<>();
         private static final Map<String, String> online_image_status = new HashMap<>();
 
-        public static void drawText (GuiGraphics graphic, String pos_anchor, int posX, int posZ, double scale, boolean shadow, String text) {
+        public static void drawText (GuiGraphics graphic, int posX, int posZ, double scale, boolean shadow, String text) {
 
-            int[] pos = convertPosAnchor(graphic, posX, posZ, pos_anchor, scale);
-            posX = pos[0];
-            posZ = pos[1];
+            posX = (int) Math.round(posX / scale);
+            posZ = (int) Math.round(posZ / scale);
 
             /*
             (1.20.1) (1.21.1)
@@ -188,6 +223,20 @@ public class ScreenDrawing {
             graphic.pose().scale((float) scale, (float) scale, 1.0f);
             graphic.drawString(Minecraft.getInstance().font, text, posX, posZ, 0, shadow);
             graphic.pose().popPose();
+
+        }
+
+        public static void drawTextCentered (GuiGraphics graphic, int centerX, int centerZ, boolean is_only_vertical, double scale, String text) {
+
+            int[] pos_convert = Anchor.convertPosCenterText(centerX, centerZ, scale, text);
+
+            if (is_only_vertical == true) {
+
+                pos_convert[0] = centerX;
+
+            }
+
+            drawText(graphic, pos_convert[0], pos_convert[1], scale, false, text);
 
         }
 
@@ -224,7 +273,7 @@ public class ScreenDrawing {
 
                 AutoLine.test(posZ, "text_paragraph", 8);
 
-                drawText(graphic, "", posX, posZ + (entry.getKey() * 8), normal_font_scale, false, entry.getValue().toString());
+                drawText(graphic, posX, posZ + (entry.getKey() * 8), normal_font_scale, false, entry.getValue().toString());
 
             }
 
@@ -379,7 +428,7 @@ public class ScreenDrawing {
 
     }
 
-    public static class GUI {
+    public static class ComponentAdvance {
 
         public static void drawShape (GUIScreen screen, int posX, int posZ, int sizeX, int sizeZ) {
 
@@ -424,7 +473,7 @@ public class ScreenDrawing {
             // Ingredient
             {
 
-                int[] pos_convert = convertPosTextCenter(posX + (sizeX / 2), posZ + (sizeZ / 2), font_scale, text);
+                int[] pos_convert = Anchor.convertPosCenterText(posX + (sizeX / 2), posZ + (sizeZ / 2), font_scale, text);
                 Ingredient.text.add(new Object[]{"", pos_convert[0], pos_convert[1], font_scale, true, text});
 
             }
@@ -543,7 +592,7 @@ public class ScreenDrawing {
             // Ingredient
             {
 
-                int[] pos_convert = convertPosTextCenter(0, posZ + 4, normal_font_scale, text);
+                int[] pos_convert = Anchor.convertPosCenterText(0, posZ + 4, normal_font_scale, text);
                 Ingredient.text.add(new Object[]{"", posX + 16, pos_convert[1], normal_font_scale, false, text});
 
             }
@@ -588,7 +637,7 @@ public class ScreenDrawing {
 
                 if (is_lock == true) {
 
-                    int[] pos_convert = convertPosTextCenter(posX + 10 + (150 / 2), posZ + 15, normal_font_scale, text_lock);
+                    int[] pos_convert = Anchor.convertPosCenterText(posX + 10 + (150 / 2), posZ + 15, normal_font_scale, text_lock);
                     Ingredient.text.add(new Object[]{"", pos_convert[0], pos_convert[1], normal_font_scale, false, text_lock});
 
                 }
@@ -777,7 +826,7 @@ public class ScreenDrawing {
             }
 
             boolean is_select = false;
-            int[] pos_convert = new int[0];
+            int[] pos_convert = new int[]{};
 
             for (String scan : nbt_value.split(" / ")) {
 
@@ -805,7 +854,7 @@ public class ScreenDrawing {
 
                     }
 
-                    pos_convert = convertPosTextCenter(0, posZ + 4, normal_font_scale, scan);
+                    pos_convert = Anchor.convertPosCenterText(0, posZ + 4, normal_font_scale, scan);
                     Ingredient.text.add(new Object[]{"", posX + 10, pos_convert[1], normal_font_scale, false, scan});
 
                 }

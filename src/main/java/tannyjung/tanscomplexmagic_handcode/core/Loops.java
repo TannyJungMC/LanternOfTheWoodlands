@@ -27,20 +27,20 @@ public class Loops {
             // Mana Regeneration
             {
 
-                if (NBTManager.Mob.getNumber(user, "status", "mana") < 150) {
+                if (NBTManager.Mob.getNumber(user, "main", "mana") < 150) {
 
-                    if (NBTManager.Mob.getNumber(user, "status", "mana_charge") < 60) {
+                    if (NBTManager.Mob.getNumber(user, "main", "mana_charge") < 60) {
 
-                        NBTManager.Mob.addNumber(user, "status", "mana_charge", 1);
+                        NBTManager.Mob.addNumber(user, "main", "mana_charge", 1);
 
                     } else {
 
-                        NBTManager.Mob.setNumber(user, "status", "mana_charge", 1);
-                        NBTManager.Mob.addNumber(user, "status", "mana", 1);
+                        NBTManager.Mob.setNumber(user, "main", "mana_charge", 1);
+                        NBTManager.Mob.addNumber(user, "main", "mana", 1);
 
-                        if (NBTManager.Mob.getNumber(user, "status", "mana") == 150) {
+                        if (NBTManager.Mob.getNumber(user, "main", "mana") == 150) {
 
-                            NBTManager.Mob.setNumber(user, "status", "mana_charge", 0);
+                            NBTManager.Mob.setNumber(user, "main", "mana_charge", 0);
 
                         }
 

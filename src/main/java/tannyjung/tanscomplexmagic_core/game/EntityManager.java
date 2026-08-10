@@ -4,12 +4,10 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Display;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import tannyjung.tanscomplexmagic_core.Core;
@@ -43,6 +41,8 @@ public class EntityManager {
                             for (String scan : entry.getKey()) {
 
                                 if (scan.startsWith("!") == true) {
+
+                                    scan = scan.substring(1);
 
                                     if (entity.getTags().contains(scan) == true) {
 
@@ -117,20 +117,20 @@ public class EntityManager {
 
             if (entities == null) {
 
-                List<Entity> scan = new ArrayList<>();
+                List<Entity> list = new ArrayList<>();
 
                 level_server.getAllEntities().forEach(entity -> {
 
-                    if (filter(entity, id, tag_convert) == true) {
+                    if (test(entity, id, tag_convert) == true) {
 
-                        scan.add(entity);
+                        list.add(entity);
 
                     }
 
                 });
 
-                entities = scan;
-                cache_entities.get(id).put(tag_convert, scan);
+                entities = list;
+                cache_entities.get(id).put(tag_convert, list);
 
             }
 
@@ -171,6 +171,8 @@ public class EntityManager {
 
                             if (scan.startsWith("!") == true) {
 
+                                scan = scan.substring(1);
+
                                 if (entity.getTags().contains(scan) == true) {
 
                                     break test;
@@ -201,65 +203,121 @@ public class EntityManager {
 
         }
 
-        private static boolean filter (Entity entity, String id, List<String> tag_convert) {
+        public static boolean test (Entity entity, String id, List<String> tag_convert) {
 
-            if (id.isEmpty() == true || EntityType.getKey(entity.getType()).toString().equals(id) == true) {
+            if (id.isEmpty() == false) {
 
-                for (String scan : tag_convert) {
+                boolean blacklist = false;
 
-                    if (scan.startsWith("!") == true) {
+                if (id.startsWith("!") == true) {
 
-                        if (entity.getTags().contains(scan) == true) {
+                    id = id.substring(1);
+                    blacklist = true;
 
-                            return false;
+                }
 
-                        }
+                boolean test = EntityType.getKey(entity.getType()).toString().equals(id) == true;
 
-                    } else {
+                if (blacklist == true && test == true) {
 
-                        if (entity.getTags().contains(scan) == false) {
+                    return false;
 
-                            return false;
+                } else if (blacklist == false && test == false) {
 
-                        }
+                    return false;
+
+                }
+
+            }
+
+            for (String scan : tag_convert) {
+
+                if (scan.startsWith("!") == true) {
+
+                    if (entity.getTags().contains(scan) == true) {
+
+                        return false;
+
+                    }
+
+                } else {
+
+                    if (entity.getTags().contains(scan) == false) {
+
+                        return false;
 
                     }
 
                 }
 
-                return true;
-
             }
 
-            return false;
+            return true;
 
         }
 
         public static List<Entity> sort (List<Entity> entities, Vec3 vec3_center, boolean is_nearest, int count) {
 
-            List<Entity> sorted_entities = new ArrayList<>();
+            List<Entity> list = new ArrayList<>();
 
             if (is_nearest == true) {
 
-                sorted_entities = entities.stream().sorted(Comparator.comparingDouble(entity -> entity.position().distanceTo(vec3_center))).toList();
+                list = entities.stream().sorted(Comparator.comparingDouble(entity -> entity.position().distanceTo(vec3_center))).toList();
 
             } else {
 
-                sorted_entities = entities.stream().sorted(Comparator.comparingDouble(entity -> entity.position().distanceTo(vec3_center))).toList();
+                list = entities.stream().sorted(Comparator.comparingDouble(entity -> entity.position().distanceTo(vec3_center))).toList();
 
             }
 
             if (count > 0) {
 
-                if (sorted_entities.size() > count) {
+                if (list.size() > count) {
 
-                    sorted_entities = sorted_entities.subList(0, count);
+                    list = list.subList(0, count);
 
                 }
 
             }
 
-            return sorted_entities;
+            return list;
+
+        }
+
+        public static List<Entity> filter (List<Entity> entities, String id, String[] tags) {
+
+            List<Entity> list = new ArrayList<>();
+            List<String> tag_convert = List.of(tags);
+
+            for (Entity entity : entities) {
+
+                if (test(entity, id, tag_convert) == true) {
+
+                    list.add(entity);
+
+                }
+
+            }
+
+            return list;
+
+        }
+
+        public static List<Entity> filterLivingEntity (List<Entity> entities) {
+
+            List<Entity> list = new ArrayList<>();
+
+            for (Entity entity : entities) {
+
+                if (entity instanceof LivingEntity entity_living) {
+
+                    list.add(entity_living);
+
+                }
+
+            }
+
+            return list;
 
         }
 
@@ -403,6 +461,26 @@ public class EntityManager {
             summon(level_server, vec3, false, id, name, tags, custom);
 
         });
+
+    }
+
+    public static void setTarget (Entity entity_attacker, Entity entity_target) {
+
+        if (entity_attacker instanceof Mob mob && entity_target instanceof LivingEntity entity_living) {
+
+            mob.setTarget(entity_living);
+
+        }
+
+    }
+
+    public static void moveTo (Entity entity, Vec3 vec3, double speed) {
+
+        if (entity instanceof Mob mob) {
+
+            mob.getNavigation().moveTo(vec3.x, vec3.y, vec3.z, speed);
+
+        }
 
     }
 

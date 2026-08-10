@@ -27,7 +27,27 @@ public class EffectManager {
 
     }
 
-    public static boolean has (ServerLevel level_server, Entity entity, String id, int duration_min, int duration_max) {
+    public static boolean has (ServerLevel level_server, Entity entity, String id) {
+
+        if (entity instanceof LivingEntity entity_living) {
+
+            Holder<MobEffect> effect = getHolder(level_server, id);
+
+            if (effect == null) {
+
+                return false;
+
+            }
+
+            return entity_living.getEffect(effect) != null;
+
+        }
+
+        return false;
+
+    }
+
+    public static boolean hasDuration (ServerLevel level_server, Entity entity, String id, int duration_min) {
 
         if (entity instanceof LivingEntity entity_living) {
 
@@ -43,9 +63,7 @@ public class EffectManager {
 
             if (instance != null) {
 
-                duration_min = 20 * duration_min;
-                duration_max = 20 * duration_max;
-                return (instance.getDuration() >= duration_min && (duration_max == 0 || duration_max <= instance.getDuration()));
+                return duration_min * 20 <= instance.getDuration();
 
             }
 
@@ -73,13 +91,15 @@ public class EffectManager {
 
     }
 
-    public static void clearAll (Entity entity) {
+    public static boolean clearAll (Entity entity) {
 
         if (entity instanceof LivingEntity entity_living) {
 
-            entity_living.removeAllEffects();
+            return entity_living.removeAllEffects();
 
         }
+
+        return false;
 
     }
 
@@ -111,7 +131,7 @@ public class EffectManager {
 
                 for (MobEffectInstance instance : entity_living_from.getActiveEffects()) {
 
-                    entity_living_to.addEffect(new MobEffectInstance(instance.getEffect(), 20 * duration, instance.getAmplifier(), false, false));
+                    entity_living_to.addEffect(new MobEffectInstance(instance.getEffect(), 20 * duration, instance.getAmplifier(), instance.isAmbient(), instance.isVisible()));
 
                 }
 

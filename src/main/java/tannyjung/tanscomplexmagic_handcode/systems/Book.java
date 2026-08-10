@@ -13,8 +13,8 @@ public class Book {
 
         if (type.equals("mana") == true) {
 
-            int mana = (int) NBTManager.Mob.getNumber(player_server, "status", "mana");
-            int mana_charge = (int) NBTManager.Mob.getNumber(player_server, "status", "mana_charge");
+            int mana = (int) NBTManager.Mob.getNumber(player_server, "main", "mana");
+            int mana_charge = (int) NBTManager.Mob.getNumber(player_server, "main", "mana_charge");
             String time = "";
 
             if (mana != 150) {

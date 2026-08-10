@@ -15,15 +15,7 @@ public class NetworkCore {
 
         public static void client (LocalPlayer player, String work, CompoundTag extra) {
 
-            if (work.equals("refresh") == true) {
 
-                {
-
-                    ScreenDrawing.refresh();
-
-                }
-
-            }
 
         }
 

@@ -75,123 +75,113 @@ public class ScreenDrawing {
 
     }
 
-    private static int[] convertPosAnchor (GuiGraphics graphic, int posX, int posZ, String pos_anchor, double scale) {
-
-        int[] pos = new int[]{0, 0};
-
-        if (pos_anchor.isEmpty() == true) {
-
-            pos[0] = posX;
-            pos[1] = posZ;
-
-        } else {
-
-            if (pos_anchor.startsWith("top-") == true) {
-
-                pos[1] = posZ;
-
-            } else if (pos_anchor.startsWith("bottom-") == true) {
-
-                pos[1] = graphic.guiHeight() - posZ;
-
-            }
-
-            if (pos_anchor.endsWith("-left") == true) {
-
-                pos[0] = posX;
-
-            } else if (pos_anchor.endsWith("-right") == true) {
-
-                pos[0] = graphic.guiWidth() - posX;
-
-            }
-
-        }
-
-        pos[0] = (int) Math.round(pos[0] / scale);
-        pos[1] = (int) Math.round(pos[1] / scale);
-        return pos;
-
-    }
-
     public static class AutoLine {
 
-        private static boolean start = false;
-        private static int save_pos = 0;
+        private static boolean is_active = false;
+        private static boolean is_temporary_pause = false;
+        private static int posX = 0;
+        private static int posZ = 0;
+        private static int markX = 0;
+        private static int markZ = 0;
         private static String previous_type = "";
 
-        public static void start (int pos) {
+        public static void start (int posX, int posZ) {
 
-            start = true;
-            save_pos = pos;
+            is_active = true;
             previous_type = "";
+            AutoLine.posX = posX;
+            AutoLine.posZ = posZ;
 
         }
         
         public static void stop () {
 
-            start = false;
+            is_active = false;
             
         }
 
-        public static void addSpaceMark () {
+        public static void setMarkX () {
 
-            save_pos = save_pos + 8;
+            markX = posX;
 
         }
 
-        private static int test (int original_posZ, String type, int distance) {
+        public static void setMarkZ () {
 
-            if (start == false) {
-                
-                return original_posZ;
-                
+            markZ = posZ;
+
+        }
+
+        public static void returnMarkX () {
+
+            posX = markX;
+
+        }
+
+        public static void returnMarkZ () {
+
+            posZ = markZ;
+
+        }
+
+        public static void addSpace (int size) {
+
+            if (is_temporary_pause == true) {
+
+                return;
+
             }
-            
-            int export = 0;
 
-            if (previous_type.isEmpty() == true) {
+            posZ = posZ + size;
 
-                previous_type = type;
-                export = save_pos;
+        }
 
-            } else {
+        public static void setPosX (int posX) {
 
-                if (previous_type.equals(type) == false) {
+            AutoLine.posX = posX;
+
+        }
+
+        private static int getPosX (int originalX) {
+
+            if (is_active == true && is_temporary_pause == false) {
+
+                return posX;
+
+            }
+
+            return originalX;
+
+        }
+
+        private static int getPosZ (int originalZ, String type, int add_same, int add_different) {
+
+            if (is_active == true && is_temporary_pause == false) {
+
+                if (previous_type.isEmpty() == true) {
 
                     previous_type = type;
-                    save_pos = save_pos + 8;
+
+                } else {
+
+                    if (previous_type.equals(type) == true) {
+
+                        posZ = posZ + add_same;
+
+                    } else {
+
+                        posZ = posZ + add_different;
+                        previous_type = type;
+
+                    }
 
                 }
 
-                export = save_pos;
+                return posZ;
 
             }
 
-            save_pos = save_pos + distance;
-            return export;
-
-        }
-
-    }
-
-    public static class Ingredient {
-
-        private static final Set<Object[]> text = new HashSet<>();
-
-        public static void clear () {
-
-            text.clear();
-
-        }
-
-        public static void renderText (GuiGraphics graphic) {
-
-            for (Object[] objects : text) {
-
-                ComponentBasic.drawText(graphic, (int) objects[1], (int) objects[2], (double) objects[3], (boolean) objects[4], (String) objects[5]);
-
-            }
+            return originalZ;
 
         }
 
@@ -202,7 +192,7 @@ public class ScreenDrawing {
         private static final Map<String, String> online_image_id = new HashMap<>();
         private static final Map<String, String> online_image_status = new HashMap<>();
 
-        public static void drawText (GuiGraphics graphic, int posX, int posZ, double scale, boolean shadow, String text) {
+        private static void drawText (GuiGraphics graphic, int posX, int posZ, double scale, boolean shadow, String text) {
 
             posX = (int) Math.round(posX / scale);
             posZ = (int) Math.round(posZ / scale);
@@ -225,24 +215,21 @@ public class ScreenDrawing {
             graphic.pose().popPose();
 
         }
+        
+        public static void drawTextBasic (int posX, int posZ, double scale, String text) {
 
-        public static void drawTextCentered (GuiGraphics graphic, int centerX, int centerZ, boolean is_only_vertical, double scale, String text) {
+            posX = AutoLine.getPosX(posX);
+            posZ = AutoLine.getPosZ(posZ, "text_basic", 4, 8);
+            AutoLine.addSpace(4);
 
-            int[] pos_convert = Anchor.convertPosCenterText(centerX, centerZ, scale, text);
-
-            if (is_only_vertical == true) {
-
-                pos_convert[0] = centerX;
-
-            }
-
-            drawText(graphic, pos_convert[0], pos_convert[1], scale, false, text);
-
+            PreCalculate.addText(posX, posZ, scale, false, text);
+            
         }
 
-        public static void drawTextParagraph (GuiGraphics graphic, int posX, int posZ, int length_per_line, String text) {
+        public static void drawTextParagraph (int posX, int posZ, int length_per_line, String text) {
 
-            posZ = AutoLine.test(posZ, "text_paragraph", 8);
+            posX = AutoLine.getPosX(posX);
+            posZ = AutoLine.getPosZ(posZ, "text_paragraph", 8, 8);
 
             Map<Integer, StringBuilder> paragraph = new HashMap<>();
             int line = 0;
@@ -271,27 +258,64 @@ public class ScreenDrawing {
 
             for (Map.Entry<Integer, StringBuilder> entry : paragraph.entrySet()) {
 
-                AutoLine.test(posZ, "text_paragraph", 8);
-
-                drawText(graphic, posX, posZ + (entry.getKey() * 8), normal_font_scale, false, entry.getValue().toString());
+                AutoLine.addSpace(8);
+                PreCalculate.addText(posX, posZ + (entry.getKey() * 8), normal_font_scale, false, entry.getValue().toString());
 
             }
 
         }
 
-        private static void drawImage (GuiGraphics graphic, int posX, int posZ, int overall_sizeX, int overall_sizeZ, int slideX, int slideZ, int split_sizeX, int split_sizeZ, String path) {
+        private static void drawTextCentered (int posX, int posZ, boolean is_only_vertical, double scale, boolean shadow, String text) {
 
+            posX = AutoLine.getPosX(posX);
+            posZ = AutoLine.getPosZ(posZ, "text_centered", 0, 8);
+
+            double scale_test = scale;
+
+            while (scale_test > 0.5) {
+
+                scale_test = scale_test - 0.5;
+                AutoLine.addSpace(4);
+
+            }
+
+            int[] pos_convert = Anchor.convertPosCenterText(posX, posZ, scale, text);
+
+            if (is_only_vertical == true) {
+
+                pos_convert[0] = posX;
+
+            }
+
+            PreCalculate.addText(pos_convert[0], pos_convert[1], scale, shadow, text);
+
+        }
+
+        public static void drawTextCenteredBasic (int posX, int posZ, boolean is_only_vertical, double scale, String text) {
+
+            drawTextCentered(posX, posZ, is_only_vertical, scale, false, text);
+
+        }
+
+        public static void drawTextCenteredShadow (int posX, int posZ, boolean is_only_vertical, double scale, String text) {
+
+            drawTextCentered(posX, posZ, is_only_vertical, scale, true, text);
+
+        }
+
+        private static void drawImage (GuiGraphics graphic, int posX, int posZ, int overall_sizeX, int overall_sizeZ, int slideX, int slideZ, int split_sizeX, int split_sizeZ, String path) {
+            
             graphic.blit(ResourceLocation.parse(path), (graphic.guiWidth() / 2) + posX, (graphic.guiHeight() / 2) + posZ, slideX,slideZ, split_sizeX, split_sizeZ, overall_sizeX, overall_sizeZ);
 
         }
 
-        public static void drawImageBasic (GuiGraphics graphic, int posX, int posZ, int sizeX, int sizeZ, String path) {
+        public static void drawImageBasic (int posX, int posZ, int sizeX, int sizeZ, String path) {
 
-            drawImage(graphic, posX, posZ, sizeX, sizeZ, 0, 0, sizeX, sizeZ, path);
+            PreCalculate.addImage(posX, posZ, sizeX, sizeZ, 0, 0, sizeX, sizeZ, path);
 
         }
 
-        public static void drawImageSplit (GuiGraphics graphic, int posX, int posZ, int overall_sizeX, int overall_sizeZ, boolean is_horizontal, int piece_count, int choose, String path) {
+        public static void drawImageSplit (int posX, int posZ, int overall_sizeX, int overall_sizeZ, boolean is_horizontal, int piece_count, int choose, String path) {
 
             int split_sizeX = 0;
             int split_sizeZ = 0;
@@ -314,11 +338,11 @@ public class ScreenDrawing {
 
             }
 
-            drawImage(graphic, posX, posZ, overall_sizeX, overall_sizeZ, slideX, slideZ, split_sizeX, split_sizeZ, path);
+            PreCalculate.addImage(posX, posZ, overall_sizeX, overall_sizeZ, slideX, slideZ, split_sizeX, split_sizeZ, path);
 
         }
 
-        public static void drawImageOnline (GuiGraphics graphic, int posX, int posZ, int sizeX, int sizeZ, String url, String path_loading, String path_fail) {
+        public static void drawImageOnline (int posX, int posZ, int sizeX, int sizeZ, String url, String path_loading, String path_fail) {
 
             String id = online_image_id.get(url);
 
@@ -422,7 +446,53 @@ public class ScreenDrawing {
 
             }
 
-            drawImageBasic(graphic, posX, posZ, sizeX, sizeZ, id);
+            PreCalculate.addImage(posX, posZ, sizeX, sizeZ, 0, 0, sizeX, sizeZ, id);
+
+        }
+
+        public static class PreCalculate {
+
+            private static final List<Object[]> set_text = new ArrayList<>();
+            private static final List<Object[]> set_image = new ArrayList<>();
+
+            public static void clear () {
+
+                set_text.clear();
+                set_image.clear();
+
+            }
+
+            private static void addText (int posX, int posZ, double scale, boolean shadow, String text) {
+
+                set_text.add(new Object[]{posX, posZ, scale, shadow, text});
+
+            }
+
+            public static void renderText (GuiGraphics graphic) {
+
+                for (Object[] objects : set_text) {
+
+                    drawText(graphic, (int) objects[0], (int) objects[1], (double) objects[2], (boolean) objects[3], (String) objects[4]);
+
+                }
+
+            }
+
+            private static void addImage (int posX, int posZ, int overall_sizeX, int overall_sizeZ, int slideX, int slideZ, int split_sizeX, int split_sizeZ, String path) {
+
+                set_image.add(new Object[]{posX, posZ, overall_sizeX, overall_sizeZ, slideX, slideZ, split_sizeX, split_sizeZ, path});
+
+            }
+
+            public static void renderImage (GuiGraphics graphic) {
+
+                for (Object[] objects : set_image) {
+
+                    drawImage(graphic, (int) objects[0], (int) objects[1], (int) objects[2], (int) objects[3], (int) objects[4], (int) objects[5], (int) objects[6], (int) objects[7], (String) objects[8]);
+
+                }
+
+            }
 
         }
 
@@ -430,17 +500,14 @@ public class ScreenDrawing {
 
     public static class ComponentAdvance {
 
-        public static void drawShape (GUIScreen screen, int posX, int posZ, int sizeX, int sizeZ) {
+        private static void drawButton (GUIScreen screen, int posX, int posZ, int sizeX, int sizeZ, boolean is_active, boolean is_lock, String text_lock, String text_unlock, Runnable runnable) {
 
-            drawButton(screen, posX, posZ, sizeX, sizeZ, 0, false, true, "", "", () -> {});
-
-        }
-
-        private static void drawButton (GUIScreen screen, int posX, int posZ, int sizeX, int sizeZ, double font_scale, boolean is_active, boolean is_lock, String text_lock, String text_unlock, Runnable runnable) {
+            posX = AutoLine.getPosX(posX);
+            posZ = AutoLine.getPosZ(posZ, "button", 1, 8);
+            AutoLine.addSpace(11);
 
             Button button = Button.builder(Component.empty(), create -> {
 
-                create.setFocused(false);
                 runnable.run();
 
             }).build();
@@ -458,11 +525,11 @@ public class ScreenDrawing {
                 if (is_lock == true) {
 
                     button.active = false;
-                    text = text_lock;
+                    text = "§c" + text_lock;
 
                 } else {
 
-                    text = text_unlock;
+                    text = "§f" + text_unlock;
 
                 }
 
@@ -473,8 +540,9 @@ public class ScreenDrawing {
             // Ingredient
             {
 
-                int[] pos_convert = Anchor.convertPosCenterText(posX + (sizeX / 2), posZ + (sizeZ / 2), font_scale, text);
-                Ingredient.text.add(new Object[]{"", pos_convert[0], pos_convert[1], font_scale, true, text});
+                AutoLine.is_temporary_pause = true;
+                ComponentBasic.drawTextCenteredShadow(posX + (sizeX / 2), posZ + (sizeZ / 2), false, normal_font_scale, text);
+                AutoLine.is_temporary_pause = false;
 
             }
 
@@ -482,37 +550,13 @@ public class ScreenDrawing {
 
         public static void drawButtonBasic (GUIScreen screen, int posX, int posZ, int length, String text, String network, String work_type, String work) {
 
-            posZ = AutoLine.test(posZ, "button", 12);
-
-            drawButton(screen, posX, posZ + 1, length, 10, normal_font_scale, true, false, "", text, () -> {
-
-                if (network.equals("client") == true) {
-
-                    NetworkManager.runClient(screen.player, work_type, work, new CompoundTag());
-
-                } else if (network.equals("server") == true) {
-
-                    NetworkManager.runServer(screen.player, work_type, work, new CompoundTag());
-
-                } else if (network.equals("client_core") == true) {
-
-                    NetworkManager.runClientCore(screen.player, work_type, work, new CompoundTag());
-
-                } else if (network.equals("server_core") == true) {
-
-                    NetworkManager.runServerCore(screen.player, work_type, work, new CompoundTag());
-
-                }
-
-            });
+            drawButtonLockable(screen, posX, posZ + 1, length, true, false, "", text, network, work_type, work);
 
         }
 
         public static void drawButtonLockable (GUIScreen screen, int posX, int posZ, int length, boolean is_active, boolean is_lock, String text_lock, String text_unlock, String network, String work_type, String work) {
 
-            posZ = AutoLine.test(posZ, "button", 12);
-
-            drawButton(screen, posX, posZ + 1, length, 10, normal_font_scale, is_active, is_lock, text_lock, text_unlock, () -> {
+            drawButtonLockableCustomWork(screen, posX, posZ + 1, length, is_active, is_lock, text_lock, text_unlock, () -> {
 
                 if (network.equals("client") == true) {
 
@@ -536,9 +580,24 @@ public class ScreenDrawing {
 
         }
 
-        public static void drawSwitch (GUIScreen screen, int posX, int posZ, boolean is_active, boolean is_lock, String nbt_type, String nbt_name, String text) {
+        public static void drawButtonLockableCustomWork (GUIScreen screen, int posX, int posZ, int length, boolean is_active, boolean is_lock, String text_lock, String text_unlock, Runnable runnable) {
 
-            posZ = AutoLine.test(posZ, "switch", 8);
+            drawButton(screen, posX, posZ + 1, length, 11, is_active, is_lock, text_lock, text_unlock, runnable);
+
+        }
+
+        private static void drawSwitch (GUIScreen screen, int posX, int posZ, boolean is_active, boolean is_lock, String nbt_type, String nbt_name, String text) {
+
+            AutoLine.addSpace(8);
+
+            // Ingredient
+            {
+
+                AutoLine.is_temporary_pause = true;
+                ComponentBasic.drawTextCenteredBasic(posX + 16, posZ + 4, true, normal_font_scale, text);
+                AutoLine.is_temporary_pause = false;
+
+            }
 
             CompoundTag extra_data = new CompoundTag();
             extra_data.putString("nbt_type", nbt_type);
@@ -589,19 +648,58 @@ public class ScreenDrawing {
             GUIScreen.addWidget(screen, button_left);
             GUIScreen.addWidget(screen, button_right);
 
+        }
+
+        public static void drawSwitchBasic (GUIScreen screen, int posX, int posZ, String nbt_type, String nbt_name, String text) {
+
+            posX = AutoLine.getPosX(posX);
+            posZ = AutoLine.getPosZ(posZ, "switch", 0, 8);
+
+            drawSwitch(screen, posX, posZ, true, false, nbt_type, nbt_name, text);
+
+        }
+
+        public static void drawSwitchLockable (GUIScreen screen, int posX, int posZ, boolean is_active, boolean is_lock, String nbt_type, String nbt_name, String text) {
+
+            posX = AutoLine.getPosX(posX);
+            posZ = AutoLine.getPosZ(posZ, "switch", 0, 8);
+
+            drawSwitch(screen, posX, posZ, is_active, is_lock, nbt_type, nbt_name, text);
+
+        }
+
+        public static void drawSwitchCategoryBasic (GUIScreen screen, int posX, int posZ, String text_main, String[] nbt_types, String[] nbt_names, String[] texts) {
+
+            // TODO -> Remove later
+
+            posX = AutoLine.getPosX(posX);
+            posZ = AutoLine.getPosZ(posZ, "switch_category", 8, 8);
+
             // Ingredient
             {
 
-                int[] pos_convert = Anchor.convertPosCenterText(0, posZ + 4, normal_font_scale, text);
-                Ingredient.text.add(new Object[]{"", posX + 16, pos_convert[1], normal_font_scale, false, text});
+                AutoLine.is_temporary_pause = true;
+                ComponentBasic.drawTextBasic(posX, posZ, normal_font_scale, text_main);
+                AutoLine.is_temporary_pause = false;
 
             }
+
+            for (int number = 0; number < texts.length; number++) {
+
+                AutoLine.addSpace(8);
+                posZ = posZ + 8;
+
+                AutoLine.is_temporary_pause = true;
+                drawSwitch(screen, posX, posZ, true, false, nbt_types[number], nbt_names[number], texts[number]);
+                AutoLine.is_temporary_pause = false;
+
+            }
+
+            AutoLine.addSpace(8);
 
         }
 
         private static void drawTextBox (GUIScreen screen, int posX, int posZ, boolean is_active, boolean is_lock, String text_lock, String text_unlock, String nbt_type, String nbt_name) {
-
-            posZ = AutoLine.test(posZ, "text_box", 24);
 
             EditBox box = new EditBox(Minecraft.getInstance().font, screen.getGuiLeft() + posX + 10, screen.getGuiTop() + posZ + 8, 150, 14, Component.empty());
             box.setMaxLength(10000);
@@ -623,9 +721,9 @@ public class ScreenDrawing {
             // Ingredient
             {
 
-                Ingredient.text.add(new Object[]{"", posX, posZ, normal_font_scale, false, text_unlock});
+                ComponentBasic.drawTextBasic(posX, posZ, normal_font_scale, text_unlock);
 
-                drawButton(screen, posX, posZ + 8, 10, 14, 1.0, true, is_active == false || is_lock == true, "§7{", "§f{", () -> {
+                drawButton(screen, posX, posZ + 8, 10, 14, true, is_active == false || is_lock == true, "§7{", "§f{", () -> {
 
                     CompoundTag extra_data = new CompoundTag();
                     extra_data.putString("nbt_type", nbt_type);
@@ -637,8 +735,7 @@ public class ScreenDrawing {
 
                 if (is_lock == true) {
 
-                    int[] pos_convert = Anchor.convertPosCenterText(posX + 10 + (150 / 2), posZ + 15, normal_font_scale, text_lock);
-                    Ingredient.text.add(new Object[]{"", pos_convert[0], pos_convert[1], normal_font_scale, false, text_lock});
+                    ComponentBasic.drawTextCenteredBasic(posX + 10 + (150 / 2), posZ + 15, false, normal_font_scale, text_lock);
 
                 }
 
@@ -648,13 +745,205 @@ public class ScreenDrawing {
 
         public static void drawTextBoxBasic (GUIScreen screen, int posX, int posZ, String text, String nbt_type, String nbt_name) {
 
+            posX = AutoLine.getPosX(posX);
+            posZ = AutoLine.getPosZ(posZ, "text_box", 8, 8);
+
             drawTextBox(screen, posX, posZ, true, false, "", text, nbt_type, nbt_name);
 
         }
 
         public static void drawTextBoxLockable (GUIScreen screen, int posX, int posZ, boolean is_active, boolean is_lock, String text_lock, String text_unlock, String nbt_type, String nbt_name) {
 
+            posX = AutoLine.getPosX(posX);
+            posZ = AutoLine.getPosZ(posZ, "text_box", 8, 8);
+
             drawTextBox(screen, posX, posZ, is_active, is_lock, text_lock, text_unlock, nbt_type, nbt_name);
+
+        }
+
+        private static void drawSlider (GUIScreen screen, int posX, int posZ, boolean is_active, boolean is_lock, double value_min, double value_max, double value_move, String nbt_type, String nbt_name, String text) {
+
+            posX = AutoLine.getPosX(posX);
+            posZ = AutoLine.getPosZ(posZ, "slider", 4, 8);
+            AutoLine.addSpace(16);
+
+            double value_default = NBTManager.Mob.getNumber(screen.player, nbt_type, nbt_name);
+
+            // Ingredient
+            {
+
+                text = text + " (";
+
+                if (value_default % 1 == 0) {
+
+                    text = text + (int) value_default;
+
+                } else {
+
+                    text = text + value_default;
+
+                }
+
+                if (value_min == 0 || value_min == 1) {
+
+                    text = text + "/";
+
+                    if (value_default % 1 == 0) {
+
+                        text = text + (int) value_max;
+
+                    } else {
+
+                        text = text + value_max;
+
+                    }
+
+                }
+
+                text = text + ")";
+
+                AutoLine.is_temporary_pause = true;
+                ComponentBasic.drawTextBasic(posX, posZ, normal_font_scale, text);
+                AutoLine.is_temporary_pause = false;
+
+            }
+
+            double range = value_max - value_min;
+            double value_default_percent = (value_default - value_min) / range;
+
+            if (value_default_percent < 0.0 || value_default_percent > 1.0) {
+
+                double value = 0.0;
+
+                if (value_default_percent < 0.0) {
+
+                    value_default_percent = 0.0;
+                    value = value_min;
+
+                } else {
+
+                    value_default_percent = 1.0;
+                    value = value_max;
+
+                }
+
+                CompoundTag extra_data = new CompoundTag();
+                extra_data.putString("nbt_type", nbt_type);
+                extra_data.putString("nbt_name", nbt_name);
+                extra_data.putDouble("nbt_value", value);
+                NetworkManager.runServerCore(screen.player, "gui", "slider", extra_data);
+
+            }
+
+            AbstractSliderButton slider = new AbstractSliderButton(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ + 8, 160, 6, Component.empty(), value_default_percent) {
+
+                private final double value_previous = value_min - 1.0;
+
+                @Override
+                protected void updateMessage () {
+                }
+
+                @Override
+                protected void applyValue () {
+
+                    double value = this.value;
+                    value = value * range;
+                    value = Math.round(value / value_move);
+                    value = (value * value_move) + value_min;
+
+                    if (value != value_previous) {
+
+                        CompoundTag extra_data = new CompoundTag();
+                        extra_data.putString("nbt_type", nbt_type);
+                        extra_data.putString("nbt_name", nbt_name);
+                        extra_data.putDouble("nbt_value", value);
+                        NetworkManager.runServerCore(screen.player, "gui", "slider", extra_data);
+
+                    }
+
+                }
+
+            };
+
+            slider.active = is_active == true && is_lock == false;
+            GUIScreen.addWidget(screen, slider);
+
+        }
+
+        public static void drawSliderBasic (GUIScreen screen, int posX, int posZ, double value_min, double value_max, double value_move, String nbt_type, String nbt_name, String text) {
+
+            drawSlider(screen, posX, posZ, true, false, value_min, value_max, value_move, nbt_type, nbt_name, text);
+
+        }
+
+        public static void drawSliderLockable (GUIScreen screen, int posX, int posZ, boolean is_active, boolean is_lock, double value_min, double value_max, double value_move, String nbt_type, String nbt_name, String text) {
+
+            drawSlider(screen, posX, posZ, is_active, is_lock, value_min, value_max, value_move, nbt_type, nbt_name, text);
+
+        }
+
+        private static void drawRadio (GUIScreen screen, int posX, int posZ, boolean is_active, boolean is_lock, String text, String nbt_type, String nbt_name, String[] nbt_values) {
+
+            // Ingredient
+            {
+
+                ComponentBasic.drawTextBasic(posX, posZ, normal_font_scale, text);
+
+            }
+
+            boolean is_select = false;
+            int[] pos_convert = new int[]{};
+
+            for (String scan : nbt_values) {
+
+                AutoLine.addSpace(8);
+                posZ = posZ + 8;
+
+                is_select = NBTManager.Mob.getText(screen.player, nbt_type, nbt_name).equals(scan) == true;
+
+                CompoundTag extra_data = new CompoundTag();
+                extra_data.putString("nbt_type", nbt_type);
+                extra_data.putString("nbt_name", nbt_name);
+                extra_data.putString("nbt_value", scan);
+
+                drawButton(screen, posX, posZ + 1, 6, 6, is_active, is_lock == true || is_select == true, "", "", () -> {
+
+                    NetworkManager.runServerCore(screen.player, "gui", "radio", extra_data);
+
+                });
+
+                // Ingredient
+                {
+
+                    if (is_select == false) {
+
+                        scan = "§7" + scan;
+
+                    }
+
+                    ComponentBasic.drawTextCenteredBasic(posX + 10, posZ + 4, true, normal_font_scale, scan);
+
+                }
+
+            }
+
+        }
+
+        public static void drawRadioBasic (GUIScreen screen, int posX, int posZ, String text, String nbt_type, String nbt_name, String[] nbt_values) {
+
+            posX = AutoLine.getPosX(posX);
+            posZ = AutoLine.getPosZ(posZ, "radio", 8, 8);
+
+            drawRadio(screen, posX, posZ, true, false, text, nbt_type, nbt_name, nbt_values);
+
+        }
+
+        public static void drawRadioLockable (GUIScreen screen, int posX, int posZ, boolean is_active, boolean is_lock, String text, String nbt_type, String nbt_name, String[] nbt_values) {
+
+            posX = AutoLine.getPosX(posX);
+            posZ = AutoLine.getPosZ(posZ, "radio", 8, 8);
+
+            drawRadio(screen, posX, posZ, is_active, is_lock, text, nbt_type, nbt_name, nbt_values);
 
         }
 
@@ -737,129 +1026,6 @@ public class ScreenDrawing {
             button.active = is_active == true && is_lock == false;
 
             GUIScreen.addWidget(screen, button);
-
-        }
-
-        public static void drawSlider (GUIScreen screen, int posX, int posZ, double value_min, double value_max, double value_move, boolean is_active, boolean is_lock, String nbt_type, String nbt_name, String text) {
-
-            posZ = AutoLine.test(posZ, "slider", 16);
-
-            double range = value_max - value_min;
-            double value_default = NBTManager.Mob.getNumber(screen.player, nbt_type, nbt_name);
-            double value_default_percent = (value_default - value_min) / range;
-
-            if (value_default_percent < 0.0 || value_default_percent > 1.0) {
-
-                value_default_percent = 0.0;
-                CompoundTag extra_data = new CompoundTag();
-                extra_data.putString("nbt_type", nbt_type);
-                extra_data.putString("nbt_name", nbt_name);
-                extra_data.putDouble("nbt_value", value_min);
-                NetworkManager.runServerCore(screen.player, "gui", "slider", extra_data);
-
-            }
-
-            AbstractSliderButton slider = new AbstractSliderButton(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ + 8, 160, 6, Component.empty(), value_default_percent) {
-
-                private final double value_previous = value_min - 1.0;
-
-                @Override
-                protected void updateMessage () {
-                }
-
-                @Override
-                protected void applyValue () {
-
-                    double value = this.value;
-                    value = value * range;
-                    value = Math.round(value / value_move);
-                    value = (value * value_move) + value_min;
-
-                    if (value != value_previous) {
-
-                        CompoundTag extra_data = new CompoundTag();
-                        extra_data.putString("nbt_type", nbt_type);
-                        extra_data.putString("nbt_name", nbt_name);
-                        extra_data.putDouble("nbt_value", value);
-                        NetworkManager.runServerCore(screen.player, "gui", "slider", extra_data);
-
-                    }
-
-                }
-
-            };
-
-            slider.active = is_active == true && is_lock == false;
-            GUIScreen.addWidget(screen, slider);
-
-            // Ingredient
-            {
-
-                text = text + " (";
-
-                if (value_default % 1 == 0) {
-
-                    text = text + (int) value_default;
-
-                } else {
-
-                    text = text + value_default;
-
-                }
-
-                text = text + ")";
-                Ingredient.text.add(new Object[]{"", posX, posZ, normal_font_scale, false, text});
-
-            }
-
-        }
-
-        public static void drawRadio (GUIScreen screen, int posX, int posZ, boolean is_active, boolean is_lock, String text, String nbt_type, String nbt_name, String nbt_value) {
-
-            posZ = AutoLine.test(posZ, "radio", 8);
-
-            // Ingredient
-            {
-
-                Ingredient.text.add(new Object[]{"", posX, posZ, normal_font_scale, false, text});
-
-            }
-
-            boolean is_select = false;
-            int[] pos_convert = new int[]{};
-
-            for (String scan : nbt_value.split(" / ")) {
-
-                posZ = AutoLine.test(posZ, "radio", 8);
-
-                is_select = NBTManager.Mob.getText(screen.player, nbt_type, nbt_name).equals(scan) == true;
-
-                CompoundTag extra_data = new CompoundTag();
-                extra_data.putString("nbt_type", nbt_type);
-                extra_data.putString("nbt_name", nbt_name);
-                extra_data.putString("nbt_value", scan);
-
-                drawButton(screen, posX, posZ + 1, 6, 6, 0.0, is_active, is_lock == true || is_select == true, "", "", () -> {
-
-                    NetworkManager.runServerCore(screen.player, "gui", "radio", extra_data);
-
-                });
-
-                // Ingredient
-                {
-
-                    if (is_select == false) {
-
-                        scan = "§7" + scan;
-
-                    }
-
-                    pos_convert = Anchor.convertPosCenterText(0, posZ + 4, normal_font_scale, scan);
-                    Ingredient.text.add(new Object[]{"", posX + 10, pos_convert[1], normal_font_scale, false, scan});
-
-                }
-
-            }
 
         }
 

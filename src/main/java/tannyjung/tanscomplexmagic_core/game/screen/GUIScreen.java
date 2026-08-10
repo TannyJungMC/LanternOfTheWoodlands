@@ -21,7 +21,8 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
     public static final DeferredHolder<MenuType<?>, MenuType<GUIContainer>> gui = register.register("gui", () -> IMenuTypeExtension.create(GUIContainer::new));
 
     public final LocalPlayer player;
-    public static int id = 0;
+    public int id = 0;
+    public static int component_rebuild_type = 0;
     public static boolean refresh = false;
 
     public GUIScreen (GUIContainer container, Inventory inventory, Component text) {
@@ -94,15 +95,14 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
     @Override
     protected void renderBg (GuiGraphics graphic, float partialTicks, int mouseX, int mouseY) {
 
-        GUIs.render(this, graphic, id, "image");
+        ScreenDrawing.ComponentBasic.PreCalculate.renderImage(graphic);
 
     }
 
     @Override
     protected void renderLabels (GuiGraphics graphic, int mouseX, int mouseY) {
 
-        GUIs.render(this, graphic, id, "text");
-        ScreenDrawing.Ingredient.renderText(graphic);
+        ScreenDrawing.ComponentBasic.PreCalculate.renderText(graphic);
 
     }
 
@@ -117,10 +117,10 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
     private void refresh () {
 
         this.clearWidgets();
-        ScreenDrawing.Ingredient.clear();
+        ScreenDrawing.ComponentBasic.PreCalculate.clear();
 
         id = (int) NBTManager.Mob.getNumber(player, "gui", "id");
-        GUIs.render(this, null, id, "widget");
+        GUIs.render(this, id);
 
     }
 

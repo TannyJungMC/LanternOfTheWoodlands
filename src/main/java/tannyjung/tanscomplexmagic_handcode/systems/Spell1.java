@@ -5,33 +5,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
+import tannyjung.tanscomplexmagic_core.Core;
 import tannyjung.tanscomplexmagic_core.game.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Spell1 {
 
     public static void activate (ServerLevel level_server, ServerPlayer player_server) {
-
-        Entity entity_main = EntityManager.summon(level_server, BlockPos.containing(GameUtils.Space.getPosRay(player_server, 200)).getCenter(), false, "minecraft:marker", "Main", Utils.Tag.convertSystem(player_server, new String[]{"main"}), "");
-
-        if (entity_main == null) {
-
-            return;
-
-        }
-
-
-
-
-
-
-
-
 
         BlockPos pos = BlockPos.containing(GameUtils.Space.getPosRay(player_server, 200));
 
@@ -41,71 +22,7 @@ public class Spell1 {
 
         }
 
-        // Summon Cards
-        {
-
-            Entity entity_center = EntityManager.summon(level_server, entity_main.position().add(0, -0.5, 0), false, "minecraft:marker", "Zodiac Center", Utils.Tag.convertSystem(player_server, new String[]{"center"}), "");
-
-            if (entity_center == null) {
-
-                return;
-
-            }
-
-            int rotationY = (int) (Math.random() * 360);
-            entity_center.setYRot(rotationY);
-
-            int count = (int) (Math.random() * 13) + 1;
-
-            for (int number = 1; number <= count; number++) {
-
-                if (count == 1) {
-
-                    number = (int) (Math.random() * 13) + 1;
-
-                }
-
-                EntityManager.Display.summonItem(level_server, entity_center.position(), rotationY + ((360 / count) * (number - 1)) + 180, 90, 0, true, "Zodiac Card " + number, Utils.Tag.convertSystem(player_server, new String[]{"spell1", "spell1_card", "spell1_card" + number}), "tanscomplexmagic:zodiac_card_" + number);
-
-                if (count == 1) {
-
-                    break;
-
-                }
-
-            }
-
-        }
-
-        double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
-        GameUtils.spawnParticle(level_server, entity_main.position(), 0, 0, 0, 0, 1, "minecraft:flash");
-        GameUtils.playSound(level_server, entity_main.blockPosition(), 0, radius * 5, "minecraft:entity.evoker.prepare_summon");
-        GameUtils.playSound(level_server, entity_main.blockPosition(), 0, radius * 10, "minecraft:block.enchantment_table.use");
-
-    }
-
-    public static void deactivate (ServerLevel level_server, ServerPlayer player_server) {
-
-        double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
-
-        for (Entity entity : EntityManager.Get.fromEverywhere(level_server, "minecraft:item_display", Utils.Tag.convertSystem(player_server, new String[]{"spell1_card"}))) {
-
-            GameUtils.spawnParticle(level_server, entity.position(), 0, 0, 0, 0, 1, "minecraft:flash");
-            GameUtils.playSound(level_server, entity.blockPosition(), 0, radius * 4, "minecraft:entity.evoker.cast_spell");
-
-        }
-
-        for (Entity entity : EntityManager.Get.fromEverywhere(level_server, "", Utils.Tag.convertSystemAll(player_server))) {
-
-            entity.discard();
-
-        }
-
-    }
-
-    public static void tick (ServerLevel level_server, ServerPlayer player_server) {
-
-        Entity entity_main = EntityManager.Get.fromEverywhereOne(level_server, "minecraft:marker", Utils.Tag.convertSystem(player_server, new String[]{"main"}));
+        Entity entity_main = EntityManager.summon(level_server, pos.getCenter(), false, "minecraft:marker", "Main", Utils.Tag.convertSystemSpecific(player_server, new String[]{"main"}), "");
 
         if (entity_main == null) {
 
@@ -113,123 +30,115 @@ public class Spell1 {
 
         }
 
-        Entity entity_center = EntityManager.Get.fromEverywhereOne(level_server, "minecraft:marker", Utils.Tag.convertSystem(player_server, new String[]{"center"}));
+        Entity entity_center = EntityManager.summon(level_server, entity_main.position().add(0, -0.5, 0), false, "minecraft:marker", "Zodiac Center", Utils.Tag.convertSystemSpecific(player_server, new String[]{"center"}), "");
 
-        if (entity_center != null) {
+        if (entity_center == null) {
 
-            updateCenter(level_server, player_server, entity_main, entity_center);
+            return;
 
         }
+
+        Card.summonAll(level_server, player_server, entity_center);
 
     }
 
-    private static void updateCenter (ServerLevel level_server, ServerPlayer player_server, Entity entity_main, Entity entity_center) {
+    public static void deactivate (ServerLevel level_server, ServerPlayer player_server) {
 
-        Map<Integer, Entity> map_entity_card = new HashMap<>();
+        Card.removeAll(level_server, player_server);
 
-        // Import Card
-        {
+    }
 
-            Entity entity = null;
+    public static void tick (ServerLevel level_server, ServerPlayer player_server) {
 
-            for (int number = 1; number <= 13; number++) {
+        Entity entity_main = EntityManager.Get.fromEverywhereOne(level_server, "minecraft:marker", Utils.Tag.convertSystemSpecific(player_server, new String[]{"main"}));
 
-                entity = EntityManager.Get.fromEverywhereOne(level_server, "minecraft:item_display", Utils.Tag.convertSystem(player_server, new String[]{"spell1_card" + number}));
+        if (entity_main == null) {
 
-                if (entity != null) {
-
-                    map_entity_card.put(number, entity);
-
-                }
-
-            }
+            return;
 
         }
 
-        double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
+        Entity entity_center = EntityManager.Get.fromEverywhereOne(level_server, "minecraft:marker", Utils.Tag.convertSystemSpecific(player_server, new String[]{"center"}));
 
-        // Position and Rotation
-        {
+        if (entity_center == null) {
 
-            double height = 0.0;
-
-            if (radius <= 10) {
-
-                height = -0.475;
-
-            } else {
-
-                height = radius / 1.25;
-
-            }
-
-            entity_center.setPos(entity_main.position().add(0, height, 0));
-            double rotation = 0.0;
-
-            if (map_entity_card.size() == 1) {
-
-                rotation = 1.75;
-
-            } else {
-
-                rotation = -0.025;
-
-            }
-
-            rotation = entity_center.getYRot() + rotation;
-
-            if (rotation >= 360) {
-
-                rotation = rotation - 360;
-
-            }
-
-            entity_center.setYRot((float) rotation);
+            return;
 
         }
 
-        for (Map.Entry<Integer, Entity> entry : map_entity_card.entrySet()) {
+        Map<Integer, Entity> cards = Card.getActive(level_server, player_server);
+        updateCenter(entity_center, cards.size() == 1);
+        Card.update(level_server, player_server, entity_center, cards);
 
-            // When Update Radius
+    }
+
+    private static void updateCenter (Entity entity_center, boolean is_card_single) {
+
+        double rotation = 0.0;
+
+        if (is_card_single == true) {
+
+            rotation = 1.75;
+
+        } else {
+
+            rotation = -0.025;
+
+        }
+
+        rotation = entity_center.getYRot() + rotation;
+
+        if (rotation >= 360) {
+
+            rotation = rotation - 360;
+
+        }
+
+        entity_center.setYRot((float) rotation);
+
+    }
+
+    private static void giveEffect (ServerLevel level_server, ServerPlayer player_server, Entity entity, int card_number, boolean is_positive, int level) {
+
+        if (card_number == 1) {
+
             {
 
-                if (NBTManager.Mob.getNumber(entry.getValue(), "", "radius_previous") != radius) {
+                if (is_positive == true) {
 
-                    NBTManager.Mob.setNumber(entry.getValue(), "", "radius_previous", radius);
-                    setCardSize(player_server, entry.getValue());
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:night_vision", 12) == false) {
 
-                }
+                        if (EffectManager.has(level_server, entity, "minecraft:night_vision") == false) {
 
-            }
+                            EffectManager.give(level_server, entity, "minecraft:blindness", 1, 0);
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0.75, 20, "minecraft:entity.goat.ambient");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0.75, 20, "minecraft:block.beacon.power_select");
 
-            setCardPosition(player_server, entity_center, entry.getValue(), map_entity_card.size());
-            setCardPose(level_server, player_server, entity_center, entry.getValue(), entry.getKey(), map_entity_card.size());
+                        }
 
-            if (NBTManager.Mob.getText(entry.getValue(), "", "status").equals("effect") == true) {
+                        EffectManager.give(level_server, entity, "minecraft:night_vision", 12, 0);
 
-                int effect_tick = (int) NBTManager.Mob.getNumber(entry.getValue(), "", "effect_tick");
-
-                if (effect_tick < 20) {
-
-                    NBTManager.Mob.setNumber(entry.getValue(), "", "effect_tick", effect_tick + 1);
+                    }
 
                 } else {
 
-                    NBTManager.Mob.setNumber(entry.getValue(), "", "effect_tick", 1);
-                    giveEffect(level_server, player_server, entity_main, entry.getValue(), entry.getKey());
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:blindness", 2) == false) {
 
-                }
+                        if (EffectManager.has(level_server, entity, "minecraft:blindness") == false) {
 
-                // Center Particle
-                {
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.allay.death");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 1.25, 20, "minecraft:entity.illusioner.cast_spell");
 
-                    if (map_entity_card.size() == 1) {
+                        }
 
-                        GameUtils.spawnParticle(level_server, GameUtils.Space.getPosLook(entity_center, radius, 0, 0), 0, 0, 0, 0, 1, "minecraft:firework");
-                        GameUtils.spawnParticle(level_server, GameUtils.Space.getPosLook(entity_center, -radius, 0, 0), 0, 0, 0, 0, 1, "minecraft:firework");
-                        GameUtils.spawnParticle(level_server, GameUtils.Space.getPosLook(entity_center, 0, 0, radius), 0, 0, 0, 0, 1, "minecraft:firework");
-                        GameUtils.spawnParticle(level_server, GameUtils.Space.getPosLook(entity_center, 0, 0, -radius), 0, 0, 0, 0, 1, "minecraft:firework");
+                        if (Math.random() < 0.25) GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.goat.ambient");
+                        if (Math.random() < 0.1) GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:ambient.cave");
 
+                        GameUtils.spawnParticle(level_server, entity.getEyePosition(), 1, 1, 1, 0, 5, "minecraft:campfire_cosy_smoke");
+                        EffectManager.give(level_server, entity, "minecraft:blindness", 2, 0);
+
+                        EntityManager.setTarget(entity, null);
+                        EntityManager.moveTo(entity, entity.position().add(10.0 - (Math.random() * 20.0), 10.0 - (Math.random() * 20.0), 10.0 - (Math.random() * 20.0)), 1.5);
 
                     }
 
@@ -237,11 +146,469 @@ public class Spell1 {
 
             }
 
-            entity_center.setYRot(entity_center.getYRot() + (float) (360.0 / map_entity_card.size()));
+        } else if (card_number == 2) {
 
-            if (entity_center.getYRot() >= 360) {
+            {
 
-                entity_center.setYRot(entity_center.getYRot() - 360);
+                if (is_positive == true) {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:resistance", 2) == false) {
+
+                        if (EffectManager.has(level_server, entity, "minecraft:resistance") == false) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.zombie_horse.ambient");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:block.amethyst_block.resonate");
+
+                        }
+
+                        EffectManager.give(level_server, entity, "minecraft:resistance", 2, 0);
+
+                    }
+
+                } else {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:nausea", 5) == false) {
+
+                        if (EffectManager.has(level_server, entity, "minecraft:nausea") == false) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.ravager.death");
+
+                        }
+
+                        EffectManager.give(level_server, entity, "minecraft:nausea", 5, 0);
+                        GameUtils.playSound(level_server, entity.blockPosition(), (Math.random() * 0.25) + 0.5, 20, "minecraft:entity.ghast.ambient");
+
+                        if (Math.random() < 0.25) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), (Math.random() * 1.5) + 0.5, 10, "minecraft:ambient.cave");
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        } else if (card_number == 3) {
+
+            {
+
+                if (is_positive == true) {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:haste", 2) == false) {
+
+                        if (EffectManager.has(level_server, entity, "minecraft:haste") == false) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.allay.ambient_with_item");
+
+                        }
+
+                        EffectManager.give(level_server, entity, "minecraft:haste", 2, 0);
+
+                    }
+
+                } else {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:mining_fatigue", 2) == false) {
+
+                        if (EffectManager.has(level_server, entity, "minecraft:mining_fatigue") == false) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.allay.ambient_without_item");
+
+                        }
+
+                        EffectManager.give(level_server, entity, "minecraft:mining_fatigue", 2, 0);
+
+                    }
+
+                }
+
+            }
+
+        } else if (card_number == 4) {
+
+            {
+
+                if (is_positive == true) {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:luck", 2) == false) {
+
+                        if (EffectManager.has(level_server, entity, "minecraft:luck") == false) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.stray.step");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:block.beacon.power_select");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 1, 20, "minecraft:block.beacon.power_select");
+                            GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 0, 10, "minecraft:happy_villager");
+
+                        }
+
+                        EffectManager.give(level_server, entity, "minecraft:luck", 2, 0);
+
+                    }
+
+                } else {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:unluck", 2) == false) {
+
+                        if (EffectManager.has(level_server, entity, "minecraft:unluck") == false) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.stray.hurt");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:block.beacon.power_select");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 1, 20, "minecraft:block.beacon.power_select");
+                            GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 0, 10, "minecraft:happy_villager");
+
+                        }
+
+                        EffectManager.give(level_server, entity, "minecraft:unluck", 2, 0);
+
+                    }
+
+                }
+
+            }
+
+        } else if (card_number == 5) {
+
+            {
+
+                if (is_positive == true) {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:hero_of_the_village", 2) == false) {
+
+                        if (EffectManager.has(level_server, entity, "minecraft:hero_of_the_village") == false) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.warden.roar");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:block.beacon.power_select");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 10, "minecraft:entity.player.levelup");
+
+                        }
+
+                        EffectManager.give(level_server, entity, "minecraft:hero_of_the_village", 2, 0);
+
+                    }
+
+                } else {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:bad_omen", 2) == false) {
+
+                        if (EffectManager.has(level_server, entity, "minecraft:bad_omen") == false) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.warden.roar");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:block.beacon.power_select");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0.75, 20, "minecraft:entity.evoker.prepare_attack");
+
+                        }
+
+                        EffectManager.give(level_server, entity, "minecraft:bad_omen", 2, 0);
+
+                    }
+
+                }
+
+            }
+
+        } else if (card_number == 6) {
+
+            {
+
+                if (is_positive == true) {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:invisibility", 2) == false) {
+
+                        if (EffectManager.has(level_server, entity, "minecraft:invisibility") == false) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0.75, 20, "minecraft:entity.illusioner.mirror_move");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0.75, 20, "minecraft:block.enchantment_table.use");
+                            GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 0, 10, "minecraft:campfire_signal_smoke");
+
+                        }
+
+                        EffectManager.give(level_server, entity, "minecraft:invisibility", 2, 0);
+
+                    }
+
+                } else {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:glowing", 2) == false) {
+
+                        if (EffectManager.has(level_server, entity, "minecraft:glowing") == false) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 2, 20, "minecraft:block.amethyst_block.fall");
+
+                        }
+
+                        EffectManager.give(level_server, entity, "minecraft:glowing", 2, 0);
+                        GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 0, 1, "minecraft:firework");
+
+                    }
+
+                }
+
+            }
+
+        } else if (card_number == 7) {
+
+            {
+
+                if (is_positive == true) {
+
+                    Core.DelayedWork.create(false, 1, () -> {
+
+                        if (EffectManager.clearAll(entity) == true) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:block.enchantment_table.use");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0.75, 20, "minecraft:block.beacon.power_select");
+                            GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 0.1, 10, "minecraft:end_rod");
+
+                        }
+
+                    });
+
+                } else {
+
+                    if (player_server != entity) {
+
+                        EffectManager.copyAll(player_server, entity);
+
+                    }
+
+                    GameUtils.playSound(level_server, entity.blockPosition(), Math.random() + 1.0, 10, "minecraft:block.beacon.ambient");
+
+                }
+
+            }
+
+        } else if (card_number == 8) {
+
+            {
+
+                if (is_positive == true) {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:fire_resistance", 2) == false) {
+
+                        if (EffectManager.has(level_server, entity, "minecraft:fire_resistance") == false) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0.75, 20, "minecraft:entity.silverfish.ambient");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.illusioner.prepare_blindness");
+                            GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 0, 10, "minecraft:flame");
+
+                        }
+
+                        EffectManager.give(level_server, entity, "minecraft:fire_resistance", 2, 0);
+
+                    }
+
+                } else {
+
+                    entity.setRemainingFireTicks(20 * 1);
+                    GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.skeleton_horse.ambient");
+                    GameUtils.playSound(level_server, entity.blockPosition(), 1, 20, "minecraft:entity.blaze.burn");
+
+                }
+
+            }
+
+        } else if (card_number == 9) {
+
+            {
+
+                if (is_positive == true) {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:speed", 2) == false) {
+
+                        if (EffectManager.has(level_server, entity, "minecraft:speed") == false) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 1.5, 20, "minecraft:item.trident.thunder");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 2, 20, "minecraft:item.trident.thunder");
+                            GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 0.1, 20, "minecraft:reverse_portal");
+
+                        }
+
+                        EffectManager.give(level_server, entity, "minecraft:speed", 3, 9);
+                        EffectManager.give(level_server, entity, "minecraft:jump_boost", 3, 9);
+
+                    }
+
+                } else {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:slowness", 2) == false) {
+
+                        EffectManager.give(level_server, entity, "minecraft:slowness", 2, 2);
+                        GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 0.1, 1, "minecraft:reverse_portal");
+
+                        if (Math.random() < 0.25) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:ambient.crimson_forest.mood");
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        } else if (card_number == 10) {
+
+            {
+
+                if (is_positive == true) {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:strength", 2) == false) {
+
+                        if (EffectManager.has(level_server, entity, "minecraft:strength") == false) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.player.breath");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:block.enchantment_table.use");
+                            GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 1, 10, "minecraft:enchant");
+
+                        }
+
+                        EffectManager.give(level_server, entity, "minecraft:strength", 2, 0);
+
+                    }
+
+                } else {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:weakness", 2) == false) {
+
+                        if (EffectManager.has(level_server, entity, "minecraft:weakness") == false) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.wither.ambient");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:block.beacon.power_select");
+                            GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 1, 10, "minecraft:enchant");
+
+                        }
+
+                        EffectManager.give(level_server, entity, "minecraft:weakness", 2, 0);
+
+                    }
+
+                }
+
+            }
+
+        } else if (card_number == 11) {
+
+            {
+
+                if (is_positive == true) {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:slow_falling", 2) == false) {
+
+                        if (EffectManager.has(level_server, entity, "minecraft:slow_falling") == false) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.allay.ambient_with_item");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:ambient.cave");
+                            GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 0.25, 10, "minecraft:cloud");
+
+                        }
+
+                        EffectManager.give(level_server, entity, "minecraft:slow_falling", 2, 0);
+
+                    }
+
+                } else {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:levitation", 2) == false) {
+
+                        if (EffectManager.has(level_server, entity, "minecraft:levitation") == false) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.allay.ambient_without_item");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:ambient.cave");
+                            GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 0.25, 10, "minecraft:cloud");
+
+                        }
+
+                        EffectManager.give(level_server, entity, "minecraft:levitation", 2, 0);
+
+                        if (Math.random() < 0.25) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 2, 20, "minecraft:ambient.warped_forest.mood");
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        } else if (card_number == 12) {
+
+            {
+
+                if (is_positive == true) {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:water_breathing", 2) == false) {
+
+                        if (EffectManager.has(level_server, entity, "minecraft:water_breathing") == false) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.dolphin.play");
+                            GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:entity.allay.ambient_with_item");
+                            GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 0, 10, "minecraft:dripping_water");
+
+                        }
+
+                        EffectManager.give(level_server, entity, "minecraft:water_breathing", 2, 0);
+
+                    }
+
+                } else {
+
+                    if (entity.isUnderWater() == true) {
+
+                        GameUtils.runCommandEntity(entity, "damage @s 1 minecraft:drown");
+                        GameUtils.playSound(level_server, entity.blockPosition(), (Math.random() * 0.5) + 0.5, 20, "minecraft:entity.elder_guardian.ambient");
+
+                        if (Math.random() < 0.25) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), 1.5, 20, "minecraft:ambient.underwater.loop.additions.ultra_rare");
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        } else if (card_number == 13) {
+
+            {
+
+                if (is_positive == true) {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:regeneration", 2) == false) {
+
+                        EffectManager.give(level_server, entity, "minecraft:regeneration", 2, 0);
+                        GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 0, 1, "minecraft:soul_fire_flame");
+
+                        if (Math.random() < 0.5) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), (Math.random() * 1.5) + 0.5, 20, "minecraft:block.amethyst_block.chime");
+
+                        }
+
+                    }
+
+                } else {
+
+                    if (EffectManager.hasDuration(level_server, entity, "minecraft:poison", 2) == false) {
+
+                        EffectManager.give(level_server, entity, "minecraft:poison", 2, 0);
+                        GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 0, 1, "minecraft:sculk_soul");
+
+                        if (Math.random() < 0.25) {
+
+                            GameUtils.playSound(level_server, entity.blockPosition(), (Math.random() * 1.5) + 0.5, 10, "minecraft:ambient.soul_sand_valley.mood");
+
+                        }
+
+                    }
+
+                }
 
             }
 
@@ -249,515 +616,323 @@ public class Spell1 {
 
     }
 
-    private static void setCardPosition (ServerPlayer player_server, Entity entity_center, Entity entity_card, int card_count) {
+    private static class Card {
 
-        double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
-        double far = 0.0;
-        double height = 0.0;
+        private static void summonAll (ServerLevel level_server, ServerPlayer player_server, Entity entity_center) {
 
-        if (NBTManager.Mob.getText(entity_card, "", "status").isEmpty() == true) {
+            entity_center.setYRot((float) (Math.random() * 360));
+            List<Integer> list = new ArrayList<>();
 
-            far = radius * 1.25;
+            for (int number = 1; number <= 13; number++) {
 
-        } else {
+                if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_active" + number) == true) {
 
-            far = radius;
-            height = radius / 4.0;
+                    list.add(number);
 
-            if (radius > 10) {
+                }
 
-                height = -height;
+            }
+
+            int[] numbers = new int[list.size()];
+
+            for (int loop = 0; loop < list.size(); loop++) {
+
+                numbers[loop] = list.get(loop);
+
+            }
+
+            summonSpecific(level_server, player_server, entity_center, numbers);
+
+        }
+
+        private static void summonSpecific (ServerLevel level_server, ServerPlayer player_server, Entity entity_center, int[] numbers) {
+
+            for (int number : numbers) {
+
+                EntityManager.Display.summonItem(level_server, entity_center.position(), (int) entity_center.getYRot() + ((360 / numbers.length) * (number - 1)) + 180, 90, 0, true, "Zodiac Card " + number, Utils.Tag.convertSystemSpecific(player_server, new String[]{"spell1", "spell1_card", "spell1_card" + number}), "tanscomplexmagic:zodiac_card_" + number);
+
+            }
+
+            double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
+            GameUtils.spawnParticle(level_server, entity_center.position(), 0, 0, 0, 0, 1, "minecraft:flash");
+            GameUtils.playSound(level_server, entity_center.blockPosition(), 0, radius * 5, "minecraft:entity.evoker.prepare_summon");
+            GameUtils.playSound(level_server, entity_center.blockPosition(), 0, radius * 10, "minecraft:block.enchantment_table.use");
+
+        }
+
+        private static void removeAll (ServerLevel level_server, ServerPlayer player_server) {
+
+            double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
+
+            for (Entity entity : EntityManager.Get.fromEverywhere(level_server, "minecraft:item_display", Utils.Tag.convertSystemSpecific(player_server, new String[]{"spell1_card"}))) {
+
+                removeSpecific(level_server, entity, radius);
 
             }
 
         }
 
-        if (card_count == 1) {
+        private static void removeSpecific (ServerLevel level_server, Entity entity_card, double radius) {
 
-            entity_card.setPos(GameUtils.Space.getPosLook(entity_center, 0, height, 0));
+            GameUtils.spawnParticle(level_server, entity_card.position(), 0, 0, 0, 0, 1, "minecraft:flash");
+            GameUtils.playSound(level_server, entity_card.blockPosition(), 0, radius * 4, "minecraft:entity.evoker.cast_spell");
+            entity_card.discard();
 
-        } else {
+        }
+
+        private static void update (ServerLevel level_server, ServerPlayer player_server, Entity entity_center, Map<Integer, Entity> cards) {
+
+            double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
+
+            for (Map.Entry<Integer, Entity> entry : cards.entrySet()) {
+
+                entity_center.setYRot(entity_center.getYRot() + (float) (360.0 / cards.size()));
+
+                if (entity_center.getYRot() >= 360) {
+
+                    entity_center.setYRot(entity_center.getYRot() - 360);
+
+                }
+
+                // When Update Radius
+                {
+
+                    if (NBTManager.Mob.getNumber(entry.getValue(), "", "save_radius") != radius) {
+
+                        NBTManager.Mob.setNumber(entry.getValue(), "", "save_radius", radius);
+                        setSize(player_server, entry.getValue());
+
+                    }
+
+                }
+
+                setPosition(player_server, entity_center, entry.getValue(), cards.size());
+                setPose(level_server, player_server, entity_center, entry.getValue(), entry.getKey(), cards.size());
+
+            }
+
+            // Second Updates
+            {
+
+                int card_update_second_tick = (int) NBTManager.Mob.getNumber(player_server, "", "card_update_second_tick");
+
+                if (card_update_second_tick < 20) {
+
+                    NBTManager.Mob.setNumber(player_server, "", "card_update_second_tick", card_update_second_tick + 1);
+
+                } else {
+
+                    NBTManager.Mob.setNumber(player_server, "", "card_update_second_tick", 1);
+                    updateSecond(level_server, player_server, entity_center, cards);
+
+                }
+
+            }
+
+        }
+
+        private static void updateSecond (ServerLevel level_server, ServerPlayer player_server, Entity entity_center, Map<Integer, Entity> cards) {
+
+            double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
+            Map<String, List<Entity>> targets = new HashMap<>();
+            Entity entity_card = null;
+
+            // Get Targets
+            {
+
+                List<Entity> list = EntityManager.Get.filterLivingEntity(EntityManager.Get.fromArea(level_server, entity_center.position(), radius, false, "", new String[]{}));
+                targets.put("user", new ArrayList<>());
+
+                if (list.contains(player_server) == true) {
+
+                    targets.get("user").add(player_server);
+
+                }
+
+                targets.put("ally_player", EntityManager.Get.filter(list, "minecraft:player", Utils.Tag.convertAlly(player_server)));
+                targets.put("ally_non_player", EntityManager.Get.filter(list, "!minecraft:player", Utils.Tag.convertAlly(player_server)));
+                targets.put("enemy_player", EntityManager.Get.filter(list, "minecraft:player", Utils.Tag.convertEnemy(player_server)));
+                targets.put("enemy_non_player", EntityManager.Get.filter(list, "!minecraft:player", Utils.Tag.convertEnemy(player_server)));
+
+            }
+
+            for (int number = 1; number < 13; number++) {
+
+                List<Entity> sort_targets = new ArrayList<>();
+
+                // Sort Targets
+                {
+
+                    if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_target_user" + number) == true)
+                        sort_targets.addAll(targets.get("user"));
+                    if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_target_ally_player" + number) == true)
+                        sort_targets.addAll(targets.get("ally_player"));
+                    if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_target_ally_non_player" + number) == true)
+                        sort_targets.addAll(targets.get("ally_non_player"));
+                    if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_target_enemy_player" + number) == true)
+                        sort_targets.addAll(targets.get("enemy_player"));
+                    if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_target_enemy_non_player" + number) == true)
+                        sort_targets.addAll(targets.get("enemy_non_player"));
+
+                    sort_targets = EntityManager.Get.sort(sort_targets, entity_center.position(), true, 0);
+
+                }
+
+                int level = (int) NBTManager.Mob.getNumber(player_server, "spell1", "card_level" + number);
+                int per_second = (2 * level) - 1;
+                NBTManager.Mob.setNumber(player_server, "spell1", "approximate_duration_per_second" + number, sort_targets.size() * per_second);
+                NBTManager.Mob.setNumber(player_server, "spell1", "number_of_targets_detected" + number, sort_targets.size());
+
+                entity_card = cards.get(number);
+
+                // When Update Card Enable
+                {
+
+                    boolean active = NBTManager.Mob.getLogic(player_server, "spell1", "is_card_active" + number);
+
+                    if (active != NBTManager.Mob.getLogic(player_server, "spell1", "save_is_card_active" + number)) {
+
+                        NBTManager.Mob.setLogic(player_server, "spell1", "save_is_card_active" + number, active);
+
+                        if (entity_card == null) {
+
+                            if (active == true) {
+
+                                summonSpecific(level_server, player_server, entity_center, new int[]{number});
+
+                            }
+
+                        } else {
+
+                            if (active == false) {
+
+                                removeSpecific(level_server, entity_card, radius);
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                if (entity_card == null) {
+
+                    continue;
+
+                }
+
+                if (NBTManager.Mob.getText(entity_card, "", "status").equals("effect") == true) {
+
+                    // Apply Effects
+                    {
+
+                        int duration = (int) NBTManager.Mob.getNumber(player_server, "spell1", "card_duration" + number);
+                        int duration_max = (int) NBTManager.Mob.getNumber(player_server, "spell1", "card_duration_max" + number);
+
+                        for (Entity entity : sort_targets) {
+
+                            if (duration - per_second < 0) {
+
+                                break;
+
+                            }
+
+                            duration = duration - per_second;
+                            duration_max = duration_max - per_second;
+                            giveEffect(level_server, player_server, entity, number, entity_card.getXRot() == 0, level);
+
+                        }
+
+                        NBTManager.Mob.setNumber(player_server, "spell1", "card_duration" + number, duration);
+                        NBTManager.Mob.setNumber(player_server, "spell1", "card_duration_max" + number, duration_max);
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        private static void setPosition (ServerPlayer player_server, Entity entity_center, Entity entity_card, int card_count) {
+
+            boolean is_rest = NBTManager.Mob.getText(entity_card, "", "status").isEmpty() == true;
+            double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
+            double height = 0.0;
+            double far = 0.0;
+
+            if (radius <= 10) {
+
+                if (is_rest == true) {
+
+                    height = 0.075;
+
+                } else {
+
+                    height = radius / 4.0;
+
+                }
+
+            } else {
+
+                height = radius;
+
+                if (is_rest == false) {
+
+                    height = radius - (radius / 4.0);
+
+                }
+
+            }
+
+            if (card_count > 1) {
+
+                if (is_rest == true) {
+
+                    far = radius * 1.25;
+
+                } else {
+
+                    far = radius;
+
+                }
+
+            }
 
             entity_card.setPos(GameUtils.Space.getPosLook(entity_center, 0, height, far));
 
         }
 
-    }
+        private static void setPose (ServerLevel level_server, ServerPlayer player_server, Entity entity_center, Entity entity_card, int card_number, int card_count) {
 
-    private static void setCardPose (ServerLevel level_server, ServerPlayer player_server, Entity entity_center, Entity entity_card, int card_number, int card_count) {
+            if (card_count == 1) {
 
-        if (card_count == 1) {
-
-            entity_card.setYRot((float) (entity_card.getYRot() + -0.5));
-
-        } else {
-
-            float rotX_save = entity_card.getXRot();
-            entity_card.lookAt(EntityAnchorArgument.Anchor.FEET, entity_center.position());
-            entity_card.setXRot(rotX_save);
-
-        }
-
-        int degree_set = 90;
-
-        if (NBTManager.Mob.getLogic(player_server, "spell1", "pause") == false) {
-
-            if (NBTManager.Mob.getLogic(player_server, "spell1", "is_enable" + card_number) == true) {
-
-                if (NBTManager.Mob.getLogic(player_server, "spell1", "is_negative" + card_number) == true) {
-
-                    degree_set = -180;
-
-                } else {
-
-                    degree_set = 0;
-
-                }
-
-            }
-
-        }
-
-        if (entity_card.getXRot() != degree_set) {
-
-            // Flipping
-            {
-
-                double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
-                double sound_distance = radius + 2.5;
-
-                if (NBTManager.Mob.getText(entity_card, "", "status").equals("flip") == false) {
-
-                    // At Start of Flipping
-                    {
-
-                        NBTManager.Mob.setText(entity_card, "", "status", "flip");
-
-                        if (entity_card.getXRot() != 90) {
-
-                            GameUtils.playSound(level_server, entity_card.blockPosition(), (Math.random() * 0.5) + 0.5, sound_distance * 5.0, "minecraft:block.bell.use");
-
-                        } else {
-
-                            GameUtils.playSound(level_server, entity_card.blockPosition(), (Math.random() * 0.5) + 0.5, sound_distance * 5.0, "minecraft:block.ender_chest.open");
-
-                        }
-
-                    }
-
-                }
-
-                // Add Degree
-                {
-
-                    double degree = 1.0 - (radius / 200.0);
-                    degree = (degree * 0.6) + 0.4;
-
-                    if (entity_card.getXRot() > degree_set && entity_card.getXRot() - (float) degree > degree_set) {
-
-                        entity_card.setXRot(entity_card.getXRot() - (float) degree);
-
-                    } else if (entity_card.getXRot() < degree_set && entity_card.getXRot() + (float) degree < degree_set) {
-
-                        entity_card.setXRot(entity_card.getXRot() + (float) degree);
-
-                    } else {
-
-                        entity_card.setXRot((float) degree_set);
-
-                    }
-
-                }
-
-                // Gear Sound
-                {
-
-                    int tick = (int) NBTManager.Mob.getNumber(entity_card, "", "gear_sound_tick");
-
-                    if (tick < 10) {
-
-                        NBTManager.Mob.setNumber(entity_card, "", "gear_sound_tick", tick + 1);
-
-                    } else {
-
-                        NBTManager.Mob.setNumber(entity_card, "", "gear_sound_tick", 1);
-                        GameUtils.playSound(level_server, entity_card.blockPosition(), 0, sound_distance * 5.0, "minecraft:block.wooden_door.open");
-
-
-                    }
-
-                }
-
-                if (entity_card.getXRot() == degree_set || entity_card.getXRot() == -180) {
-
-                    // Finish Flipping
-                    {
-
-                        if (degree_set == 90) {
-
-                            NBTManager.Mob.setText(entity_card, "", "status", "");
-                            GameUtils.playSound(level_server, entity_card.blockPosition(), (Math.random() * 0.5) + 0.5, sound_distance * 5.0, "minecraft:block.note_block.chime");
-
-                        } else {
-
-                            NBTManager.Mob.setText(entity_card, "", "status", "effect");
-                            GameUtils.playSound(level_server, entity_card.blockPosition(), 0, sound_distance * 5.0, "minecraft:block.iron_door.open");
-
-                        }
-
-                    }
-
-                }
-
-            }
-
-        }
-
-    }
-
-    private static void setCardSize (ServerPlayer player_server, Entity entity_card) {
-
-        double scale = NBTManager.Mob.getNumber(player_server, "spell1", "radius") / 5.0;
-        EntityManager.Display.setItemScale(entity_card, scale);
-
-    }
-
-    private static void giveEffect (ServerLevel level_server, ServerPlayer player_server, Entity entity_main, Entity entity_card, int card_number) {
-
-        String effect = "";
-        int apply_min_duration = 0;
-        int duration = 0;
-        int level = 0;
-
-        // Effects
-        {
-
-            boolean is_positive = entity_card.getXRot() == 0;
-
-            if (card_number == 1) {
-
-                {
-
-                    if (is_positive == true) {
-
-                        effect = "minecraft:night_vision";
-                        apply_min_duration = 12;
-                        duration = 1;
-                        level = 0;
-
-                    } else {
-
-                        effect = "minecraft:blindness";
-                        apply_min_duration = 2;
-                        duration = 3;
-                        level = 0;
-
-                    }
-
-                }
-
-            } else if (card_number == 2) {
-
-                {
-
-                    if (is_positive == true) {
-
-                        effect = "minecraft:resistance";
-                        apply_min_duration = 2;
-                        duration = 3;
-                        level = 0;
-
-                    } else {
-
-                        effect = "minecraft:nausea";
-                        apply_min_duration = 5;
-                        duration = 1;
-                        level = 0;
-
-                    }
-
-                }
-
-            } else if (card_number == 3) {
-
-                {
-
-                    if (is_positive == true) {
-
-                        effect = "minecraft:haste";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    } else {
-
-                        effect = "minecraft:mining_fatigue";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    }
-
-                }
-
-            } else if (card_number == 4) {
-
-                {
-
-                    if (is_positive == true) {
-
-                        effect = "minecraft:luck";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    } else {
-
-                        effect = "minecraft:unluck";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    }
-
-                }
-
-            } else if (card_number == 5) {
-
-                {
-
-                    if (is_positive == true) {
-
-                        effect = "minecraft:hero_of_the_village";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    } else {
-
-                        effect = "minecraft:bad_omen";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    }
-
-                }
-
-            } else if (card_number == 6) {
-
-                {
-
-                    if (is_positive == true) {
-
-                        effect = "minecraft:invisibility";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    } else {
-
-                        effect = "minecraft:glowing";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    }
-
-                }
-
-            } else if (card_number == 7) {
-
-                {
-
-                    if (is_positive == true) {
-
-                        effect = "clear";
-                        duration = 1;
-                        level = 0;
-
-                    } else {
-
-                        effect = "share";
-                        duration = 1;
-                        level = 0;
-
-                    }
-
-                }
-
-            } else if (card_number == 8) {
-
-                {
-
-                    if (is_positive == true) {
-
-                        effect = "minecraft:fire_resistance";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    } else {
-
-                        effect = "fire";
-                        duration = 2;
-                        level = 0;
-
-                    }
-
-                }
-
-            } else if (card_number == 9) {
-
-                {
-
-                    if (is_positive == true) {
-
-                        effect = "minecraft:speed";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    } else {
-
-                        effect = "minecraft:slowness";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    }
-
-                }
-
-            } else if (card_number == 10) {
-
-                {
-
-                    if (is_positive == true) {
-
-                        effect = "minecraft:strength";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    } else {
-
-                        effect = "minecraft:weakness";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    }
-
-                }
-
-            } else if (card_number == 11) {
-
-                {
-
-                    if (is_positive == true) {
-
-                        effect = "minecraft:slow_falling";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    } else {
-
-                        effect = "minecraft:levitation";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    }
-
-                }
-
-            } else if (card_number == 12) {
-
-                {
-
-                    if (is_positive == true) {
-
-                        effect = "minecraft:water_breathing";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    } else {
-
-                        effect = "fear_water";
-                        duration = 1;
-                        level = 0;
-
-                    }
-
-                }
-
-            } else if (card_number == 13) {
-
-                {
-
-                    if (is_positive == true) {
-
-                        effect = "minecraft:regeneration";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    } else {
-
-                        effect = "minecraft:poison";
-                        apply_min_duration = 2;
-                        duration = 1;
-                        level = 0;
-
-                    }
-
-                }
-
-            }
-
-        }
-
-        double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
-
-        for (Entity entity : EntityManager.Get.fromArea(level_server, entity_main.position(), radius, false, "", new String[]{})) {
-
-            if (effect.startsWith("minecraft:") == true) {
-
-                if (EffectManager.has(level_server, entity, effect, apply_min_duration, 0) == false) {
-
-                    EffectManager.give(level_server, entity, effect, apply_min_duration + duration, level);
-
-                }
+                entity_card.setYRot((float) (entity_card.getYRot() + -0.5));
 
             } else {
 
-                // Special Effects
-                {
+                float rotX_save = entity_card.getXRot();
+                entity_card.lookAt(EntityAnchorArgument.Anchor.FEET, entity_center.position());
+                entity_card.setXRot(rotX_save);
 
-                    if (effect.equals("clear") == true) {
+            }
 
-                        EffectManager.clearAll(entity);
+            int degree_set = 90;
 
-                    } else if (effect.equals("share") == true) {
+            if (NBTManager.Mob.getLogic(player_server, "spell1", "is_pause_all") == false) {
 
-                        if (player_server != entity) {
+                if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_start_effect" + card_number) == true) {
 
-                            EffectManager.copyAll(player_server, entity);
+                    if (NBTManager.Mob.getNumber(player_server, "spell1", "card_duration" + card_number) > 0) {
 
-                        }
+                        if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_negative" + card_number) == true) {
 
-                    } else if (effect.equals("fire") == true) {
+                            degree_set = -180;
 
-                        entity.setRemainingFireTicks(20 * duration);
+                        } else {
 
-                    } else if (effect.equals("fear_water") == true) {
-
-                        if (entity.isUnderWater() == true) {
-
-                            GameUtils.runCommandEntity(entity, "damage @s 1 minecraft:drown");
+                            degree_set = 0;
 
                         }
 
@@ -766,6 +941,131 @@ public class Spell1 {
                 }
 
             }
+
+            if (entity_card.getXRot() != degree_set) {
+
+                // Flipping
+                {
+
+                    double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
+                    double sound_distance = radius + 2.5;
+
+                    if (NBTManager.Mob.getText(entity_card, "", "status").equals("flip") == false) {
+
+                        // At Start of Flipping
+                        {
+
+                            NBTManager.Mob.setText(entity_card, "", "status", "flip");
+
+                            if (entity_card.getXRot() != 90) {
+
+                                GameUtils.playSound(level_server, entity_card.blockPosition(), (Math.random() * 0.5) + 0.5, sound_distance * 5.0, "minecraft:block.bell.use");
+
+                            } else {
+
+                                GameUtils.playSound(level_server, entity_card.blockPosition(), (Math.random() * 0.5) + 0.5, sound_distance * 5.0, "minecraft:block.ender_chest.open");
+
+                            }
+
+                        }
+
+                    }
+
+                    // Add Degree
+                    {
+
+                        double degree = 1.0 - (radius / 200.0);
+                        degree = (degree * 0.6) + 0.4;
+
+                        if (entity_card.getXRot() > degree_set && entity_card.getXRot() - (float) degree > degree_set) {
+
+                            entity_card.setXRot(entity_card.getXRot() - (float) degree);
+
+                        } else if (entity_card.getXRot() < degree_set && entity_card.getXRot() + (float) degree < degree_set) {
+
+                            entity_card.setXRot(entity_card.getXRot() + (float) degree);
+
+                        } else {
+
+                            entity_card.setXRot((float) degree_set);
+
+                        }
+
+                    }
+
+                    // Gear Sound
+                    {
+
+                        int tick = (int) NBTManager.Mob.getNumber(entity_card, "", "gear_sound_tick");
+
+                        if (tick < 10) {
+
+                            NBTManager.Mob.setNumber(entity_card, "", "gear_sound_tick", tick + 1);
+
+                        } else {
+
+                            NBTManager.Mob.setNumber(entity_card, "", "gear_sound_tick", 1);
+                            GameUtils.playSound(level_server, entity_card.blockPosition(), 0, sound_distance * 5.0, "minecraft:block.wooden_door.open");
+
+
+                        }
+
+                    }
+
+                    if (entity_card.getXRot() == degree_set || entity_card.getXRot() == -180) {
+
+                        // Finish Flipping
+                        {
+
+                            if (degree_set == 90) {
+
+                                NBTManager.Mob.setText(entity_card, "", "status", "");
+                                GameUtils.playSound(level_server, entity_card.blockPosition(), (Math.random() * 0.5) + 0.5, sound_distance * 5.0, "minecraft:block.note_block.chime");
+
+                            } else {
+
+                                NBTManager.Mob.setText(entity_card, "", "status", "effect");
+                                GameUtils.playSound(level_server, entity_card.blockPosition(), 0, sound_distance * 5.0, "minecraft:block.iron_door.open");
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        private static void setSize (ServerPlayer player_server, Entity entity_card) {
+
+            double scale = NBTManager.Mob.getNumber(player_server, "spell1", "radius") / 5.0;
+            EntityManager.Display.setItemScale(entity_card, scale);
+
+        }
+
+        private static Map<Integer, Entity> getActive (ServerLevel level_server, ServerPlayer player_server) {
+
+            Map<Integer, Entity> map = new HashMap<>();
+            Entity entity = null;
+
+            for (int number = 1; number <= 13; number++) {
+
+                entity = EntityManager.Get.fromEverywhereOne(level_server, "minecraft:item_display", Utils.Tag.convertSystemSpecific(player_server, new String[]{"spell1_card" + number}));
+
+                if (entity == null) {
+
+                    continue;
+
+                }
+
+                map.put(number, entity);
+
+            }
+
+            return map;
 
         }
 

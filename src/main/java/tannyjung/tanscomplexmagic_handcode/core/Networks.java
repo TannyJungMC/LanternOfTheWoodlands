@@ -4,11 +4,14 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import tannyjung.tanscomplexmagic_core.game.EntityManager;
 import tannyjung.tanscomplexmagic_core.game.GameUtils;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
 import tannyjung.tanscomplexmagic_core.game.screen.GUIManager;
 import tannyjung.tanscomplexmagic_handcode.systems.Book;
 import tannyjung.tanscomplexmagic_handcode.systems.Spell1;
+import tannyjung.tanscomplexmagic_handcode.systems.Utils;
 
 public class Networks {
 
@@ -38,13 +41,17 @@ public class Networks {
                     {
 
                         GameUtils.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 10, "minecraft:item.book.page_turn");
-                        NBTManager.Mob.addNumber(player_server, "gui", "id", -2);
 
-                        if (NBTManager.Mob.getNumber(player_server, "gui", "id") < 0) {
+                        int page = (int) NBTManager.Mob.getNumber(player_server, "gui", "id");
+                        page = page - 2;
 
-                            NBTManager.Mob.setNumber(player_server, "gui", "id", 0);
+                        if (page < 1) {
+
+                            page = 1;
 
                         }
+
+                        NBTManager.Mob.setNumber(player_server, "gui", "id", page);
 
                     }
 
@@ -96,6 +103,22 @@ public class Networks {
 
             }
 
+        } else if (type.equals("spell1") == true) {
+
+            {
+
+                if (work.equals("get_duration1") == true) {
+
+                    if (Utils.trySpendMana(player_server, 1) == true) {
+
+                        NBTManager.Mob.addNumber(player_server, "spell1", "card_duration_max1", 120);
+
+                    }
+
+                }
+
+            }
+
         }
 
     }
@@ -116,15 +139,21 @@ public class Networks {
 
                     ServerLevel level_server = player_server.serverLevel();
 
-                    if (NBTManager.Mob.getLogic(player_server, "status", "main_key") == true) {
+                    if (NBTManager.Mob.getLogic(player_server, "main", "main_key") == true) {
 
-                        NBTManager.Mob.setLogic(player_server, "status", "main_key", false);
+                        NBTManager.Mob.setLogic(player_server, "main", "main_key", false);
 
                         Spell1.deactivate(level_server, player_server);
 
+                        for (Entity entity : EntityManager.Get.fromEverywhere(level_server, "", Utils.Tag.convertSystemAll(player_server))) {
+
+                            entity.discard();
+
+                        }
+
                     } else {
 
-                        NBTManager.Mob.setLogic(player_server, "status", "main_key", true);
+                        NBTManager.Mob.setLogic(player_server, "main", "main_key", true);
 
                         Spell1.activate(level_server, player_server);
 
@@ -136,7 +165,7 @@ public class Networks {
 
                 {
 
-                    NBTManager.Mob.setLogic(player_server, "spell1", "pause", NBTManager.Mob.getLogic(player_server, "spell1", "pause") == false);
+                    NBTManager.Mob.setLogic(player_server, "spell1", "is_pause_all", NBTManager.Mob.getLogic(player_server, "spell1", "is_pause_all") == false);
 
                 }
 

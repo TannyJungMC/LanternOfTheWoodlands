@@ -79,11 +79,13 @@ public class ScreenDrawing {
 
         private static boolean is_active = false;
         private static boolean is_temporary_pause = false;
+        private static String previous_type = "";
         private static int posX = 0;
         private static int posZ = 0;
         private static int markX = 0;
         private static int markZ = 0;
-        private static String previous_type = "";
+        private static String markX_previous_type = "";
+        private static String markZ_previous_type = "";
 
         public static void start (int posX, int posZ) {
 
@@ -103,24 +105,28 @@ public class ScreenDrawing {
         public static void setMarkX () {
 
             markX = posX;
+            markX_previous_type = previous_type;
 
         }
 
         public static void setMarkZ () {
 
             markZ = posZ;
+            markZ_previous_type = previous_type;
 
         }
 
         public static void returnMarkX () {
 
             posX = markX;
+            previous_type = markX_previous_type;
 
         }
 
         public static void returnMarkZ () {
 
             posZ = markZ;
+            previous_type = markZ_previous_type;
 
         }
 
@@ -145,6 +151,12 @@ public class ScreenDrawing {
         private static int getPosX (int originalX) {
 
             if (is_active == true && is_temporary_pause == false) {
+
+                if (originalX != 0) {
+
+                    return posX + originalX;
+
+                }
 
                 return posX;
 
@@ -174,6 +186,12 @@ public class ScreenDrawing {
                         previous_type = type;
 
                     }
+
+                }
+
+                if (originalZ != 0) {
+
+                    return posZ + originalZ;
 
                 }
 
@@ -761,7 +779,7 @@ public class ScreenDrawing {
 
         }
 
-        private static void drawSlider (GUIScreen screen, int posX, int posZ, boolean is_active, boolean is_lock, double value_min, double value_max, double value_move, String nbt_type, String nbt_name, String text) {
+        private static void drawSlider (GUIScreen screen, int posX, int posZ, int length, boolean is_active, boolean is_lock, double value_min, double value_max, double value_move, String nbt_type, String nbt_name, String text) {
 
             posX = AutoLine.getPosX(posX);
             posZ = AutoLine.getPosZ(posZ, "slider", 4, 8);
@@ -835,7 +853,7 @@ public class ScreenDrawing {
 
             }
 
-            AbstractSliderButton slider = new AbstractSliderButton(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ + 8, 160, 6, Component.empty(), value_default_percent) {
+            AbstractSliderButton slider = new AbstractSliderButton(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ + 8, length, 6, Component.empty(), value_default_percent) {
 
                 private final double value_previous = value_min - 1.0;
 
@@ -870,15 +888,15 @@ public class ScreenDrawing {
 
         }
 
-        public static void drawSliderBasic (GUIScreen screen, int posX, int posZ, double value_min, double value_max, double value_move, String nbt_type, String nbt_name, String text) {
+        public static void drawSliderBasic (GUIScreen screen, int posX, int posZ, int length, double value_min, double value_max, double value_move, String nbt_type, String nbt_name, String text) {
 
-            drawSlider(screen, posX, posZ, true, false, value_min, value_max, value_move, nbt_type, nbt_name, text);
+            drawSlider(screen, posX, posZ, length, true, false, value_min, value_max, value_move, nbt_type, nbt_name, text);
 
         }
 
-        public static void drawSliderLockable (GUIScreen screen, int posX, int posZ, boolean is_active, boolean is_lock, double value_min, double value_max, double value_move, String nbt_type, String nbt_name, String text) {
+        public static void drawSliderLockable (GUIScreen screen, int posX, int posZ, int length, boolean is_active, boolean is_lock, double value_min, double value_max, double value_move, String nbt_type, String nbt_name, String text) {
 
-            drawSlider(screen, posX, posZ, is_active, is_lock, value_min, value_max, value_move, nbt_type, nbt_name, text);
+            drawSlider(screen, posX, posZ, length, is_active, is_lock, value_min, value_max, value_move, nbt_type, nbt_name, text);
 
         }
 

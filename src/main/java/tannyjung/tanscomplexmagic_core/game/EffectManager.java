@@ -85,7 +85,7 @@ public class EffectManager {
 
             }
 
-            entity_living.addEffect(new MobEffectInstance(effect, 20 * duration, level, false, false));
+            entity_living.addEffect(new MobEffectInstance(effect, 20 * duration, level - 1, false, false));
 
         }
 

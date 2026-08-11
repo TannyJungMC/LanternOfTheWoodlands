@@ -107,11 +107,20 @@ public class Networks {
 
             {
 
-                if (work.equals("get_duration1") == true) {
+                if (work.startsWith("get_duration_") == true) {
 
-                    if (Utils.trySpendMana(player_server, 1) == true) {
+                    {
 
-                        NBTManager.Mob.addNumber(player_server, "spell1", "card_duration_max1", 120);
+                        work = work.substring("get_duration_".length());
+                        String positive_negative = work.substring(0, work.length() - 1);
+                        int number = Integer.parseInt(work.substring(work.length() - 1));
+
+                        if (Utils.trySpendMana(player_server, 1) == true) {
+
+                            int duration_per_mana = extra.getInt("duration_per_mana_" + positive_negative);
+                            NBTManager.Mob.addNumber(player_server, "spell1", "card_duration_max_" + positive_negative + number, duration_per_mana);
+
+                        }
 
                     }
 

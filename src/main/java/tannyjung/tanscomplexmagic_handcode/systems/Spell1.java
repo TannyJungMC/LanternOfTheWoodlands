@@ -98,13 +98,13 @@ public class Spell1 {
 
     }
 
-    private static void giveEffect (ServerLevel level_server, ServerPlayer player_server, Entity entity, int card_number, boolean is_positive, int level) {
+    private static void giveEffect (ServerLevel level_server, ServerPlayer player_server, Entity entity, int card_number, boolean is_negative, int level) {
 
         if (card_number == 1) {
 
             {
 
-                if (is_positive == true) {
+                if (is_negative == false) {
 
                     if (EffectManager.hasDuration(level_server, entity, "minecraft:night_vision", 12) == false) {
 
@@ -116,7 +116,7 @@ public class Spell1 {
 
                         }
 
-                        EffectManager.give(level_server, entity, "minecraft:night_vision", 12, 0);
+                        EffectManager.give(level_server, entity, "minecraft:night_vision", 12, 1);
 
                     }
 
@@ -135,7 +135,7 @@ public class Spell1 {
                         if (Math.random() < 0.1) GameUtils.playSound(level_server, entity.blockPosition(), 0, 20, "minecraft:ambient.cave");
 
                         GameUtils.spawnParticle(level_server, entity.getEyePosition(), 1, 1, 1, 0, 5, "minecraft:campfire_cosy_smoke");
-                        EffectManager.give(level_server, entity, "minecraft:blindness", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:blindness", 2, 1);
 
                         EntityManager.setTarget(entity, null);
                         EntityManager.moveTo(entity, entity.position().add(10.0 - (Math.random() * 20.0), 10.0 - (Math.random() * 20.0), 10.0 - (Math.random() * 20.0)), 1.5);
@@ -150,7 +150,7 @@ public class Spell1 {
 
             {
 
-                if (is_positive == true) {
+                if (is_negative == false) {
 
                     if (EffectManager.hasDuration(level_server, entity, "minecraft:resistance", 2) == false) {
 
@@ -161,7 +161,7 @@ public class Spell1 {
 
                         }
 
-                        EffectManager.give(level_server, entity, "minecraft:resistance", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:resistance", 2, (level * 2) - 1);
 
                     }
 
@@ -175,7 +175,7 @@ public class Spell1 {
 
                         }
 
-                        EffectManager.give(level_server, entity, "minecraft:nausea", 5, 0);
+                        EffectManager.give(level_server, entity, "minecraft:nausea", 5, 1);
                         GameUtils.playSound(level_server, entity.blockPosition(), (Math.random() * 0.25) + 0.5, 20, "minecraft:entity.ghast.ambient");
 
                         if (Math.random() < 0.25) {
@@ -194,7 +194,7 @@ public class Spell1 {
 
             {
 
-                if (is_positive == true) {
+                if (is_negative == false) {
 
                     if (EffectManager.hasDuration(level_server, entity, "minecraft:haste", 2) == false) {
 
@@ -204,7 +204,7 @@ public class Spell1 {
 
                         }
 
-                        EffectManager.give(level_server, entity, "minecraft:haste", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:haste", 2, (level * 3) - 1);
 
                     }
 
@@ -218,7 +218,7 @@ public class Spell1 {
 
                         }
 
-                        EffectManager.give(level_server, entity, "minecraft:mining_fatigue", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:mining_fatigue", 2, (level * 3) - 1);
 
                     }
 
@@ -230,7 +230,7 @@ public class Spell1 {
 
             {
 
-                if (is_positive == true) {
+                if (is_negative == false) {
 
                     if (EffectManager.hasDuration(level_server, entity, "minecraft:luck", 2) == false) {
 
@@ -243,7 +243,7 @@ public class Spell1 {
 
                         }
 
-                        EffectManager.give(level_server, entity, "minecraft:luck", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:luck", 2, 1);
 
                     }
 
@@ -260,7 +260,7 @@ public class Spell1 {
 
                         }
 
-                        EffectManager.give(level_server, entity, "minecraft:unluck", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:unluck", 2, 1);
 
                     }
 
@@ -272,7 +272,7 @@ public class Spell1 {
 
             {
 
-                if (is_positive == true) {
+                if (is_negative == false) {
 
                     if (EffectManager.hasDuration(level_server, entity, "minecraft:hero_of_the_village", 2) == false) {
 
@@ -284,7 +284,7 @@ public class Spell1 {
 
                         }
 
-                        EffectManager.give(level_server, entity, "minecraft:hero_of_the_village", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:hero_of_the_village", 2, 1);
 
                     }
 
@@ -300,7 +300,7 @@ public class Spell1 {
 
                         }
 
-                        EffectManager.give(level_server, entity, "minecraft:bad_omen", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:bad_omen", 2, 1);
 
                     }
 
@@ -312,7 +312,7 @@ public class Spell1 {
 
             {
 
-                if (is_positive == true) {
+                if (is_negative == false) {
 
                     if (EffectManager.hasDuration(level_server, entity, "minecraft:invisibility", 2) == false) {
 
@@ -324,7 +324,7 @@ public class Spell1 {
 
                         }
 
-                        EffectManager.give(level_server, entity, "minecraft:invisibility", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:invisibility", 2, 1);
 
                     }
 
@@ -338,7 +338,7 @@ public class Spell1 {
 
                         }
 
-                        EffectManager.give(level_server, entity, "minecraft:glowing", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:glowing", 2, 1);
                         GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 0, 1, "minecraft:firework");
 
                     }
@@ -351,7 +351,7 @@ public class Spell1 {
 
             {
 
-                if (is_positive == true) {
+                if (is_negative == false) {
 
                     Core.DelayedWork.create(false, 1, () -> {
 
@@ -383,7 +383,7 @@ public class Spell1 {
 
             {
 
-                if (is_positive == true) {
+                if (is_negative == false) {
 
                     if (EffectManager.hasDuration(level_server, entity, "minecraft:fire_resistance", 2) == false) {
 
@@ -395,7 +395,7 @@ public class Spell1 {
 
                         }
 
-                        EffectManager.give(level_server, entity, "minecraft:fire_resistance", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:fire_resistance", 2, 1);
 
                     }
 
@@ -413,7 +413,7 @@ public class Spell1 {
 
             {
 
-                if (is_positive == true) {
+                if (is_negative == false) {
 
                     if (EffectManager.hasDuration(level_server, entity, "minecraft:speed", 2) == false) {
 
@@ -453,7 +453,7 @@ public class Spell1 {
 
             {
 
-                if (is_positive == true) {
+                if (is_negative == false) {
 
                     if (EffectManager.hasDuration(level_server, entity, "minecraft:strength", 2) == false) {
 
@@ -465,7 +465,7 @@ public class Spell1 {
 
                         }
 
-                        EffectManager.give(level_server, entity, "minecraft:strength", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:strength", 2, 1);
 
                     }
 
@@ -481,7 +481,7 @@ public class Spell1 {
 
                         }
 
-                        EffectManager.give(level_server, entity, "minecraft:weakness", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:weakness", 2, 1);
 
                     }
 
@@ -493,7 +493,7 @@ public class Spell1 {
 
             {
 
-                if (is_positive == true) {
+                if (is_negative == false) {
 
                     if (EffectManager.hasDuration(level_server, entity, "minecraft:slow_falling", 2) == false) {
 
@@ -505,7 +505,7 @@ public class Spell1 {
 
                         }
 
-                        EffectManager.give(level_server, entity, "minecraft:slow_falling", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:slow_falling", 2, 1);
 
                     }
 
@@ -521,7 +521,7 @@ public class Spell1 {
 
                         }
 
-                        EffectManager.give(level_server, entity, "minecraft:levitation", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:levitation", 2, 1);
 
                         if (Math.random() < 0.25) {
 
@@ -539,7 +539,7 @@ public class Spell1 {
 
             {
 
-                if (is_positive == true) {
+                if (is_negative == false) {
 
                     if (EffectManager.hasDuration(level_server, entity, "minecraft:water_breathing", 2) == false) {
 
@@ -551,7 +551,7 @@ public class Spell1 {
 
                         }
 
-                        EffectManager.give(level_server, entity, "minecraft:water_breathing", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:water_breathing", 2, 1);
 
                     }
 
@@ -578,11 +578,11 @@ public class Spell1 {
 
             {
 
-                if (is_positive == true) {
+                if (is_negative == false) {
 
                     if (EffectManager.hasDuration(level_server, entity, "minecraft:regeneration", 2) == false) {
 
-                        EffectManager.give(level_server, entity, "minecraft:regeneration", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:regeneration", 2, 1);
                         GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 0, 1, "minecraft:soul_fire_flame");
 
                         if (Math.random() < 0.5) {
@@ -597,7 +597,7 @@ public class Spell1 {
 
                     if (EffectManager.hasDuration(level_server, entity, "minecraft:poison", 2) == false) {
 
-                        EffectManager.give(level_server, entity, "minecraft:poison", 2, 0);
+                        EffectManager.give(level_server, entity, "minecraft:poison", 2, 1);
                         GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 0, 1, "minecraft:sculk_soul");
 
                         if (Math.random() < 0.25) {
@@ -625,7 +625,7 @@ public class Spell1 {
 
             for (int number = 1; number <= 13; number++) {
 
-                if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_active" + number) == true) {
+                if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_enable" + number) == true) {
 
                     list.add(number);
 
@@ -647,9 +647,17 @@ public class Spell1 {
 
         private static void summonSpecific (ServerLevel level_server, ServerPlayer player_server, Entity entity_center, int[] numbers) {
 
+
             for (int number : numbers) {
 
-                EntityManager.Display.summonItem(level_server, entity_center.position(), (int) entity_center.getYRot() + ((360 / numbers.length) * (number - 1)) + 180, 90, 0, true, "Zodiac Card " + number, Utils.Tag.convertSystemSpecific(player_server, new String[]{"spell1", "spell1_card", "spell1_card" + number}), "tanscomplexmagic:zodiac_card_" + number);
+                entity_center.setYRot((float) (entity_center.getYRot() + (360.0 / numbers.length)));
+                EntityManager.Display.summonItem(level_server, entity_center.position(), (int) (entity_center.getYRot() + 180), 90, 0, true, "Zodiac Card " + number, Utils.Tag.convertSystemSpecific(player_server, new String[]{"spell1", "spell1_card", "spell1_card" + number}), "tanscomplexmagic:zodiac_card_" + number);
+
+                if (entity_center.getYRot() >= 360) {
+
+                    entity_center.setYRot(entity_center.getYRot() - 360);
+
+                }
 
             }
 
@@ -756,43 +764,21 @@ public class Spell1 {
 
             }
 
+            boolean is_negative = false;
+            String positive_negative = "";
+
             for (int number = 1; number < 13; number++) {
-
-                List<Entity> sort_targets = new ArrayList<>();
-
-                // Sort Targets
-                {
-
-                    if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_target_user" + number) == true)
-                        sort_targets.addAll(targets.get("user"));
-                    if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_target_ally_player" + number) == true)
-                        sort_targets.addAll(targets.get("ally_player"));
-                    if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_target_ally_non_player" + number) == true)
-                        sort_targets.addAll(targets.get("ally_non_player"));
-                    if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_target_enemy_player" + number) == true)
-                        sort_targets.addAll(targets.get("enemy_player"));
-                    if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_target_enemy_non_player" + number) == true)
-                        sort_targets.addAll(targets.get("enemy_non_player"));
-
-                    sort_targets = EntityManager.Get.sort(sort_targets, entity_center.position(), true, 0);
-
-                }
-
-                int level = (int) NBTManager.Mob.getNumber(player_server, "spell1", "card_level" + number);
-                int per_second = (2 * level) - 1;
-                NBTManager.Mob.setNumber(player_server, "spell1", "approximate_duration_per_second" + number, sort_targets.size() * per_second);
-                NBTManager.Mob.setNumber(player_server, "spell1", "number_of_targets_detected" + number, sort_targets.size());
 
                 entity_card = cards.get(number);
 
                 // When Update Card Enable
                 {
 
-                    boolean active = NBTManager.Mob.getLogic(player_server, "spell1", "is_card_active" + number);
+                    boolean active = NBTManager.Mob.getLogic(player_server, "spell1", "is_card_enable" + number);
 
-                    if (active != NBTManager.Mob.getLogic(player_server, "spell1", "save_is_card_active" + number)) {
+                    if (active != NBTManager.Mob.getLogic(player_server, "spell1", "save_is_card_enable" + number)) {
 
-                        NBTManager.Mob.setLogic(player_server, "spell1", "save_is_card_active" + number, active);
+                        NBTManager.Mob.setLogic(player_server, "spell1", "save_is_card_enable" + number, active);
 
                         if (entity_card == null) {
 
@@ -816,9 +802,43 @@ public class Spell1 {
 
                 }
 
+                List<Entity> sort_targets = new ArrayList<>();
+
                 if (entity_card == null) {
 
+                    NBTManager.Mob.setNumber(player_server, "spell1", "number_of_targets_detected" + number, 0);
                     continue;
+
+                }
+
+                // Sort Targets
+                {
+
+                    if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_target_user" + number) == true)
+                        sort_targets.addAll(targets.get("user"));
+                    if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_target_ally_player" + number) == true)
+                        sort_targets.addAll(targets.get("ally_player"));
+                    if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_target_ally_non_player" + number) == true)
+                        sort_targets.addAll(targets.get("ally_non_player"));
+                    if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_target_enemy_player" + number) == true)
+                        sort_targets.addAll(targets.get("enemy_player"));
+                    if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_target_enemy_non_player" + number) == true)
+                        sort_targets.addAll(targets.get("enemy_non_player"));
+
+                    sort_targets = EntityManager.Get.sort(sort_targets, entity_center.position(), true, 0);
+
+                }
+
+                NBTManager.Mob.setNumber(player_server, "spell1", "number_of_targets_detected" + number, sort_targets.size());
+                is_negative = NBTManager.Mob.getLogic(player_server, "spell1", "is_card_negative" + number);
+
+                if (is_negative == true) {
+
+                    positive_negative = "negative";
+
+                } else {
+
+                    positive_negative = "positive";
 
                 }
 
@@ -827,25 +847,25 @@ public class Spell1 {
                     // Apply Effects
                     {
 
-                        int duration = (int) NBTManager.Mob.getNumber(player_server, "spell1", "card_duration" + number);
-                        int duration_max = (int) NBTManager.Mob.getNumber(player_server, "spell1", "card_duration_max" + number);
+                        int duration = (int) NBTManager.Mob.getNumber(player_server, "spell1", "card_duration_" + positive_negative + number);
+                        int duration_max = (int) NBTManager.Mob.getNumber(player_server, "spell1", "card_duration_max_" + positive_negative + number);
 
                         for (Entity entity : sort_targets) {
 
-                            if (duration - per_second < 0) {
+                            if (duration == 0) {
 
                                 break;
 
                             }
 
-                            duration = duration - per_second;
-                            duration_max = duration_max - per_second;
-                            giveEffect(level_server, player_server, entity, number, entity_card.getXRot() == 0, level);
+                            duration = duration - 1;
+                            duration_max = duration_max - 1;
+                            giveEffect(level_server, player_server, entity, number, is_negative, 1);
 
                         }
 
-                        NBTManager.Mob.setNumber(player_server, "spell1", "card_duration" + number, duration);
-                        NBTManager.Mob.setNumber(player_server, "spell1", "card_duration_max" + number, duration_max);
+                        NBTManager.Mob.setNumber(player_server, "spell1", "card_duration_" + positive_negative + number, duration);
+                        NBTManager.Mob.setNumber(player_server, "spell1", "card_duration_max_" + positive_negative + number, duration_max);
 
                     }
 
@@ -922,11 +942,24 @@ public class Spell1 {
 
             if (NBTManager.Mob.getLogic(player_server, "spell1", "is_pause_all") == false) {
 
-                if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_start_effect" + card_number) == true) {
+                if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_active" + card_number) == true) {
 
-                    if (NBTManager.Mob.getNumber(player_server, "spell1", "card_duration" + card_number) > 0) {
+                    boolean is_negative = NBTManager.Mob.getLogic(player_server, "spell1", "is_card_negative" + card_number);
+                    String positive_negative = "";
 
-                        if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_negative" + card_number) == true) {
+                    if (is_negative == true) {
+
+                        positive_negative = "negative";
+
+                    } else {
+
+                        positive_negative = "positive";
+
+                    }
+
+                    if (NBTManager.Mob.getNumber(player_server, "spell1", "card_duration_" + positive_negative + card_number) > 0) {
+
+                        if (is_negative == true) {
 
                             degree_set = -180;
 

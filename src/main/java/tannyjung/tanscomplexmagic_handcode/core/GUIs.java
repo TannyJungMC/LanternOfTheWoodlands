@@ -1,11 +1,13 @@
 package tannyjung.tanscomplexmagic_handcode.core;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.phys.Vec3;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tannyjung.tanscomplexmagic_core.game.screen.GUIScreen;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
 import tannyjung.tanscomplexmagic_core.game.screen.ScreenDrawing;
+import tannyjung.tanscomplexmagic_core.outside.NetworkManager;
 import tannyjung.tanscomplexmagic_core.outside.OutsideUtils;
 
 public class GUIs {
@@ -246,7 +248,7 @@ public class GUIs {
 
                 }
 
-                // Settings
+                // General Settings and Card Settings 1
                 {
 
                     if (page == id) {
@@ -254,32 +256,118 @@ public class GUIs {
                         ScreenDrawing.AutoLine.start(8 * -22 + 0, 8 * -11 + 0);
                         ScreenDrawing.ComponentBasic.drawTextCenteredBasic(0, 0, true, 2, "Settings");
                         ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_pause_all", "Pause All Cards");
-                        ScreenDrawing.ComponentAdvance.drawSliderBasic(screen, 0, 0, 1, 100, 1, "spell1", "radius", "Radius");
+                        ScreenDrawing.ComponentAdvance.drawSliderBasic(screen, 0, 0, 160, 1, 100, 1, "spell1", "radius", "Radius");
                         ScreenDrawing.AutoLine.stop();
 
-                        int card_number = 1;
-                        boolean is_active = NBTManager.Mob.getLogic(screen.player, "spell1", "is_card_active" + card_number) == true;
-                        ScreenDrawing.AutoLine.start(8 * 2 + 0, 8 * -12 + 0);
-                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(0, 0, true, 1, "Aries Settings");
-                        ScreenDrawing.ComponentBasic.drawTextBasic(0, 0, ScreenDrawing.normal_font_scale, "Number of Targets Detected : " + (int) NBTManager.Mob.getNumber(screen.player, "spell1", "number_of_targets_detected" + card_number));
-                        ScreenDrawing.ComponentBasic.drawTextBasic(0, 0, ScreenDrawing.normal_font_scale, "Approximate Duration Loss Per Second : -" + (int) NBTManager.Mob.getNumber(screen.player, "spell1", "approximate_duration_per_second" + card_number));
-                        ScreenDrawing.ComponentBasic.drawTextBasic(0, 0, ScreenDrawing.normal_font_scale, "Approximate Remaining Time : " + OutsideUtils.Calculation.convertSecondToTime((int) Math.round(NBTManager.Mob.getNumber(screen.player, "spell1", "card_duration" + card_number) / NBTManager.Mob.getNumber(screen.player, "spell1", "approximate_duration_per_second" + card_number))));
-                        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_card_active" + card_number, "Activate");
-                        ScreenDrawing.ComponentAdvance.drawSwitchLockable(screen, 0, 0, is_active, false, "spell1", "is_card_negative" + card_number, "Flip");
-                        ScreenDrawing.ComponentAdvance.drawSwitchLockable(screen, 0, 0, is_active, false, "spell1", "is_card_start_effect" + card_number, "Start Effect");
-                        ScreenDrawing.ComponentBasic.drawTextBasic(0, 0, ScreenDrawing.normal_font_scale, "Targets");
-                        ScreenDrawing.AutoLine.addSpace(-4);
-                        ScreenDrawing.ComponentAdvance.drawSwitchLockable(screen, 0, 0, is_active, false, "spell1", "is_card_target_user" + card_number, "User");
-                        ScreenDrawing.ComponentAdvance.drawSwitchLockable(screen, 0, 0, is_active, false, "spell1", "is_card_target_ally_player" + card_number, "Ally Player");
-                        ScreenDrawing.ComponentAdvance.drawSwitchLockable(screen, 0, 0, is_active, false, "spell1", "is_card_target_ally_non_player" + card_number, "Ally Non-Player");
-                        ScreenDrawing.ComponentAdvance.drawSwitchLockable(screen, 0, 0, is_active, false, "spell1", "is_card_target_enemy_player" + card_number, "Enemy Player");
-                        ScreenDrawing.ComponentAdvance.drawSwitchLockable(screen, 0, 0, is_active, false, "spell1", "is_card_target_enemy_non_player" + card_number, "Enemy Non-Player");
-                        ScreenDrawing.ComponentAdvance.drawSwitchLockable(screen, 0, 0, is_active, false, "spell1", "is_card_target_mark" + card_number, "Mark");
-                        ScreenDrawing.ComponentAdvance.drawSliderLockable(screen, 0, 0, is_active, false, 1, 2, 1, "spell1", "card_level" + card_number, "Level");
-                        ScreenDrawing.ComponentAdvance.drawSliderLockable(screen, 0, 0, is_active, false, 0, NBTManager.Mob.getNumber(screen.player, "spell1", "card_duration_max" + card_number), 1, "spell1", "card_duration" + card_number, "Duration");
-                        ScreenDrawing.AutoLine.addSpace(-8);
-                        ScreenDrawing.ComponentAdvance.drawButtonLockable(screen, 0, 0, 160, is_active, mana < 1, "+120 Duration (1 Mana)", "+120 Duration (1 Mana)", "server", "spell1", "get_duration" + card_number);
-                        ScreenDrawing.AutoLine.stop();
+                        generateSpell1CardSettings(screen, mana, false, "Aries", 1, 1, 1, 120, 120);
+
+                        break pages;
+
+                    } else {
+
+                        page = page + 2;
+
+                    }
+
+                }
+
+                // Card Settings 2-3
+                {
+
+                    if (page == id) {
+
+                        generateSpell1CardSettings(screen, mana, true, "Taurus", 2, 3, 1, 60, 180);
+                        generateSpell1CardSettings(screen, mana, false, "Gemini", 3, 2, 2, 120, 120);
+
+                        break pages;
+
+                    } else {
+
+                        page = page + 2;
+
+                    }
+
+                }
+
+                // Card Settings 4-5
+                {
+
+                    if (page == id) {
+
+                        generateSpell1CardSettings(screen, mana, true, "Cancer", 4, 1, 1, 120, 120);
+                        generateSpell1CardSettings(screen, mana, false, "Leo", 5, 1, 1, 120, 120);
+
+                        break pages;
+
+                    } else {
+
+                        page = page + 2;
+
+                    }
+
+                }
+
+                // Card Settings 6-7
+                {
+
+                    if (page == id) {
+
+                        generateSpell1CardSettings(screen, mana, true, "Virgo", 6, 1, 1, 120, 120);
+                        generateSpell1CardSettings(screen, mana, false, "Libra", 7, 1, 1, 120, 120);
+
+                        break pages;
+
+                    } else {
+
+                        page = page + 2;
+
+                    }
+
+                }
+
+                // Card Settings 8-9
+                {
+
+                    if (page == id) {
+
+                        generateSpell1CardSettings(screen, mana, true, "Scorpio", 8, 1, 1, 120, 120);
+                        generateSpell1CardSettings(screen, mana, false, "Sagittarius", 9, 1, 1, 120, 120);
+
+                        break pages;
+
+                    } else {
+
+                        page = page + 2;
+
+                    }
+
+                }
+
+                // Card Settings 10-11
+                {
+
+                    if (page == id) {
+
+                        generateSpell1CardSettings(screen, mana, true, "Capricorn", 10, 1, 1, 120, 120);
+                        generateSpell1CardSettings(screen, mana, false, "Aquarius", 11, 1, 1, 120, 120);
+
+                        break pages;
+
+                    } else {
+
+                        page = page + 2;
+
+                    }
+
+                }
+
+                // Card Settings 12-13
+                {
+
+                    if (page == id) {
+
+                        generateSpell1CardSettings(screen, mana, true, "Pisces", 12, 1, 1, 120, 120);
+                        generateSpell1CardSettings(screen, mana, false, "Ophiuchus", 13, 1, 1, 120, 120);
 
                         break pages;
 
@@ -294,6 +382,80 @@ public class GUIs {
             }
 
         }
+
+    }
+
+    private static void generateSpell1CardSettings (GUIScreen screen, int mana, boolean is_page_left, String name, int number, int max_level_positive, int max_level_negative, int duration_per_mana_positive, int duration_per_mana_negative) {
+
+        int posX = 0;
+
+        if (is_page_left == true) {
+
+            posX = 8 * -22 + 0;
+
+        } else {
+
+            posX = 8 * 2 + 0;
+
+        }
+
+        String positive_negative = "";
+
+        if (NBTManager.Mob.getLogic(screen.player, "spell1", "is_card_negative" + number) == true) {
+
+            positive_negative = "negative";
+
+        } else {
+
+            positive_negative = "positive";
+
+        }
+
+        ScreenDrawing.AutoLine.start(posX, 8 * -12 + 0);
+        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(0, 0, true, 1, "Card Settings : " + name);
+        ScreenDrawing.ComponentBasic.drawTextBasic(0, 0, ScreenDrawing.normal_font_scale, "§8Detected Targets : " + (int) NBTManager.Mob.getNumber(screen.player, "spell1", "number_of_targets_detected" + number));
+        ScreenDrawing.ComponentBasic.drawTextBasic(0, 0, ScreenDrawing.normal_font_scale, "§8Remaining Effect Duration : " + OutsideUtils.Calculation.convertSecondToTime((int) Math.round(NBTManager.Mob.getNumber(screen.player, "spell1", "card_duration_" + positive_negative + number) / NBTManager.Mob.getNumber(screen.player, "spell1", "number_of_targets_detected" + number))));
+        ScreenDrawing.AutoLine.setMarkZ();
+        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_card_enable" + number, "Enable");
+        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_card_negative" + number, "Flip");
+        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_card_active" + number, "Activate Effect");
+
+        ScreenDrawing.ComponentBasic.drawTextBasic(0, 0, ScreenDrawing.normal_font_scale, "Targets");
+        ScreenDrawing.AutoLine.addSpace(-4);
+        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_card_target_user" + number, "User");
+        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_card_target_ally_player" + number, "Ally Player");
+        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_card_target_ally_non_player" + number, "Ally Non-Player");
+        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_card_target_enemy_player" + number, "Enemy Player");
+        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_card_target_enemy_non_player" + number, "Enemy Non-Player");
+
+        // Duration and Level
+        {
+
+            ScreenDrawing.ComponentAdvance.drawSliderBasic(screen, 0, 0, 160, 0, NBTManager.Mob.getNumber(screen.player, "spell1", "card_duration_max_positive" + number), 1, "spell1", "card_duration_positive" + number, "Duration Positive");
+            ScreenDrawing.AutoLine.addSpace(-8);
+
+            ScreenDrawing.ComponentAdvance.drawButtonLockableCustomWork(screen, 0, 0, 160, true, mana < 1, "+" + duration_per_mana_positive + " / 1 Mana", "+" + duration_per_mana_positive + " / 1 Mana", () -> {
+
+                CompoundTag tag = new CompoundTag();
+                tag.putInt("duration_per_mana_positive", duration_per_mana_positive);
+                NetworkManager.runServer(screen.player, "spell1", "get_duration_positive" + number, tag);
+
+            });
+
+            ScreenDrawing.ComponentAdvance.drawSliderBasic(screen, 0, 0, 160, 0, NBTManager.Mob.getNumber(screen.player, "spell1", "card_duration_max_negative" + number), 1, "spell1", "card_duration_negative" + number, "Duration Negative");
+            ScreenDrawing.AutoLine.addSpace(-8);
+
+            ScreenDrawing.ComponentAdvance.drawButtonLockableCustomWork(screen, 0, 0, 160, true, mana < 1, "+" + duration_per_mana_negative + " / 1 Mana)", "+" + duration_per_mana_negative + " / 1 Mana", () -> {
+
+                CompoundTag tag = new CompoundTag();
+                tag.putInt("duration_per_mana_negative", duration_per_mana_negative);
+                NetworkManager.runServer(screen.player, "spell1", "get_duration_negative" + number, tag);
+
+            });
+
+        }
+
+        ScreenDrawing.AutoLine.stop();
 
     }
 

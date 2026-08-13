@@ -6,43 +6,27 @@ import net.minecraft.core.*;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.nbt.TagParser;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.ServerScoreboard;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.chunk.ProtoChunk;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.scores.Objective;
-import net.minecraft.world.scores.Scoreboard;
-import net.minecraft.world.scores.criteria.ObjectiveCriteria;
 import tannyjung.tanscomplexmagic_core.Core;
 
 import java.util.*;
@@ -60,9 +44,6 @@ import net.minecraft.world.scores.ScoreHolder;
 */
 import net.neoforged.fml.ModList;
 import net.minecraft.world.level.chunk.status.ChunkStatus;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.item.component.CustomData;
-import net.minecraft.world.scores.ScoreHolder;
 import tannyjung.tanscomplexmagic_core.outside.config.CacheManager;
 import tannyjung.tanscomplexmagic_core.outside.FileManager;
 import tannyjung.tanscomplexmagic_core.outside.OutsideUtils;
@@ -296,32 +277,6 @@ public class GameUtils {
 			lookup.getValueOrThrow(key).place(level_world_gen, chunk_generator, random, pos);
 			*/
 			lookup.getOrThrow(key).value().place(level_world_gen, chunk_generator, random, pos);
-
-		}
-
-		public static Vec3 getPosLook (Entity entity, double offsetX, double offsetY, double offsetZ) {
-
-			Vec3 vec3_forward = Vec3.directionFromRotation(entity.getXRot(), entity.getYRot());
-			Vec3 vec3_vertical = null;
-
-			if (Math.abs(vec3_forward.y) > 0.999) {
-
-				vec3_vertical = new Vec3(0,0,1);
-
-			} else {
-
-				vec3_vertical = new Vec3(0,1,0);
-
-			}
-
-			Vec3 vec3_horizontal = vec3_forward.cross(vec3_vertical).normalize();
-			Vec3 vec3_vertical_adjust = vec3_horizontal.cross(vec3_forward).normalize();
-			return entity.position().add(vec3_horizontal.scale(offsetX)).add(vec3_vertical_adjust.scale(offsetY)).add(vec3_forward.scale(offsetZ));
-		}
-
-		public static Vec3 getPosRay (Entity entity, double distance) {
-
-			return entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(distance)), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity)).getLocation();
 
 		}
 

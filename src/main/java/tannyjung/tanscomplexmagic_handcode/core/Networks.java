@@ -112,13 +112,31 @@ public class Networks {
                     {
 
                         work = work.substring("get_duration_".length());
-                        String positive_negative = work.substring(0, work.length() - 1);
-                        int number = Integer.parseInt(work.substring(work.length() - 1));
+                        String positive_negative = "";
+
+                        if (work.startsWith("positive") == true) {
+
+                            positive_negative = "positive";
+
+                        } else {
+
+                            positive_negative = "negative";
+
+                        }
+
+                        int number = Integer.parseInt(work.substring(positive_negative.length()));
 
                         if (Utils.trySpendMana(player_server, 1) == true) {
 
                             int duration_per_mana = extra.getInt("duration_per_mana_" + positive_negative);
                             NBTManager.Mob.addNumber(player_server, "spell1", "card_duration_max_" + positive_negative + number, duration_per_mana);
+
+
+
+                            NBTManager.Mob.setNumber(player_server, "main", "mana", 100);
+
+
+
 
                         }
 
@@ -154,7 +172,7 @@ public class Networks {
 
                         Spell1.deactivate(level_server, player_server);
 
-                        for (Entity entity : EntityManager.Get.fromEverywhere(level_server, "", Utils.Tag.convertSystemAll(player_server))) {
+                        for (Entity entity : EntityManager.Population.getEverywhere(level_server, "", Utils.Tag.convertSystemAll(player_server))) {
 
                             entity.discard();
 

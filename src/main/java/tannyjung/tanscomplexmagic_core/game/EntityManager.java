@@ -8,6 +8,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import tannyjung.tanscomplexmagic_core.Core;
@@ -16,11 +17,146 @@ import java.util.*;
 
 public class EntityManager {
 
-    public static class Get {
+    public static Entity summon (ServerLevel level_server, Vec3 vec3, boolean is_always_show_name, String id, String name, String[] tags, String custom) {
 
-        // TODO - Check if I add ally tag, will it bug here because tag not update?
+        EntityType<?> type = level_server.registryAccess().registryOrThrow(Registries.ENTITY_TYPE).get(ResourceLocation.parse(id));
 
-        private static final Map<String, Map<List<String>, List<Entity>>> cache_entities = new HashMap<>();
+        if (type == null) {
+
+            return null;
+
+        }
+
+        Entity entity = type.create(level_server);
+
+        if (entity == null) {
+
+            return null;
+
+        }
+
+        if (custom.isEmpty() == false) {
+
+            entity.load(NBTManager.convertJSONToTag(custom));
+
+        }
+
+        if (is_always_show_name == true) {
+
+            entity.setCustomNameVisible(true);
+
+        }
+
+        entity.setCustomName(Component.literal(name));
+        entity.addTag("TANNYJUNG");
+        entity.addTag(Core.mod_id_big);
+
+        for (String get : tags) {
+
+            entity.addTag(get);
+
+        }
+
+        entity.setPos(vec3);
+        level_server.addFreshEntity(entity);
+        return entity;
+
+    }
+
+    public static void summonWorldGen (ServerLevel level_server, Vec3 vec3, String id, String name, String[] tags, String custom) {
+
+        level_server.getServer().execute(() -> {
+
+            summon(level_server, vec3, false, id, name, tags, custom);
+
+        });
+
+    }
+
+    public static Vec3 getPosLook (Entity entity, double offsetX, double offsetY, double offsetZ) {
+
+        Vec3 vec3_forward = Vec3.directionFromRotation(entity.getXRot(), entity.getYRot());
+        Vec3 vec3_vertical = null;
+
+        if (Math.abs(vec3_forward.y) > 0.999) {
+
+            vec3_vertical = new Vec3(0,0,1);
+
+        } else {
+
+            vec3_vertical = new Vec3(0,1,0);
+
+        }
+
+        Vec3 vec3_horizontal = vec3_forward.cross(vec3_vertical).normalize();
+        Vec3 vec3_vertical_adjust = vec3_horizontal.cross(vec3_forward).normalize();
+        return entity.position().add(vec3_horizontal.scale(offsetX)).add(vec3_vertical_adjust.scale(offsetY)).add(vec3_forward.scale(offsetZ));
+    }
+
+    public static Vec3 getPosLookReverse (Entity entity, Vec3 vec3_target, double offsetX, double offsetY, double offsetZ) {
+
+        Vec3 forward_behind = vec3_target.subtract(entity.getEyePosition()).normalize();
+        Vec3 left_right = forward_behind.cross(new Vec3(0, 1, 0)).normalize();
+        Vec3 up = left_right.cross(forward_behind).normalize();
+        return entity.getEyePosition().add(left_right.scale(offsetX)).add(up.scale(offsetY)).add(forward_behind.scale(offsetZ));
+
+    }
+
+    public static Vec3 getPosRay (Entity entity, double distance) {
+
+        return entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(distance)), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity)).getLocation();
+
+    }
+
+    public static Entity getTarget (Entity entity) {
+
+        if (entity instanceof Mob mob) {
+
+            return mob.getTarget();
+
+        }
+
+        return null;
+
+    }
+
+    public static void setTarget (Entity entity_attacker, Entity entity_target) {
+
+        if (entity_attacker instanceof Mob mob) {
+
+            if (entity_target instanceof LivingEntity entity_living) {
+
+                mob.setTarget(entity_living);
+
+            }
+
+        }
+
+    }
+
+    public static void clearTarget (Entity entity) {
+
+        if (entity instanceof Mob == true) {
+
+            EventCenter.attacker_reset_target.add(entity);
+
+        }
+
+    }
+
+    public static void go (Entity entity, Vec3 vec3, double speed) {
+
+        if (entity instanceof Mob mob) {
+
+            mob.getNavigation().moveTo(vec3.x, vec3.y, vec3.z, speed);
+
+        }
+
+    }
+
+    public static class Population {
+
+        private static final Map<String, Map<List<String>, List<Entity>>> population = new HashMap<>();
 
         public static void eventAddRemove (Entity entity, boolean is_join) {
 
@@ -29,7 +165,7 @@ public class EntityManager {
 
             for (int loop = 2; loop > 0; loop--) {
 
-                map_tag_entity = cache_entities.get(id);
+                map_tag_entity = population.get(id);
 
                 if (map_tag_entity != null) {
 
@@ -102,18 +238,18 @@ public class EntityManager {
 
         }
 
-        public static List<Entity> fromEverywhere (ServerLevel level_server, String id, String[] tags) {
+        public static List<Entity> getEverywhere (ServerLevel level_server, String id, String[] tags) {
 
-            Map<List<String>, List<Entity>> map_tag_entity = cache_entities.get(id);
+            Map<List<String>, List<Entity>> map_tag_entity = population.get(id);
 
             if (map_tag_entity == null) {
 
-                cache_entities.put(id, new HashMap<>());
+                population.put(id, new HashMap<>());
 
             }
 
             List<String> tag_convert = Arrays.stream(tags).toList();
-            List<Entity> entities = cache_entities.get(id).get(tag_convert);
+            List<Entity> entities = population.get(id).get(tag_convert);
 
             if (entities == null) {
 
@@ -130,7 +266,7 @@ public class EntityManager {
                 });
 
                 entities = list;
-                cache_entities.get(id).put(tag_convert, list);
+                population.get(id).put(tag_convert, list);
 
             }
 
@@ -138,9 +274,9 @@ public class EntityManager {
 
         }
 
-        public static Entity fromEverywhereOne (ServerLevel level_server, String id, String[] tags) {
+        public static Entity getEverywhereOne (ServerLevel level_server, String id, String[] tags) {
 
-            List<Entity> list = fromEverywhere(level_server, id, tags);
+            List<Entity> list = getEverywhere(level_server, id, tags);
 
             if (list.isEmpty() == true) {
 
@@ -152,7 +288,7 @@ public class EntityManager {
 
         }
 
-        public static List<Entity> fromArea (ServerLevel level_server, Vec3 vec3, double distance, boolean is_box, String id, String[] tags) {
+        public static List<Entity> getArea (ServerLevel level_server, Vec3 vec3, double distance, boolean is_box, String id, String[] tags) {
 
             return level_server.getEntitiesOfClass(Entity.class, new AABB(vec3, vec3).inflate(distance), entity -> {
 
@@ -345,7 +481,7 @@ public class EntityManager {
 
             Core.DelayedWork.create(false, 200, () -> {
 
-                for (Entity scan : Get.fromArea(level_server, vec3, 1, true, "minecraft:text_display", new String[]{Core.mod_id_big + "-display_text"})) {
+                for (Entity scan : Population.getArea(level_server, vec3, 1, true, "minecraft:text_display", new String[]{Core.mod_id_big + "-display_text"})) {
 
                     scan.discard();
 
@@ -403,82 +539,6 @@ public class EntityManager {
         public static void setItemScale (Entity entity, double scale) {
 
             GameUtils.runCommandEntity(entity, "data modify entity @s transformation.scale set value [" + scale + "f," + scale + "f," + scale + "f]");
-
-        }
-
-    }
-
-    public static Entity summon (ServerLevel level_server, Vec3 vec3, boolean is_always_show_name, String id, String name, String[] tags, String custom) {
-
-        EntityType<?> type = level_server.registryAccess().registryOrThrow(Registries.ENTITY_TYPE).get(ResourceLocation.parse(id));
-
-        if (type == null) {
-
-            return null;
-
-        }
-
-        Entity entity = type.create(level_server);
-
-        if (entity == null) {
-
-            return null;
-
-        }
-
-        if (custom.isEmpty() == false) {
-
-            entity.load(NBTManager.convertJSONToTag(custom));
-
-        }
-
-        if (is_always_show_name == true) {
-
-            entity.setCustomNameVisible(true);
-
-        }
-
-        entity.setCustomName(Component.literal(name));
-        entity.addTag("TANNYJUNG");
-        entity.addTag(Core.mod_id_big);
-
-        for (String get : tags) {
-
-            entity.addTag(get);
-
-        }
-
-        entity.setPos(vec3);
-        level_server.addFreshEntity(entity);
-        return entity;
-
-    }
-
-    public static void summonWorldGen (ServerLevel level_server, Vec3 vec3, String id, String name, String[] tags, String custom) {
-
-        level_server.getServer().execute(() -> {
-
-            summon(level_server, vec3, false, id, name, tags, custom);
-
-        });
-
-    }
-
-    public static void setTarget (Entity entity_attacker, Entity entity_target) {
-
-        if (entity_attacker instanceof Mob mob && entity_target instanceof LivingEntity entity_living) {
-
-            mob.setTarget(entity_living);
-
-        }
-
-    }
-
-    public static void moveTo (Entity entity, Vec3 vec3, double speed) {
-
-        if (entity instanceof Mob mob) {
-
-            mob.getNavigation().moveTo(vec3.x, vec3.y, vec3.z, speed);
 
         }
 

@@ -6,8 +6,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Display;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -18,6 +18,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
+import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import tannyjung.tanscomplexmagic.TanscomplexmagicMod;
 import tannyjung.tanscomplexmagic_core.Core;
@@ -72,12 +73,15 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.api.distmarker.Dist;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 @EventBusSubscriber
 public class EventCenter {
 
     private static boolean first_player_joined = false;
+    public static final Set<Entity> attacker_reset_target = new HashSet<>();
 
     public static void bus (IEventBus bus) {
 
@@ -210,7 +214,7 @@ public class EventCenter {
 
         }
 
-        EntityManager.Get.eventAddRemove(event.getEntity(), true);
+        EntityManager.Population.eventAddRemove(event.getEntity(), true);
 
     }
 
@@ -223,7 +227,7 @@ public class EventCenter {
 
         }
 
-        EntityManager.Get.eventAddRemove(event.getEntity(), false);
+        EntityManager.Population.eventAddRemove(event.getEntity(), false);
 
     }
 
@@ -254,6 +258,25 @@ public class EventCenter {
         ServerLevel level_server = event.getServer().overworld();
         Core.DelayedWork.runTick();
         Core.Loop.loopTick(level_server);
+
+    }
+
+    @SubscribeEvent
+    public static void eventEntityTargetClear (LivingChangeTargetEvent event) {
+
+        if (attacker_reset_target.isEmpty() == false) {
+
+            Mob mob = (Mob) event.getEntity();
+
+            if (attacker_reset_target.contains(mob) == true) {
+
+                attacker_reset_target.remove(mob);
+                event.setCanceled(true);
+                mob.setTarget(null);
+
+            }
+
+        }
 
     }
 

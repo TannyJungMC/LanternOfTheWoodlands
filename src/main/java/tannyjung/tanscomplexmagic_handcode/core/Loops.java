@@ -12,7 +12,7 @@ public class Loops {
 
     public static void tick (ServerLevel level_server) {
 
-        for (Entity user : EntityManager.Get.fromEverywhere(level_server, "minecraft:player", new String[]{})) {
+        for (Entity user : EntityManager.Population.getEverywhere(level_server, "minecraft:player", new String[]{})) {
 
             Spell1.tick(level_server, (ServerPlayer) user);
 
@@ -22,7 +22,7 @@ public class Loops {
 
     public static void second (ServerLevel level_server) {
 
-        for (Entity user : EntityManager.Get.fromEverywhere(level_server, "minecraft:player", new String[]{})) {
+        for (Entity user : EntityManager.Population.getEverywhere(level_server, "minecraft:player", new String[]{})) {
 
             // Mana Regeneration
             {

@@ -617,12 +617,12 @@ public class GameUtils {
 			String part_name = "custom_name:\"" + createTextDoubleBackslash(name) + "\",";
 			String part_lore = "lore:[\"" + createTextDoubleBackslash(lore) + "\"],";
 			String part_custom_data = "custom_data:{" + custom_data + "},";
-			String part_forge_data = "block_entity_data:{id:\"\",NeoForgeData:{" + Core.mod_id + ":{" + forge_data + "}}},";
+			String part_forge_data = "entity_block_data:{id:\"\",NeoForgeData:{" + Core.mod_id + ":{" + forge_data + "}}},";
 			*/
 			String part_name = "custom_name:\"" + createTextDoubleBackslash(name) + "\",";
 			String part_lore = "lore:[\"" + createTextDoubleBackslash(lore) + "\"],";
 			String part_custom_data = "custom_data:{" + custom_data + "},";
-			String part_forge_data = "block_entity_data:{id:\"\",NeoForgeData:{" + Core.mod_id + ":{" + forge_data + "}}},";
+			String part_forge_data = "entity_block_data:{id:\"\",NeoForgeData:{" + Core.mod_id + ":{" + forge_data + "}}},";
 
 			StringBuilder write = new StringBuilder();
 			if (name.isEmpty() == false) write.append(part_name);

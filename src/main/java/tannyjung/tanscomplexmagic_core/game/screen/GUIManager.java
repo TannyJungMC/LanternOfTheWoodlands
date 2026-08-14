@@ -5,9 +5,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import tannyjung.tanscomplexmagic_core.game.ItemManager;
 import tannyjung.tanscomplexmagic_core.outside.NetworkManager;
 
 public class GUIManager {
@@ -36,16 +39,15 @@ public class GUIManager {
             @Override
             public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
 
-                // GUIManagerContainer
-                // GUIIndexMenu
                 return new GUIContainer(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(player.blockPosition()));
 
             }
 
         };
 
-        NetworkManager.runServerCore(player, "nbt", "sync_all", new CompoundTag());
         player.openMenu(provider, player.blockPosition());
+        NetworkManager.runServerCore(player, "nbt", "sync_all", new CompoundTag());
+        GUIScreen.item = ItemStack.EMPTY;
 
     }
 

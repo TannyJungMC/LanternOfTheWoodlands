@@ -10,9 +10,9 @@ import tannyjung.tanscomplexmagic_core.game.screen.ScreenDrawing;
 import tannyjung.tanscomplexmagic_core.outside.NetworkManager;
 import tannyjung.tanscomplexmagic_core.outside.OutsideUtils;
 
-public class GUIs {
+import java.util.Arrays;
 
-    private static final Logger log = LoggerFactory.getLogger(GUIs.class);
+public class GUIs {
 
     public static void render (GUIScreen screen, int id) {
 
@@ -31,8 +31,21 @@ public class GUIs {
                     ScreenDrawing.AutoLine.start(8 * -22 + 0, 8 * -12 + 0);
                     ScreenDrawing.ComponentBasic.drawTextBasic(0, 0, 1.5, "Ally List");
                     ScreenDrawing.ComponentAdvance.drawList(screen, 0 ,0);
-
                     ScreenDrawing.AutoLine.stop();
+
+
+
+
+
+                    ScreenDrawing.AutoLine.start(8 * 2 + 0, 8 * -12 + 0);
+                    ScreenDrawing.ComponentAdvance.drawButtonBasic(screen, 0, 0, 160, "Set", "server", "test", "run");
+                    ScreenDrawing.ComponentBasic.drawTextBasic(0, 0, ScreenDrawing.normal_font_scale, "List : " + NBTManager.Mob.getListText(screen.player, "gui", "list").size());
+                    ScreenDrawing.AutoLine.stop();
+
+
+
+
+
 
                     return;
 
@@ -59,8 +72,8 @@ public class GUIs {
 
                         ScreenDrawing.ComponentBasic.drawImageBasic(8 * -22 + 0, 8 * -12 + 0, 20, 36, "tanscomplexmagic:textures/screens/background.png");
                         ScreenDrawing.ComponentBasic.drawImageBasic(8 * -22 + 2, 8 * -12 + 2, 32, 32, "tanscomplexmagic:textures/block/zodiac_card1.png");
-                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -10 - 5, true, 1.5, "Aries");
-                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -8 - 6, true, ScreenDrawing.normal_font_scale, "§8Courage and Fear");
+                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -10 - 3, true, 1, "Aries");
+                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -9 - 1, true, ScreenDrawing.normal_font_scale, "§8Courage and Fear");
                         ScreenDrawing.AutoLine.start(8 * -22 + 0, 8 * -6 + 0);
                         ScreenDrawing.ComponentBasic.drawTextParagraph(0, 0, 160, "§" + (int) NBTManager.Mob.getNumber(screen.player, "test", "color") + "   The 1st sign of zodiac. Aries is the ram full of courage. The legend is quite complicated, some is the golden ram sent by gods to save 2 children. After all, the ram becomes a symbol of courage and sacrifice.");
                         ScreenDrawing.ComponentBasic.drawTextParagraph(0, 0, 160, "§" + (int) NBTManager.Mob.getNumber(screen.player, "test", "color") + "   There's low information to tell what is the true power of this sign. Astral magicians said it can give some of courage to people to do something they are scared to do. Some of them discovered it can reduce their fear of height, or even committing illegal acts. After my tests, I can bring one of its power into the card. The power to see in the dark, as I'm scared of darkness.");
@@ -84,8 +97,8 @@ public class GUIs {
 
                         ScreenDrawing.ComponentBasic.drawImageBasic(8 * -22 + 0, 8 * -12 + 0, 20, 36, "tanscomplexmagic:textures/screens/background.png");
                         ScreenDrawing.ComponentBasic.drawImageBasic(8 * -22 + 2, 8 * -12 + 2, 32, 32, "tanscomplexmagic:textures/block/zodiac_card2.png");
-                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -10 - 5, true, 1.5, "Taurus");
-                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -8 - 6, true, ScreenDrawing.normal_font_scale, "§8Hardiness and Worthlessness");
+                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -10 - 3, true, 1, "Taurus");
+                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -9 - 1, true, ScreenDrawing.normal_font_scale, "§8Hardiness and Worthlessness");
                         ScreenDrawing.AutoLine.start(8 * -22 + 0, 8 * -6 + 0);
                         ScreenDrawing.ComponentBasic.drawTextParagraph(0, 0, 160, "§" + (int) NBTManager.Mob.getNumber(screen.player, "test", "color") + "   The 2nd sign of zodiac. Taurus is the big strong bull. The legend is that Zeus turned himself into the strong white bull to win the heart of the princess Europa, then carrying her across the sea.");
                         ScreenDrawing.ComponentBasic.drawTextParagraph(0, 0, 160, "§" + (int) NBTManager.Mob.getNumber(screen.player, "test", "color") + "   Even the history is about love and relationship, but the power of Taurus sign is one of strongest power in the zodiac. The sign gives power of body protection that can protect from almost all damage of any weapons, as though this is the bless of Zeus for the princess Europa.");
@@ -110,8 +123,8 @@ public class GUIs {
 
                         ScreenDrawing.ComponentBasic.drawImageBasic(8 * -22 + 0, 8 * -12 + 0, 20, 36, "tanscomplexmagic:textures/screens/background.png");
                         ScreenDrawing.ComponentBasic.drawImageBasic(8 * -22 + 2, 8 * -12 + 2, 32, 32, "tanscomplexmagic:textures/block/zodiac_card3.png");
-                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -10 - 5, true, 1.5, "Gemini ");
-                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -8 - 6, true, ScreenDrawing.normal_font_scale, "§8Hopeful and Hopeless");
+                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -10 - 3, true, 1, "Gemini ");
+                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -9 - 1, true, ScreenDrawing.normal_font_scale, "§8Hopeful and Hopeless");
                         ScreenDrawing.AutoLine.start(8 * -22 + 0, 8 * -6 + 0);
                         ScreenDrawing.ComponentBasic.drawTextParagraph(0, 0, 160, "§" + (int) NBTManager.Mob.getNumber(screen.player, "test", "color") + "   The 3rd sign of zodiac. Gemini is the twins. Some history tell that they is Pollux and Castor. One has the bloodline of god, so he is an immortal. But other one is a mortal, since he is human. After Castor died, Pollux begged his father to give Castor immortality.");
                         ScreenDrawing.ComponentBasic.drawTextParagraph(0, 0, 160, "§" + (int) NBTManager.Mob.getNumber(screen.player, "test", "color") + "   Gemini sign can make people feel of motivation, increasing their strength by no reason. Some astral magicians said that this sign is one of dangerous signs if use it incorrectly. Even it has the power to give people motivation, but can also give the feeling of discouraged and hopeless to some people.");
@@ -136,8 +149,8 @@ public class GUIs {
 
                         ScreenDrawing.ComponentBasic.drawImageBasic(8 * -22 + 0, 8 * -12 + 0, 20, 36, "tanscomplexmagic:textures/screens/background.png");
                         ScreenDrawing.ComponentBasic.drawImageBasic(8 * -22 + 2, 8 * -12 + 2, 32, 32, "tanscomplexmagic:textures/block/zodiac_card4.png");
-                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -10 - 5, true, 1.5, "Cancer");
-                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -8 - 6, true, ScreenDrawing.normal_font_scale, "§8Luck and Unluck");
+                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -10 - 3, true, 1, "Cancer");
+                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -9 - 1, true, ScreenDrawing.normal_font_scale, "§8Luck and Unluck");
                         ScreenDrawing.AutoLine.start(8 * -22 + 0, 8 * -6 + 0);
                         ScreenDrawing.ComponentBasic.drawTextParagraph(0, 0, 160, "§" + (int) NBTManager.Mob.getNumber(screen.player, "test", "color") + "   The 4st sign of zodiac. Cancer is the crab. Some history tells that he crushed under the foot of Heracles. Moved by his loyalty, Hera brings him placed in the sky and becomes the Cancer constellation.");
                         ScreenDrawing.ComponentBasic.drawTextParagraph(0, 0, 160, "§" + (int) NBTManager.Mob.getNumber(screen.player, "test", "color") + "   Many astral magicians said that the crab is one of weakest signs in the zodiac, with the power of animal attraction in very small scale. However after my some experiments, I discovered that it might be one of the most powerful sign. While making the card and trying to apply the power of it to my body, I noticed my luck changes instead of attracting the butterflies in the room. Sometimes I'm very lucky, sometimes nearly die in accidents.");
@@ -161,7 +174,7 @@ public class GUIs {
 
                         ScreenDrawing.ComponentBasic.drawImageBasic(8 * -22 + 0, 8 * -12 + 0, 20, 36, "tanscomplexmagic:textures/screens/background.png");
                         ScreenDrawing.ComponentBasic.drawImageBasic(8 * -22 + 2, 8 * -12 + 2, 32, 32, "tanscomplexmagic:textures/block/zodiac_card7.png");
-                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -10 - 5, true, 1.5, "Libra");
+                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -10 - 5, true, 1, "Libra");
                         ScreenDrawing.ComponentBasic.drawTextCenteredBasic(8 * -18 + 0, 8 * -8 - 6, true, ScreenDrawing.normal_font_scale, "§8Fairness and Unfairness");
                         ScreenDrawing.AutoLine.start(8 * -22 + 0, 8 * -6 + 0);
                         ScreenDrawing.ComponentBasic.drawTextParagraph(0, 0, 160, "§" + (int) NBTManager.Mob.getNumber(screen.player, "test", "color") + "   The 7st sign of zodiac. The scales of justice. The only sign in the zodiac that represented as an object.");

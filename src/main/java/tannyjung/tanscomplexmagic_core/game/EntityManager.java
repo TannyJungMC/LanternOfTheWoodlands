@@ -392,31 +392,27 @@ public class EntityManager {
 
         }
 
-        public static List<Entity> sort (List<Entity> entities, Vec3 vec3_center, boolean is_nearest, int count) {
+        public static Entity[] sort (List<Entity> entities, Vec3 vec3_center, boolean is_farthest, int count_limit) {
 
-            List<Entity> list = new ArrayList<>();
+            List<Entity> list = entities.stream().sorted(Comparator.comparingDouble(entity -> entity.position().distanceTo(vec3_center))).toList();
 
-            if (is_nearest == true) {
+            if (is_farthest == true) {
 
-                list = entities.stream().sorted(Comparator.comparingDouble(entity -> entity.position().distanceTo(vec3_center))).toList();
-
-            } else {
-
-                list = entities.stream().sorted(Comparator.comparingDouble(entity -> entity.position().distanceTo(vec3_center))).toList();
+                list = list.reversed();
 
             }
 
-            if (count > 0) {
+            if (count_limit > 0) {
 
-                if (list.size() > count) {
+                if (list.size() > count_limit) {
 
-                    list = list.subList(0, count);
+                    list = list.subList(0, count_limit);
 
                 }
 
             }
 
-            return list;
+            return list.toArray(new Entity[]{});
 
         }
 

@@ -28,6 +28,52 @@ public class ScreenDrawing {
 
     }
 
+    private static class NBT {
+
+        private static boolean getLogic (GUIScreen screen, String type, String name) {
+
+            if (GUIScreen.item.isEmpty() == true) {
+
+                return NBTManager.Mob.getLogic(screen.player, type, name);
+
+            } else {
+
+                return NBTManager.Item.getLogic(GUIScreen.item, type, name);
+
+            }
+
+        }
+
+        private static String getText (GUIScreen screen, String type, String name) {
+
+            if (GUIScreen.item.isEmpty() == true) {
+
+                return NBTManager.Mob.getText(screen.player, type, name);
+
+            } else {
+
+                return NBTManager.Item.getText(GUIScreen.item, type, name);
+
+            }
+
+        }
+
+        private static double getNumber (GUIScreen screen, String type, String name) {
+
+            if (GUIScreen.item.isEmpty() == true) {
+
+                return NBTManager.Mob.getNumber(screen.player, type, name);
+
+            } else {
+
+                return NBTManager.Item.getNumber(GUIScreen.item, type, name);
+
+            }
+
+        }
+
+    }
+
     public static class Anchor {
 
         public static int[] getWindowPoint (int windowX, int windowZ, boolean is_top, boolean is_bottom, boolean is_left, boolean is_right) {
@@ -237,8 +283,8 @@ public class ScreenDrawing {
         public static void drawTextBasic (int posX, int posZ, double scale, String text) {
 
             posX = AutoLine.getPosX(posX);
-            posZ = AutoLine.getPosZ(posZ, "text_basic", 8, 8);
-            AutoLine.addSpace((int) (8 * scale));
+            posZ = AutoLine.getPosZ(posZ, "text_basic", 3, 8);
+            AutoLine.addSpace((int) Math.round(8 * scale));
 
             PreCalculate.addText(posX, posZ, scale, false, text);
             
@@ -524,7 +570,7 @@ public class ScreenDrawing {
 
             posX = AutoLine.getPosX(posX);
             posZ = AutoLine.getPosZ(posZ, "button", 1, 8);
-            AutoLine.addSpace(11);
+            AutoLine.addSpace(sizeZ);
 
             Button button = Button.builder(Component.empty(), create -> {
 
@@ -702,6 +748,7 @@ public class ScreenDrawing {
             }
 
             CompoundTag extra_data = new CompoundTag();
+            extra_data.putBoolean("is_item", GUIScreen.item.isEmpty() == false);
             extra_data.putString("nbt_type", nbt_type);
             extra_data.putString("nbt_name", nbt_name);
 
@@ -731,7 +778,7 @@ public class ScreenDrawing {
 
                 } else {
 
-                    if (NBTManager.Mob.getLogic(screen.player, nbt_type, nbt_name) == true) {
+                    if (NBT.getLogic(screen, nbt_type, nbt_name) == true) {
 
                         button_left.active = false;
                         button_right.active = true;
@@ -814,7 +861,7 @@ public class ScreenDrawing {
 
             } else {
 
-                box.setValue(NBTManager.Mob.getText(screen.player, nbt_type, nbt_name));
+                box.setValue(NBT.getText(screen, nbt_type, nbt_name));
 
             }
 
@@ -828,6 +875,7 @@ public class ScreenDrawing {
                 drawButton(screen, posX, posZ + 8, 10, 14, true, is_active == false || is_lock == true, "§7{", "§f{", () -> {
 
                     CompoundTag extra_data = new CompoundTag();
+                    extra_data.putBoolean("is_item", GUIScreen.item.isEmpty() == false);
                     extra_data.putString("nbt_type", nbt_type);
                     extra_data.putString("nbt_name", nbt_name);
                     extra_data.putString("nbt_value", box.getValue());
@@ -867,58 +915,70 @@ public class ScreenDrawing {
 
             posX = AutoLine.getPosX(posX);
             posZ = AutoLine.getPosZ(posZ, "slider", 4, 8);
-            AutoLine.addSpace(16);
 
-            // Ingredient
-            {
 
-                double value_default = NBTManager.Mob.getNumber(screen.player, nbt_type, nbt_name);
-                StringBuilder builder = new StringBuilder();
-                builder.append(text).append(" ");
+            if (text.isEmpty() == true) {
 
-                // Number Show
+                AutoLine.addSpace(8);
+
+            } else {
+
+                AutoLine.addSpace(16);
+
+                // Ingredient
                 {
 
-                    builder.append("(");
+                    double value_default = NBT.getNumber(screen, nbt_type, nbt_name);
+                    StringBuilder builder = new StringBuilder();
+                    builder.append(text).append(" ");
 
-                    if (value_default % 1 == 0) {
+                    // Number Show
+                    {
 
-                        builder.append((int) value_default);
-
-                    } else {
-
-                        builder.append(value_default);
-
-                    }
-
-                    if (value_min == 0 || value_min == 1) {
-
-                        builder.append("/");
+                        builder.append("(");
 
                         if (value_default % 1 == 0) {
 
-                            builder.append((int) value_max);
+                            builder.append((int) value_default);
 
                         } else {
 
-                            builder.append(value_max);
+                            builder.append(value_default);
 
                         }
 
+                        if (value_min == 0 || value_min == 1) {
+
+                            builder.append("/");
+
+                            if (value_default % 1 == 0) {
+
+                                builder.append((int) value_max);
+
+                            } else {
+
+                                builder.append(value_max);
+
+                            }
+
+                        }
+
+                        builder.append(")");
+
                     }
 
-                    builder.append(")");
+                    AutoLine.is_temporary_pause = true;
+                    ComponentBasic.drawTextBasic(posX, posZ, normal_font_scale, builder.toString());
+                    AutoLine.is_temporary_pause = false;
 
                 }
 
-                AutoLine.is_temporary_pause = true;
-                ComponentBasic.drawTextBasic(posX, posZ, normal_font_scale, builder.toString());
-                AutoLine.is_temporary_pause = false;
+                posZ = posZ + 8;
 
             }
 
             double range = value_max - value_min;
-            double value_default = NBTManager.Mob.getNumber(screen.player, nbt_type, nbt_name);
+            double value_default = NBT.getNumber(screen, nbt_type, nbt_name);
             double value_default_percent = (value_default - value_min) / range;
 
             if (value_default_percent < 0.0 || value_default_percent > 1.0) {
@@ -938,6 +998,7 @@ public class ScreenDrawing {
                 }
 
                 CompoundTag extra_data = new CompoundTag();
+                extra_data.putBoolean("is_item", GUIScreen.item.isEmpty() == false);
                 extra_data.putString("nbt_type", nbt_type);
                 extra_data.putString("nbt_name", nbt_name);
                 extra_data.putDouble("nbt_value", value);
@@ -945,7 +1006,7 @@ public class ScreenDrawing {
 
             }
 
-            AbstractSliderButton slider = new AbstractSliderButton(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ + 8, length, 6, Component.empty(), value_default_percent) {
+            AbstractSliderButton slider = new AbstractSliderButton(screen.getGuiLeft() + posX, screen.getGuiTop() + posZ, length, 6, Component.empty(), value_default_percent) {
 
                 private final double value_previous = value_min - 1.0;
 
@@ -964,6 +1025,7 @@ public class ScreenDrawing {
                     if (value != value_previous) {
 
                         CompoundTag extra_data = new CompoundTag();
+                        extra_data.putBoolean("is_item", GUIScreen.item.isEmpty() == false);
                         extra_data.putString("nbt_type", nbt_type);
                         extra_data.putString("nbt_name", nbt_name);
                         extra_data.putDouble("nbt_value", value);
@@ -1009,9 +1071,10 @@ public class ScreenDrawing {
                 AutoLine.addSpace(8);
                 posZ = posZ + 8;
 
-                is_select = NBTManager.Mob.getText(screen.player, nbt_type, nbt_name).equals(scan) == true;
+                is_select = NBT.getText(screen, nbt_type, nbt_name).equals(scan) == true;
 
                 CompoundTag extra_data = new CompoundTag();
+                extra_data.putBoolean("is_item", GUIScreen.item.isEmpty() == false);
                 extra_data.putString("nbt_type", nbt_type);
                 extra_data.putString("nbt_name", nbt_name);
                 extra_data.putString("nbt_value", scan);
@@ -1062,9 +1125,89 @@ public class ScreenDrawing {
             posX = AutoLine.getPosX(posX);
             posZ = AutoLine.getPosZ(posZ, "list", 8, 8);
 
-            drawShape(screen, posX, posZ, 160, 160);
+            int sizeX = 8 * 20 + 0;
+            int sizeZ = 8 * 20 + 0;
+            sizeZ = sizeZ - 3;
+            int line_limit = (int) (Math.ceil(sizeZ / 8.0) - 2);
 
-            ComponentBasic.drawTextBasic(8, 0, normal_font_scale, "§fHello");
+
+
+
+            drawShape(screen, posX, posZ, sizeX, sizeZ);
+
+
+
+
+            List<String> list = NBTManager.Mob.getListText(screen.player, "gui", "list");
+            AutoLine.is_temporary_pause = true;
+
+            if (list.isEmpty() == true) {
+
+                ComponentBasic.drawTextCenteredBasic(posX + (sizeX / 2), posZ + (sizeZ / 2), false, normal_font_scale, "§fEmpty List");
+
+            } else {
+
+                // Draw List
+                {
+
+                    int sub_start = 0;
+                    int sub_end = 0;
+
+                    // Get Sub Start and End
+                    {
+
+                        int page = (int) NBTManager.Mob.getNumber(screen.player, "gui", "list" + "_page");
+                        sub_start = page * line_limit;
+                        sub_end = sub_start + line_limit;
+
+                        if (sub_start > list.size()) {
+
+                            sub_start = list.size();
+
+                        }
+
+                        if (sub_end > list.size()) {
+
+                            sub_end = list.size();
+
+                        }
+
+                    }
+
+                    int line_limit_test = line_limit;
+                    int posZ_add = 8;
+
+                    for (String scan : list.subList(sub_start, sub_end)) {
+
+                        ComponentBasic.drawTextBasic(posX + 8, posZ + posZ_add, normal_font_scale, "§f" + scan);
+                        posZ_add = posZ_add + 8;
+
+                        if (line_limit_test > 1) {
+
+                            line_limit_test = line_limit_test - 1;
+
+                        } else {
+
+                            break;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            posZ = posZ + sizeZ;
+
+            // Ingredient
+            {
+
+                ComponentAdvance.drawSliderBasic(screen, posX, posZ + 2, sizeX, 0, Math.floor(list.size() / (double) line_limit), 1, "gui", "list" + "_page", "");
+
+            }
+
+            AutoLine.is_temporary_pause = false;
 
         }
 

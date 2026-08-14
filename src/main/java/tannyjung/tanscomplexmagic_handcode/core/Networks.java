@@ -13,6 +13,9 @@ import tannyjung.tanscomplexmagic_handcode.systems.Book;
 import tannyjung.tanscomplexmagic_handcode.systems.Spell1;
 import tannyjung.tanscomplexmagic_handcode.systems.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Networks {
 
     public static void client (LocalPlayer player_local, String type, String work, CompoundTag extra) {
@@ -145,6 +148,42 @@ public class Networks {
                 }
 
             }
+
+        } else if (type.equals("test") == true) {
+
+            if (NBTManager.Mob.getLogic(player_server, "gui", "a") == false) {
+
+                NBTManager.Mob.setLogic(player_server, "gui", "a", true);
+
+            } else {
+
+                NBTManager.Mob.setLogic(player_server, "gui", "a", false);
+                NBTManager.Mob.setListText(player_server, "gui", "list", new ArrayList<>());
+                return;
+
+            }
+
+            List<String> list = new ArrayList<>();
+
+            for (Entity entity : EntityManager.Population.sort(EntityManager.Population.getEverywhere(player_server.serverLevel(), "", new String[]{}), player_server.position(), false, 0)) {
+
+                if (entity instanceof ServerPlayer == true) {
+
+                    list.add("§d" + entity.getName().getString());
+
+                } else if (entity.hasCustomName() == true) {
+
+                    list.add("§a" + entity.getDisplayName().getString());
+
+                } else {
+
+                    list.add("§f" + entity.getDisplayName().getString() + " §7(" + entity.getId() + ")");
+
+                }
+
+            }
+
+            NBTManager.Mob.setListText(player_server, "gui", "list", list);
 
         }
 

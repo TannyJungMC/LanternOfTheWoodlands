@@ -17,6 +17,30 @@ import java.util.*;
 
 public class EntityManager {
 
+    public static String getID (Entity entity) {
+
+        return EntityType.getKey(entity.getType()).toString();
+
+    }
+
+    public static Entity getByUUID (ServerLevel level_server, String uuid) {
+
+        UUID uuid_convert = null;
+
+        try {
+
+            uuid_convert = UUID.fromString(uuid);
+
+        } catch (Exception ignored) {
+
+            return null;
+
+        }
+
+        return level_server.getEntity(uuid_convert);
+
+    }
+
     public static Entity summon (ServerLevel level_server, Vec3 vec3, boolean is_always_show_name, String id, String name, String[] tags, String custom) {
 
         EntityType<?> type = level_server.registryAccess().registryOrThrow(Registries.ENTITY_TYPE).get(ResourceLocation.parse(id));
@@ -136,9 +160,18 @@ public class EntityManager {
 
     public static void clearTarget (Entity entity) {
 
-        if (entity instanceof Mob == true) {
+        if (entity instanceof Mob mob) {
 
-            EventCenter.attacker_reset_target.add(entity);
+            Entity entity_summon = summon((ServerLevel) entity.level(), entity.position(), false, "minecraft:chicken", "", new String[]{}, "");
+
+            if (entity_summon == null) {
+
+                return;
+
+            }
+
+            mob.setTarget((LivingEntity) entity_summon);
+            entity_summon.discard();
 
         }
 
@@ -156,231 +189,149 @@ public class EntityManager {
 
     public static class Population {
 
-        private static final Map<String, Map<List<String>, List<Entity>>> population = new HashMap<>();
+        private static class Request {
 
-        public static void eventAddRemove (Entity entity, boolean is_join) {
+            String id;
+            String name;
+            List<String> tag;
 
-            Map<List<String>, List<Entity>> map_tag_entity = new HashMap<>();
-            String id = "";
+            private Request (String id, String name, List<String> tag) {
 
-            for (int loop = 2; loop > 0; loop--) {
-
-                map_tag_entity = population.get(id);
-
-                if (map_tag_entity != null) {
-
-                    test:
-                    for (Map.Entry<List<String>, List<Entity>> entry : map_tag_entity.entrySet()) {
-
-                        if (entry.getKey().equals("[]") == false) {
-
-                            for (String scan : entry.getKey()) {
-
-                                if (scan.startsWith("!") == true) {
-
-                                    scan = scan.substring(1);
-
-                                    if (entity.getTags().contains(scan) == true) {
-
-                                        continue test;
-
-                                    }
-
-                                } else {
-
-                                    if (entity.getTags().contains(scan) == false) {
-
-                                        continue test;
-
-                                    }
-
-                                }
-
-                            }
-
-                        }
-
-                        if (is_join == true) {
-
-                            entry.getValue().add(entity);
-
-                        } else {
-
-                            Core.DelayedWork.create(false, 1, () -> {
-
-                                // Fix entities remove by re-enter the chunks, caused by status not instant update.
-                                // When re-enter the chunks, the game will send some entity leave event, some is new created entities with status null, do not delete them.
-                                if (entity.isRemoved() == true) {
-
-                                    entry.getValue().remove(entity);
-
-                                }
-
-                            });
-
-                        }
-
-                    }
-
-                }
-
-                if (id.isEmpty() == true) {
-
-                    id = EntityType.getKey(entity.getType()).toString();
-
-                } else {
-
-                    break;
-
-                }
+                this.id = id;
+                this.name = name;
+                this.tag = tag;
 
             }
 
-        }
+            @Override
+            public boolean equals (Object object) {
 
-        public static List<Entity> getEverywhere (ServerLevel level_server, String id, String[] tags) {
+                if (object instanceof Request request) {
 
-            Map<List<String>, List<Entity>> map_tag_entity = population.get(id);
-
-            if (map_tag_entity == null) {
-
-                population.put(id, new HashMap<>());
-
-            }
-
-            List<String> tag_convert = Arrays.stream(tags).toList();
-            List<Entity> entities = population.get(id).get(tag_convert);
-
-            if (entities == null) {
-
-                List<Entity> list = new ArrayList<>();
-
-                level_server.getAllEntities().forEach(entity -> {
-
-                    if (test(entity, id, tag_convert) == true) {
-
-                        list.add(entity);
-
-                    }
-
-                });
-
-                entities = list;
-                population.get(id).put(tag_convert, list);
-
-            }
-
-            return entities;
-
-        }
-
-        public static Entity getEverywhereOne (ServerLevel level_server, String id, String[] tags) {
-
-            List<Entity> list = getEverywhere(level_server, id, tags);
-
-            if (list.isEmpty() == true) {
-
-                return null;
-
-            }
-
-            return list.getFirst();
-
-        }
-
-        public static List<Entity> getArea (ServerLevel level_server, Vec3 vec3, double distance, boolean is_box, String id, String[] tags) {
-
-            return level_server.getEntitiesOfClass(Entity.class, new AABB(vec3, vec3).inflate(distance), entity -> {
-
-                if (is_box == true || entity.position().distanceTo(vec3) <= distance) {
-
-                    if (id.isEmpty() == false && EntityType.getKey(entity.getType()).toString().equals(id) == false) {
-
-                        return false;
-
-                    }
-
-                    test:
-                    {
-
-                        for (String scan : tags) {
-
-                            if (scan.startsWith("!") == true) {
-
-                                scan = scan.substring(1);
-
-                                if (entity.getTags().contains(scan) == true) {
-
-                                    break test;
-
-                                }
-
-                            } else {
-
-                                if (entity.getTags().contains(scan) == false) {
-
-                                    break test;
-
-                                }
-
-                            }
-
-                        }
-
-                        return true;
-
-                    }
+                    return request.id.equals(id) == true && request.name.equals(name) == true && request.tag.equals(tag) == true;
 
                 }
 
                 return false;
 
-            });
+            }
+
+            @Override
+            public int hashCode () {
+
+                return Objects.hash(id, name, tag);
+
+            }
 
         }
 
-        public static boolean test (Entity entity, String id, List<String> tag_convert) {
+        private static final Map<Request, List<Entity>> population = new HashMap<>();
+        private static final Set<Request> pause_updatable = new HashSet<>();
 
-            if (id.isEmpty() == false) {
+        public static void refresh () {
 
-                boolean blacklist = false;
+            population.clear();
 
-                if (id.startsWith("!") == true) {
+        }
 
-                    id = id.substring(1);
-                    blacklist = true;
+        private static boolean test (Entity entity, Request request) {
 
-                }
+            // ID
+            {
 
-                boolean test = EntityType.getKey(entity.getType()).toString().equals(id) == true;
+                if (request.id.isEmpty() == false) {
 
-                if (blacklist == true && test == true) {
+                    String id = getID(entity);
 
-                    return false;
+                    if (request.id.startsWith("!") == true) {
 
-                } else if (blacklist == false && test == false) {
+                        if (request.id.substring(1).equals(id) == true) {
 
-                    return false;
+                            return false;
+
+                        }
+
+                    } else {
+
+                        if (request.id.equals(id) == false) {
+
+                            return false;
+
+                        }
+
+                    }
 
                 }
 
             }
 
-            for (String scan : tag_convert) {
+            // Name
+            {
 
-                if (scan.startsWith("!") == true) {
+                if (request.name.isEmpty() == false) {
 
-                    if (entity.getTags().contains(scan) == true) {
+                    String name = entity.getDisplayName().getString();
 
-                        return false;
+                    if (request.name.startsWith("!") == true) {
+
+                        if (request.name.substring(1).equals(name) == true) {
+
+                            return false;
+
+                        }
+
+                    } else {
+
+                        if (request.name.equals(name) == false) {
+
+                            return false;
+
+                        }
 
                     }
 
-                } else {
+                }
 
-                    if (entity.getTags().contains(scan) == false) {
+            }
 
-                        return false;
+            // Tag
+            {
+
+                if (request.tag.isEmpty() == false) {
+
+                    Set<String> tag = entity.getTags();
+                    boolean is_tag_blacklist = false;
+
+                    for (String scan : request.tag) {
+
+                        if (scan.startsWith("!") == true) {
+
+                            is_tag_blacklist = true;
+                            scan = scan.substring(1);
+
+                        } else {
+
+                            is_tag_blacklist = false;
+
+                        }
+
+                        if (tag.contains(scan) == false) {
+
+                            if (is_tag_blacklist == false) {
+
+                                return false;
+
+                            }
+
+                        } else {
+
+                            if (is_tag_blacklist == true) {
+
+                                return false;
+
+                            }
+
+                        }
 
                     }
 
@@ -389,6 +340,152 @@ public class EntityManager {
             }
 
             return true;
+
+        }
+
+        public static void eventAddRemove (Entity entity, boolean is_join) {
+
+            for (Request request : population.keySet()) {
+
+                if (test(entity, request) == true) {
+
+                    if (is_join == true) {
+
+                        population.get(request).add(entity);
+
+                    } else {
+
+                        Core.DelayedWork.create(false, 1, () -> {
+
+                            population.getOrDefault(request, new ArrayList<>()).remove(entity);
+
+                        });
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        private static List<Entity> getEverywhere (ServerLevel level_server, Request request) {
+
+            List<Entity> entities = population.get(request);
+
+            if (entities == null) {
+
+                List<Entity> list = new ArrayList<>();
+
+                level_server.getAllEntities().forEach(entity -> {
+
+                    if (test(entity, request) == true) {
+
+                        list.add(entity);
+
+                    }
+
+                });
+
+                entities = list;
+                population.put(request, entities);
+
+            } else {
+
+                if (entities.isEmpty() == true) {
+
+                    population.remove(request);
+
+                }
+
+            }
+
+            return entities;
+
+        }
+
+        public static List<Entity> getEverywhereStatic (ServerLevel level_server, String id, String name, String[] tags) {
+
+            List<String> tags_convert = List.of(tags);
+            Request request = new Request(id, name, tags_convert);
+            return getEverywhere(level_server, request);
+
+        }
+
+        public static List<Entity> getEverywhereUpdatable (ServerLevel level_server, String id, String name, String[] tags) {
+
+            List<String> tags_convert = List.of(tags);
+            Request request = new Request(id, name, tags_convert);
+
+            if (pause_updatable.contains(request) == false) {
+
+                pause_updatable.add(request);
+
+                Core.DelayedWork.create(false, 20, () -> {
+
+                    pause_updatable.remove(request);
+
+                });
+
+                population.remove(request);
+
+            }
+
+            return getEverywhere(level_server, request);
+
+        }
+
+        private static Entity getEverywhereOne (ServerLevel level_server, boolean is_updatable, String id, String name, String[] tags) {
+
+            List<Entity> entities = new ArrayList<>();
+
+            if (is_updatable == true) {
+
+                entities = getEverywhereUpdatable(level_server, id, name, tags);
+
+            } else {
+
+                entities = getEverywhereStatic(level_server, id, name, tags);
+
+            }
+
+            if (entities.isEmpty() == true) {
+
+                return null;
+
+            }
+
+            return entities.getFirst();
+
+        }
+
+        public static Entity getEverywhereOneStatic (ServerLevel level_server, String id, String name, String[] tags) {
+
+            return getEverywhereOne(level_server, false, id, name, tags);
+
+        }
+
+        public static Entity getEverywhereOneUpdatable (ServerLevel level_server, String id, String name, String[] tags) {
+
+            return getEverywhereOne(level_server, true, id, name, tags);
+
+        }
+
+        public static List<Entity> getArea (ServerLevel level_server, Vec3 vec3, double radius, boolean is_box, String id, String name, String[] tags) {
+
+            Request request = new Request(id, name, List.of(tags));
+
+            return level_server.getEntitiesOfClass(Entity.class, new AABB(vec3, vec3).inflate(radius), entity -> {
+
+                if (is_box == false && entity.position().distanceTo(vec3) > radius) {
+
+                    return false;
+
+                }
+
+                return test(entity, request);
+
+            });
 
         }
 
@@ -416,14 +513,14 @@ public class EntityManager {
 
         }
 
-        public static List<Entity> filter (List<Entity> entities, String id, String[] tags) {
+        public static List<Entity> filter (List<Entity> entities, String id, String name, String[] tags) {
 
             List<Entity> list = new ArrayList<>();
-            List<String> tag_convert = List.of(tags);
+            Request request = new Request(id, name, List.of(tags));
 
             for (Entity entity : entities) {
 
-                if (test(entity, id, tag_convert) == true) {
+                if (test(entity, request) == true) {
 
                     list.add(entity);
 
@@ -477,7 +574,7 @@ public class EntityManager {
 
             Core.DelayedWork.create(false, 200, () -> {
 
-                for (Entity scan : Population.getArea(level_server, vec3, 1, true, "minecraft:text_display", new String[]{Core.mod_id_big + "-display_text"})) {
+                for (Entity scan : Population.getArea(level_server, vec3, 1, true, "minecraft:text_display", "", new String[]{Core.mod_id_big + "-display_text"})) {
 
                     scan.discard();
 

@@ -2,15 +2,11 @@ package tannyjung.tanscomplexmagic_handcode.core;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.phys.Vec3;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import tannyjung.tanscomplexmagic_core.game.screen.GUIScreen;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
 import tannyjung.tanscomplexmagic_core.game.screen.ScreenDrawing;
 import tannyjung.tanscomplexmagic_core.outside.NetworkManager;
 import tannyjung.tanscomplexmagic_core.outside.OutsideUtils;
-
-import java.util.Arrays;
 
 public class GUIs {
 
@@ -30,7 +26,7 @@ public class GUIs {
 
                     ScreenDrawing.AutoLine.start(8 * -22 + 0, 8 * -12 + 0);
                     ScreenDrawing.ComponentBasic.drawTextBasic(0, 0, 1.5, "Ally List");
-                    ScreenDrawing.ComponentAdvance.drawList(screen, 0 ,0);
+                    ScreenDrawing.ComponentAdvance.ListBoard.draw(screen, 0 ,0, 160, 155, "main", "ally_list_board");
                     ScreenDrawing.AutoLine.stop();
 
 
@@ -38,8 +34,17 @@ public class GUIs {
 
 
                     ScreenDrawing.AutoLine.start(8 * 2 + 0, 8 * -12 + 0);
-                    ScreenDrawing.ComponentAdvance.drawButtonBasic(screen, 0, 0, 160, "Set", "server", "test", "run");
-                    ScreenDrawing.ComponentBasic.drawTextBasic(0, 0, ScreenDrawing.normal_font_scale, "List : " + NBTManager.Mob.getListText(screen.player, "gui", "list").size());
+
+                    ScreenDrawing.ComponentAdvance.TextBox.drawText(screen, 0, 0, 160, "main", "ally_list_edit_number", "Entity Number");
+                    ScreenDrawing.ComponentAdvance.TextBox.drawText(screen, 0, 0, 160, "main", "ally_list_edit_id", "Entity ID");
+                    ScreenDrawing.ComponentAdvance.TextBox.drawText(screen, 0, 0, 160, "main", "ally_list_edit_name", "Entity Name");
+
+                    ScreenDrawing.ComponentAdvance.Slider.drawText(screen, 0, 0, 160, 2, 100, 5, "main", "ally_list_edit_radius", "Add Radius");
+
+                    ScreenDrawing.ComponentAdvance.ButtonTiny.drawText(screen, 0, 0, 160, "server", "test", "add", "Add");
+                    ScreenDrawing.ComponentAdvance.ButtonTiny.drawText(screen, 0, 0, 160, "server", "test", "clear_all", "Clear All");
+                    ScreenDrawing.ComponentAdvance.ButtonTiny.drawText(screen, 0, 0, 160, "server", "test", "clear_specific", "Clear Specific");
+
                     ScreenDrawing.AutoLine.stop();
 
 
@@ -204,12 +209,12 @@ public class GUIs {
                     if (page == id) {
 
                         ScreenDrawing.AutoLine.start(8 * -22 + 0, 8 * -11 + 0);
-                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(0, 0, true, 2, "Settings");
-                        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_pause_all", "Pause All Cards");
-                        ScreenDrawing.ComponentAdvance.drawSliderBasic(screen, 0, 0, 160, 1, 100, 1, "spell1", "radius", "Radius");
+                        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(0, 0, true, 1.5, "Settings");
+                        ScreenDrawing.ComponentAdvance.Switch.drawText(screen, 0, 0, "spell1", "is_pause_all", "Pause All Cards");
+                        ScreenDrawing.ComponentAdvance.Slider.drawText(screen, 0, 0, 160, 1, 100, 1, "spell1", "radius", "Radius");
                         ScreenDrawing.AutoLine.stop();
 
-                        generateSpell1SettingsCard(screen, mana, false, "Aries 1", 1, 1, 1, 120, 180);
+                        generateSpell1SettingsCard(screen, mana, false, "Aries 1", 1, 1, 1, 60 * 3, 60 * 4);
 
                         return;
 
@@ -226,8 +231,8 @@ public class GUIs {
 
                     if (page == id) {
 
-                        generateSpell1SettingsCard(screen, mana, true, "Taurus 2", 2, 3, 1, 60, 180);
-                        generateSpell1SettingsCard(screen, mana, false, "Gemini 3", 3, 2, 2, 120, 180);
+                        generateSpell1SettingsCard(screen, mana, true, "Taurus 2", 2, 3, 1, 60 * 1, 60 * 4);
+                        generateSpell1SettingsCard(screen, mana, false, "Gemini 3", 3, 2, 2, 60 * 2, 60 * 5);
 
                         return;
 
@@ -244,8 +249,8 @@ public class GUIs {
 
                     if (page == id) {
 
-                        generateSpell1SettingsCard(screen, mana, true, "Cancer 4", 4, 1, 1, 120, 120);
-                        generateSpell1SettingsCard(screen, mana, false, "Leo 5", 5, 1, 1, 60, 180);
+                        generateSpell1SettingsCard(screen, mana, true, "Cancer 4", 4, 1, 1, 60 * 3, 60 * 3);
+                        generateSpell1SettingsCard(screen, mana, false, "Leo 5", 5, 1, 1, 60 * 2, 60 * 4);
 
                         return;
 
@@ -262,8 +267,8 @@ public class GUIs {
 
                     if (page == id) {
 
-                        generateSpell1SettingsCard(screen, mana, true, "Virgo 6", 6, 1, 1, 60, 120);
-                        generateSpell1SettingsCard(screen, mana, false, "Libra 7", 7, 1, 1, 60, 60);
+                        generateSpell1SettingsCard(screen, mana, true, "Virgo 6", 6, 1, 1, 60 * 2, 60 * 4);
+                        generateSpell1SettingsCard(screen, mana, false, "Libra 7", 7, 1, 1, 60 * 3, 60 * 3);
 
                         return;
 
@@ -280,8 +285,8 @@ public class GUIs {
 
                     if (page == id) {
 
-                        generateSpell1SettingsCard(screen, mana, true, "Scorpio 8", 8, 1, 1, 120, 60);
-                        generateSpell1SettingsCard(screen, mana, false, "Sagittarius 9", 9, 1, 1, 120, 120);
+                        generateSpell1SettingsCard(screen, mana, true, "Scorpio 8", 8, 1, 1, 60 * 3, 60 * 2);
+                        generateSpell1SettingsCard(screen, mana, false, "Sagittarius 9", 9, 1, 1, 60 * 3, 60 * 3);
 
                         return;
 
@@ -298,8 +303,8 @@ public class GUIs {
 
                     if (page == id) {
 
-                        generateSpell1SettingsCard(screen, mana, true, "Capricorn 10", 10, 1, 1, 60, 60);
-                        generateSpell1SettingsCard(screen, mana, false, "Aquarius 11", 11, 1, 1, 120, 120);
+                        generateSpell1SettingsCard(screen, mana, true, "Capricorn 10", 10, 1, 1, 60 * 1, 60 * 3);
+                        generateSpell1SettingsCard(screen, mana, false, "Aquarius 11", 11, 1, 1, 60 * 3, 60 * 4);
 
                         return;
 
@@ -316,8 +321,8 @@ public class GUIs {
 
                     if (page == id) {
 
-                        generateSpell1SettingsCard(screen, mana, true, "Pisces 12", 12, 1, 1, 120, 120);
-                        generateSpell1SettingsCard(screen, mana, false, "Ophiuchus 13", 13, 1, 1, 60, 60);
+                        generateSpell1SettingsCard(screen, mana, true, "Pisces 12", 12, 1, 1, 60 * 4, 60 * 3);
+                        generateSpell1SettingsCard(screen, mana, false, "Ophiuchus 13", 13, 1, 1, 60 * 2, 60 * 2);
 
                         return;
 
@@ -408,18 +413,18 @@ public class GUIs {
 
         }
 
-        ScreenDrawing.ComponentAdvance.drawImageButton(screen, 8 * -23 - 4, 8 * 11 + 4, 32, 16, true, true, false, "server", "book", "page_previous", "tanscomplexmagic:textures/screens/gui_component_page_previous.png");
-        ScreenDrawing.ComponentAdvance.drawImageButton(screen, 8 * 22 - 4, 8 * 11 + 4, 32, 16, true, true, false, "server", "book", "page_next", "tanscomplexmagic:textures/screens/gui_component_page_next.png");
-        ScreenDrawing.ComponentAdvance.drawImageButton(screen, 8 * 25 + 0, 8 * 15 + 0, 16, 8, true, true, false, "server", "book", "close", "tanscomplexmagic:textures/screens/gui_component_close.png");
+        ScreenDrawing.ComponentAdvance.ButtonImage.draw(screen, 8 * -23 - 4, 8 * 11 + 4, 32, 16, true, true, false, "server", "book", "page_previous", "tanscomplexmagic:textures/screens/gui_component_page_previous.png");
+        ScreenDrawing.ComponentAdvance.ButtonImage.draw(screen, 8 * 22 - 4, 8 * 11 + 4, 32, 16, true, true, false, "server", "book", "page_next", "tanscomplexmagic:textures/screens/gui_component_page_next.png");
+        ScreenDrawing.ComponentAdvance.ButtonImage.draw(screen, 8 * 25 + 0, 8 * 15 + 0, 16, 8, true, true, false, "server", "book", "close", "tanscomplexmagic:textures/screens/gui_component_close.png");
 
-        ScreenDrawing.ComponentAdvance.drawImageButton(screen, 8 * -27 + 0, 8 * -12 + 0 , 24, 16, false, true, false, "server", "book", "", "tanscomplexmagic:textures/screens/icon_home.png");
-        ScreenDrawing.ComponentAdvance.drawImageButton(screen, 8 * -27 + 0, 8 * -11 + 4, 24, 16, false, true, false, "server", "book", "", "tanscomplexmagic:textures/screens/gui_component_shortcut_ally_list.png");
-        ScreenDrawing.ComponentAdvance.drawImageButton(screen, 8 * -27 + 0, 8 * -10 + 8, 24, 16, false, true, false, "server", "book", "", "tanscomplexmagic:textures/screens/gui_component_shortcut_basic_spells.png");
-        ScreenDrawing.ComponentAdvance.drawImageButton(screen, 8 * -27 + 0, 8 * -9 + 12, 24, 16, false, true, false, "server", "book", "", "tanscomplexmagic:textures/screens/gui_component_shortcut_spell_control.png");
-        ScreenDrawing.ComponentAdvance.drawImageButton(screen, 8 * -27 + 0, 8 * -8 + 16, 24, 16, false, true, false, "server", "book", "", "tanscomplexmagic:textures/screens/gui_component_shortcut_custom.png");
+        ScreenDrawing.ComponentAdvance.ButtonImage.draw(screen, 8 * -27 + 0, 8 * -12 + 0 , 24, 16, false, true, false, "server", "book", "", "tanscomplexmagic:textures/screens/icon_home.png");
+        ScreenDrawing.ComponentAdvance.ButtonImage.draw(screen, 8 * -27 + 0, 8 * -11 + 4, 24, 16, false, true, false, "server", "book", "", "tanscomplexmagic:textures/screens/gui_component_shortcut_ally_list.png");
+        ScreenDrawing.ComponentAdvance.ButtonImage.draw(screen, 8 * -27 + 0, 8 * -10 + 8, 24, 16, false, true, false, "server", "book", "", "tanscomplexmagic:textures/screens/gui_component_shortcut_basic_spells.png");
+        ScreenDrawing.ComponentAdvance.ButtonImage.draw(screen, 8 * -27 + 0, 8 * -9 + 12, 24, 16, false, true, false, "server", "book", "", "tanscomplexmagic:textures/screens/gui_component_shortcut_spell_control.png");
+        ScreenDrawing.ComponentAdvance.ButtonImage.draw(screen, 8 * -27 + 0, 8 * -8 + 16, 24, 16, false, true, false, "server", "book", "", "tanscomplexmagic:textures/screens/gui_component_shortcut_custom.png");
 
-        ScreenDrawing.ComponentAdvance.drawImageButton(screen, 8 * -23 - 4, 8 * 13 + 6, 14, 7, true, true, false, "server", "book", "log", "tanscomplexmagic:textures/screens/gui_component_log_type_set.png");
-        ScreenDrawing.ComponentAdvance.drawImageButton(screen, 8 * 4 + 0, 8 * 13 + 8, 6, 3, true, true, false, "server", "book", "compass", "tanscomplexmagic:textures/screens/gui_component_compass_custom_set.png");
+        ScreenDrawing.ComponentAdvance.ButtonImage.draw(screen, 8 * -23 - 4, 8 * 13 + 6, 14, 7, true, true, false, "server", "book", "log", "tanscomplexmagic:textures/screens/gui_component_log_type_set.png");
+        ScreenDrawing.ComponentAdvance.ButtonImage.draw(screen, 8 * 4 + 0, 8 * 13 + 8, 6, 3, true, true, false, "server", "book", "compass", "tanscomplexmagic:textures/screens/gui_component_compass_custom_set.png");
 
 
     }
@@ -443,28 +448,28 @@ public class GUIs {
         ScreenDrawing.ComponentBasic.drawTextBasic(0, 0, ScreenDrawing.normal_font_scale, "§8Detected Targets : " + (int) NBTManager.Mob.getNumber(screen.player, "spell1", "number_of_targets_detected" + number));
         ScreenDrawing.ComponentBasic.drawTextBasic(0, 0, ScreenDrawing.normal_font_scale, "§8Remaining Duration : " + NBTManager.Mob.getText(screen.player, "spell1", "remaining_duration" + number));
         ScreenDrawing.AutoLine.setMarkZ();
-        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_card_enable" + number, "Enable");
-        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_card_active" + number, "Activate Effect");
+        ScreenDrawing.ComponentAdvance.Switch.drawText(screen, 0, 0, "spell1", "is_card_enable" + number, "Enable");
+        ScreenDrawing.ComponentAdvance.Switch.drawText(screen, 0, 0, "spell1", "is_card_active" + number, "Activate Effect");
         ScreenDrawing.AutoLine.returnMarkZ();
-        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 80, 0, "spell1", "is_card_negative" + number, "Flip Card");
-        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 80, 0, "spell1", "is_card_high_power_mode" + number, "High Power Mode");
+        ScreenDrawing.ComponentAdvance.Switch.drawText(screen, 80, 0, "spell1", "is_card_negative" + number, "Flip Card");
+        ScreenDrawing.ComponentAdvance.Switch.drawText(screen, 80, 0, "spell1", "is_card_high_power_mode" + number, "High Power Mode");
 
         ScreenDrawing.ComponentBasic.drawTextBasic(0, 0, ScreenDrawing.normal_font_scale, "Targets");
         ScreenDrawing.AutoLine.addSpace(-4);
-        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_card_target_user" + number, "User");
-        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_card_target_ally_player" + number, "Ally Player");
-        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_card_target_ally_non_player" + number, "Ally Non-Player");
-        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_card_target_enemy_player" + number, "Enemy Player");
-        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_card_target_enemy_non_player" + number, "Enemy Non-Player");
-        ScreenDrawing.ComponentAdvance.drawSwitchBasic(screen, 0, 0, "spell1", "is_card_target_mark" + number, "Mark");
+        ScreenDrawing.ComponentAdvance.Switch.drawText(screen, 0, 0, "spell1", "is_card_target_user" + number, "User");
+        ScreenDrawing.ComponentAdvance.Switch.drawText(screen, 0, 0, "spell1", "is_card_target_ally_player" + number, "Ally Player");
+        ScreenDrawing.ComponentAdvance.Switch.drawText(screen, 0, 0, "spell1", "is_card_target_ally_non_player" + number, "Ally Non-Player");
+        ScreenDrawing.ComponentAdvance.Switch.drawText(screen, 0, 0, "spell1", "is_card_target_enemy_player" + number, "Enemy Player");
+        ScreenDrawing.ComponentAdvance.Switch.drawText(screen, 0, 0, "spell1", "is_card_target_enemy_non_player" + number, "Enemy Non-Player");
+        ScreenDrawing.ComponentAdvance.Switch.drawText(screen, 0, 0, "spell1", "is_card_target_mark" + number, "Mark");
 
         // Duration
         {
 
-            ScreenDrawing.ComponentAdvance.drawSliderBasic(screen, 0, 0, 160, 0, NBTManager.Mob.getNumber(screen.player, "spell1", "card_duration_max_positive" + number), 1, "spell1", "card_duration_positive" + number, "Positive Duration");
+            ScreenDrawing.ComponentAdvance.Slider.drawText(screen, 0, 0, 160, 0, NBTManager.Mob.getNumber(screen.player, "spell1", "card_duration_max_positive" + number), 1, "spell1", "card_duration_positive" + number, "Positive Duration");
             ScreenDrawing.AutoLine.addSpace(-8);
 
-            ScreenDrawing.ComponentAdvance.drawButtonLockableCustomWork(screen, 0, 0, 160, true, mana < 1, "+" + duration_per_mana_positive + " / 1 Mana", "+" + duration_per_mana_positive + " / 1 Mana", () -> {
+            ScreenDrawing.ComponentAdvance.ButtonTiny.drawTextRunnableLockable(screen, 0, 0, 160, true, mana < 1, "+" + duration_per_mana_positive + " / 1 Mana", "+" + duration_per_mana_positive + " / 1 Mana", () -> {
 
                 CompoundTag tag = new CompoundTag();
                 tag.putInt("duration_per_mana_positive", duration_per_mana_positive);
@@ -472,10 +477,10 @@ public class GUIs {
 
             });
 
-            ScreenDrawing.ComponentAdvance.drawSliderBasic(screen, 0, 0, 160, 0, NBTManager.Mob.getNumber(screen.player, "spell1", "card_duration_max_negative" + number), 1, "spell1", "card_duration_negative" + number, "Negative Duration");
+            ScreenDrawing.ComponentAdvance.Slider.drawText(screen, 0, 0, 160, 0, NBTManager.Mob.getNumber(screen.player, "spell1", "card_duration_max_negative" + number), 1, "spell1", "card_duration_negative" + number, "Negative Duration");
             ScreenDrawing.AutoLine.addSpace(-8);
 
-            ScreenDrawing.ComponentAdvance.drawButtonLockableCustomWork(screen, 0, 0, 160, true, mana < 1, "+" + duration_per_mana_negative + " / 1 Mana)", "+" + duration_per_mana_negative + " / 1 Mana", () -> {
+            ScreenDrawing.ComponentAdvance.ButtonTiny.drawTextRunnableLockable(screen, 0, 0, 160, true, mana < 1, "+" + duration_per_mana_negative + " / 1 Mana)", "+" + duration_per_mana_negative + " / 1 Mana", () -> {
 
                 CompoundTag tag = new CompoundTag();
                 tag.putInt("duration_per_mana_negative", duration_per_mana_negative);

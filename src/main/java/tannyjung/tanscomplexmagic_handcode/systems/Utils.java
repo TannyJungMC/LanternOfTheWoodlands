@@ -23,26 +23,38 @@ public class Utils {
 
     public static class Tag {
 
-        public static String[] convertSystemAll (ServerPlayer player_server) {
+        public static String getUser (ServerPlayer player_server) {
 
             String mod = Core.mod_id_big;
-            String uuid = String.valueOf(player_server.getUUID());
+            String uuid = player_server.getUUID().toString();
 
-            return new String[]{mod + "-user-" + uuid};
+            return mod + "-user-" + uuid;
+
+        }
+
+        public static String getAlly (ServerPlayer player_server) {
+
+            String mod = Core.mod_id_big;
+            String uuid = player_server.getUUID().toString();
+
+            return mod + "-ally-" + uuid;
+
+        }
+
+        public static String[] convertSystemAll (ServerPlayer player_server) {
+
+            return new String[]{Core.mod_id_big, getUser(player_server)};
 
         }
 
         public static String[] convertSystemSpecific (ServerPlayer player_server, String[] tags) {
 
-            String mod = Core.mod_id_big;
-            String uuid = String.valueOf(player_server.getUUID());
-
             String[] convert = new String[tags.length + 1];
-            convert[0] = Core.mod_id_big + "-user-" + uuid;
+            convert[0] = getUser(player_server);
 
             for (int number = 0; number < tags.length; number++) {
 
-                convert[number + 1] = mod + "-" + tags[number];
+                convert[number + 1] = Core.mod_id_big + "-" + tags[number];
 
             }
 
@@ -52,19 +64,13 @@ public class Utils {
 
         public static String[] convertAlly (ServerPlayer player_server) {
 
-            String mod = Core.mod_id_big;
-            String uuid = String.valueOf(player_server.getUUID());
-
-            return new String[]{mod + "-ally-" + uuid};
+            return new String[]{getAlly(player_server)};
 
         }
 
         public static String[] convertEnemy (ServerPlayer player_server) {
 
-            String mod = Core.mod_id_big;
-            String uuid = String.valueOf(player_server.getUUID());
-
-            return new String[]{"!" + mod, "!" + mod + "-user-" + uuid, "!" + mod + "-ally-" + uuid};
+            return new String[]{"!" + Core.mod_id_big, "!" + getUser(player_server), "!" + getAlly(player_server)};
 
         }
 

@@ -521,7 +521,7 @@ public class TXTFunction {
 
         count_delayed_command = 0;
 
-        for (Entity entity : EntityManager.Population.getEverywhere(level_server, "minecraft:marker", new String[]{Core.mod_id_big + "-delayed_command"})) {
+        for (Entity entity : EntityManager.Population.getEverywhereStatic(level_server, "minecraft:marker", "", new String[]{Core.mod_id_big + "-delayed_command"})) {
 
             count_delayed_command = count_delayed_command + 1;
             TXTFunction.runDelayedCommand(level_server, entity);

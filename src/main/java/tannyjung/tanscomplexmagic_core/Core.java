@@ -1,7 +1,6 @@
 package tannyjung.tanscomplexmagic_core;
 
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
 import org.apache.logging.log4j.Logger;
 import tannyjung.tanscomplexmagic_core.game.*;
 import tannyjung.tanscomplexmagic_core.outside.*;
@@ -42,28 +41,36 @@ public class Core {
     ___NeoForgeData___
 
     */
-    
+
     public static String mod_name = "";
     public static String mod_id = "";
     public static String mod_id_big = "";
     public static String mod_id_short = "";
-    
+    public static String github_pack = "";
+    public static String wiki = "";
+
     public static int data_structure_version_core = 0;
     public static String data_structure_version_mod = "";
     public static String data_structure_version_pack = "";
     public static String main_pack_type = "";
     public static String main_pack_type_original = "";
-    public static String github_pack = "";
-    public static String wiki = "";
+
+    public static boolean have_custom_pack = false;
     public static boolean have_world_data_cleaner = false;
 
-    public static String path_game = FMLPaths.GAMEDIR.get().toString();
+    public static final ExecutorService thread = Executors.newFixedThreadPool(1, runnable -> {
+
+        Thread thread = new Thread(runnable);
+        thread.setName(mod_id_big + "-thread");
+        return thread;
+
+    });
+
     public static String path_config = "";
     public static String path_world_core = "";
     public static String path_world_mod = "";
     public static Logger logger = null;
     public static boolean global_locking = false;
-    public static final ExecutorService thread_main = Executors.newFixedThreadPool(1, name -> { Thread thread = new Thread(name); thread.setName(mod_id_big + "-thread"); return thread; });
 
     public static boolean auto_check_update = false;
     public static boolean wip_version = false;
@@ -72,14 +79,33 @@ public class Core {
     public static void start (IEventBus bus) {
 
         Handcode.start();
-        mod_id_big = mod_id.toUpperCase();
-        main_pack_type_original = main_pack_type;
         logger = LogManager.getLogger(mod_id);
         path_config = FMLPaths.GAMEDIR.get().toString() + "/config/" + mod_id;
 
         EventCenter.bus(bus);
+
         DataMigration.run(false);
         restart(null, true, true);
+
+    }
+
+    public static void syncModData (String mod_name, String mod_id, String mod_id_short, String github_pack, String wiki, int data_structure_version_core, String data_structure_version_mod, String data_structure_version_pack, String main_pack_type, boolean have_world_data_cleaner, boolean have_custom_pack) {
+
+        Core.mod_name = mod_name;
+        Core.mod_id = mod_id;
+        Core.mod_id_big = mod_id.toUpperCase();
+        Core.mod_id_short = mod_id_short;
+        Core.github_pack = github_pack;
+        Core.wiki = wiki;
+
+        Core.data_structure_version_core = data_structure_version_core;
+        Core.data_structure_version_mod = data_structure_version_mod;
+        Core.data_structure_version_pack = data_structure_version_pack;
+        Core.main_pack_type = main_pack_type;
+        Core.main_pack_type_original = main_pack_type;
+
+        Core.have_custom_pack = have_custom_pack;
+        Core.have_world_data_cleaner = have_world_data_cleaner;
 
     }
 
@@ -136,7 +162,7 @@ public class Core {
 
         } else {
 
-            thread_main.submit(() -> {
+            thread.submit(() -> {
 
                 GlobalLocking.test();
                 GlobalLocking.lock();
@@ -144,6 +170,8 @@ public class Core {
                 DelayedWork.create(true, 20, () -> {
 
                     runnable.run();
+
+                    EntityManager.Population.refresh();
                     ScoreManager.create(level_server, mod_id_big);
 
                     GlobalLocking.unlock();
@@ -205,12 +233,6 @@ public class Core {
 
     }
 
-    public static void register (IEventBus bus) {
-
-
-
-    }
-    
     public static class GlobalLocking {
 
         private static final Object lock = new Object();
@@ -303,11 +325,14 @@ public class Core {
         public static void loopTick (ServerLevel level_server) {
 
             Loops.tick(level_server);
-            second = second + 1;
 
-            if (second > 20) {
+            if (second > 1) {
 
-                second = 0;
+                second = second - 1;
+
+            } else {
+
+                second = 20;
                 loopSecond(level_server);
 
             }
@@ -318,11 +343,14 @@ public class Core {
 
             TXTFunction.loop(level_server);
             Loops.second(level_server);
-            minute = minute + 1;
 
-            if (minute > 60) {
+            if (minute > 1) {
 
-                minute = 0;
+                minute = minute - 1;
+
+            } else {
+
+                minute = 60;
                 loopMinute(level_server);
 
             }

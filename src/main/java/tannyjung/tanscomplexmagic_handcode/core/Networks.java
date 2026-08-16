@@ -151,39 +151,97 @@ public class Networks {
 
         } else if (type.equals("test") == true) {
 
-            if (NBTManager.Mob.getLogic(player_server, "gui", "a") == false) {
+            {
 
-                NBTManager.Mob.setLogic(player_server, "gui", "a", true);
+                int number = 0;
+                String id = NBTManager.Mob.getText(player_server, "main", "ally_list_edit_id");
+                String name = NBTManager.Mob.getText(player_server, "main", "ally_list_edit_name");
 
-            } else {
+                try {
 
-                NBTManager.Mob.setLogic(player_server, "gui", "a", false);
-                NBTManager.Mob.setListText(player_server, "gui", "list", new ArrayList<>());
-                return;
+                    number = Integer.parseInt(NBTManager.Mob.getText(player_server, "main", "ally_list_edit_number"));
 
-            }
+                } catch (Exception ignored) {
 
-            List<String> list = new ArrayList<>();
 
-            for (Entity entity : EntityManager.Population.sort(EntityManager.Population.getEverywhere(player_server.serverLevel(), "", new String[]{}), player_server.position(), false, 0)) {
 
-                if (entity instanceof ServerPlayer == true) {
+                }
 
-                    list.add("§d" + entity.getName().getString());
+                if (work.equals("add") == true) {
 
-                } else if (entity.hasCustomName() == true) {
+                    {
 
-                    list.add("§a" + entity.getDisplayName().getString());
+                        List<String> list = new ArrayList<>();
+                        int radius = (int) NBTManager.Mob.getNumber(player_server, "main", "ally_list_edit_radius");
 
-                } else {
+                        for (Entity entity : EntityManager.Population.sort(EntityManager.Population.getArea(player_server.serverLevel(), player_server.position(), radius, false, id, name, new String[]{}), player_server.position(), false, 0)) {
 
-                    list.add("§f" + entity.getDisplayName().getString() + " §7(" + entity.getId() + ")");
+                            list.add(entity.getStringUUID() + "///" + EntityManager.getID(entity) + "///" + entity.getDisplayName().getString());
+
+                        }
+
+                        NBTManager.Mob.ListText.addMultiple(player_server, "main", "ally_list", list);
+
+                    }
+
+                } else if (work.startsWith("clear_") == true) {
+
+                    {
+
+                        if (work.equals("clear_all") == true) {
+
+                            {
+
+                                NBTManager.Mob.ListText.set(player_server, "main", "ally_list", new ArrayList<>());
+
+                            }
+
+                        } else if (work.equals("clear_specific") == true) {
+
+                            {
+
+                                if (number != 0) {
+
+                                    NBTManager.Mob.ListText.removeByNumber(player_server, "main", "ally_list", number - 1);
+
+                                } else {
+
+                                    List<String> list = new ArrayList<>();
+                                    String[] split = new String[]{};
+
+                                    for (String scan : NBTManager.Mob.ListText.get(player_server, "main", "ally_list")) {
+
+                                        split = scan.split("///");
+
+                                        if (id.isEmpty() == false && split[1].equals(id) == false) {
+
+                                            continue;
+
+                                        }
+
+                                        if (name.isEmpty() == false && split[2].equals(name) == false) {
+
+                                            continue;
+
+                                        }
+
+                                        list.add(scan);
+
+                                    }
+
+                                    NBTManager.Mob.ListText.removeMultiple(player_server, "main", "ally_list", list);
+
+                                }
+
+                            }
+
+                        }
+
+                    }
 
                 }
 
             }
-
-            NBTManager.Mob.setListText(player_server, "gui", "list", list);
 
         }
 
@@ -211,7 +269,7 @@ public class Networks {
 
                         Spell1.deactivate(level_server, player_server);
 
-                        for (Entity entity : EntityManager.Population.getEverywhere(level_server, "", Utils.Tag.convertSystemAll(player_server))) {
+                        for (Entity entity : EntityManager.Population.getEverywhereStatic(level_server, "", "", Utils.Tag.convertSystemAll(player_server))) {
 
                             entity.discard();
 

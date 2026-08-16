@@ -246,9 +246,14 @@ public class CommandMaker {
 
         public static void registry (Object event_object) {
 
-            CommandMaker.create(event_object, 2, "command / txt_function / <text>", run.command::txt_function);
-            CommandMaker.create(event_object, 2, "pack / check_update_main", run.pack::check_update_main);
-            CommandMaker.create(event_object, 2, "pack / update_main", run.pack::update_main);
+            if (Core.have_custom_pack == true) {
+
+                CommandMaker.create(event_object, 2, "command / txt_function / <text>", run.command::txt_function);
+                CommandMaker.create(event_object, 2, "pack / check_update_main", run.pack::check_update_main);
+                CommandMaker.create(event_object, 2, "pack / update_main", run.pack::update_main);
+
+            }
+
             CommandMaker.create(event_object, 2, "restart", run::restart);
 
         }
@@ -275,7 +280,7 @@ public class CommandMaker {
 
                     ServerLevel level_server = data.getSource().getLevel();
 
-                    Core.thread_main.submit(() -> {
+                    Core.thread.submit(() -> {
 
                         TannyPackManager.runCheckUpdate(level_server);
 
@@ -287,7 +292,7 @@ public class CommandMaker {
 
                     ServerLevel level_server = data.getSource().getLevel();
 
-                    Core.thread_main.submit(() -> {
+                    Core.thread.submit(() -> {
 
                         TannyPackManager.runUpdate(level_server);
 

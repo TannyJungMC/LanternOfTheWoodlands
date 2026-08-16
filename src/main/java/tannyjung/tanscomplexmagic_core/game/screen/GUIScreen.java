@@ -5,6 +5,7 @@ import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
@@ -12,8 +13,11 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.lwjgl.glfw.GLFW;
 import tannyjung.tanscomplexmagic.TanscomplexmagicMod;
+import tannyjung.tanscomplexmagic_core.game.KeyBindingMaker;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
+import tannyjung.tanscomplexmagic_core.outside.NetworkManager;
 import tannyjung.tanscomplexmagic_handcode.core.GUIs;
 
 public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
@@ -38,20 +42,46 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
     @Override
     public boolean keyPressed (int key, int scan, int modifier) {
 
-        if (key == 256) {
+        if (key == GLFW.GLFW_KEY_ESCAPE) {
 
-            this.player.closeContainer();
-            return true;
+            {
 
-        } else if (key == 69) {
+                this.player.closeContainer();
+                return true;
 
-            for (Renderable renderable : this.renderables) {
+            }
 
-                if (renderable instanceof EditBox box) {
+        } else if (key == GLFW.GLFW_KEY_ENTER || key == GLFW.GLFW_KEY_KP_ENTER) {
 
-                    if (box.isFocused() == true) {
+            {
 
-                        return true;
+                for (Renderable renderable : this.renderables) {
+
+                    if (renderable instanceof EditBox box) {
+
+                        box.setFocused(false);
+
+                    }
+
+                }
+
+                return true;
+
+            }
+
+        } if (key == GLFW.GLFW_KEY_E) {
+
+            {
+
+                for (Renderable renderable : this.renderables) {
+
+                    if (renderable instanceof EditBox box) {
+
+                        if (box.isFocused() == true) {
+
+                            return false;
+
+                        }
 
                     }
 
@@ -111,16 +141,25 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
     public void init () {
 
         super.init();
+
+        id = -1;
         refresh();
 
     }
 
     private void refresh () {
 
-        this.clearWidgets();
-        ScreenDrawing.ComponentBasic.PreCalculate.clear();
+        int id_set = (int) NBTManager.Mob.getNumber(player, "gui", "id");
 
-        id = (int) NBTManager.Mob.getNumber(player, "gui", "id");
+        if (id != id_set) {
+
+            id = id_set;
+            this.clearWidgets();
+            ScreenDrawing.ComponentAdvance.regenerate();
+
+        }
+
+        ScreenDrawing.ComponentBasic.PreCalculate.clear();
         GUIs.render(this, id);
 
     }
@@ -128,6 +167,12 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
     public static void addWidget (GUIScreen screen, AbstractWidget widget) {
 
         screen.addRenderableWidget(widget);
+
+    }
+
+    public static void removeWidget (GUIScreen screen, AbstractWidget widget) {
+
+        screen.removeWidget(widget);
 
     }
 

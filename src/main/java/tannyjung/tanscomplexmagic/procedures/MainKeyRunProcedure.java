@@ -20,7 +20,7 @@ public class MainKeyRunProcedure {
 					if (Math.abs((entity.getData(TanscomplexmagicModVariables.PLAYER_VARIABLES).user_book_posX + 0.5) - entity.getX()) <= 3
 							&& Math.abs((entity.getData(TanscomplexmagicModVariables.PLAYER_VARIABLES).user_book_posY + 1.5) - entity.getY()) <= 3
 							&& Math.abs((entity.getData(TanscomplexmagicModVariables.PLAYER_VARIABLES).user_book_posZ + 0.5) - entity.getZ()) <= 3) {
-						GUIOpenProcedure.execute(entity);
+						GUIOpenProcedure.execute();
 					}
 				}
 			} else {

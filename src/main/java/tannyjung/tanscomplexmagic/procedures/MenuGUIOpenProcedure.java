@@ -13,6 +13,6 @@ public class MenuGUIOpenProcedure {
 			_vars.book_page = 3;
 			_vars.markSyncDirty();
 		}
-		GUIOpenProcedure.execute(entity);
+		GUIOpenProcedure.execute();
 	}
 }

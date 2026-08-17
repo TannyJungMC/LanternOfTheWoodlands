@@ -546,12 +546,6 @@ public class OutsideUtils {
 
             if (hour > 0) {
 
-                if (hour < 10) {
-
-                    builder.append("0");
-
-                }
-
                 builder.append(hour).append("h ");
 
             }

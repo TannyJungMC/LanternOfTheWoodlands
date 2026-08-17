@@ -5,7 +5,6 @@ import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
@@ -15,27 +14,38 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.lwjgl.glfw.GLFW;
 import tannyjung.tanscomplexmagic.TanscomplexmagicMod;
-import tannyjung.tanscomplexmagic_core.game.KeyBindingMaker;
+import tannyjung.tanscomplexmagic_core.Core;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
-import tannyjung.tanscomplexmagic_core.outside.NetworkManager;
-import tannyjung.tanscomplexmagic_handcode.core.GUIs;
 
 public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
 
     public static final DeferredRegister<MenuType<?>> register = DeferredRegister.create(Registries.MENU, TanscomplexmagicMod.MODID);
     public static final DeferredHolder<MenuType<?>, MenuType<GUIContainer>> gui = register.register("gui", () -> IMenuTypeExtension.create(GUIContainer::new));
 
-    public static boolean refresh = false;
+    public static GUIScreen screen = null;
+    public static LocalPlayer player_local = null;
     public static ItemStack item = ItemStack.EMPTY;
-    public final LocalPlayer player;
-    public int id = 0;
+    public static String id_group = "";
+    public static String id_name = "";
 
     public GUIScreen (GUIContainer container, Inventory inventory, Component text) {
 
         super(container, inventory, text);
-        this.player = (LocalPlayer) container.entity;
         this.imageWidth = 0;
         this.imageHeight = 0;
+
+        GUIScreen.screen = this;
+        GUIScreen.player_local = (LocalPlayer) container.entity;
+
+    }
+
+    @Override
+    public void onClose () {
+
+        super.onClose();
+
+        GUIScreen.screen = null;
+        GUIScreen.player_local = null;
 
     }
 
@@ -46,7 +56,7 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
 
             {
 
-                this.player.closeContainer();
+                GUIManager.close(player_local);
                 return true;
 
             }
@@ -114,13 +124,6 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
         super.render(graphic, mouseX, mouseY, tick);
         this.renderTooltip(graphic, mouseX, mouseY);
 
-        if (refresh == true) {
-
-            refresh = false;
-            refresh();
-
-        }
-
     }
 
     @Override
@@ -142,37 +145,31 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
 
         super.init();
 
-        id = -1;
-        refresh();
+        GUIScreen.id_group = "";
+        GUIScreen.id_name = "";
+        ScreenDrawing.refresh();
 
     }
 
-    private void refresh () {
+    public static class Widget {
 
-        int id_set = (int) NBTManager.Mob.getNumber(player, "gui", "id");
+        public static void add (AbstractWidget widget) {
 
-        if (id != id_set) {
-
-            id = id_set;
-            this.clearWidgets();
-            ScreenDrawing.ComponentAdvance.regenerate();
+            screen.addRenderableWidget(widget);
 
         }
 
-        ScreenDrawing.ComponentBasic.PreCalculate.clear();
-        GUIs.render(this, id);
+        public static void remove (AbstractWidget widget) {
 
-    }
+            screen.removeWidget(widget);
 
-    public static void addWidget (GUIScreen screen, AbstractWidget widget) {
+        }
 
-        screen.addRenderableWidget(widget);
+        public static void removeAll () {
 
-    }
+            screen.clearWidgets();
 
-    public static void removeWidget (GUIScreen screen, AbstractWidget widget) {
-
-        screen.removeWidget(widget);
+        }
 
     }
 

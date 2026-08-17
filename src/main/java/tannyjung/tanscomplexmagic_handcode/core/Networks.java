@@ -43,18 +43,7 @@ public class Networks {
 
                     {
 
-                        GameUtils.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 10, "minecraft:item.book.page_turn");
-
-                        int page = (int) NBTManager.Mob.getNumber(player_server, "gui", "id");
-                        page = page - 2;
-
-                        if (page < 1) {
-
-                            page = 1;
-
-                        }
-
-                        NBTManager.Mob.setNumber(player_server, "gui", "id", page);
+                        Book.pageTurn(player_server, false);
 
                     }
 
@@ -62,12 +51,11 @@ public class Networks {
 
                     {
 
-                        GameUtils.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 10, "minecraft:item.book.page_turn");
-                        NBTManager.Mob.addNumber(player_server, "gui", "id", 2);
+                        Book.pageTurn(player_server, true);
 
                     }
 
-                } else if (work.equals("compass") == true) {
+                } else if (work.equals("custom_compass_set") == true) {
 
                     {
 
@@ -80,25 +68,7 @@ public class Networks {
 
                     {
 
-                        if (NBTManager.Mob.getText(player_server, "book", "log").isEmpty() == true) {
-
-                            NBTManager.Mob.setText(player_server, "book", "log", "mana");
-
-                        } else if (NBTManager.Mob.getText(player_server, "book", "log").equals("mana") == true) {
-
-                            NBTManager.Mob.setText(player_server, "book", "log", "action");
-
-                        } else if (NBTManager.Mob.getText(player_server, "book", "log").equals("action") == true) {
-
-                            NBTManager.Mob.setText(player_server, "book", "log", "warning");
-
-                        } else {
-
-                            NBTManager.Mob.setText(player_server, "book", "log", "");
-
-                        }
-
-                        Book.updateLog(player_server);
+                        Book.Log.setType(player_server);
 
                     }
 
@@ -140,100 +110,6 @@ public class Networks {
 
 
 
-
-                        }
-
-                    }
-
-                }
-
-            }
-
-        } else if (type.equals("test") == true) {
-
-            {
-
-                int number = 0;
-                String id = NBTManager.Mob.getText(player_server, "main", "ally_list_edit_id");
-                String name = NBTManager.Mob.getText(player_server, "main", "ally_list_edit_name");
-
-                try {
-
-                    number = Integer.parseInt(NBTManager.Mob.getText(player_server, "main", "ally_list_edit_number"));
-
-                } catch (Exception ignored) {
-
-
-
-                }
-
-                if (work.equals("add") == true) {
-
-                    {
-
-                        List<String> list = new ArrayList<>();
-                        int radius = (int) NBTManager.Mob.getNumber(player_server, "main", "ally_list_edit_radius");
-
-                        for (Entity entity : EntityManager.Population.sort(EntityManager.Population.getArea(player_server.serverLevel(), player_server.position(), radius, false, id, name, new String[]{}), player_server.position(), false, 0)) {
-
-                            list.add(entity.getStringUUID() + "///" + EntityManager.getID(entity) + "///" + entity.getDisplayName().getString());
-
-                        }
-
-                        NBTManager.Mob.ListText.addMultiple(player_server, "main", "ally_list", list);
-
-                    }
-
-                } else if (work.startsWith("clear_") == true) {
-
-                    {
-
-                        if (work.equals("clear_all") == true) {
-
-                            {
-
-                                NBTManager.Mob.ListText.set(player_server, "main", "ally_list", new ArrayList<>());
-
-                            }
-
-                        } else if (work.equals("clear_specific") == true) {
-
-                            {
-
-                                if (number != 0) {
-
-                                    NBTManager.Mob.ListText.removeByNumber(player_server, "main", "ally_list", number - 1);
-
-                                } else {
-
-                                    List<String> list = new ArrayList<>();
-                                    String[] split = new String[]{};
-
-                                    for (String scan : NBTManager.Mob.ListText.get(player_server, "main", "ally_list")) {
-
-                                        split = scan.split("///");
-
-                                        if (id.isEmpty() == false && split[1].equals(id) == false) {
-
-                                            continue;
-
-                                        }
-
-                                        if (name.isEmpty() == false && split[2].equals(name) == false) {
-
-                                            continue;
-
-                                        }
-
-                                        list.add(scan);
-
-                                    }
-
-                                    NBTManager.Mob.ListText.removeMultiple(player_server, "main", "ally_list", list);
-
-                                }
-
-                            }
 
                         }
 

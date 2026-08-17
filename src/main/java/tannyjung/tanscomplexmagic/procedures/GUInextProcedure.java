@@ -13,6 +13,6 @@ public class GUInextProcedure {
 			_vars.book_page = entity.getData(TanscomplexmagicModVariables.PLAYER_VARIABLES).book_page + 2;
 			_vars.markSyncDirty();
 		}
-		GUIOpenProcedure.execute(entity);
+		GUIOpenProcedure.execute();
 	}
 }

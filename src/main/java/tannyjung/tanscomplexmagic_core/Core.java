@@ -3,11 +3,13 @@ package tannyjung.tanscomplexmagic_core;
 import net.minecraft.server.level.ServerLevel;
 import org.apache.logging.log4j.Logger;
 import tannyjung.tanscomplexmagic_core.game.*;
+import tannyjung.tanscomplexmagic_core.game.screen.GUIManager;
 import tannyjung.tanscomplexmagic_core.outside.*;
 import tannyjung.tanscomplexmagic_core.outside.config.CacheManager;
 import tannyjung.tanscomplexmagic_core.outside.config.ConfigClassic;
 import tannyjung.tanscomplexmagic_core.outside.config.CustomPackOrganizing;
 import tannyjung.tanscomplexmagic_handcode.Handcode;
+import tannyjung.tanscomplexmagic_handcode.core.GUIs;
 import tannyjung.tanscomplexmagic_handcode.core.Loops;
 
 import java.io.File;
@@ -171,8 +173,9 @@ public class Core {
 
                     runnable.run();
 
-                    EntityManager.Population.refresh();
                     ScoreManager.create(level_server, mod_id_big);
+                    EntityManager.Population.refresh();
+                    GUIManager.Storage.refresh();
 
                     GlobalLocking.unlock();
 

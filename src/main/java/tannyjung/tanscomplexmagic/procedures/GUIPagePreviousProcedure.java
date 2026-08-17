@@ -20,6 +20,6 @@ public class GUIPagePreviousProcedure {
 				_vars.markSyncDirty();
 			}
 		}
-		GUIOpenProcedure.execute(entity);
+		GUIOpenProcedure.execute();
 	}
 }

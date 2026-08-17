@@ -5,8 +5,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -112,36 +113,6 @@ public class EventCenter {
     }
 
     @SubscribeEvent
-
-    /*
-    (1.20.1)
-    public static void eventTickServer (TickEvent.ServerTickEvent event) {
-    (1.21.1)
-    public static void eventTickServer (ServerTickEvent.Post event) {
-    */
-    public static void eventTickServer (ServerTickEvent.Post event) {
-
-        if (Core.global_locking == true || event.getServer().overworld().isClientSide == true) {
-
-            return;
-
-        }
-
-        /*
-        (1.20.1)
-        if (event.phase == TickEvent.Phase.START) return;
-        (1.21.1)
-        ### Nothing ###
-        */
-
-
-        ServerLevel level_server = event.getServer().overworld();
-        Core.DelayedWork.runTick();
-        Core.Loop.loopTick(level_server);
-
-    }
-
-    @SubscribeEvent
     public static void eventWorldAboutToStart (ServerAboutToStartEvent event) {
 
         String path_world = event.getServer().getWorldPath(new LevelResource(".")).toString();
@@ -197,14 +168,10 @@ public class EventCenter {
     @SubscribeEvent
     public static void eventPlayerJoin (PlayerEvent.PlayerLoggedInEvent event) {
 
-        if (event.getEntity().level().isClientSide == true) {
+        ServerPlayer player_server = (ServerPlayer) event.getEntity();
+        ServerLevel level_server = player_server.serverLevel();
 
-            return;
-
-        }
-
-        Entity entity = event.getEntity();
-        ServerLevel level_server = (ServerLevel) entity.level();
+        NetworkManager.runServerCore(player_server, "nbt", "sync_all", new CompoundTag());
 
         if (first_player_joined == false) {
 
@@ -253,6 +220,36 @@ public class EventCenter {
         }
 
         EntityManager.Population.eventAddRemove(event.getEntity(), false);
+
+    }
+
+    @SubscribeEvent
+
+    /*
+    (1.20.1)
+    public static void eventTickServer (TickEvent.ServerTickEvent event) {
+    (1.21.1)
+    public static void eventTickServer (ServerTickEvent.Post event) {
+    */
+    public static void eventTickServer (ServerTickEvent.Post event) {
+
+        if (Core.global_locking == true) {
+
+            return;
+
+        }
+
+        /*
+        (1.20.1)
+        if (event.phase == TickEvent.Phase.START) return;
+        (1.21.1)
+        ### Nothing ###
+        */
+
+
+        ServerLevel level_server = event.getServer().overworld();
+        Core.DelayedWork.runTick();
+        Core.Loop.loopTick(level_server);
 
     }
 

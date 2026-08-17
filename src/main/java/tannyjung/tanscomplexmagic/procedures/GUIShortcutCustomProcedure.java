@@ -13,6 +13,6 @@ public class GUIShortcutCustomProcedure {
 			_vars.book_page = entity.getData(TanscomplexmagicModVariables.PLAYER_VARIABLES).book_shortcut_custom;
 			_vars.markSyncDirty();
 		}
-		GUIOpenProcedure.execute(entity);
+		GUIOpenProcedure.execute();
 	}
 }

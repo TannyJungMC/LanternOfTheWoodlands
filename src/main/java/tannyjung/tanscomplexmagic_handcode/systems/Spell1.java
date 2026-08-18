@@ -259,6 +259,7 @@ public class Spell1 {
                 targets.put("ally_non_player", EntityManager.Population.filter(list, "!minecraft:player", "", Utils.Tag.convertAlly(player_server)));
                 targets.put("enemy_player", EntityManager.Population.filter(list, "minecraft:player", "", Utils.Tag.convertEnemy(player_server)));
                 targets.put("enemy_non_player", EntityManager.Population.filter(list, "!minecraft:player", "", Utils.Tag.convertEnemy(player_server)));
+                targets.put("mark", EntityManager.Population.filter(list, "", "", new String[]{Utils.Tag.getUser(player_server) + "_spell1_mark"}));
 
             }
 
@@ -329,6 +330,8 @@ public class Spell1 {
                         target_all.addAll(targets.get("enemy_player"));
                     if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_target_enemy_non_player" + number) == true)
                         target_all.addAll(targets.get("enemy_non_player"));
+                    if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_target_mark" + number) == true)
+                        target_all.addAll(targets.get("mark"));
 
                     target_sort = EntityManager.Population.sort(target_all, entity_center.position(), false, 0);
 

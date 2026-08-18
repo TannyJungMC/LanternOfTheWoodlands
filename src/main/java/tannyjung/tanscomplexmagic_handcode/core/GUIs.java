@@ -22,7 +22,22 @@ public class GUIs {
                 generateBackground();
 
                 ScreenDrawing.Position.set(8 * -22 + 0, 8 * -12 + 0);
-                ScreenDrawing.ComponentAdvance.Board.drawEntity(Utils.Tag.getAlly(GUIScreen.player_local));
+                ScreenDrawing.ComponentBasic.drawTextBasic(1.25, "Ally List");
+                ScreenDrawing.Position.addZ(8);
+                ScreenDrawing.ComponentBasic.drawTextParagraph(160, "   Hello");
+                ScreenDrawing.Position.addZ(8);
+                ScreenDrawing.ComponentBasic.drawImageBasic(16, 16, "tanscomplexmagic:textures/screens/icon_ally_list.png");
+                ScreenDrawing.Position.addZ(8);
+                ScreenDrawing.ComponentBasic.drawTextParagraph(160, "   Hello");
+
+            });
+
+            GUIManager.Storage.add("book", "ally_list_manager", () -> {
+
+                generateBackground();
+
+                ScreenDrawing.Position.set(8 * -22 + 0, 8 * -12 + 0);
+                ScreenDrawing.ComponentAdvance.BoardEntity.draw("Ally List", Utils.Tag.getAlly(GUIScreen.player_local), "   Manage list of your ally. Some spell systems can interact with this list, some can skip negative actions on them.");
 
             });
 
@@ -136,13 +151,11 @@ public class GUIs {
                     generateBackground();
 
                     ScreenDrawing.Position.set(8 * -22 + 0, 8 * -12 + 0);
-                    ScreenDrawing.ComponentBasic.drawTextCenteredBasic(true, 1.5, "Settings");
+                    ScreenDrawing.ComponentBasic.drawTextBasic(1.25, "Settings");
                     ScreenDrawing.Position.addZ(8);
                     ScreenDrawing.ComponentAdvance.Switch.drawText("spell1", "is_pause_all", "Pause All Cards");
                     ScreenDrawing.Position.addZ(8);
                     ScreenDrawing.ComponentAdvance.Slider.drawText(160, 1, 200, 1, "spell1", "radius", "Radius");
-
-                    generateSpell1SettingsCard(false, "Aries 1", 1, 300 * 3, 300 * 4);
 
                 });
 
@@ -150,53 +163,68 @@ public class GUIs {
 
                     generateBackground();
 
-                    generateSpell1SettingsCard(true, "Taurus 2", 2, 300 * 1, 300 * 5);
-                    generateSpell1SettingsCard(false, "Gemini 3", 3, 300 * 2, 300 * 5);
+                    ScreenDrawing.Position.set(8 * -22 + 0, 8 * -12 + 0);
+                    ScreenDrawing.ComponentAdvance.BoardEntity.draw("Target Mark", Utils.Tag.getUser(GUIScreen.player_local) + "_spell1_mark", "   You can select targets you want to add effects using this list. Once adding them, you can enable target mode \"Mark\" in the card settings page.");
 
                 });
 
-                GUIManager.Storage.add("book", "spell1_settings3", () -> {
+            }
+
+            // Settings : Cards
+            {
+
+                GUIManager.Storage.add("book", "spell1_settings_card1", () -> {
 
                     generateBackground();
-
-                    generateSpell1SettingsCard(true, "Cancer 4", 4, 300 * 3, 300 * 3);
-                    generateSpell1SettingsCard(false, "Leo 5", 5, 300 * 2, 300 * 4);
+                    generateSpell1SettingsCard(true, "Aries 1", 1, 300 * 3, 300 * 4);
+                    generateSpell1SettingsCard(false, "Taurus 2", 2, 300 * 1, 300 * 5);
 
                 });
 
-                GUIManager.Storage.add("book", "spell1_settings4", () -> {
+                GUIManager.Storage.add("book", "spell1_settings_card2", () -> {
 
                     generateBackground();
-
-                    generateSpell1SettingsCard(true, "Virgo 6", 6, 300 * 2, 300 * 4);
-                    generateSpell1SettingsCard(false, "Libra 7", 7, 300 * 3, 300 * 3);
+                    generateSpell1SettingsCard(true, "Gemini 3", 3, 300 * 2, 300 * 5);
+                    generateSpell1SettingsCard(false, "Cancer 4", 4, 300 * 3, 300 * 3);
 
                 });
 
-                GUIManager.Storage.add("book", "spell1_settings5", () -> {
+                GUIManager.Storage.add("book", "spell1_settings_card3", () -> {
 
                     generateBackground();
-
-                    generateSpell1SettingsCard(true, "Scorpio 8", 8, 300 * 3, 300 * 2);
-                    generateSpell1SettingsCard(false, "Sagittarius 9", 9, 300 * 3, 300 * 3);
+                    generateSpell1SettingsCard(true, "Leo 5", 5, 300 * 2, 300 * 4);
+                    generateSpell1SettingsCard(false, "Virgo 6", 6, 300 * 2, 300 * 4);
 
                 });
 
-                GUIManager.Storage.add("book", "spell1_settings6", () -> {
+                GUIManager.Storage.add("book", "spell1_settings_card4", () -> {
 
                     generateBackground();
-
-                    generateSpell1SettingsCard(true, "Capricorn 10", 10, 300 * 1, 300 * 3);
-                    generateSpell1SettingsCard(false, "Aquarius 11", 11, 300 * 3, 300 * 4);
+                    generateSpell1SettingsCard(true, "Libra 7", 7, 300 * 3, 300 * 3);
+                    generateSpell1SettingsCard(false, "Scorpio 8", 8, 300 * 3, 300 * 2);
 
                 });
 
-                GUIManager.Storage.add("book", "spell1_settings7", () -> {
+                GUIManager.Storage.add("book", "spell1_settings_card5", () -> {
 
                     generateBackground();
+                    generateSpell1SettingsCard(true, "Sagittarius 9", 9, 300 * 3, 300 * 3);
+                    generateSpell1SettingsCard(false, "Capricorn 10", 10, 300 * 1, 300 * 3);
 
-                    generateSpell1SettingsCard(true, "Pisces 12", 12, 300 * 4, 300 * 3);
-                    generateSpell1SettingsCard(false, "Ophiuchus 13", 13, 300 * 2, 300 * 2);
+                });
+
+                GUIManager.Storage.add("book", "spell1_settings_card6", () -> {
+
+                    generateBackground();
+                    generateSpell1SettingsCard(true, "Aquarius 11", 11, 300 * 3, 300 * 4);
+                    generateSpell1SettingsCard(false, "Pisces 12", 12, 300 * 4, 300 * 3);
+
+                });
+
+                GUIManager.Storage.add("book", "spell1_settings_card7", () -> {
+
+                    generateBackground();
+                    generateSpell1SettingsCard(true, "Ophiuchus 13", 13, 300 * 2, 300 * 2);
 
                 });
                 
@@ -344,7 +372,7 @@ public class GUIs {
         }
 
         ScreenDrawing.Position.set(posX, 8 * -12 + 0);
-        ScreenDrawing.ComponentBasic.drawTextCenteredBasic(true, 1, "Card Settings : " + name);
+        ScreenDrawing.ComponentBasic.drawTextBasic(1, "Card Settings : " + name);
         ScreenDrawing.Position.addZ(8);
         ScreenDrawing.ComponentBasic.drawTextBasic( ScreenDrawing.normal_font_scale, "§8Detected Targets : " + (int) NBTManager.Mob.getNumber(GUIScreen.player_local, "spell1", "number_of_targets_detected" + number));
         ScreenDrawing.Position.addZ(3);

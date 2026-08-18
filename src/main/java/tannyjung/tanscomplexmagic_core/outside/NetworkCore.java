@@ -12,7 +12,9 @@ import tannyjung.tanscomplexmagic_core.game.EffectManager;
 import tannyjung.tanscomplexmagic_core.game.EntityManager;
 import tannyjung.tanscomplexmagic_core.game.ItemManager;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
+import tannyjung.tanscomplexmagic_core.game.screen.GUIScreen;
 import tannyjung.tanscomplexmagic_core.game.screen.ScreenDrawing;
+import tannyjung.tanscomplexmagic_handcode.systems.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,193 +122,24 @@ public class NetworkCore {
 
                 {
 
+                    ServerLevel level_server = player_server.serverLevel();
                     String nbt_tag = extra.getString("nbt_tag");
-                    String type = "gui";
-                    String name = "board_entity_" + nbt_tag;
 
-                    if (work.equals("board_entity_refresh") == true) {
+                    if (work.equals("board_entity_add") == true) {
 
-                        {
+                        ScreenDrawing.ComponentAdvance.BoardEntity.runAdd(level_server, player_server, nbt_tag);
 
-                            ServerLevel level_server = player_server.serverLevel();
+                    } else if (work.equals("board_entity_clear") == true) {
 
-                            for (Entity scan : EntityManager.Population.getEverywhereUpdatable(level_server, "", "", new String[]{nbt_tag})) {
+                        ScreenDrawing.ComponentAdvance.BoardEntity.runClear(player_server, nbt_tag);
 
-                                scan.removeTag(nbt_tag);
+                    } else if (work.equals("board_entity_remove") == true) {
 
-                            }
-
-                            List<String> list = new ArrayList<>();
-                            StringBuilder builder = new StringBuilder();
-                            Entity entity = null;
-                            int number = 1;
-
-                            String[] split = new String[]{};
-                            String split_uuid = null;
-                            String split_name = "";
-
-                            for (String scan : NBTManager.Mob.ListText.get(player_server, type, name)) {
-
-                                // Split
-                                {
-
-                                    split = scan.split("///");
-
-                                    try {
-
-                                        split_uuid = split[0];
-                                        split_name = split[2];
-
-                                    } catch (Exception ignored) {
-
-                                        continue;
-
-                                    }
-
-                                }
-
-                                entity = EntityManager.getByUUID(level_server, split_uuid);
-
-                                if (entity == null) {
-
-                                    builder.append("§c");
-
-                                } else {
-
-                                    if (entity instanceof ServerPlayer == true) {
-
-                                        builder.append("§a");
-
-                                    } else if (entity.hasCustomName() == true) {
-
-                                        builder.append("§d");
-
-                                    } else {
-
-                                        builder.append("§f");
-
-                                    }
-
-                                    entity.addTag(nbt_tag);
-
-
-
-                                    EffectManager.giveBasic(level_server, entity, "glowing", 1, 60);
-
-
-
-
-                                }
-
-                                builder.append(split_name).append(" §8(").append(number).append(")");
-                                list.add(builder.toString());
-                                builder.setLength(0);
-                                number = number + 1;
-
-                            }
-
-                            NBTManager.Mob.ListText.set(player_server, type, name + "_show", list);
-
-                        }
-
-                    } else {
-
-                        if (work.equals("board_entity_clear") == true) {
-
-                            {
-
-                                NBTManager.Mob.ListText.set(player_server, type, name, new ArrayList<>());
-
-                            }
-
-                        } else if (work.equals("board_entity_remove") == true) {
-
-                            {
-
-                                String target_id = NBTManager.Mob.getText(player_server, type, name + "_id");
-                                String target_name = NBTManager.Mob.getText(player_server, type, name + "_name");
-
-                                List<String> list = new ArrayList<>();
-                                String[] split = new String[]{};
-                                String split_id = "";
-                                String split_name = "";
-
-                                for (String scan : NBTManager.Mob.ListText.get(player_server, type, name)) {
-
-                                    try {
-
-                                        split = scan.split("///");
-                                        split_id = split[1];
-                                        split_name = split[2];
-
-                                    } catch (Exception ignored) {
-
-                                        continue;
-
-                                    }
-
-                                    if (target_id.isEmpty() == false && split_id.equals(target_id) == false) {
-
-                                        continue;
-
-                                    }
-
-                                    if (target_name.isEmpty() == false && split_name.equals(target_name) == false) {
-
-                                        continue;
-
-                                    }
-
-                                    list.add(scan);
-
-                                }
-
-                                NBTManager.Mob.ListText.removeMultiple(player_server, type, name, list);
-
-                            }
-
-                        } else if (work.equals("board_entity_remove_select") == true) {
-
-                            {
-
-                                int page = (int) NBTManager.Mob.getNumber(player_server, type, name + "_show_page");
-                                int select = (int) NBTManager.Mob.getNumber(player_server, type, name + "_show_select");
-
-                                if (select == 0) {
-
-                                    return;
-
-                                }
-
-                                int number = (page * 18) + select;
-                                NBTManager.Mob.ListText.removeByNumber(player_server, type, name, number - 1);
-
-                            }
-
-                        } else if (work.equals("board_entity_add") == true) {
-
-                            {
-
-                                String target_id = NBTManager.Mob.getText(player_server, type, name + "_id");
-                                String target_name = NBTManager.Mob.getText(player_server, type, name + "_name");
-                                int radius = (int) NBTManager.Mob.getNumber(player_server, type, name + "_radius");
-                                List<String> list = new ArrayList<>();
-
-                                for (Entity entity : EntityManager.Population.sort(EntityManager.Population.getArea(player_server.serverLevel(), player_server.position(), radius, false, target_id, target_name, new String[]{}), player_server.position(), false, 0)) {
-
-                                    list.add(entity.getStringUUID() + "///" + EntityManager.getID(entity) + "///" + entity.getDisplayName().getString());
-
-                                }
-
-                                NBTManager.Mob.ListText.addMultiple(player_server, type, name, list);
-
-                            }
-
-                        }
-
-                        NetworkManager.runServerCore(player_server, "gui", "board_entity_refresh", extra);
+                        ScreenDrawing.ComponentAdvance.BoardEntity.runRemove(level_server, player_server, nbt_tag);
 
                     }
+
+                    ScreenDrawing.ComponentAdvance.BoardEntity.runRefresh(level_server, player_server, nbt_tag);
 
                 }
 

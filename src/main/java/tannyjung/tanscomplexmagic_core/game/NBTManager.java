@@ -378,6 +378,40 @@ public class NBTManager {
 
             }
 
+            public static int getNumber (Entity entity, String type, String name, String value) {
+
+                int number = 0;
+
+                for (String scan : get(entity, type, name)) {
+
+                    if (scan.equals(value) == true) {
+
+                        return number;
+
+                    }
+
+                    number = number + 1;
+
+                }
+
+                return -1;
+
+            }
+
+            public static String getByNumber (Entity entity, String type, String name, int number) {
+
+                ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getList(name, Tag.TAG_STRING);
+
+                if (number < 0 || number >= list.size()) {
+
+                    return "";
+
+                }
+
+                return list.getString(number);
+
+            }
+
             public static void set (Entity entity, String type, String name, List<String> values) {
 
                 ListTag list = new ListTag();
@@ -392,7 +426,31 @@ public class NBTManager {
 
             }
 
+            public static void setByNumber (Entity entity, String type, String name, int number, String value) {
+
+                ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getList(name, Tag.TAG_STRING);
+
+                if (number < 0 || number >= list.size()) {
+
+                    return;
+
+                }
+
+                list.set(number, StringTag.valueOf(value));
+                send(entity, type, name, list);
+
+            }
+
             public static void add (Entity entity, String type, String name, String value) {
+
+                ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getList(name, Tag.TAG_STRING);
+                list.add(StringTag.valueOf(value));
+
+                send(entity, type, name, list);
+
+            }
+
+            public static void addUnique (Entity entity, String type, String name, String value) {
 
                 ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getList(name, Tag.TAG_STRING);
                 Tag tag = StringTag.valueOf(value);
@@ -408,6 +466,20 @@ public class NBTManager {
             }
 
             public static void addMultiple (Entity entity, String type, String name, List<String> values) {
+
+                ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getList(name, Tag.TAG_STRING);
+
+                for (String value : values) {
+
+                    list.add(StringTag.valueOf(value));
+
+                }
+
+                send(entity, type, name, list);
+
+            }
+
+            public static void addMultipleUnique (Entity entity, String type, String name, List<String> values) {
 
                 ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getList(name, Tag.TAG_STRING);
                 Tag tag = null;

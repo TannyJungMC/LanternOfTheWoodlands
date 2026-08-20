@@ -21,7 +21,7 @@ import java.util.function.Supplier;
 public class GUIContainer extends AbstractContainerMenu {
 
     public final Level world;
-    public final Player entity;
+    public final Player player;
     public int x, y, z;
     private ContainerLevelAccess access = ContainerLevelAccess.NULL;
     private IItemHandler internal;
@@ -44,7 +44,7 @@ public class GUIContainer extends AbstractContainerMenu {
 
     public GUIContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
         super(GUIScreen.gui.get(), id);
-        this.entity = inv.player;
+        this.player = inv.player;
         this.world = inv.player.level();
         this.internal = new ItemStackHandler(0);
         BlockPos pos = null;
@@ -68,6 +68,20 @@ public class GUIContainer extends AbstractContainerMenu {
                 return this.boundEntity.isAlive();
         }
         return true;
+    }
+
+    @Override
+    public void removed (Player player) {
+
+        super.removed(player);
+
+        if (player.level().isClientSide == true && player.containerMenu instanceof GUIContainer == false) {
+
+            GUIScreen.screen = null;
+            GUIScreen.player_local = null;
+
+        }
+
     }
 
     @Override

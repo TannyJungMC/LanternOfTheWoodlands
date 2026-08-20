@@ -1,0 +1,9 @@
+{
+  "parent": "lotw:custom/book_close",
+  "textures": {
+    "all": "lotw:blocks/spell_book_holy",
+    "particle": "lotw:blocks/spell_book_holy",
+    "0": "lotw:blocks/spell_book_holy"
+  },
+  "render_type": "solid"
+}

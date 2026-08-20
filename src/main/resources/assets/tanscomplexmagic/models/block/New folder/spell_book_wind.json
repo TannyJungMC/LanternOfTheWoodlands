@@ -1,0 +1,9 @@
+{
+  "parent": "lotw:custom/book",
+  "textures": {
+    "all": "lotw:blocks/spell_book_wind",
+    "particle": "lotw:blocks/spell_book_wind",
+    "0": "lotw:blocks/spell_book_wind"
+  },
+  "render_type": "solid"
+}

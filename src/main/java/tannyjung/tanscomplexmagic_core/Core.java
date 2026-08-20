@@ -3,13 +3,13 @@ package tannyjung.tanscomplexmagic_core;
 import net.minecraft.server.level.ServerLevel;
 import org.apache.logging.log4j.Logger;
 import tannyjung.tanscomplexmagic_core.game.*;
-import tannyjung.tanscomplexmagic_core.game.screen.GUIManager;
 import tannyjung.tanscomplexmagic_core.outside.*;
 import tannyjung.tanscomplexmagic_core.outside.config.CacheManager;
 import tannyjung.tanscomplexmagic_core.outside.config.ConfigClassic;
 import tannyjung.tanscomplexmagic_core.outside.config.CustomPackOrganizing;
 import tannyjung.tanscomplexmagic_handcode.Handcode;
 import tannyjung.tanscomplexmagic_handcode.core.GUIs;
+import tannyjung.tanscomplexmagic_handcode.core.KeyBindings;
 import tannyjung.tanscomplexmagic_handcode.core.Loops;
 
 import java.io.File;
@@ -81,12 +81,10 @@ public class Core {
     public static void start (IEventBus bus) {
 
         Handcode.start();
-        logger = LogManager.getLogger(mod_id);
-        path_config = FMLPaths.GAMEDIR.get().toString() + "/config/" + mod_id;
-
-        EventCenter.bus(bus);
-
         DataMigration.run(false);
+
+        generateDataOverall(bus);
+
         restart(null, true, true);
 
     }
@@ -108,6 +106,23 @@ public class Core {
 
         Core.have_custom_pack = have_custom_pack;
         Core.have_world_data_cleaner = have_world_data_cleaner;
+
+    }
+
+    public static void generateDataOverall (IEventBus bus) {
+
+        logger = LogManager.getLogger(mod_id);
+        path_config = FMLPaths.GAMEDIR.get().toString() + "/config/" + mod_id;
+
+        EventCenter.bus(bus);
+        GUIs.add();
+        KeyBindings.add();
+
+    }
+
+    public static void generateDataWorld (ServerLevel level_server) {
+
+        ScoreManager.create(level_server, mod_id_big);
 
     }
 
@@ -173,9 +188,7 @@ public class Core {
 
                     runnable.run();
 
-                    ScoreManager.create(level_server, mod_id_big);
                     EntityManager.Population.refresh();
-                    GUIManager.Storage.refresh();
 
                     GlobalLocking.unlock();
 

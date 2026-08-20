@@ -14,8 +14,6 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.lwjgl.glfw.GLFW;
 import tannyjung.tanscomplexmagic.TanscomplexmagicMod;
-import tannyjung.tanscomplexmagic_core.Core;
-import tannyjung.tanscomplexmagic_core.game.NBTManager;
 
 public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
 
@@ -28,24 +26,16 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
     public static String id_group = "";
     public static String id_name = "";
 
+    private final GUIContainer container = null;
+
     public GUIScreen (GUIContainer container, Inventory inventory, Component text) {
 
         super(container, inventory, text);
         this.imageWidth = 0;
         this.imageHeight = 0;
 
-        GUIScreen.screen = this;
-        GUIScreen.player_local = (LocalPlayer) container.entity;
-
-    }
-
-    @Override
-    public void onClose () {
-
-        super.onClose();
-
-        GUIScreen.screen = null;
-        GUIScreen.player_local = null;
+        screen = this;
+        player_local = (LocalPlayer) container.player;
 
     }
 
@@ -159,15 +149,15 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
 
         }
 
-        public static void remove (AbstractWidget widget) {
-
-            screen.removeWidget(widget);
-
-        }
-
         public static void removeAll () {
 
             screen.clearWidgets();
+
+        }
+
+        public static void removeSpecific (AbstractWidget widget) {
+
+            screen.removeWidget(widget);
 
         }
 

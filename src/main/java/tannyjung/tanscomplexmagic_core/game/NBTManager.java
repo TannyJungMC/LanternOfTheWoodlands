@@ -219,43 +219,105 @@ public class NBTManager {
 
     }
 
-    public static class Mob {
+    public static class PutInTag {
 
-        private static void set (Entity entity, String type, CompoundTag tag_value) {
+        private static CompoundTag putType (String type, CompoundTag tag) {
+
+            CompoundTag tag1 = new CompoundTag();
+            tag1.put(type, tag);
+            CompoundTag tag2 = new CompoundTag();
+            tag2.put(Core.mod_id, tag1);
+            return tag2;
+
+        }
+
+        public static CompoundTag fromText (String type, String name, String value) {
 
             CompoundTag tag = new CompoundTag();
+            tag.putString(name, value);
+            return putType(type, tag);
 
-            if (type.isEmpty() == false) {
+        }
 
-                CompoundTag tag_type = new CompoundTag();
-                tag_type.put(type, tag_value);
-                tag.put(Core.mod_id, tag_type);
+        public static CompoundTag fromLogic (String type, String name, boolean value) {
+
+            CompoundTag tag = new CompoundTag();
+            tag.putBoolean(name, value);
+            return putType(type, tag);
+
+        }
+
+        public static CompoundTag fromNumber (String type, String name, double value) {
+
+            CompoundTag tag = new CompoundTag();
+            tag.putDouble(name, value);
+            return putType(type, tag);
+
+        }
+
+        public static CompoundTag fromList (String type, String name, ListTag value) {
+
+            CompoundTag tag = new CompoundTag();
+            tag.put(name, value);
+            return putType(type, tag);
+
+        }
+
+    }
+
+    public static class Mob {
+
+        private static void sync (ServerPlayer player_server, CompoundTag tag) {
+
+            if (tag.sizeInBytes() / 1024 < 900) {
+
+                NetworkManager.runClientCore(player_server, "nbt", "sync", tag);
 
             } else {
 
-                tag.put(Core.mod_id, tag_value);
+                Core.logger.error("Detected too big player NBT size sending to client, over 900 MB. Skip sending and reset that server player data.");
 
-            }
-
-            entity.getPersistentData().merge(tag);
-
-            if (entity instanceof ServerPlayer player_server) {
-
-                NetworkManager.runServerCore(player_server, "nbt", "sync_one", tag);
+                CompoundTag tag_new = new CompoundTag();
+                tag_new.put(Core.mod_id, new CompoundTag());
+                merge(player_server, tag_new, true);
 
             }
 
         }
 
-        public static String getText (Entity entity, String type, String name) {
+        public static void merge (Entity entity, CompoundTag tag, boolean should_sync) {
 
-            CompoundTag tag = entity.getPersistentData().getCompound(Core.mod_id);
+            entity.getPersistentData().merge(tag);
 
-            if (type.isEmpty() == false) {
+            if (should_sync == true) {
 
-                tag = tag.getCompound(type);
+                if (entity instanceof ServerPlayer player_server) {
+
+                    sync(player_server, tag);
+
+                }
 
             }
+
+        }
+
+        public static CompoundTag getAll (Entity entity) {
+
+            return entity.getPersistentData().getCompound(Core.mod_id);
+
+        }
+
+        public static CompoundTag getAllMergeReady (Entity entity) {
+
+            CompoundTag tag = new CompoundTag();
+            tag.put(Core.mod_id, entity.getPersistentData().getCompound(Core.mod_id));
+            return tag;
+
+        }
+
+        public static String getText (Entity entity, String type, String name) {
+
+            CompoundTag tag = getAll(entity).getCompound(type);
 
             /*
             (1.20.1) (1.21.1)
@@ -267,102 +329,77 @@ public class NBTManager {
 
         }
 
+        public static void setText (Entity entity, String type, String name, String value, boolean should_sync) {
+
+            merge(entity, NBTManager.PutInTag.fromText(type, name, value), should_sync);
+
+        }
+
         public static boolean getLogic (Entity entity, String type, String name) {
 
-            CompoundTag tag = entity.getPersistentData().getCompound(Core.mod_id);
-
-            if (type.isEmpty() == false) {
-
-                tag = tag.getCompound(type);
-
-            }
+            CompoundTag tag = getAll(entity).getCompound(type);
 
             /*
             (1.20.1) (1.21.1)
-            tag.getBoolean(name);
+            return tag.getBoolean(name);
             (1.21.8)
-            tag.getBoolean(name).get();
+            return tag.getBoolean(name).get();
             */
             return tag.getBoolean(name);
 
         }
 
+        public static void setLogic (Entity entity, String type, String name, boolean value, boolean should_sync) {
+
+            merge(entity, NBTManager.PutInTag.fromLogic(type, name, value), should_sync);
+
+        }
+
         public static double getNumber (Entity entity, String type, String name) {
 
-            CompoundTag tag = entity.getPersistentData().getCompound(Core.mod_id);
-
-            if (type.isEmpty() == false) {
-
-                tag = tag.getCompound(type);
-
-            }
+            CompoundTag tag = getAll(entity).getCompound(type);
 
             /*
             (1.20.1) (1.21.1)
-            tag.getDouble(name);
+            return tag.getDouble(name);
             (1.21.8)
-            tag.getDouble(name).get();
+            return tag.getDouble(name).get();
             */
             return tag.getDouble(name);
 
         }
 
-        public static void setText (Entity entity, String type, String name, String value) {
+        public static void setNumber (Entity entity, String type, String name, double value, boolean should_sync) {
 
-            CompoundTag tag = new CompoundTag();
-            tag.putString(name, value);
-            set(entity, type, tag);
+            merge(entity, NBTManager.PutInTag.fromNumber(type, name, value), should_sync);
 
         }
 
-        public static void setLogic (Entity entity, String type, String name, boolean value) {
-
-            CompoundTag tag = new CompoundTag();
-            tag.putBoolean(name, value);
-            set(entity, type, tag);
-
-        }
-
-        public static void setNumber (Entity entity, String type, String name, double value) {
-
-            CompoundTag tag = new CompoundTag();
-            tag.putDouble(name, value);
-            set(entity, type, tag);
-
-        }
-
-        public static void addNumber (Entity entity, String type, String name, double value) {
+        public static void addNumber (Entity entity, String type, String name, double value, boolean should_sync) {
 
             value = getNumber(entity, type, name) + value;
-            setNumber(entity, type, name, value);
+            setNumber(entity, type, name, value, should_sync);
 
         }
 
-        public static class ListText {
+        public static ListTag getList (Entity entity, String type, String name) {
 
-            private static void send (Entity entity, String type, String name, ListTag list) {
+            /*
+            (1.20.1) (1.21.1)
+            return getAll(entity).getCompound(type).getList(name, Tag.TAG_STRING);
+            (1.21.8)
+            return getAll(entity).getCompound(type).getList(name).get();
+            */
+            return getAll(entity).getCompound(type).getList(name, Tag.TAG_STRING);
 
-                CompoundTag tag = new CompoundTag();
-                tag.put(name, list);
-                Mob.set(entity, type, tag);
+        }
 
-            }
+        public static List<String> getListAsList (Entity entity, String type, String name) {
 
-            public static List<String> get (Entity entity, String type, String name) {
+            ListTag list = getList(entity, type, name);
+            java.util.List<String> convert = new ArrayList<>();
 
-                CompoundTag tag = entity.getPersistentData().getCompound(Core.mod_id).getCompound(type);
-
-                /*
-                (1.20.1) (1.21.1)
-                ListTag list = tag.getList(name, Tag.TAG_STRING);
-                (1.21.8)
-                ListTag list = tag.getList(name).get();
-                */
-                ListTag list = tag.getList(name, Tag.TAG_STRING);
-
-                List<String> convert = new ArrayList<>();
-
-                for (int number = 0; number < list.size(); number++) {
+            for (int number = 0; number < list.size(); number++) {
 
                     /*
                     (1.20.1) (1.21.1)
@@ -370,172 +407,62 @@ public class NBTManager {
                     (1.21.8)
                     convert.add(list.getString(number)).get();
                     */
-                    convert.add(list.getString(number));
-
-                }
-
-                return convert;
+                convert.add(list.getString(number));
 
             }
 
-            public static int getNumber (Entity entity, String type, String name, String value) {
+            return convert;
 
-                int number = 0;
+        }
 
-                for (String scan : get(entity, type, name)) {
+        public static void setList (Entity entity, String type, String name, ListTag value, boolean should_sync) {
 
-                    if (scan.equals(value) == true) {
+            merge(entity, NBTManager.PutInTag.fromList(type, name, value), should_sync);
 
-                        return number;
+        }
 
-                    }
+        public static void setListAlternate (Entity entity, String type, String name, List<String> value, boolean should_sync) {
 
-                    number = number + 1;
+            ListTag list = new ListTag();
 
-                }
+            for (String scan : value) {
 
-                return -1;
-
-            }
-
-            public static String getByNumber (Entity entity, String type, String name, int number) {
-
-                ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getList(name, Tag.TAG_STRING);
-
-                if (number < 0 || number >= list.size()) {
-
-                    return "";
-
-                }
-
-                return list.getString(number);
+                list.add(StringTag.valueOf(scan));
 
             }
 
-            public static void set (Entity entity, String type, String name, List<String> values) {
+            setList(entity, type, name, list, should_sync);
 
-                ListTag list = new ListTag();
+        }
 
-                for (String value : values) {
+        public static void addList (Entity entity, String type, String name, ListTag value, boolean should_sync) {
 
-                    list.add(StringTag.valueOf(value));
+            ListTag list = getList(entity, type, name);
+            list.add(value);
 
-                }
+            merge(entity, NBTManager.PutInTag.fromList(type, name, list), should_sync);
 
-                send(entity, type, name, list);
+        }
 
-            }
+        public static void addListAlternate (Entity entity, String type, String name, String value, boolean should_sync) {
 
-            public static void setByNumber (Entity entity, String type, String name, int number, String value) {
+            ListTag list = new ListTag();
+            list.add(StringTag.valueOf(value));
+            addList(entity, type, name, list, should_sync);
 
-                ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getList(name, Tag.TAG_STRING);
+        }
 
-                if (number < 0 || number >= list.size()) {
+        public static void addListMultiple (Entity entity, String type, String name, List<String> value, boolean should_sync) {
 
-                    return;
+            ListTag list = getList(entity, type, name);
 
-                }
+            for (String scan : value) {
 
-                list.set(number, StringTag.valueOf(value));
-                send(entity, type, name, list);
-
-            }
-
-            public static void add (Entity entity, String type, String name, String value) {
-
-                ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getList(name, Tag.TAG_STRING);
-                list.add(StringTag.valueOf(value));
-
-                send(entity, type, name, list);
+                list.add(StringTag.valueOf(scan));
 
             }
 
-            public static void addUnique (Entity entity, String type, String name, String value) {
-
-                ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getList(name, Tag.TAG_STRING);
-                Tag tag = StringTag.valueOf(value);
-
-                if (list.contains(tag) == false) {
-
-                    list.add(tag);
-
-                }
-
-                send(entity, type, name, list);
-
-            }
-
-            public static void addMultiple (Entity entity, String type, String name, List<String> values) {
-
-                ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getList(name, Tag.TAG_STRING);
-
-                for (String value : values) {
-
-                    list.add(StringTag.valueOf(value));
-
-                }
-
-                send(entity, type, name, list);
-
-            }
-
-            public static void addMultipleUnique (Entity entity, String type, String name, List<String> values) {
-
-                ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getList(name, Tag.TAG_STRING);
-                Tag tag = null;
-
-                for (String value : values) {
-
-                    tag = StringTag.valueOf(value);
-
-                    if (list.contains(tag) == false) {
-
-                        list.add(tag);
-
-                    }
-
-                }
-
-                send(entity, type, name, list);
-
-            }
-
-            public static void remove (Entity entity, String type, String name, String value) {
-
-                ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getList(name, Tag.TAG_STRING);
-                list.remove(StringTag.valueOf(value));
-                send(entity, type, name, list);
-
-            }
-
-            public static void removeMultiple (Entity entity, String type, String name, List<String> values) {
-
-                ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getList(name, Tag.TAG_STRING);
-
-                for (String value : values) {
-
-                    list.remove(StringTag.valueOf(value));
-
-                }
-
-                send(entity, type, name, list);
-
-            }
-
-            public static void removeByNumber (Entity entity, String type, String name, int number) {
-
-                ListTag list = entity.getPersistentData().getCompound(Core.mod_id).getCompound(type).getList(name, Tag.TAG_STRING);
-
-                if (number < 0 || number >= list.size()) {
-
-                    return;
-
-                }
-
-                list.remove(number);
-                send(entity, type, name, list);
-
-            }
+            merge(entity, NBTManager.PutInTag.fromList(type, name, list), should_sync);
 
         }
 

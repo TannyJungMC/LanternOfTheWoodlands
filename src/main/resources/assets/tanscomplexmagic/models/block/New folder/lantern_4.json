@@ -1,0 +1,9 @@
+{
+  "parent": "lotw:custom/lantern",
+  "textures": {
+    "all": "lotw:blocks/lantern_4",
+    "particle": "lotw:blocks/lantern_4",
+    "0": "lotw:blocks/lantern_4"
+  },
+  "render_type": "translucent"
+}

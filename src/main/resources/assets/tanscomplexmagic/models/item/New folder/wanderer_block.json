@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "lotw:items/wanderer"
+  },
+  "render_type": "translucent"
+}

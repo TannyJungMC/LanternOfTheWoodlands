@@ -12,12 +12,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import tannyjung.tanscomplexmagic_core.Core;
-import tannyjung.tanscomplexmagic_core.game.EffectManager;
 import tannyjung.tanscomplexmagic_core.game.EntityManager;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
 import tannyjung.tanscomplexmagic_core.outside.NetworkManager;
 import tannyjung.tanscomplexmagic_core.outside.OutsideUtils;
-import tannyjung.tanscomplexmagic_handcode.systems.Utils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -31,7 +29,7 @@ public class ScreenDrawing {
     public static void refresh () {
 
         ScreenDrawing.ComponentBasic.PreCalculate.clear();
-        
+
         if (GUIScreen.screen != null) {
 
             String group = NBTManager.Mob.getText(GUIScreen.player_local, "gui", "group");
@@ -63,7 +61,7 @@ public class ScreenDrawing {
         private static boolean getLogic (String type, String name) {
 
             if (GUIScreen.item.isEmpty() == true) {
-
+                
                 return NBTManager.Mob.getLogic(GUIScreen.player_local, type, name);
 
             } else {
@@ -685,7 +683,7 @@ public class ScreenDrawing {
 
             public static void drawTextRunnableLockable (int length, boolean is_active, boolean is_lock, String text_lock, String text_unlock, Runnable runnable) {
 
-                drawBasicRunnableLockable(length, 11, true, false, runnable);
+                drawBasicRunnableLockable(length, 11, is_active, is_lock, runnable);
 
                 // Ingredient
                 {
@@ -989,7 +987,7 @@ public class ScreenDrawing {
                 if (slider != null) {
 
                     map.remove(key);
-                    GUIScreen.Widget.remove(slider);
+                    GUIScreen.Widget.removeSpecific(slider);
 
                 }
 
@@ -1257,14 +1255,14 @@ public class ScreenDrawing {
 
         }
 
-        public static class BoardText {
+        public static class Board {
 
             private static void draw (int sizeX, int sizeZ, String nbt_type, String nbt_name) {
 
                 int posX = Position.posX;
                 int posZ = Position.posZ;
 
-                List<String> list = NBTManager.Mob.ListText.get(GUIScreen.player_local, nbt_type, nbt_name);
+                List<String> list = NBTManager.Mob.getListAsList(GUIScreen.player_local, nbt_type, nbt_name);
                 int line_limit = (int) (Math.round(sizeZ / 8.0) - 2);
                 int count = 0;
 
@@ -1367,248 +1365,248 @@ public class ScreenDrawing {
 
             }
 
-        }
+            public static class ListEntity {
 
-        public static class BoardEntity {
+                public static void draw (String title, String tag, String description) {
 
-            public static void draw (String title, String tag, String description) {
+                    int posX = Position.posX;
+                    int posZ = Position.posZ;
+                    Position.addX(192);
+                    Board.draw(160, 150, "gui", "board_entity_" + tag + "_show");
 
-                int posX = Position.posX;
-                int posZ = Position.posZ;
-                Position.addX(192);
-                BoardText.draw(160, 150, "gui", "board_entity_" + tag + "_show");
+                    // Ingredient
+                    {
 
-                // Ingredient
-                {
+                        CompoundTag extra = new CompoundTag();
+                        extra.putString("nbt_tag", tag);
 
-                    CompoundTag extra = new CompoundTag();
-                    extra.putString("nbt_tag", tag);
+                        int temporary_number = 0;
 
-                    int temporary_number = 0;
+                        Position.addZ(6);
+                        temporary_number = Position.posZ;
+                        ButtonTiny.drawTextRunnable(40, "Refresh", () -> NetworkManager.runServerCore(GUIScreen.player_local, "gui", "board_entity_refresh", extra));
+                        Position.addX(120);
+                        Position.setZ(temporary_number);
+                        ButtonTiny.drawTextRunnable(40, "Clear", () -> NetworkManager.runServerCore(GUIScreen.player_local, "gui", "board_entity_clear", extra));
 
-                    Position.addZ(6);
-                    temporary_number = Position.posZ;
-                    ButtonTiny.drawTextRunnable(40, "Refresh", () -> NetworkManager.runServerCore(GUIScreen.player_local, "gui", "board_entity_refresh", extra));
-                    Position.addX(120);
-                    Position.setZ(temporary_number);
-                    ButtonTiny.drawTextRunnable(40, "Clear", () -> NetworkManager.runServerCore(GUIScreen.player_local, "gui", "board_entity_clear", extra));
+                        Position.set(posX, posZ);
 
-                    Position.set(posX, posZ);
+                        ComponentBasic.drawTextBasic(1.25, title);
+                        Position.addZ(8);
+                        ComponentBasic.drawTextParagraph(160, description);
 
-                    ComponentBasic.drawTextBasic(1.25, title);
-                    Position.addZ(8);
-                    ComponentBasic.drawTextParagraph(160, description);
+                        Position.setZ(posZ + 80);
+                        TextBox.drawText(160, "gui", "board_entity_" + tag + "_id", "Entity ID and Name");
+                        Position.addZ(2);
+                        TextBox.drawBasic(160, "gui", "board_entity_" + tag + "_name");
+                        Position.addZ(8);
+                        Slider.drawText(160, 5, 200, 10, "gui", "board_entity_" + tag + "_radius", "Area Radius");
 
-                    Position.setZ(posZ + 80);
-                    TextBox.drawText(160, "gui", "board_entity_" + tag + "_id", "Entity ID and Name");
-                    Position.addZ(2);
-                    TextBox.drawBasic(160, "gui", "board_entity_" + tag + "_name");
-                    Position.addZ(8);
-                    Slider.drawText(160, 5, 200, 10, "gui", "board_entity_" + tag + "_radius", "Area Radius");
+                        Position.addZ(8);
+                        posZ = Position.posZ;
+                        Radio.drawBasic("Removal Mode", "gui", "board_entity_" + tag + "_remove_mode", new String[]{"Area", "Overall", "Selection"});
+                        Position.setZ(posZ);
+                        Position.add(80, 22);
+                        posZ = Position.posZ;
+                        ButtonTiny.drawTextRunnable(39, "Remove", () -> NetworkManager.runServerCore(GUIScreen.player_local, "gui", "board_entity_remove", extra));
+                        Position.setZ(posZ);
+                        Position.addX(41);
+                        ButtonTiny.drawTextRunnable(39, "Add", () -> NetworkManager.runServerCore(GUIScreen.player_local, "gui", "board_entity_add", extra));
 
-                    Position.addZ(8);
-                    posZ = Position.posZ;
-                    Radio.drawBasic("Removal Mode", "gui", "board_entity_" + tag + "_remove_mode", new String[]{"Area", "Overall", "Selection"});
-                    Position.setZ(posZ);
-                    Position.add(80, 22);
-                    posZ = Position.posZ;
-                    ButtonTiny.drawTextRunnable(39, "Remove", () -> NetworkManager.runServerCore(GUIScreen.player_local, "gui", "board_entity_remove", extra));
-                    Position.setZ(posZ);
-                    Position.addX(41);
-                    ButtonTiny.drawTextRunnable(39, "Add", () -> NetworkManager.runServerCore(GUIScreen.player_local, "gui", "board_entity_add", extra));
-
-                }
-
-            }
-
-            public static void runRefresh (ServerLevel level_server, ServerPlayer player_server, String tag) {
-
-                for (Entity scan : EntityManager.Population.getEverywhereUpdatable(level_server, "", "", new String[]{tag})) {
-
-                    scan.removeTag(tag);
+                    }
 
                 }
 
-                List<String> list_id = NBTManager.Mob.ListText.get(player_server, "gui", "board_entity_" + tag + "_list_id");
-                List<String> list_name = NBTManager.Mob.ListText.get(player_server, "gui", "board_entity_" + tag + "_list_name");
-                List<String> list = new ArrayList<>();
-                Entity entity = null;
-                String entity_name = "";
-                String entity_name_color = "";
-                String entity_status = "";
-                int number = 0;
+                public static void runRefresh (ServerLevel level_server, ServerPlayer player_server, String tag) {
 
-                for (String scan : NBTManager.Mob.ListText.get(player_server, "gui", "board_entity_" + tag + "_list_uuid")) {
+                    for (Entity scan : EntityManager.Population.getEverywhereUpdatable(level_server, "", "", new String[]{tag})) {
 
-                    entity = EntityManager.getByUUID(level_server, scan);
-                    entity_name = list_name.get(number);
+                        scan.removeTag(tag);
 
-                    if (list_id.get(number).equals("minecraft:player") == true) {
+                    }
 
-                        if (entity == null) {
+                    List<String> list_id = NBTManager.Mob.getListAsList(player_server, "gui", "board_entity_" + tag + "_list_id");
+                    List<String> list_name = NBTManager.Mob.getListAsList(player_server, "gui", "board_entity_" + tag + "_list_name");
+                    List<String> list = new ArrayList<>();
+                    Entity entity = null;
+                    String entity_name = "";
+                    String entity_name_color = "";
+                    String entity_status = "";
+                    int number = 0;
 
-                            entity_name_color = "§6";
-                            entity_status = " (Offline)";
+                    for (String scan : NBTManager.Mob.getListAsList(player_server, "gui", "board_entity_" + tag + "_list_uuid")) {
 
-                        } else {
+                        entity = EntityManager.getByUUID(level_server, scan);
+                        entity_name = list_name.get(number);
 
-                            entity_name_color = "§a";
-                            entity_status = " (Online)";
-                            entity.addTag(tag);
+                        if (list_id.get(number).equals("minecraft:player") == true) {
 
-                        }
+                            if (entity == null) {
 
-                    } else {
-
-                        if (entity == null) {
-
-                            entity_name_color = "§c";
-                            entity_status = " (Not Detected)";
-
-                        } else {
-
-                            if (entity.hasCustomName() == true) {
-
-                                entity_name_color = "§d";
-                                entity_status = "";
+                                entity_name_color = "§6";
+                                entity_status = " (Offline)";
 
                             } else {
 
-                                entity_name_color = "§f";
-                                entity_status = " §8(" + (number + 1) + ")";
+                                entity_name_color = "§a";
+                                entity_status = " (Online)";
+                                entity.addTag(tag);
 
                             }
 
-                            entity.addTag(tag);
+                        } else {
+
+                            if (entity == null) {
+
+                                entity_name_color = "§c";
+                                entity_status = " (Not Detected)";
+
+                            } else {
+
+                                if (entity.hasCustomName() == true) {
+
+                                    entity_name_color = "§d";
+                                    entity_status = "";
+
+                                } else {
+
+                                    entity_name_color = "§f";
+                                    entity_status = " §8(" + (number + 1) + ")";
+
+                                }
+
+                                entity.addTag(tag);
+
+                            }
 
                         }
 
-                    }
-
-                    list.add(entity_name_color + entity_name + entity_status);
-                    number = number + 1;
-
-                }
-
-                NBTManager.Mob.ListText.set(player_server, "gui", "board_entity_" + tag + "_show", list);
-
-            }
-            
-            public static void runAdd (ServerLevel level_server, ServerPlayer player_server, String tag) {
-                
-                String target_id = NBTManager.Mob.getText(player_server, "gui", "board_entity_" + tag + "_id");
-                String target_name = NBTManager.Mob.getText(player_server, "gui", "board_entity_" + tag + "_name");
-                int radius = (int) NBTManager.Mob.getNumber(player_server, "gui", "board_entity_" + tag + "_radius");
-
-                List<String> list_uuid_original = NBTManager.Mob.ListText.get(player_server, "gui", "board_entity_" + tag + "_list_uuid");
-                List<String> list_uuid = new ArrayList<>();
-                List<String> list_id = new ArrayList<>();
-                List<String> list_name = new ArrayList<>();
-                String uuid = "";
-
-                for (Entity entity : EntityManager.Population.sort(EntityManager.Population.getArea(player_server.serverLevel(), player_server.position(), radius, false, target_id, target_name, new String[]{"!" + Core.mod_id_big}), player_server.position(), false, 0)) {
-
-                    uuid = entity.getStringUUID();
-
-                    if (list_uuid_original.contains(uuid) == true) {
-
-                        continue;
+                        list.add(entity_name_color + entity_name + entity_status);
+                        number = number + 1;
 
                     }
 
-                    list_uuid.add(uuid);
-                    list_id.add(EntityManager.getID(entity));
-                    list_name.add(entity.getDisplayName().getString());
-                    EffectManager.giveBasic(level_server, entity, "glowing", 1, 200);
+                    NBTManager.Mob.setListAlternate(player_server, "gui", "board_entity_" + tag + "_show", list, true);
 
                 }
 
-                NBTManager.Mob.ListText.addMultiple(player_server, "gui", "board_entity_" + tag + "_list_uuid", list_uuid);
-                NBTManager.Mob.ListText.addMultiple(player_server, "gui", "board_entity_" + tag + "_list_id", list_id);
-                NBTManager.Mob.ListText.addMultiple(player_server, "gui", "board_entity_" + tag + "_list_name", list_name);
-                
-            }
+                public static void runAdd (ServerPlayer player_server, String tag) {
 
-            public static void runClear (ServerPlayer player_server, String tag) {
+                    String target_id = NBTManager.Mob.getText(player_server, "gui", "board_entity_" + tag + "_id");
+                    String target_name = NBTManager.Mob.getText(player_server, "gui", "board_entity_" + tag + "_name");
+                    int radius = (int) NBTManager.Mob.getNumber(player_server, "gui", "board_entity_" + tag + "_radius");
 
-                NBTManager.Mob.ListText.set(player_server, "gui", "board_entity_" + tag + "_list_uuid", new ArrayList<>());
-                NBTManager.Mob.ListText.set(player_server, "gui", "board_entity_" + tag + "_list_id", new ArrayList<>());
-                NBTManager.Mob.ListText.set(player_server, "gui", "board_entity_" + tag + "_list_name", new ArrayList<>());
-                NBTManager.Mob.ListText.set(player_server, "gui", "board_entity_" + tag + "_list_name_custom", new ArrayList<>());
-                
-            }
+                    List<String> list_uuid_original = NBTManager.Mob.getListAsList(player_server, "gui", "board_entity_" + tag + "_list_uuid");
+                    List<String> list_uuid = new ArrayList<>();
+                    List<String> list_id = new ArrayList<>();
+                    List<String> list_name = new ArrayList<>();
+                    String uuid = "";
 
-            public static void runRemove (ServerLevel level_server, ServerPlayer player_server, String tag) {
+                    for (Entity entity : EntityManager.Population.sort(EntityManager.Population.getArea(player_server.serverLevel(), player_server.position(), radius, false, target_id, target_name, new String[]{"!" + Core.mod_id_big}), player_server.position(), false, 0)) {
 
-                String mode = NBTManager.Mob.getText(player_server, "gui", "board_entity_" + tag + "_remove_mode");
+                        uuid = entity.getStringUUID();
 
-                if (mode.equals("Area") == true) {
+                        if (list_uuid_original.contains(uuid) == true) {
 
-                    runRemoveModeScan(level_server, player_server, tag, false);
+                            continue;
 
-                } else if (mode.equals("Overall") == true) {
+                        }
 
-                    runRemoveModeScan(level_server, player_server, tag, true);
+                        list_uuid.add(uuid);
+                        list_id.add(EntityManager.getID(entity));
+                        list_name.add(entity.getDisplayName().getString());
 
-                } else if (mode.equals("Selection") == true) {
+                    }
 
-                    runRemoveModeSelected(player_server, tag);
+                    NBTManager.Mob.addListMultiple(player_server, "gui", "board_entity_" + tag + "_list_uuid", list_uuid, true);
+                    NBTManager.Mob.addListMultiple(player_server, "gui", "board_entity_" + tag + "_list_id", list_id, true);
+                    NBTManager.Mob.addListMultiple(player_server, "gui", "board_entity_" + tag + "_list_name", list_name, true);
 
                 }
 
-            }
+                public static void runClear (ServerPlayer player_server, String tag) {
 
-            private static void runRemoveModeScan (ServerLevel level_server, ServerPlayer player_server, String tag, boolean is_mode_overall) {
+                    NBTManager.Mob.setListAlternate(player_server, "gui", "board_entity_" + tag + "_list_uuid", new ArrayList<>(), true);
+                    NBTManager.Mob.setListAlternate(player_server, "gui", "board_entity_" + tag + "_list_id", new ArrayList<>(), true);
+                    NBTManager.Mob.setListAlternate(player_server, "gui", "board_entity_" + tag + "_list_name", new ArrayList<>(), true);
+                    NBTManager.Mob.setListAlternate(player_server, "gui", "board_entity_" + tag + "_list_name_custom", new ArrayList<>(), true);
 
-                String target_id = NBTManager.Mob.getText(player_server, "gui", "board_entity_" + tag + "_id");
-                String target_name = NBTManager.Mob.getText(player_server, "gui", "board_entity_" + tag + "_name");
-                int radius = (int) NBTManager.Mob.getNumber(player_server, "gui", "board_entity_" + tag + "_radius");
+                }
 
-                List<String> list_uuid = new ArrayList<>();
-                List<String> list_id = new ArrayList<>();
-                List<String> list_name = new ArrayList<>();
+                public static void runRemove (ServerLevel level_server, ServerPlayer player_server, String tag) {
 
-                int number = -1;
-                String scan_id = "";
-                String scan_name = "";
-                Entity entity = null;
+                    String mode = NBTManager.Mob.getText(player_server, "gui", "board_entity_" + tag + "_remove_mode");
 
-                for (String scan : NBTManager.Mob.ListText.get(player_server, "gui", "board_entity_" + tag + "_list_uuid")) {
+                    if (mode.equals("Area") == true) {
 
-                    number = number + 1;
-                    scan_id = NBTManager.Mob.ListText.getByNumber(player_server, "gui", "board_entity_" + tag + "_list_id", number);
-                    scan_name = NBTManager.Mob.ListText.getByNumber(player_server, "gui", "board_entity_" + tag + "_list_name", number);
+                        runRemoveModeScan(level_server, player_server, tag, false);
 
-                    if (is_mode_overall == true) {
+                    } else if (mode.equals("Overall") == true) {
 
-                        {
+                        runRemoveModeScan(level_server, player_server, tag, true);
 
-                            if (target_id.isEmpty() == true || scan_id.equals(target_id) == true) {
+                    } else if (mode.equals("Selection") == true) {
 
-                                if (target_name.isEmpty() == true || scan_name.equals(target_name) == true) {
+                        runRemoveModeSelected(player_server, tag);
 
-                                    continue;
+                    }
+
+                }
+
+                private static void runRemoveModeScan (ServerLevel level_server, ServerPlayer player_server, String tag, boolean is_mode_overall) {
+
+                    String target_id = NBTManager.Mob.getText(player_server, "gui", "board_entity_" + tag + "_id");
+                    String target_name = NBTManager.Mob.getText(player_server, "gui", "board_entity_" + tag + "_name");
+                    int radius = (int) NBTManager.Mob.getNumber(player_server, "gui", "board_entity_" + tag + "_radius");
+
+                    List<String> list_original_id = NBTManager.Mob.getListAsList(player_server, "gui", "board_entity_" + tag + "_list_id");
+                    List<String> list_original_name = NBTManager.Mob.getListAsList(player_server, "gui", "board_entity_" + tag + "_list_name");
+                    List<String> list_uuid = new ArrayList<>();
+                    List<String> list_id = new ArrayList<>();
+                    List<String> list_name = new ArrayList<>();
+
+                    int number = -1;
+                    String scan_id = "";
+                    String scan_name = "";
+                    Entity entity = null;
+
+                    for (String scan : NBTManager.Mob.getListAsList(player_server, "gui", "board_entity_" + tag + "_list_uuid")) {
+
+                        number = number + 1;
+                        scan_id = list_original_id.get(number);
+                        scan_name = list_original_name.get(number);
+
+                        if (is_mode_overall == true) {
+
+                            {
+
+                                if (target_id.isEmpty() == true || scan_id.equals(target_id) == true) {
+
+                                    if (target_name.isEmpty() == true || scan_name.equals(target_name) == true) {
+
+                                        continue;
+
+                                    }
 
                                 }
 
                             }
 
-                        }
+                        } else {
 
-                    } else {
+                            {
 
-                        {
+                                entity = EntityManager.getByUUID(level_server, scan);
 
-                            entity = EntityManager.getByUUID(level_server, scan);
+                                if (entity != null) {
 
-                            if (entity != null) {
+                                    if (player_server.position().distanceTo(entity.position()) <= radius) {
 
-                                if (player_server.position().distanceTo(entity.position()) <= radius) {
+                                        if (EntityManager.getID(entity).equals(target_id) == true || entity.getDisplayName().getString().equals(target_name) == true) {
 
-                                    if (EntityManager.getID(entity).equals(target_id) == true || entity.getDisplayName().getString().equals(target_name) == true) {
+                                            continue;
 
-                                        EffectManager.giveBasic(level_server, entity, "glowing", 1, 200);
-                                        continue;
+                                        }
 
                                     }
 
@@ -1618,38 +1616,46 @@ public class ScreenDrawing {
 
                         }
 
+                        list_uuid.add(scan);
+                        list_id.add(scan_id);
+                        list_name.add(scan_name);
+
                     }
 
-                    list_uuid.add(scan);
-                    list_id.add(scan_id);
-                    list_name.add(scan_name);
+                    NBTManager.Mob.addListMultiple(player_server, "gui", "board_entity_" + tag + "_list_uuid", list_uuid, true);
+                    NBTManager.Mob.addListMultiple(player_server, "gui", "board_entity_" + tag + "_list_id", list_id, true);
+                    NBTManager.Mob.addListMultiple(player_server, "gui", "board_entity_" + tag + "_list_name", list_name, true);
 
                 }
 
-                NBTManager.Mob.ListText.set(player_server, "gui", "board_entity_" + tag + "_list_uuid", list_uuid);
-                NBTManager.Mob.ListText.set(player_server, "gui", "board_entity_" + tag + "_list_id", list_id);
-                NBTManager.Mob.ListText.set(player_server, "gui", "board_entity_" + tag + "_list_name", list_name);
+                private static void runRemoveModeSelected (ServerPlayer player_server, String tag) {
 
-            }
+                    int page = (int) NBTManager.Mob.getNumber(player_server, "gui", "board_entity_" + tag + "_show_page");
+                    int select = (int) NBTManager.Mob.getNumber(player_server, "gui", "board_entity_" + tag + "_show_select");
 
-            private static void runRemoveModeSelected (ServerPlayer player_server, String tag) {
+                    if (select == 0) {
 
-                int page = (int) NBTManager.Mob.getNumber(player_server, "gui", "board_entity_" + tag + "_show_page");
-                int select = (int) NBTManager.Mob.getNumber(player_server, "gui", "board_entity_" + tag + "_show_select");
+                        return;
 
-                if (select == 0) {
+                    }
 
-                    return;
+                    int number = (page * 17) + select;
+                    number = number - 1;
+
+                    List<String> list_uuid = NBTManager.Mob.getListAsList(player_server, "gui", "board_entity_" + tag + "_list_uuid");
+                    List<String> list_id = NBTManager.Mob.getListAsList(player_server, "gui", "board_entity_" + tag + "_list_id");
+                    List<String> list_name = NBTManager.Mob.getListAsList(player_server, "gui", "board_entity_" + tag + "_list_name");
+                    list_uuid.remove(number);
+                    list_id.remove(number);
+                    list_name.remove(number);
+                    NBTManager.Mob.addListMultiple(player_server, "gui", "board_entity_" + tag + "_list_uuid", list_uuid, true);
+                    NBTManager.Mob.addListMultiple(player_server, "gui", "board_entity_" + tag + "_list_id", list_id, true);
+                    NBTManager.Mob.addListMultiple(player_server, "gui", "board_entity_" + tag + "_list_name", list_name, true);
 
                 }
 
-                int number = (page * 17) + select;
-                NBTManager.Mob.ListText.removeByNumber(player_server, "gui", "board_entity_" + tag + "_list_uuid", number - 1);
-                NBTManager.Mob.ListText.removeByNumber(player_server, "gui", "board_entity_" + tag + "_list_id", number - 1);
-                NBTManager.Mob.ListText.removeByNumber(player_server, "gui", "board_entity_" + tag + "_list_name", number - 1);
-
             }
-
+            
         }
 
     }

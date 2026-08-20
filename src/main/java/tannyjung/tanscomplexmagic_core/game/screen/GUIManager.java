@@ -10,7 +10,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import tannyjung.tanscomplexmagic_core.Core;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
-import tannyjung.tanscomplexmagic_handcode.core.GUIs;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -25,7 +24,7 @@ public class GUIManager {
             @Override
             public Component getDisplayName () {
 
-                return Component.literal(Core.mod_name + " - GUI");
+                return Component.literal(Core.mod_name);
 
             }
 
@@ -45,8 +44,8 @@ public class GUIManager {
 
         };
 
-        NBTManager.Mob.setText(player_server, "gui", "group", group);
-        NBTManager.Mob.setText(player_server, "gui", "name", name);
+        NBTManager.Mob.setText(player_server, "gui", "group", group, true);
+        NBTManager.Mob.setText(player_server, "gui", "name", name, true);
         player_server.openMenu(provider, player_server.blockPosition());
 
     }
@@ -61,14 +60,6 @@ public class GUIManager {
 
         private static final Map<String, LinkedHashMap<String, Integer>> map_number = new HashMap<>();
         private static final Map<String, LinkedHashMap<String, Runnable>> map_data = new HashMap<>();
-
-        public static void refresh () {
-
-            map_number.clear();
-            map_data.clear();
-            GUIs.add();
-
-        }
 
         public static void draw (String group, String name) {
 

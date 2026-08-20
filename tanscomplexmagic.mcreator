@@ -33,7 +33,7 @@
           }
         ]
       },
-      "path": "~/.Other"
+      "path": "~/.../.Other"
     },
     {
       "name": "GUIreturnMana",
@@ -72,7 +72,7 @@
           }
         ]
       },
-      "path": "~/Spell4/..."
+      "path": "~/.../Spell4/..."
     },
     {
       "name": "Spell4distance",
@@ -91,7 +91,7 @@
           }
         ]
       },
-      "path": "~/Spell4/..."
+      "path": "~/.../Spell4/..."
     },
     {
       "name": "Spell4effect",
@@ -126,7 +126,7 @@
           }
         ]
       },
-      "path": "~/Spell4/..."
+      "path": "~/.../Spell4/..."
     },
     {
       "name": "Spell4keyDistanceAddRun",
@@ -145,7 +145,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Key Binding"
+      "path": "~/.../Spell4/.../Key Binding"
     },
     {
       "name": "Spell4keyDistanceRelease",
@@ -164,7 +164,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Key Binding"
+      "path": "~/.../Spell4/.../Key Binding"
     },
     {
       "name": "Spell4keyDistanceReduceRun",
@@ -183,18 +183,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Key Binding"
-    },
-    {
-      "name": "LotwTab",
-      "type": "tab",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "lotw_tab",
-      "metadata": {
-        "files": []
-      },
-      "path": "~/.Other"
+      "path": "~/.../Spell4/.../Key Binding"
     },
     {
       "name": "TargetArrow",
@@ -211,7 +200,7 @@
           "src/main/java/tannyjung/tanscomplexmagic/block/TargetArrowBlock.java"
         ]
       },
-      "path": "~/Spell4/Items"
+      "path": "~/.../Spell4/Items"
     },
     {
       "name": "Spell4keyTypeRun",
@@ -246,7 +235,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Key Binding"
+      "path": "~/.../Spell4/.../Key Binding"
     },
     {
       "name": "Spell4keyLockTargetRun",
@@ -281,7 +270,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Key Binding"
+      "path": "~/.../Spell4/.../Key Binding"
     },
     {
       "name": "LotwCommand",
@@ -294,7 +283,7 @@
           "src/main/java/tannyjung/tanscomplexmagic/command/LotwCommandCommand.java"
         ]
       },
-      "path": "~/.Other"
+      "path": "~/.../.Other"
     },
     {
       "name": "Spell4commandShootNearest",
@@ -313,7 +302,7 @@
           }
         ]
       },
-      "path": "~/Spell4/..."
+      "path": "~/.../Spell4/..."
     },
     {
       "name": "Spell4keyConstantRun",
@@ -332,7 +321,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Key Binding"
+      "path": "~/.../Spell4/.../Key Binding"
     },
     {
       "name": "Spell4keyHomingRun",
@@ -351,7 +340,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Key Binding"
+      "path": "~/.../Spell4/.../Key Binding"
     },
     {
       "name": "Spell4keyModeRun",
@@ -370,7 +359,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Key Binding"
+      "path": "~/.../Spell4/.../Key Binding"
     },
     {
       "name": "MenuGUIOpen",
@@ -852,7 +841,7 @@
         ],
         "dependencies": []
       },
-      "path": "~/GUI"
+      "path": "~/.../GUI"
     },
     {
       "name": "GUIClose",
@@ -871,7 +860,7 @@
           }
         ]
       },
-      "path": "~/GUI/Components"
+      "path": "~/.../GUI/Components"
     },
     {
       "name": "GUInext",
@@ -944,7 +933,7 @@
           }
         ]
       },
-      "path": "~/.Other"
+      "path": "~/.../.Other"
     },
     {
       "name": "MainKeyRelease",
@@ -963,7 +952,7 @@
           }
         ]
       },
-      "path": "~/.Other"
+      "path": "~/.../.Other"
     },
     {
       "name": "UserBook",
@@ -976,8 +965,7 @@
           "src/main/java/tannyjung/tanscomplexmagic/item/UserBookItem.java",
           "src/main/resources/assets/tanscomplexmagic/models/item/user_book.json"
         ]
-      },
-      "path": "~/Items and Blocks"
+      }
     },
     {
       "name": "UserBookOpen",
@@ -990,25 +978,7 @@
           "src/main/resources/assets/tanscomplexmagic/models/item/user_book_open.json",
           "src/main/java/tannyjung/tanscomplexmagic/item/UserBookOpenItem.java"
         ]
-      },
-      "path": "~/Items and Blocks"
-    },
-    {
-      "name": "UserBookOpenBlock",
-      "type": "block",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "user_book_open_block",
-      "metadata": {
-        "files": [
-          "src/main/resources/data/tanscomplexmagic/loot_table/blocks/user_book_open_block.json",
-          "src/main/resources/assets/tanscomplexmagic/models/block/user_book_open_block.json",
-          "src/main/java/tannyjung/tanscomplexmagic/block/UserBookOpenBlockBlock.java",
-          "src/main/resources/assets/tanscomplexmagic/blockstates/user_book_open_block.json",
-          "src/main/resources/assets/tanscomplexmagic/models/item/user_book_open_block.json"
-        ]
-      },
-      "path": "~/Items and Blocks"
+      }
     },
     {
       "name": "UserBookRightClick",
@@ -1026,8 +996,7 @@
             "type": "entity"
           }
         ]
-      },
-      "path": "~/Items and Blocks"
+      }
     },
     {
       "name": "UserBookPlace",
@@ -1062,7 +1031,7 @@
           }
         ]
       },
-      "path": "~/Items and Blocks"
+      "path": "~/.../Items and Blocks"
     },
     {
       "name": "PersonalWeaponGUIbuttonSet",
@@ -1908,7 +1877,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Button"
+      "path": "~/.../Spell4/.../Button"
     },
     {
       "name": "Spell4GUIbuttonBoundary",
@@ -1927,7 +1896,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Button"
+      "path": "~/.../Spell4/.../Button"
     },
     {
       "name": "Spell4GUIbuttonDistancingIn",
@@ -1950,7 +1919,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Button"
+      "path": "~/.../Spell4/.../Button"
     },
     {
       "name": "Spell4GUIbuttonDistancingOut",
@@ -1973,7 +1942,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Button"
+      "path": "~/.../Spell4/.../Button"
     },
     {
       "name": "Spell4GUIbuttonDistancingSpeed",
@@ -1992,7 +1961,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Button"
+      "path": "~/.../Spell4/.../Button"
     },
     {
       "name": "Spell4GUIbuttonGuardPose",
@@ -2011,7 +1980,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Button"
+      "path": "~/.../Spell4/.../Button"
     },
     {
       "name": "Spell4GUIbuttonGuardPoseDistance",
@@ -2030,7 +1999,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Button"
+      "path": "~/.../Spell4/.../Button"
     },
     {
       "name": "Spell4GUIbuttonLockReverse",
@@ -2049,7 +2018,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Button"
+      "path": "~/.../Spell4/.../Button"
     },
     {
       "name": "Spell4GUIbuttonLockShoot",
@@ -2068,7 +2037,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Button"
+      "path": "~/.../Spell4/.../Button"
     },
     {
       "name": "Spell4GUIbuttonPauseAtMark",
@@ -2087,7 +2056,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Button"
+      "path": "~/.../Spell4/.../Button"
     },
     {
       "name": "Spell4GUIbuttonPauseGravity",
@@ -2106,7 +2075,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Button"
+      "path": "~/.../Spell4/.../Button"
     },
     {
       "name": "Spell4GUIbuttonShowOverlay",
@@ -2125,7 +2094,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Button"
+      "path": "~/.../Spell4/.../Button"
     },
     {
       "name": "Spell4GUIbuttonShowTargetArrow",
@@ -2144,7 +2113,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Button"
+      "path": "~/.../Spell4/.../Button"
     },
     {
       "name": "Spell4GUIreturnConstantTrue",
@@ -2164,7 +2133,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnGuardPoseTrue",
@@ -2184,7 +2153,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnHomingTrue",
@@ -2204,7 +2173,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnLockReverseTrue",
@@ -2224,7 +2193,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnLockShootTrue",
@@ -2244,7 +2213,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnLockTargetTrue",
@@ -2264,7 +2233,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnModeAuto",
@@ -2284,7 +2253,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnModeAutoSingle",
@@ -2304,7 +2273,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnModeMultiple",
@@ -2324,7 +2293,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnModeSingle",
@@ -2344,7 +2313,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnPauseAtMarkTrue",
@@ -2364,7 +2333,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnPauseGravityTrue",
@@ -2384,7 +2353,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnReverseTrue",
@@ -2404,7 +2373,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnShowOverlayTrue",
@@ -2424,7 +2393,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnShowTargetArrowTrue",
@@ -2444,7 +2413,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnTypeAll",
@@ -2464,7 +2433,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnTypeBow",
@@ -2484,7 +2453,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Bow"
+      "path": "~/.../Spell4/.../Weapon and Ability/Bow"
     },
     {
       "name": "Spell4GUIreturnTypeLantern",
@@ -2504,7 +2473,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Lantern"
+      "path": "~/.../Spell4/.../Weapon and Ability/Lantern"
     },
     {
       "name": "Spell4GUIreturnTypeNotOff",
@@ -2524,7 +2493,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnTypeShield",
@@ -2544,7 +2513,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Shield"
+      "path": "~/.../Spell4/.../Weapon and Ability/Shield"
     },
     {
       "name": "Spell4GUIreturnTypeSword",
@@ -2564,7 +2533,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Sword"
+      "path": "~/.../Spell4/.../Weapon and Ability/Sword"
     },
     {
       "name": "Spell4GUIreturnTypeUnselected",
@@ -2584,7 +2553,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "Spell4GUIreturnAutoShotCooldown",
@@ -2604,7 +2573,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Text"
+      "path": "~/.../Spell4/.../Return/Text"
     },
     {
       "name": "Spell4GUIreturnBoundary",
@@ -2624,7 +2593,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Text"
+      "path": "~/.../Spell4/.../Return/Text"
     },
     {
       "name": "Spell4GUIreturnDistancingIn",
@@ -2644,7 +2613,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Text"
+      "path": "~/.../Spell4/.../Return/Text"
     },
     {
       "name": "Spell4GUIreturnDistancingOut",
@@ -2664,7 +2633,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Text"
+      "path": "~/.../Spell4/.../Return/Text"
     },
     {
       "name": "Spell4GUIreturnDistancingSpeed",
@@ -2684,7 +2653,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Text"
+      "path": "~/.../Spell4/.../Return/Text"
     },
     {
       "name": "Spell4GUIreturnGuardPose",
@@ -2704,7 +2673,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Text"
+      "path": "~/.../Spell4/.../Return/Text"
     },
     {
       "name": "PersonalSkillClick",
@@ -2767,7 +2736,7 @@
         ],
         "dependencies": []
       },
-      "path": "~/.Other"
+      "path": "~/.../.Other"
     },
     {
       "name": "Start",
@@ -2798,7 +2767,7 @@
           }
         ]
       },
-      "path": "~/.Other"
+      "path": "~/.../.Other"
     },
     {
       "name": "SpellHealingCircle",
@@ -3319,7 +3288,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Text"
+      "path": "~/.../Spell4/.../Return/Text"
     },
     {
       "name": "PersonalSkillGUIreturnDuration",
@@ -3393,7 +3362,7 @@
           "src/main/java/tannyjung/tanscomplexmagic/item/BowItem.java"
         ]
       },
-      "path": "~/Spell4/.../Item and Entity"
+      "path": "~/.../Spell4/.../Item and Entity"
     },
     {
       "name": "Bow1",
@@ -3407,7 +3376,7 @@
           "src/main/resources/assets/tanscomplexmagic/models/item/bow_1.json"
         ]
       },
-      "path": "~/Spell4/.../Item and Entity"
+      "path": "~/.../Spell4/.../Item and Entity"
     },
     {
       "name": "Bow2",
@@ -3421,7 +3390,7 @@
           "src/main/java/tannyjung/tanscomplexmagic/item/Bow2Item.java"
         ]
       },
-      "path": "~/Spell4/.../Item and Entity"
+      "path": "~/.../Spell4/.../Item and Entity"
     },
     {
       "name": "Bow3",
@@ -3435,7 +3404,7 @@
           "src/main/resources/assets/tanscomplexmagic/models/item/bow_3.json"
         ]
       },
-      "path": "~/Spell4/.../Item and Entity"
+      "path": "~/.../Spell4/.../Item and Entity"
     },
     {
       "name": "BowArrow",
@@ -3450,7 +3419,7 @@
           "src/main/java/tannyjung/tanscomplexmagic/client/renderer/BowArrowRenderer.java"
         ]
       },
-      "path": "~/Spell4/.../Item and Entity"
+      "path": "~/.../Spell4/.../Item and Entity"
     },
     {
       "name": "BowArrowLoop",
@@ -3469,7 +3438,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Item and Entity"
+      "path": "~/.../Spell4/.../Item and Entity"
     },
     {
       "name": "Spell4skillEnd",
@@ -3504,7 +3473,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability"
+      "path": "~/.../Spell4/.../Weapon and Ability"
     },
     {
       "name": "Spell4GUIbuttonBowActivate",
@@ -3539,7 +3508,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Bow"
+      "path": "~/.../Spell4/.../Weapon and Ability/Bow"
     },
     {
       "name": "Spell4GUIbuttonBowClear",
@@ -3574,7 +3543,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Bow"
+      "path": "~/.../Spell4/.../Weapon and Ability/Bow"
     },
     {
       "name": "Spell4GUIbuttonLanternActivate",
@@ -3609,7 +3578,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Lantern"
+      "path": "~/.../Spell4/.../Weapon and Ability/Lantern"
     },
     {
       "name": "Spell4GUIbuttonLanternClear",
@@ -3644,7 +3613,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Lantern"
+      "path": "~/.../Spell4/.../Weapon and Ability/Lantern"
     },
     {
       "name": "Spell4GUIbuttonShieldActivate",
@@ -3679,7 +3648,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Shield"
+      "path": "~/.../Spell4/.../Weapon and Ability/Shield"
     },
     {
       "name": "Spell4GUIbuttonShieldClear",
@@ -3714,7 +3683,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Shield"
+      "path": "~/.../Spell4/.../Weapon and Ability/Shield"
     },
     {
       "name": "Spell4GUIbuttonSwordActivate",
@@ -3749,7 +3718,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Sword"
+      "path": "~/.../Spell4/.../Weapon and Ability/Sword"
     },
     {
       "name": "Spell4GUIbuttonSwordClear",
@@ -3784,7 +3753,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Sword"
+      "path": "~/.../Spell4/.../Weapon and Ability/Sword"
     },
     {
       "name": "PersonalSkillGUIreturnSkillTheMissingPerson",
@@ -3918,7 +3887,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability"
+      "path": "~/.../Spell4/.../Weapon and Ability"
     },
     {
       "name": "Spell4GUIreturnAbilityDuration",
@@ -3938,7 +3907,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability"
+      "path": "~/.../Spell4/.../Weapon and Ability"
     },
     {
       "name": "Spell4GUIreturnAbilityCooldownTrue",
@@ -3958,7 +3927,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability"
+      "path": "~/.../Spell4/.../Weapon and Ability"
     },
     {
       "name": "Spell4GUIreturnAbilityDurationTrue",
@@ -3978,7 +3947,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability"
+      "path": "~/.../Spell4/.../Weapon and Ability"
     },
     {
       "name": "Spell4GUIreturnSwordLevel",
@@ -3998,7 +3967,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Sword"
+      "path": "~/.../Spell4/.../Weapon and Ability/Sword"
     },
     {
       "name": "Spell4GUIbuttonSwordLevelUpgrade",
@@ -4017,7 +3986,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Sword"
+      "path": "~/.../Spell4/.../Weapon and Ability/Sword"
     },
     {
       "name": "Spell4GUIbuttonBowLevelUpgrade",
@@ -4036,7 +4005,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Bow"
+      "path": "~/.../Spell4/.../Weapon and Ability/Bow"
     },
     {
       "name": "Spell4GUIbuttonLanternLevelUpgrade",
@@ -4055,7 +4024,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Lantern"
+      "path": "~/.../Spell4/.../Weapon and Ability/Lantern"
     },
     {
       "name": "Spell4GUIbuttonShieldLevelUpgrade",
@@ -4074,7 +4043,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Shield"
+      "path": "~/.../Spell4/.../Weapon and Ability/Shield"
     },
     {
       "name": "Spell4GUIbuttonBowCountUpgrade",
@@ -4093,7 +4062,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Bow"
+      "path": "~/.../Spell4/.../Weapon and Ability/Bow"
     },
     {
       "name": "Spell4GUIbuttonLanternCountUpgrade",
@@ -4112,7 +4081,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Lantern"
+      "path": "~/.../Spell4/.../Weapon and Ability/Lantern"
     },
     {
       "name": "Spell4GUIbuttonShieldCountUpgrade",
@@ -4131,7 +4100,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Shield"
+      "path": "~/.../Spell4/.../Weapon and Ability/Shield"
     },
     {
       "name": "Spell4GUIbuttonSwordCountUpgrade",
@@ -4150,7 +4119,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Sword"
+      "path": "~/.../Spell4/.../Weapon and Ability/Sword"
     },
     {
       "name": "Spell4GUIreturnBowLevel",
@@ -4170,7 +4139,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Bow"
+      "path": "~/.../Spell4/.../Weapon and Ability/Bow"
     },
     {
       "name": "Spell4GUIreturnLanternLevel",
@@ -4190,7 +4159,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Lantern"
+      "path": "~/.../Spell4/.../Weapon and Ability/Lantern"
     },
     {
       "name": "Spell4GUIreturnShieldLevel",
@@ -4210,7 +4179,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Shield"
+      "path": "~/.../Spell4/.../Weapon and Ability/Shield"
     },
     {
       "name": "Spell4GUIreturnSwordStatus",
@@ -4230,7 +4199,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Sword"
+      "path": "~/.../Spell4/.../Weapon and Ability/Sword"
     },
     {
       "name": "Spell4GUIreturnShieldStatus",
@@ -4250,7 +4219,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Shield"
+      "path": "~/.../Spell4/.../Weapon and Ability/Shield"
     },
     {
       "name": "Spell4GUIreturnBowStatus",
@@ -4270,7 +4239,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Bow"
+      "path": "~/.../Spell4/.../Weapon and Ability/Bow"
     },
     {
       "name": "Spell4GUIreturnLanternStatus",
@@ -4290,7 +4259,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Lantern"
+      "path": "~/.../Spell4/.../Weapon and Ability/Lantern"
     },
     {
       "name": "Spell4GUIreturnBowCount",
@@ -4310,7 +4279,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Bow"
+      "path": "~/.../Spell4/.../Weapon and Ability/Bow"
     },
     {
       "name": "Spell4GUIreturnLanternCount",
@@ -4330,7 +4299,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Lantern"
+      "path": "~/.../Spell4/.../Weapon and Ability/Lantern"
     },
     {
       "name": "Spell4GUIreturnShieldCount",
@@ -4350,7 +4319,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Shield"
+      "path": "~/.../Spell4/.../Weapon and Ability/Shield"
     },
     {
       "name": "Spell4GUIreturnSwordCount",
@@ -4370,40 +4339,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Sword"
-    },
-    {
-      "name": "GetManaCreative",
-      "type": "item",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "get_mana_creative",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/tanscomplexmagic/models/item/get_mana_creative.json",
-          "src/main/java/tannyjung/tanscomplexmagic/item/GetManaCreativeItem.java"
-        ]
-      },
-      "path": "~/Items and Blocks"
-    },
-    {
-      "name": "GetManaCreativeLoop",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "get_mana_creative_loop",
-      "metadata": {
-        "files": [
-          "src/main/java/tannyjung/tanscomplexmagic/procedures/GetManaCreativeLoopProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ]
-      },
-      "path": "~/Items and Blocks"
+      "path": "~/.../Spell4/.../Weapon and Ability/Sword"
     },
     {
       "name": "Lantern",
@@ -4420,7 +4356,7 @@
           "src/main/java/tannyjung/tanscomplexmagic/block/LanternBlock.java"
         ]
       },
-      "path": "~/Spell4/.../Item and Entity"
+      "path": "~/.../Spell4/.../Item and Entity"
     },
     {
       "name": "Lantern1",
@@ -4437,7 +4373,7 @@
           "src/main/resources/assets/tanscomplexmagic/models/block/lantern_1.json"
         ]
       },
-      "path": "~/Spell4/.../Item and Entity"
+      "path": "~/.../Spell4/.../Item and Entity"
     },
     {
       "name": "Lantern2",
@@ -4454,7 +4390,7 @@
           "src/main/java/tannyjung/tanscomplexmagic/block/Lantern2Block.java"
         ]
       },
-      "path": "~/Spell4/.../Item and Entity"
+      "path": "~/.../Spell4/.../Item and Entity"
     },
     {
       "name": "Lantern3",
@@ -4471,7 +4407,7 @@
           "src/main/resources/assets/tanscomplexmagic/blockstates/lantern_3.json"
         ]
       },
-      "path": "~/Spell4/.../Item and Entity"
+      "path": "~/.../Spell4/.../Item and Entity"
     },
     {
       "name": "Anchor",
@@ -4485,7 +4421,7 @@
           "src/main/resources/assets/tanscomplexmagic/models/item/anchor.json"
         ]
       },
-      "path": "~/Spell4/.../Item and Entity"
+      "path": "~/.../Spell4/.../Item and Entity"
     },
     {
       "name": "Spell4GUIbuttonAnchorActivate",
@@ -4504,7 +4440,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Anchor"
+      "path": "~/.../Spell4/.../Weapon and Ability/Anchor"
     },
     {
       "name": "Spell4GUIbuttonAnchorClear",
@@ -4539,7 +4475,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Anchor"
+      "path": "~/.../Spell4/.../Weapon and Ability/Anchor"
     },
     {
       "name": "Spell4GUIbuttonAnchorLevelUpgrade",
@@ -4558,7 +4494,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Anchor"
+      "path": "~/.../Spell4/.../Weapon and Ability/Anchor"
     },
     {
       "name": "Spell4GUIreturnAnchorCount",
@@ -4578,7 +4514,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Anchor"
+      "path": "~/.../Spell4/.../Weapon and Ability/Anchor"
     },
     {
       "name": "Spell4GUIreturnAnchorLevel",
@@ -4598,7 +4534,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Anchor"
+      "path": "~/.../Spell4/.../Weapon and Ability/Anchor"
     },
     {
       "name": "Spell4GUIreturnAnchorStatus",
@@ -4618,7 +4554,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Anchor"
+      "path": "~/.../Spell4/.../Weapon and Ability/Anchor"
     },
     {
       "name": "Spell4GUIreturnTypeAnchor",
@@ -4638,7 +4574,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Anchor"
+      "path": "~/.../Spell4/.../Weapon and Ability/Anchor"
     },
     {
       "name": "Spell4weaponSummon",
@@ -4673,7 +4609,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability"
+      "path": "~/.../Spell4/.../Weapon and Ability"
     },
     {
       "name": "KnightSword",
@@ -4687,7 +4623,7 @@
           "src/main/resources/assets/tanscomplexmagic/models/item/knight_sword.json"
         ]
       },
-      "path": "~/Spell4/.../Item and Entity"
+      "path": "~/.../Spell4/.../Item and Entity"
     },
     {
       "name": "ForgottenSword",
@@ -4701,7 +4637,7 @@
           "src/main/java/tannyjung/tanscomplexmagic/item/ForgottenSwordItem.java"
         ]
       },
-      "path": "~/Spell4/.../Item and Entity"
+      "path": "~/.../Spell4/.../Item and Entity"
     },
     {
       "name": "Spell4GUIbuttonKnightSwordActivate",
@@ -4720,7 +4656,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Knight Sword"
+      "path": "~/.../Spell4/.../Weapon and Ability/Knight Sword"
     },
     {
       "name": "Spell4GUIbuttonKnightSwordClear",
@@ -4755,7 +4691,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Knight Sword"
+      "path": "~/.../Spell4/.../Weapon and Ability/Knight Sword"
     },
     {
       "name": "Spell4GUIreturnKnightSwordCount",
@@ -4775,7 +4711,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Knight Sword"
+      "path": "~/.../Spell4/.../Weapon and Ability/Knight Sword"
     },
     {
       "name": "Spell4GUIreturnTypeKnightSword",
@@ -4795,7 +4731,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Weapon and Ability/Knight Sword"
+      "path": "~/.../Spell4/.../Weapon and Ability/Knight Sword"
     },
     {
       "name": "Spell4GUIbuttonPauseRotation",
@@ -4814,7 +4750,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Button"
+      "path": "~/.../Spell4/.../Button"
     },
     {
       "name": "Spell4GUIreturnPauseRotation",
@@ -4834,7 +4770,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Text"
+      "path": "~/.../Spell4/.../Return/Text"
     },
     {
       "name": "Spell4GUIbuttonPauseBalancing",
@@ -4853,7 +4789,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Button"
+      "path": "~/.../Spell4/.../Button"
     },
     {
       "name": "Spell4GUIreturnPauseBalancingTrue",
@@ -4873,7 +4809,7 @@
           }
         ]
       },
-      "path": "~/Spell4/.../Return/Logic"
+      "path": "~/.../Spell4/.../Return/Logic"
     },
     {
       "name": "UserBookRecipe",
@@ -4886,7 +4822,7 @@
           "src/main/resources/data/tanscomplexmagic/recipe/user_book.json"
         ]
       },
-      "path": "~/Items and Blocks"
+      "path": "~/.../Items and Blocks"
     },
     {
       "name": "Spell1GUI",
@@ -4920,7 +4856,7 @@
           }
         ]
       },
-      "path": "~/.Other"
+      "path": "~/.../.Other"
     },
     {
       "name": "FontConvertSmall",
@@ -4940,7 +4876,7 @@
           }
         ]
       },
-      "path": "~/.Other"
+      "path": "~/.../.Other"
     },
     {
       "name": "GUICompass",
@@ -4960,7 +4896,7 @@
           }
         ]
       },
-      "path": "~/GUI/Components"
+      "path": "~/.../GUI/Components"
     },
     {
       "name": "GUICompassCustom",
@@ -4980,7 +4916,7 @@
           }
         ]
       },
-      "path": "~/GUI/Components"
+      "path": "~/.../GUI/Components"
     },
     {
       "name": "GUICompassCustomSet",
@@ -4999,7 +4935,7 @@
           }
         ]
       },
-      "path": "~/GUI/Components"
+      "path": "~/.../GUI/Components"
     },
     {
       "name": "GUILog",
@@ -5019,7 +4955,7 @@
           }
         ]
       },
-      "path": "~/GUI/Components"
+      "path": "~/.../GUI/Components"
     },
     {
       "name": "GUILogSet",
@@ -5046,7 +4982,7 @@
           }
         ]
       },
-      "path": "~/GUI/Components"
+      "path": "~/.../GUI/Components"
     },
     {
       "name": "GUILogTypeSet",
@@ -5065,7 +5001,7 @@
           }
         ]
       },
-      "path": "~/GUI/Components"
+      "path": "~/.../GUI/Components"
     },
     {
       "name": "GUILogType",
@@ -5085,7 +5021,7 @@
           }
         ]
       },
-      "path": "~/GUI/Components"
+      "path": "~/.../GUI/Components"
     },
     {
       "name": "GUIMana",
@@ -5105,7 +5041,7 @@
           }
         ]
       },
-      "path": "~/GUI/Components"
+      "path": "~/.../GUI/Components"
     },
     {
       "name": "GUIManaCharge",
@@ -5125,7 +5061,7 @@
           }
         ]
       },
-      "path": "~/GUI/Components"
+      "path": "~/.../GUI/Components"
     },
     {
       "name": "GUIPageNumberLeft",
@@ -5145,7 +5081,7 @@
           }
         ]
       },
-      "path": "~/GUI/Components"
+      "path": "~/.../GUI/Components"
     },
     {
       "name": "GUIPageNumberRight",
@@ -5165,7 +5101,7 @@
           }
         ]
       },
-      "path": "~/GUI/Components"
+      "path": "~/.../GUI/Components"
     },
     {
       "name": "GUIShortcutCustom",
@@ -5184,7 +5120,7 @@
           }
         ]
       },
-      "path": "~/GUI/Components"
+      "path": "~/.../GUI/Components"
     },
     {
       "name": "GUIShortcutCustomSet",
@@ -5203,7 +5139,7 @@
           }
         ]
       },
-      "path": "~/GUI/Components"
+      "path": "~/.../GUI/Components"
     },
     {
       "name": "GUIClock",
@@ -5223,7 +5159,7 @@
           }
         ]
       },
-      "path": "~/GUI/Components"
+      "path": "~/.../GUI/Components"
     },
     {
       "name": "GUIPageNext",
@@ -5242,7 +5178,7 @@
           }
         ]
       },
-      "path": "~/GUI/Components"
+      "path": "~/.../GUI/Components"
     },
     {
       "name": "GUIPagePrevious",
@@ -5261,7 +5197,7 @@
           }
         ]
       },
-      "path": "~/GUI/Components"
+      "path": "~/.../GUI/Components"
     },
     {
       "name": "Spell4LoopSecond",
@@ -5275,7 +5211,7 @@
         ],
         "dependencies": []
       },
-      "path": "~/Spell4"
+      "path": "~/.../Spell4"
     },
     {
       "name": "Spell4LoopTick",
@@ -5310,7 +5246,7 @@
           }
         ]
       },
-      "path": "~/Spell4"
+      "path": "~/.../Spell4"
     },
     {
       "name": "Spell4Cancel",
@@ -5345,7 +5281,7 @@
           }
         ]
       },
-      "path": "~/Spell4"
+      "path": "~/.../Spell4"
     },
     {
       "name": "Spell4StartSAVE",
@@ -5368,7 +5304,7 @@
           }
         ]
       },
-      "path": "~/Spell4/..."
+      "path": "~/.../Spell4/..."
     },
     {
       "name": "Spell4CancelSAVE",
@@ -5403,7 +5339,7 @@
           }
         ]
       },
-      "path": "~/Spell4/..."
+      "path": "~/.../Spell4/..."
     },
     {
       "name": "Spell4Start",
@@ -5426,7 +5362,7 @@
           }
         ]
       },
-      "path": "~/Spell4"
+      "path": "~/.../Spell4"
     },
     {
       "name": "KEYSpell4ShootRun",
@@ -5461,7 +5397,7 @@
           }
         ]
       },
-      "path": "~/Spell4/KEY"
+      "path": "~/.../Spell4/KEY"
     },
     {
       "name": "KEYSpell4ShootRelease",
@@ -5496,7 +5432,7 @@
           }
         ]
       },
-      "path": "~/Spell4/KEY"
+      "path": "~/.../Spell4/KEY"
     },
     {
       "name": "KEYSpell4ReverseRun",
@@ -5515,7 +5451,7 @@
           }
         ]
       },
-      "path": "~/Spell4/KEY"
+      "path": "~/.../Spell4/KEY"
     },
     {
       "name": "KEYSpell4ReverseRelease",
@@ -5534,7 +5470,7 @@
           }
         ]
       },
-      "path": "~/Spell4/KEY"
+      "path": "~/.../Spell4/KEY"
     },
     {
       "name": "KEYSpell4ActivateRun",
@@ -5569,7 +5505,7 @@
           }
         ]
       },
-      "path": "~/Spell4/KEY"
+      "path": "~/.../Spell4/KEY"
     },
     {
       "name": "ReplaceID",
@@ -5593,7 +5529,7 @@
           }
         ]
       },
-      "path": "~/.Other"
+      "path": "~/.../.Other"
     },
     {
       "name": "SummonArmorStand",
@@ -5617,7 +5553,7 @@
           }
         ]
       },
-      "path": "~/.Other"
+      "path": "~/.../.Other"
     },
     {
       "name": "SetRole",
@@ -5633,13 +5569,10 @@
           {
             "name": "entity",
             "type": "entity"
-          },
-          {
-            "name": "itemstack",
-            "type": "itemstack"
           }
         ]
-      }
+      },
+      "path": "~/..."
     },
     {
       "name": "UserBookPickUp",
@@ -5674,7 +5607,7 @@
           }
         ]
       },
-      "path": "~/Items and Blocks"
+      "path": "~/.../Items and Blocks"
     },
     {
       "name": "GUIMenuOpen",
@@ -5693,7 +5626,7 @@
           }
         ]
       },
-      "path": "~/GUI"
+      "path": "~/.../GUI"
     },
     {
       "name": "Spell4SummonPickUp",
@@ -5728,7 +5661,7 @@
           }
         ]
       },
-      "path": "~/Spell4"
+      "path": "~/.../Spell4"
     },
     {
       "name": "SwordKnight",
@@ -5745,7 +5678,7 @@
           "src/main/resources/assets/tanscomplexmagic/blockstates/sword_knight.json"
         ]
       },
-      "path": "~/Spell4/Items"
+      "path": "~/.../Spell4/Items"
     },
     {
       "name": "Spell4ShootNearest",
@@ -5780,7 +5713,7 @@
           }
         ]
       },
-      "path": "~/Spell4"
+      "path": "~/.../Spell4"
     },
     {
       "name": "KEYSpell4HomingRun",
@@ -5799,7 +5732,7 @@
           }
         ]
       },
-      "path": "~/Spell4/KEY"
+      "path": "~/.../Spell4/KEY"
     },
     {
       "name": "CommandEntity",
@@ -5823,7 +5756,7 @@
           }
         ]
       },
-      "path": "~/.Other"
+      "path": "~/.../.Other"
     },
     {
       "name": "KEYSpell4ConstantRun",
@@ -5842,7 +5775,7 @@
           }
         ]
       },
-      "path": "~/Spell4/KEY"
+      "path": "~/.../Spell4/KEY"
     },
     {
       "name": "KEYSpell4ModeRun",
@@ -5861,7 +5794,7 @@
           }
         ]
       },
-      "path": "~/Spell4/KEY"
+      "path": "~/.../Spell4/KEY"
     },
     {
       "name": "KEYSPell4LockTargetRun",
@@ -5896,7 +5829,7 @@
           }
         ]
       },
-      "path": "~/Spell4/KEY"
+      "path": "~/.../Spell4/KEY"
     },
     {
       "name": "KEYSpell4DistanceAddRun",
@@ -5915,7 +5848,7 @@
           }
         ]
       },
-      "path": "~/Spell4/KEY"
+      "path": "~/.../Spell4/KEY"
     },
     {
       "name": "KEYSpell4DistanceReduceRun",
@@ -5934,7 +5867,7 @@
           }
         ]
       },
-      "path": "~/Spell4/KEY"
+      "path": "~/.../Spell4/KEY"
     },
     {
       "name": "KEYSpell4DistanceRelease",
@@ -5953,7 +5886,7 @@
           }
         ]
       },
-      "path": "~/Spell4/KEY"
+      "path": "~/.../Spell4/KEY"
     },
     {
       "name": "CommandResult",
@@ -5977,7 +5910,7 @@
           }
         ]
       },
-      "path": "~/.Other/.Connected Features For All My Mods"
+      "path": "~/.../.Other/.Connected Features For All My Mods"
     },
     {
       "name": "KEYSpell4AbilityRun",
@@ -5996,7 +5929,7 @@
           }
         ]
       },
-      "path": "~/Spell4/KEY"
+      "path": "~/.../Spell4/KEY"
     },
     {
       "name": "Spell4AbilityRun",
@@ -6015,7 +5948,7 @@
           }
         ]
       },
-      "path": "~/Spell4"
+      "path": "~/.../Spell4"
     },
     {
       "name": "Spell4AbilityEnd",
@@ -6034,20 +5967,7 @@
           }
         ]
       },
-      "path": "~/Spell4"
-    },
-    {
-      "name": "MagicCircleWeather",
-      "type": "item",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "magic_circle_weather",
-      "metadata": {
-        "files": [
-          "src/main/resources/assets/tanscomplexmagic/models/item/magic_circle_weather.json",
-          "src/main/java/tannyjung/tanscomplexmagic/item/MagicCircleWeatherItem.java"
-        ]
-      }
+      "path": "~/.../Spell4"
     },
     {
       "name": "ZodiacCard1",
@@ -6060,7 +5980,8 @@
           "src/main/resources/assets/tanscomplexmagic/models/item/zodiac_card_1.json",
           "src/main/java/tannyjung/tanscomplexmagic/item/ZodiacCard1Item.java"
         ]
-      }
+      },
+      "path": "~/Spell 1"
     },
     {
       "name": "ZodiacCard2",
@@ -6073,7 +5994,8 @@
           "src/main/java/tannyjung/tanscomplexmagic/item/ZodiacCard2Item.java",
           "src/main/resources/assets/tanscomplexmagic/models/item/zodiac_card_2.json"
         ]
-      }
+      },
+      "path": "~/Spell 1"
     },
     {
       "name": "ZodiacCard3",
@@ -6086,7 +6008,8 @@
           "src/main/java/tannyjung/tanscomplexmagic/item/ZodiacCard3Item.java",
           "src/main/resources/assets/tanscomplexmagic/models/item/zodiac_card_3.json"
         ]
-      }
+      },
+      "path": "~/Spell 1"
     },
     {
       "name": "ZodiacCard4",
@@ -6099,7 +6022,8 @@
           "src/main/resources/assets/tanscomplexmagic/models/item/zodiac_card_4.json",
           "src/main/java/tannyjung/tanscomplexmagic/item/ZodiacCard4Item.java"
         ]
-      }
+      },
+      "path": "~/Spell 1"
     },
     {
       "name": "ZodiacCard5",
@@ -6112,7 +6036,8 @@
           "src/main/resources/assets/tanscomplexmagic/models/item/zodiac_card_5.json",
           "src/main/java/tannyjung/tanscomplexmagic/item/ZodiacCard5Item.java"
         ]
-      }
+      },
+      "path": "~/Spell 1"
     },
     {
       "name": "ZodiacCard6",
@@ -6125,7 +6050,8 @@
           "src/main/resources/assets/tanscomplexmagic/models/item/zodiac_card_6.json",
           "src/main/java/tannyjung/tanscomplexmagic/item/ZodiacCard6Item.java"
         ]
-      }
+      },
+      "path": "~/Spell 1"
     },
     {
       "name": "ZodiacCard7",
@@ -6138,7 +6064,8 @@
           "src/main/java/tannyjung/tanscomplexmagic/item/ZodiacCard7Item.java",
           "src/main/resources/assets/tanscomplexmagic/models/item/zodiac_card_7.json"
         ]
-      }
+      },
+      "path": "~/Spell 1"
     },
     {
       "name": "ZodiacCard8",
@@ -6151,7 +6078,8 @@
           "src/main/java/tannyjung/tanscomplexmagic/item/ZodiacCard8Item.java",
           "src/main/resources/assets/tanscomplexmagic/models/item/zodiac_card_8.json"
         ]
-      }
+      },
+      "path": "~/Spell 1"
     },
     {
       "name": "ZodiacCard9",
@@ -6164,7 +6092,8 @@
           "src/main/resources/assets/tanscomplexmagic/models/item/zodiac_card_9.json",
           "src/main/java/tannyjung/tanscomplexmagic/item/ZodiacCard9Item.java"
         ]
-      }
+      },
+      "path": "~/Spell 1"
     },
     {
       "name": "ZodiacCard10",
@@ -6177,7 +6106,8 @@
           "src/main/java/tannyjung/tanscomplexmagic/item/ZodiacCard10Item.java",
           "src/main/resources/assets/tanscomplexmagic/models/item/zodiac_card_10.json"
         ]
-      }
+      },
+      "path": "~/Spell 1"
     },
     {
       "name": "ZodiacCard11",
@@ -6190,7 +6120,8 @@
           "src/main/java/tannyjung/tanscomplexmagic/item/ZodiacCard11Item.java",
           "src/main/resources/assets/tanscomplexmagic/models/item/zodiac_card_11.json"
         ]
-      }
+      },
+      "path": "~/Spell 1"
     },
     {
       "name": "ZodiacCard12",
@@ -6203,7 +6134,8 @@
           "src/main/resources/assets/tanscomplexmagic/models/item/zodiac_card_12.json",
           "src/main/java/tannyjung/tanscomplexmagic/item/ZodiacCard12Item.java"
         ]
-      }
+      },
+      "path": "~/Spell 1"
     },
     {
       "name": "ZodiacCard13",
@@ -6216,19 +6148,48 @@
           "src/main/resources/assets/tanscomplexmagic/models/item/zodiac_card_13.json",
           "src/main/java/tannyjung/tanscomplexmagic/item/ZodiacCard13Item.java"
         ]
-      }
+      },
+      "path": "~/Spell 1"
     },
     {
-      "name": "MagicCircleZodiac",
+      "name": "CreativeMana",
       "type": "item",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "magic_circle_zodiac",
+      "registry_name": "creative_mana",
       "metadata": {
         "files": [
-          "src/main/java/tannyjung/tanscomplexmagic/item/MagicCircleZodiacItem.java",
-          "src/main/resources/assets/tanscomplexmagic/models/item/magic_circle_zodiac.json"
+          "src/main/java/tannyjung/tanscomplexmagic/item/CreativeManaItem.java",
+          "src/main/resources/assets/tanscomplexmagic/models/item/creative_mana.json"
         ]
+      }
+    },
+    {
+      "name": "CreativeManaTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "creative_mana_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "files": [
+          "src/main/java/tannyjung/tanscomplexmagic/procedures/CreativeManaTickProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "Tab",
+      "type": "tab",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "tab",
+      "metadata": {
+        "files": []
       }
     }
   ],
@@ -9339,7 +9300,6 @@
       "gui.lotw.spell_4_gu_iweapon_sword.label_upgrades": "UPGRADE",
       "gui.lotw.spell_4_gu_ihow_to_use_2.label_4_small_icons": "under it include lock",
       "gui.lanternofthewoodlands.spell_4_gu_isettings.label_distancing": "Distancing Radius (In)",
-      "item_group.tanscomplexmagic.lotw_tab": "Lantern of The Woodlands",
       "block.tanscomplexmagic.target_arrow": "Target Arrow",
       "item.tanscomplexmagic.user_book.description_6": "- Pick Up Placed Book : Hold shift and hold the main key",
       "item.tanscomplexmagic.user_book.description_7": "- Open Book GUI : Hold opened book on right hand and right click, or stay near placed book and hold the main key.",
@@ -9349,7 +9309,7 @@
       "item.tanscomplexmagic.user_book.description_3": "- Note that \"Main Key\" by default is your left control button (Ctrl)",
       "item.tanscomplexmagic.user_book.description_0": "--------------------------------------------------",
       "item.tanscomplexmagic.user_book.description_1": "The magic spell book by TannyJung. Containing all my magic creations.",
-      "item.tanscomplexmagic.user_book": "Lantern of The Woodlands - User Book",
+      "item.tanscomplexmagic.user_book": "Lantern of the Woodlands - The User Book",
       "item.tanscomplexmagic.user_book.description_8": "--------------------------------------------------",
       "item.tanscomplexmagic.user_book_open.description_2": "",
       "item.tanscomplexmagic.user_book_open.description_1": "The magic spell book by TannyJung. Containing all my magic creations.",
@@ -9357,11 +9317,10 @@
       "item.tanscomplexmagic.user_book_open.description_3": "- Note that \"Main Key\" by default is your left control button (Ctrl)",
       "item.tanscomplexmagic.user_book_open.description_6": "- Pick Up Placed Book : Hold shift and hold the main key",
       "item.tanscomplexmagic.user_book_open.description_5": "- Place Book : Hold closed book on right hand, hold the main key and right click on block.",
-      "item.tanscomplexmagic.user_book_open.description_8": "--------------------------------------------------",
+      "item.tanscomplexmagic.user_book_open.description_8": "§8--------------------------------------------------",
       "item.tanscomplexmagic.user_book_open.description_7": "- Open Book GUI : Hold opened book on right hand and right click, or stay near placed book and hold the main key.",
-      "item.tanscomplexmagic.user_book_open": "Lantern of The Woodlands - User Book",
-      "item.tanscomplexmagic.user_book_open.description_0": "--------------------------------------------------",
-      "block.tanscomplexmagic.user_book_open_block": "Spell Book (Block)",
+      "item.tanscomplexmagic.user_book_open": "Lantern of the Woodlands - The User Book",
+      "item.tanscomplexmagic.user_book_open.description_0": "§8--------------------------------------------------",
       "block.tanscomplexmagic.spell_healing_circle": "Magic Circle",
       "block.tanscomplexmagic.rejuvenating_mushroom": "Rejuvenating Mushroom",
       "block.tanscomplexmagic.spell_teleport_circle": "Magic Circle",
@@ -9371,10 +9330,6 @@
       "item.tanscomplexmagic.bow_3": "Bow",
       "item.tanscomplexmagic.bow_arrow_spawn_egg": "Bow Arrow Spawn Egg",
       "entity.tanscomplexmagic.bow_arrow": "Bow Arrow",
-      "item.tanscomplexmagic.get_mana_creative": "Creative Mana",
-      "item.tanscomplexmagic.get_mana_creative.description_0": "--------------------------------------------------",
-      "item.tanscomplexmagic.get_mana_creative.description_1": "Hold on hand to get full mana",
-      "item.tanscomplexmagic.get_mana_creative.description_2": "--------------------------------------------------",
       "block.tanscomplexmagic.lantern": "Lantern",
       "block.tanscomplexmagic.lantern_1": "Lantern",
       "block.tanscomplexmagic.lantern_2": "Lantern",
@@ -9401,7 +9356,6 @@
       "gui.tanscomplexmagic.gui_index.sliderxxx_prefix": "",
       "gui.tanscomplexmagic.gui_index.asd": "",
       "gui.tanscomplexmagic.gui_index.xxxddd": "",
-      "item.tanscomplexmagic.magic_circle_weather": "Test",
       "item.tanscomplexmagic.zodiac_card_1": "For Item Display",
       "item.tanscomplexmagic.zodiac_card_2": "For Item Display",
       "item.tanscomplexmagic.zodiac_card_3": "For Item Display",
@@ -9415,7 +9369,11 @@
       "item.tanscomplexmagic.zodiac_card_11": "For Item Display",
       "item.tanscomplexmagic.zodiac_card_12": "For Item Display",
       "item.tanscomplexmagic.zodiac_card_13": "For Item Display",
-      "item.tanscomplexmagic.magic_circle_zodiac": "Test"
+      "item.tanscomplexmagic.creative_mana.description_2": "§8--------------------------------------------------",
+      "item.tanscomplexmagic.creative_mana.description_0": "§8--------------------------------------------------",
+      "item.tanscomplexmagic.creative_mana.description_1": "§8Give user full mana when in inventory",
+      "item.tanscomplexmagic.creative_mana": "Creative Mana",
+      "item_group.tanscomplexmagic.tab": "Tan\u0027s Complex Magic"
     }
   },
   "metadata": {
@@ -9439,15 +9397,6 @@
     "name": "~",
     "children": [
       {
-        "name": ".Other",
-        "children": [
-          {
-            "name": ".Connected Features For All My Mods",
-            "children": []
-          }
-        ]
-      },
-      {
         "name": "...",
         "children": [
           {
@@ -9463,6 +9412,10 @@
               },
               {
                 "name": "Mana Regeneration",
+                "children": []
+              },
+              {
+                "name": "Components",
                 "children": []
               }
             ]
@@ -9514,105 +9467,109 @@
           {
             "name": "Spell1",
             "children": []
-          }
-        ]
-      },
-      {
-        "name": "Items and Blocks",
-        "children": []
-      },
-      {
-        "name": "GUI",
-        "children": [
+          },
           {
-            "name": "Components",
-            "children": []
-          }
-        ]
-      },
-      {
-        "name": "Spell4",
-        "children": [
-          {
-            "name": "...",
+            "name": ".Other",
             "children": [
               {
-                "name": "Key Binding",
+                "name": ".Connected Features For All My Mods",
                 "children": []
-              },
-              {
-                "name": "Button",
-                "children": []
-              },
-              {
-                "name": "Return",
-                "children": [
-                  {
-                    "name": "Text",
-                    "children": []
-                  },
-                  {
-                    "name": "Logic",
-                    "children": []
-                  }
-                ]
-              },
-              {
-                "name": "Item and Entity",
-                "children": []
-              },
-              {
-                "name": "Weapon and Ability",
-                "children": [
-                  {
-                    "name": "Sword",
-                    "children": []
-                  },
-                  {
-                    "name": "Bow",
-                    "children": []
-                  },
-                  {
-                    "name": "Shield",
-                    "children": []
-                  },
-                  {
-                    "name": "Lantern",
-                    "children": []
-                  },
-                  {
-                    "name": "Anchor",
-                    "children": []
-                  },
-                  {
-                    "name": "Knight Sword",
-                    "children": []
-                  }
-                ]
               }
             ]
           },
           {
-            "name": "KEY",
+            "name": "Items and Blocks",
             "children": []
           },
           {
-            "name": "Items",
-            "children": []
-          },
-          {
-            "name": "COMMAND",
-            "children": []
-          },
-          {
-            "name": "OVERLAY",
-            "children": []
-          },
-          {
-            "name": "GUI",
-            "children": []
+            "name": "Spell4",
+            "children": [
+              {
+                "name": "...",
+                "children": [
+                  {
+                    "name": "Key Binding",
+                    "children": []
+                  },
+                  {
+                    "name": "Button",
+                    "children": []
+                  },
+                  {
+                    "name": "Return",
+                    "children": [
+                      {
+                        "name": "Text",
+                        "children": []
+                      },
+                      {
+                        "name": "Logic",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Item and Entity",
+                    "children": []
+                  },
+                  {
+                    "name": "Weapon and Ability",
+                    "children": [
+                      {
+                        "name": "Sword",
+                        "children": []
+                      },
+                      {
+                        "name": "Bow",
+                        "children": []
+                      },
+                      {
+                        "name": "Shield",
+                        "children": []
+                      },
+                      {
+                        "name": "Lantern",
+                        "children": []
+                      },
+                      {
+                        "name": "Anchor",
+                        "children": []
+                      },
+                      {
+                        "name": "Knight Sword",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "KEY",
+                "children": []
+              },
+              {
+                "name": "Items",
+                "children": []
+              },
+              {
+                "name": "COMMAND",
+                "children": []
+              },
+              {
+                "name": "OVERLAY",
+                "children": []
+              },
+              {
+                "name": "GUI",
+                "children": []
+              }
+            ]
           }
         ]
+      },
+      {
+        "name": "Spell 1",
+        "children": []
       }
     ]
   },

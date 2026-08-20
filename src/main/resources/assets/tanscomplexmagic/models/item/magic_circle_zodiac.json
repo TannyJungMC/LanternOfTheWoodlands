@@ -1,7 +1,0 @@
-{
-  "parent": "tanscomplexmagic:custom/magic_circle",
-  "textures": {
-    "1": "tanscomplexmagic:block/magic_circle_zodiac",
-    "particle": "minecraft:item/clock_00"
-  }
-}

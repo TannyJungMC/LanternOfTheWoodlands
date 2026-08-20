@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "lotw:items/spell2_waypoint"
+  },
+  "render_type": "translucent"
+}

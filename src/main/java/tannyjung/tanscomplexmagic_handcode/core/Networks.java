@@ -4,17 +4,11 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
-import tannyjung.tanscomplexmagic_core.game.EntityManager;
 import tannyjung.tanscomplexmagic_core.game.GameUtils;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
 import tannyjung.tanscomplexmagic_core.game.screen.GUIManager;
 import tannyjung.tanscomplexmagic_handcode.systems.Book;
-import tannyjung.tanscomplexmagic_handcode.systems.Spell1;
 import tannyjung.tanscomplexmagic_handcode.systems.Utils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Networks {
 
@@ -59,8 +53,8 @@ public class Networks {
 
                     {
 
-                        NBTManager.Mob.setNumber(player_server, "book", "compassX", player_server.getX());
-                        NBTManager.Mob.setNumber(player_server, "book", "compassZ", player_server.getZ());
+                        NBTManager.Mob.setNumber(player_server, "book", "compassX", player_server.getX(), true);
+                        NBTManager.Mob.setNumber(player_server, "book", "compassZ", player_server.getZ(), true);
 
                     }
 
@@ -102,70 +96,11 @@ public class Networks {
                         if (Utils.trySpendMana(player_server, 1) == true) {
 
                             int duration_per_mana = extra.getInt("duration_per_mana_" + positive_negative);
-                            NBTManager.Mob.addNumber(player_server, "spell1", "card_duration_max_" + positive_negative + number, duration_per_mana);
-
-
-
-                            NBTManager.Mob.setNumber(player_server, "main", "mana", 100);
-
-
-
+                            NBTManager.Mob.addNumber(player_server, "spell1", "card_duration_max_" + positive_negative + number, duration_per_mana, true);
 
                         }
 
                     }
-
-                }
-
-            }
-
-        }
-
-    }
-
-    public static class Key {
-
-        public static void client (ServerPlayer player_server, String work, CompoundTag extra) {
-
-
-
-        }
-
-        public static void server (ServerPlayer player_server, String work, CompoundTag extra) {
-
-            if (work.equals("main_key") == true) {
-
-                {
-
-                    ServerLevel level_server = player_server.serverLevel();
-
-                    if (NBTManager.Mob.getLogic(player_server, "main", "main_key") == true) {
-
-                        NBTManager.Mob.setLogic(player_server, "main", "main_key", false);
-
-                        Spell1.deactivate(level_server, player_server);
-
-                        for (Entity entity : EntityManager.Population.getEverywhereStatic(level_server, "", "", Utils.Tag.convertSystemAll(player_server))) {
-
-                            entity.discard();
-
-                        }
-
-                    } else {
-
-                        NBTManager.Mob.setLogic(player_server, "main", "main_key", true);
-
-                        Spell1.activate(level_server, player_server);
-
-                    }
-
-                }
-
-            } else if (work.equals("test") == true) {
-
-                {
-
-                    NBTManager.Mob.setLogic(player_server, "spell1", "is_pause_all", NBTManager.Mob.getLogic(player_server, "spell1", "is_pause_all") == false);
 
                 }
 

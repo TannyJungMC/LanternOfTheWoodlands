@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "lotw:items/basicspell7beehive"
+  },
+  "render_type": "translucent"
+}

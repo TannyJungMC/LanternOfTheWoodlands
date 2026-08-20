@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.Block;
 public class TanscomplexmagicModBlocks {
 	public static final DeferredRegister.Blocks REGISTRY = DeferredRegister.createBlocks(TanscomplexmagicMod.MODID);
 	public static final DeferredBlock<Block> TARGET_ARROW;
-	public static final DeferredBlock<Block> USER_BOOK_OPEN_BLOCK;
 	public static final DeferredBlock<Block> SPELL_HEALING_CIRCLE;
 	public static final DeferredBlock<Block> REJUVENATING_MUSHROOM;
 	public static final DeferredBlock<Block> SPELL_TELEPORT_CIRCLE;
@@ -25,7 +24,6 @@ public class TanscomplexmagicModBlocks {
 	public static final DeferredBlock<Block> SWORD_KNIGHT;
 	static {
 		TARGET_ARROW = REGISTRY.register("target_arrow", TargetArrowBlock::new);
-		USER_BOOK_OPEN_BLOCK = REGISTRY.register("user_book_open_block", UserBookOpenBlockBlock::new);
 		SPELL_HEALING_CIRCLE = REGISTRY.register("spell_healing_circle", SpellHealingCircleBlock::new);
 		REJUVENATING_MUSHROOM = REGISTRY.register("rejuvenating_mushroom", RejuvenatingMushroomBlock::new);
 		SPELL_TELEPORT_CIRCLE = REGISTRY.register("spell_teleport_circle", SpellTeleportCircleBlock::new);

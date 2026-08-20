@@ -1,9 +1,0 @@
-{
-  "parent": "tanscomplexmagic:custom/book_open",
-  "textures": {
-    "all": "tanscomplexmagic:block/user_book",
-    "particle": "tanscomplexmagic:block/user_book",
-    "0": "tanscomplexmagic:block/user_book"
-  },
-  "render_type": "solid"
-}

@@ -1,0 +1,9 @@
+{
+  "parent": "lotw:custom/book",
+  "textures": {
+    "all": "lotw:blocks/book_enchanted",
+    "particle": "lotw:blocks/book_enchanted",
+    "0": "lotw:blocks/book_enchanted"
+  },
+  "render_type": "solid"
+}

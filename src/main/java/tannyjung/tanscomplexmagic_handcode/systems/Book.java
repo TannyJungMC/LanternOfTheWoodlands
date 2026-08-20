@@ -2,56 +2,81 @@ package tannyjung.tanscomplexmagic_handcode.systems;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import tannyjung.tanscomplexmagic.init.TanscomplexmagicModItems;
+import tannyjung.tanscomplexmagic.item.UserBookItem;
+import tannyjung.tanscomplexmagic.item.UserBookOpenItem;
 import tannyjung.tanscomplexmagic_core.game.GameUtils;
+import tannyjung.tanscomplexmagic_core.game.ItemManager;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
 import tannyjung.tanscomplexmagic_core.game.screen.GUIManager;
 import tannyjung.tanscomplexmagic_core.outside.OutsideUtils;
 
 public class Book {
 
-    public static void whenRightClick (Entity entity) {
+    public static void whenRightClick (ServerPlayer player_server) {
 
-        if (entity instanceof ServerPlayer player_server) {
+        ItemStack item = ItemManager.getSlot(player_server, EquipmentSlot.MAINHAND);
+        boolean is_main_key_active = NBTManager.Mob.getLogic(player_server, "main", "is_main_key_active");
 
-            String group = NBTManager.Mob.getText(player_server, "gui", "group");
-            String name = NBTManager.Mob.getText(player_server, "gui", "name");
+        if (item.getItem() == TanscomplexmagicModItems.USER_BOOK.asItem()) {
 
-            if (group.isEmpty() == true || name.isEmpty() == true) {
+            if (is_main_key_active == true) {
 
-                group = "book";
-                name = "ally_list";
+                player_server.setItemSlot(EquipmentSlot.MAINHAND, TanscomplexmagicModItems.USER_BOOK_OPEN.toStack());
 
             }
 
-            GUIManager.open(player_server, group, name);
+            return;
+
+        } else if (item.getItem() == TanscomplexmagicModItems.USER_BOOK_OPEN.asItem()) {
+
+            if (is_main_key_active == true) {
+
+                player_server.setItemSlot(EquipmentSlot.MAINHAND, TanscomplexmagicModItems.USER_BOOK.toStack());
+                return;
+
+            }
 
         }
+
+        String page = NBTManager.Item.getText(item, "main", "page");
+
+        if (page.isEmpty() == true) {
+
+            page = "ally_list";
+            NBTManager.Item.setText(item, "main", "page", page);
+
+        }
+
+        GUIManager.open(player_server, "book", page);
 
     }
 
     public static void pageTurn (ServerPlayer player_server, boolean is_next) {
 
-        String group = NBTManager.Mob.getText(player_server, "gui", "group");
-        String name = NBTManager.Mob.getText(player_server, "gui", "name");
+        ItemStack item = ItemManager.getSlot(player_server, EquipmentSlot.MAINHAND);
+        String page = NBTManager.Item.getText(item, "main", "page");
 
         if (is_next == true) {
 
-            name = GUIManager.Storage.getNameNext(group, name);
+            page = GUIManager.Storage.getNameNext("book", page);
 
         } else {
 
-            name = GUIManager.Storage.getNamePrevious(group, name);
+            page = GUIManager.Storage.getNamePrevious("book", page);
 
         }
 
-        if (name.isEmpty() == true) {
+        if (page.isEmpty() == true) {
 
             return;
 
         }
 
-        GUIManager.open(player_server, group, name);
+        NBTManager.Item.setText(item, "main", "page", page);
+        GUIManager.open(player_server, "book", page);
         GameUtils.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 10, "minecraft:item.book.page_turn");
 
     }
@@ -62,19 +87,19 @@ public class Book {
 
             if (NBTManager.Mob.getText(player_server, "book", "log").isEmpty() == true) {
 
-                NBTManager.Mob.setText(player_server, "book", "log", "mana");
+                NBTManager.Mob.setText(player_server, "book", "log", "mana", true);
 
             } else if (NBTManager.Mob.getText(player_server, "book", "log").equals("mana") == true) {
 
-                NBTManager.Mob.setText(player_server, "book", "log", "action");
+                NBTManager.Mob.setText(player_server, "book", "log", "action", true);
 
             } else if (NBTManager.Mob.getText(player_server, "book", "log").equals("action") == true) {
 
-                NBTManager.Mob.setText(player_server, "book", "log", "warning");
+                NBTManager.Mob.setText(player_server, "book", "log", "warning", true);
 
             } else {
 
-                NBTManager.Mob.setText(player_server, "book", "log", "");
+                NBTManager.Mob.setText(player_server, "book", "log", "", true);
 
             }
 
@@ -111,7 +136,7 @@ public class Book {
 
             }
 
-            NBTManager.Mob.setText(player_server, "book", "log_text", text);
+            NBTManager.Mob.setText(player_server, "book", "log_text", text, true);
 
         }
 

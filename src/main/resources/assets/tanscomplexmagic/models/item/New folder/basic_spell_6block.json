@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "lotw:items/letter_from_the_other_side"
+  },
+  "render_type": "translucent"
+}

@@ -187,7 +187,7 @@ public class GameUtils {
 			volume_max = percent * (max_distance / 15.0);
 			double volume = volume_min + volume_max;
 
-			delay = (int) Math.round(distance / 20.0);
+			delay = (int) Math.round(distance / 17.0);
 			Runnable runnable = () -> player_server.connection.send(new ClientboundSoundPacket(Holder.direct(sound), SoundSource.AMBIENT, pos.getX(), pos.getY(), pos.getZ(), (float) volume, (float) pitch, level_server.getRandom().nextLong()));
 
 			if (delay == 0) {

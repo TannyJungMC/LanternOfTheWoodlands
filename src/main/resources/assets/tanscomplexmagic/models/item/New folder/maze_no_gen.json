@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "lotw:items/random_infested"
+  },
+  "render_type": "translucent"
+}

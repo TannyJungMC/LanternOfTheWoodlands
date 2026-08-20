@@ -1,0 +1,9 @@
+{
+  "parent": "lotw:custom/bag",
+  "textures": {
+    "all": "lotw:blocks/bag_texture",
+    "particle": "lotw:blocks/bag_texture",
+    "0": "lotw:blocks/bag_texture"
+  },
+  "render_type": "translucent"
+}

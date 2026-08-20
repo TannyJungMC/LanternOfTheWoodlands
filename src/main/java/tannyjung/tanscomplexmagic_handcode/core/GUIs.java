@@ -2,8 +2,8 @@ package tannyjung.tanscomplexmagic_handcode.core;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.phys.Vec3;
-import tannyjung.tanscomplexmagic_core.game.screen.GUIManager;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
+import tannyjung.tanscomplexmagic_core.game.screen.GUIManager;
 import tannyjung.tanscomplexmagic_core.game.screen.GUIScreen;
 import tannyjung.tanscomplexmagic_core.game.screen.ScreenDrawing;
 import tannyjung.tanscomplexmagic_core.outside.NetworkManager;
@@ -37,7 +37,7 @@ public class GUIs {
                 generateBackground();
 
                 ScreenDrawing.Position.set(8 * -22 + 0, 8 * -12 + 0);
-                ScreenDrawing.ComponentAdvance.BoardEntity.draw("Ally List", Utils.Tag.getAlly(GUIScreen.player_local), "   Manage list of your ally. Some spell systems can interact with this list, some can skip negative actions on them.");
+                ScreenDrawing.ComponentAdvance.Board.ListEntity.draw("Ally List", Utils.Tag.getAlly(GUIScreen.player_local), "   Manage list of your ally. Some spell systems can interact with this list, some can skip negative actions on them.");
 
             });
 
@@ -164,7 +164,7 @@ public class GUIs {
                     generateBackground();
 
                     ScreenDrawing.Position.set(8 * -22 + 0, 8 * -12 + 0);
-                    ScreenDrawing.ComponentAdvance.BoardEntity.draw("Target Mark", Utils.Tag.getUser(GUIScreen.player_local) + "_spell1_mark", "   You can select targets you want to add effects using this list. Once adding them, you can enable target mode \"Mark\" in the card settings page.");
+                    ScreenDrawing.ComponentAdvance.Board.ListEntity.draw("Target Mark", Utils.Tag.getUser(GUIScreen.player_local) + "_spell1_mark", "   You can mark specific targets you want to add effects using this list. Once adding them, you can enable target mode \"Mark\" in the card settings page.");
 
                 });
 
@@ -176,55 +176,55 @@ public class GUIs {
                 GUIManager.Storage.add("book", "spell1_settings_card1", () -> {
 
                     generateBackground();
-                    generateSpell1SettingsCard(true, "Aries 1", 1, 300 * 3, 300 * 4);
-                    generateSpell1SettingsCard(false, "Taurus 2", 2, 300 * 1, 300 * 5);
+                    generateSpell1SettingsCard(true, "Aries 1", 1, 150 * 3, 150 * 5);
+                    generateSpell1SettingsCard(false, "Taurus 2", 2, 150 * 1, 150 * 5);
 
                 });
 
                 GUIManager.Storage.add("book", "spell1_settings_card2", () -> {
 
                     generateBackground();
-                    generateSpell1SettingsCard(true, "Gemini 3", 3, 300 * 2, 300 * 5);
-                    generateSpell1SettingsCard(false, "Cancer 4", 4, 300 * 3, 300 * 3);
+                    generateSpell1SettingsCard(true, "Gemini 3", 3, 150 * 2, 150 * 5);
+                    generateSpell1SettingsCard(false, "Cancer 4", 4, 150 * 3, 150 * 3);
 
                 });
 
                 GUIManager.Storage.add("book", "spell1_settings_card3", () -> {
 
                     generateBackground();
-                    generateSpell1SettingsCard(true, "Leo 5", 5, 300 * 2, 300 * 4);
-                    generateSpell1SettingsCard(false, "Virgo 6", 6, 300 * 2, 300 * 4);
+                    generateSpell1SettingsCard(true, "Leo 5", 5, 150 * 1, 150 * 4);
+                    generateSpell1SettingsCard(false, "Virgo 6", 6, 150 * 1, 150 * 2);
 
                 });
 
                 GUIManager.Storage.add("book", "spell1_settings_card4", () -> {
 
                     generateBackground();
-                    generateSpell1SettingsCard(true, "Libra 7", 7, 300 * 3, 300 * 3);
-                    generateSpell1SettingsCard(false, "Scorpio 8", 8, 300 * 3, 300 * 2);
+                    generateSpell1SettingsCard(true, "Libra 7", 7, 150 * 1, 150 * 1);
+                    generateSpell1SettingsCard(false, "Scorpio 8", 8, 150 * 3, 150 * 2);
 
                 });
 
                 GUIManager.Storage.add("book", "spell1_settings_card5", () -> {
 
                     generateBackground();
-                    generateSpell1SettingsCard(true, "Sagittarius 9", 9, 300 * 3, 300 * 3);
-                    generateSpell1SettingsCard(false, "Capricorn 10", 10, 300 * 1, 300 * 3);
+                    generateSpell1SettingsCard(true, "Sagittarius 9", 9, 150 * 2, 150 * 4);
+                    generateSpell1SettingsCard(false, "Capricorn 10", 10, 150 * 1, 150 * 3);
 
                 });
 
                 GUIManager.Storage.add("book", "spell1_settings_card6", () -> {
 
                     generateBackground();
-                    generateSpell1SettingsCard(true, "Aquarius 11", 11, 300 * 3, 300 * 4);
-                    generateSpell1SettingsCard(false, "Pisces 12", 12, 300 * 4, 300 * 3);
+                    generateSpell1SettingsCard(true, "Aquarius 11", 11, 150 * 2, 150 * 3);
+                    generateSpell1SettingsCard(false, "Pisces 12", 12, 150 * 2, 150 * 3);
 
                 });
 
                 GUIManager.Storage.add("book", "spell1_settings_card7", () -> {
 
                     generateBackground();
-                    generateSpell1SettingsCard(true, "Ophiuchus 13", 13, 300 * 2, 300 * 2);
+                    generateSpell1SettingsCard(true, "Ophiuchus 13", 13, 150 * 1, 150 * 1);
 
                 });
                 

@@ -1,0 +1,9 @@
+{
+  "parent": "lotw:custom/book",
+  "textures": {
+    "all": "lotw:blocks/spell_book_fire",
+    "particle": "lotw:blocks/spell_book_fire",
+    "0": "lotw:blocks/spell_book_fire"
+  },
+  "render_type": "solid"
+}

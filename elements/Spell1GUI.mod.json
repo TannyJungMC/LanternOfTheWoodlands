@@ -86,6 +86,12 @@
         }
       }
     ],
+    "onOpen": {
+      "name": "KEYSpell4ActivateRun"
+    },
+    "onClosed": {
+      "name": "Spell4AbilityEnd"
+    },
     "gridSettings": {
       "sx": 8,
       "sy": 8,

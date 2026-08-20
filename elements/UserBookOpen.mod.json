@@ -5,10 +5,11 @@
     "renderType": 1,
     "texture": "minecraft:knowledge_book",
     "customModelName": "book_open:default",
+    "guiTexture": "",
     "customProperties": {},
     "states": [],
     "animations": [],
-    "name": "Lantern of The Woodlands - User Book",
+    "name": "Lantern of the Woodlands - The User Book",
     "rarity": "COMMON",
     "creativeTabs": [],
     "stackSize": 1,
@@ -28,7 +29,7 @@
     "damageVsEntity": 0.0,
     "specialInformation": {
       "fixedValue": [
-        "--------------------------------------------------",
+        "§8--------------------------------------------------",
         "The magic spell book by TannyJung. Containing all my magic creations.",
         "",
         "- Note that \"Main Key\" by default is your left control button (Ctrl)",
@@ -36,7 +37,7 @@
         "- Place Book : Hold closed book on right hand, hold the main key and right click on block.",
         "- Pick Up Placed Book : Hold shift and hold the main key",
         "- Open Book GUI : Hold opened book on right hand and right click, or stay near placed book and hold the main key.",
-        "--------------------------------------------------"
+        "§8--------------------------------------------------"
       ]
     },
     "glowCondition": {
@@ -67,6 +68,10 @@
     "isAlwaysEdible": false,
     "animation": "none",
     "isMusicDisc": false,
+    "musicDiscMusic": {
+      "value": ""
+    },
+    "musicDiscDescription": "",
     "musicDiscLengthInTicks": 0,
     "musicDiscAnalogOutput": 0,
     "providedBannerPatterns": []

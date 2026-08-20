@@ -15,9 +15,9 @@ import net.minecraft.core.registries.Registries;
 
 public class TanscomplexmagicModTabs {
 	public static final DeferredRegister<CreativeModeTab> REGISTRY = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, TanscomplexmagicMod.MODID);
-	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> LOTW_TAB = REGISTRY.register("lotw_tab",
-			() -> CreativeModeTab.builder().title(Component.translatable("item_group.tanscomplexmagic.lotw_tab")).icon(() -> new ItemStack(TanscomplexmagicModItems.USER_BOOK.get())).displayItems((parameters, tabData) -> {
+	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB = REGISTRY.register("tab",
+			() -> CreativeModeTab.builder().title(Component.translatable("item_group.tanscomplexmagic.tab")).icon(() -> new ItemStack(TanscomplexmagicModItems.USER_BOOK.get())).displayItems((parameters, tabData) -> {
 				tabData.accept(TanscomplexmagicModItems.USER_BOOK.get());
-				tabData.accept(TanscomplexmagicModItems.GET_MANA_CREATIVE.get());
+				tabData.accept(TanscomplexmagicModItems.CREATIVE_MANA.get());
 			}).build());
 }

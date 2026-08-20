@@ -1,0 +1,9 @@
+{
+  "parent": "lotw:custom/lantern_stick",
+  "textures": {
+    "all": "lotw:blocks/lantern_0",
+    "particle": "lotw:blocks/lantern_0",
+    "0": "lotw:blocks/lantern_0"
+  },
+  "render_type": "solid"
+}

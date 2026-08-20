@@ -1,0 +1,9 @@
+{
+  "parent": "lotw:custom/book_close",
+  "textures": {
+    "all": "lotw:blocks/spell_book_adaptive",
+    "particle": "lotw:blocks/spell_book_adaptive",
+    "0": "lotw:blocks/spell_book_adaptive"
+  },
+  "render_type": "solid"
+}

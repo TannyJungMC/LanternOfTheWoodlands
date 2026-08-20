@@ -1,0 +1,9 @@
+{
+  "parent": "lotw:custom/bookshelf",
+  "textures": {
+    "all": "lotw:blocks/bookshelf",
+    "particle": "lotw:blocks/bookshelf",
+    "0": "lotw:blocks/bookshelf"
+  },
+  "render_type": "solid"
+}

@@ -5,7 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;
@@ -128,6 +127,8 @@ public class EventCenter {
     public static void eventWorldStart (ServerStartedEvent event) {
 
         ServerLevel level_server = event.getServer().overworld();
+
+        Core.generateDataWorld(level_server);
         Core.restart(level_server, true, false);
 
     }
@@ -171,7 +172,7 @@ public class EventCenter {
         ServerPlayer player_server = (ServerPlayer) event.getEntity();
         ServerLevel level_server = player_server.serverLevel();
 
-        NetworkManager.runServerCore(player_server, "nbt", "sync_all", new CompoundTag());
+        NetworkManager.runClientCore(player_server, "nbt", "sync", NBTManager.Mob.getAllMergeReady(player_server));
 
         if (first_player_joined == false) {
 
@@ -224,6 +225,20 @@ public class EventCenter {
     }
 
     @SubscribeEvent
+    public static void eventPlayerRespawn (PlayerEvent.PlayerRespawnEvent event) {
+
+        NetworkManager.runClientCore(event.getEntity(), "nbt", "sync", NBTManager.Mob.getAllMergeReady(event.getEntity()));
+
+    }
+
+    @SubscribeEvent
+    public static void eventPlayerClone (PlayerEvent.Clone event) {
+
+        NBTManager.Mob.merge(event.getEntity(), NBTManager.Mob.getAllMergeReady(event.getOriginal()), true);
+
+    }
+
+    @SubscribeEvent
 
     /*
     (1.20.1)
@@ -259,9 +274,10 @@ public class EventCenter {
         @SubscribeEvent
         public static void eventRegisterKey (RegisterKeyMappingsEvent event) {
 
+            KeyBindingMaker.Storage.is_client_side = true;
             KeyBindings.add();
 
-            for (Map.Entry<String, KeyMapping> entry : KeyBindingMaker.keys.entrySet()) {
+            for (Map.Entry<String, KeyMapping> entry : KeyBindingMaker.Storage.keys.entrySet()) {
 
                 event.register(entry.getValue());
 
@@ -279,7 +295,7 @@ public class EventCenter {
         @SubscribeEvent
         public static void eventTick (ClientTickEvent.Post event) {
 
-            KeyBindingMaker.tick();
+            KeyBindingMaker.Storage.tick();
 
         }
 

@@ -20,7 +20,6 @@ public class TanscomplexmagicModItems {
 	public static final DeferredItem<Item> TARGET_ARROW;
 	public static final DeferredItem<Item> USER_BOOK;
 	public static final DeferredItem<Item> USER_BOOK_OPEN;
-	public static final DeferredItem<Item> USER_BOOK_OPEN_BLOCK;
 	public static final DeferredItem<Item> SPELL_HEALING_CIRCLE;
 	public static final DeferredItem<Item> REJUVENATING_MUSHROOM;
 	public static final DeferredItem<Item> SPELL_TELEPORT_CIRCLE;
@@ -29,7 +28,6 @@ public class TanscomplexmagicModItems {
 	public static final DeferredItem<Item> BOW_2;
 	public static final DeferredItem<Item> BOW_3;
 	public static final DeferredItem<Item> BOW_ARROW_SPAWN_EGG;
-	public static final DeferredItem<Item> GET_MANA_CREATIVE;
 	public static final DeferredItem<Item> LANTERN;
 	public static final DeferredItem<Item> LANTERN_1;
 	public static final DeferredItem<Item> LANTERN_2;
@@ -38,7 +36,6 @@ public class TanscomplexmagicModItems {
 	public static final DeferredItem<Item> KNIGHT_SWORD;
 	public static final DeferredItem<Item> FORGOTTEN_SWORD;
 	public static final DeferredItem<Item> SWORD_KNIGHT;
-	public static final DeferredItem<Item> MAGIC_CIRCLE_WEATHER;
 	public static final DeferredItem<Item> ZODIAC_CARD_1;
 	public static final DeferredItem<Item> ZODIAC_CARD_2;
 	public static final DeferredItem<Item> ZODIAC_CARD_3;
@@ -52,12 +49,11 @@ public class TanscomplexmagicModItems {
 	public static final DeferredItem<Item> ZODIAC_CARD_11;
 	public static final DeferredItem<Item> ZODIAC_CARD_12;
 	public static final DeferredItem<Item> ZODIAC_CARD_13;
-	public static final DeferredItem<Item> MAGIC_CIRCLE_ZODIAC;
+	public static final DeferredItem<Item> CREATIVE_MANA;
 	static {
 		TARGET_ARROW = block(TanscomplexmagicModBlocks.TARGET_ARROW);
 		USER_BOOK = REGISTRY.register("user_book", UserBookItem::new);
 		USER_BOOK_OPEN = REGISTRY.register("user_book_open", UserBookOpenItem::new);
-		USER_BOOK_OPEN_BLOCK = block(TanscomplexmagicModBlocks.USER_BOOK_OPEN_BLOCK);
 		SPELL_HEALING_CIRCLE = block(TanscomplexmagicModBlocks.SPELL_HEALING_CIRCLE);
 		REJUVENATING_MUSHROOM = block(TanscomplexmagicModBlocks.REJUVENATING_MUSHROOM);
 		SPELL_TELEPORT_CIRCLE = block(TanscomplexmagicModBlocks.SPELL_TELEPORT_CIRCLE);
@@ -66,7 +62,6 @@ public class TanscomplexmagicModItems {
 		BOW_2 = REGISTRY.register("bow_2", Bow2Item::new);
 		BOW_3 = REGISTRY.register("bow_3", Bow3Item::new);
 		BOW_ARROW_SPAWN_EGG = REGISTRY.register("bow_arrow_spawn_egg", () -> new DeferredSpawnEggItem(TanscomplexmagicModEntities.BOW_ARROW, -1, -1, new Item.Properties()));
-		GET_MANA_CREATIVE = REGISTRY.register("get_mana_creative", GetManaCreativeItem::new);
 		LANTERN = block(TanscomplexmagicModBlocks.LANTERN);
 		LANTERN_1 = block(TanscomplexmagicModBlocks.LANTERN_1);
 		LANTERN_2 = block(TanscomplexmagicModBlocks.LANTERN_2);
@@ -75,7 +70,6 @@ public class TanscomplexmagicModItems {
 		KNIGHT_SWORD = REGISTRY.register("knight_sword", KnightSwordItem::new);
 		FORGOTTEN_SWORD = REGISTRY.register("forgotten_sword", ForgottenSwordItem::new);
 		SWORD_KNIGHT = block(TanscomplexmagicModBlocks.SWORD_KNIGHT);
-		MAGIC_CIRCLE_WEATHER = REGISTRY.register("magic_circle_weather", MagicCircleWeatherItem::new);
 		ZODIAC_CARD_1 = REGISTRY.register("zodiac_card_1", ZodiacCard1Item::new);
 		ZODIAC_CARD_2 = REGISTRY.register("zodiac_card_2", ZodiacCard2Item::new);
 		ZODIAC_CARD_3 = REGISTRY.register("zodiac_card_3", ZodiacCard3Item::new);
@@ -89,7 +83,7 @@ public class TanscomplexmagicModItems {
 		ZODIAC_CARD_11 = REGISTRY.register("zodiac_card_11", ZodiacCard11Item::new);
 		ZODIAC_CARD_12 = REGISTRY.register("zodiac_card_12", ZodiacCard12Item::new);
 		ZODIAC_CARD_13 = REGISTRY.register("zodiac_card_13", ZodiacCard13Item::new);
-		MAGIC_CIRCLE_ZODIAC = REGISTRY.register("magic_circle_zodiac", MagicCircleZodiacItem::new);
+		CREATIVE_MANA = REGISTRY.register("creative_mana", CreativeManaItem::new);
 	}
 
 	// Start of user code block custom items

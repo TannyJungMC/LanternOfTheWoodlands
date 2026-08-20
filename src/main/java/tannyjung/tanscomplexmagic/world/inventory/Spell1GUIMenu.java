@@ -1,9 +1,14 @@
 package tannyjung.tanscomplexmagic.world.inventory;
 
+import tannyjung.tanscomplexmagic.procedures.Spell4AbilityEndProcedure;
+import tannyjung.tanscomplexmagic.procedures.KEYSpell4ActivateRunProcedure;
 import tannyjung.tanscomplexmagic.init.TanscomplexmagicModMenus;
 
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.event.entity.player.PlayerContainerEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.bus.api.SubscribeEvent;
 
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.Level;
@@ -22,6 +27,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Collections;
 
+@EventBusSubscriber
 public class Spell1GUIMenu extends AbstractContainerMenu implements TanscomplexmagicModMenus.MenuAccessor {
 	public final Map<String, Object> menuState = new HashMap<>() {
 		@Override
@@ -76,6 +82,12 @@ public class Spell1GUIMenu extends AbstractContainerMenu implements Tanscomplexm
 	}
 
 	@Override
+	public void removed(Player playerIn) {
+		super.removed(playerIn);
+		Spell4AbilityEndProcedure.execute(entity);
+	}
+
+	@Override
 	public Map<Integer, Slot> getSlots() {
 		return Collections.unmodifiableMap(customSlots);
 	}
@@ -83,5 +95,17 @@ public class Spell1GUIMenu extends AbstractContainerMenu implements Tanscomplexm
 	@Override
 	public Map<String, Object> getMenuState() {
 		return menuState;
+	}
+
+	@SubscribeEvent
+	public static void onContainerOpen(PlayerContainerEvent.Open event) {
+		Player entity = event.getEntity();
+		if (event.getContainer() instanceof Spell1GUIMenu menu) {
+			Level world = menu.world;
+			double x = menu.x;
+			double y = menu.y;
+			double z = menu.z;
+			KEYSpell4ActivateRunProcedure.execute(world, x, y, z, entity);
+		}
 	}
 }

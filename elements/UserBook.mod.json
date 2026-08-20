@@ -5,14 +5,15 @@
     "renderType": 1,
     "texture": "minecraft:knowledge_book",
     "customModelName": "book:default",
+    "guiTexture": "",
     "customProperties": {},
     "states": [],
     "animations": [],
-    "name": "Lantern of The Woodlands - User Book",
+    "name": "Lantern of the Woodlands - The User Book",
     "rarity": "COMMON",
     "creativeTabs": [
       {
-        "value": "CUSTOM:LotwTab"
+        "value": "CUSTOM:Tab"
       }
     ],
     "stackSize": 1,

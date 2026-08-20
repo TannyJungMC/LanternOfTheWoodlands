@@ -1,0 +1,8 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "lotw:blocks/flower_of_resurrestion5",
+    "particle": "lotw:blocks/flower_of_resurrestion5"
+  },
+  "render_type": "cutout"
+}

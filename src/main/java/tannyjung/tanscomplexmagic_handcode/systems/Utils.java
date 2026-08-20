@@ -1,6 +1,5 @@
 package tannyjung.tanscomplexmagic_handcode.systems;
 
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import tannyjung.tanscomplexmagic_core.Core;
@@ -18,7 +17,7 @@ public class Utils {
 
         }
 
-        NBTManager.Mob.setNumber(player_server, "main", "mana", mana - amount);
+        NBTManager.Mob.setNumber(player_server, "main", "mana", mana - amount, true);
         return true;
 
     }

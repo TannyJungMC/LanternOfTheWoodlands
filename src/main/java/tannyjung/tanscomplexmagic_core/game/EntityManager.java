@@ -4,6 +4,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -128,7 +129,7 @@ public class EntityManager {
 
     public static Vec3 getPosRay (Entity entity, double distance) {
 
-        return entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(distance)), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity)).getLocation();
+        return entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(distance)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getLocation();
 
     }
 
@@ -189,42 +190,7 @@ public class EntityManager {
 
     public static class Population {
 
-        private static class Request {
-
-            String id;
-            String name;
-            List<String> tag;
-
-            private Request (String id, String name, List<String> tag) {
-
-                this.id = id;
-                this.name = name;
-                this.tag = tag;
-
-            }
-
-            @Override
-            public boolean equals (Object object) {
-
-                if (object instanceof Request request) {
-
-                    return request.id.equals(id) == true && request.name.equals(name) == true && request.tag.equals(tag) == true;
-
-                }
-
-                return false;
-
-            }
-
-            @Override
-            public int hashCode () {
-
-                return Objects.hash(id, name, tag);
-
-            }
-
-        }
-
+        private record Request (String id, String name, List<String> tag) {}
         private static final Map<Request, List<Entity>> population = new HashMap<>();
         private static final Set<Request> pause_updatable = new HashSet<>();
 
@@ -532,15 +498,33 @@ public class EntityManager {
 
         }
 
+        public static List<ServerPlayer> filterPlayerServer (List<Entity> entities) {
+
+            List<ServerPlayer> list = new ArrayList<>();
+
+            for (Entity entity : entities) {
+
+                if (entity instanceof ServerPlayer test) {
+
+                    list.add(test);
+
+                }
+
+            }
+
+            return list;
+
+        }
+
         public static List<Entity> filterLivingEntity (List<Entity> entities) {
 
             List<Entity> list = new ArrayList<>();
 
             for (Entity entity : entities) {
 
-                if (entity instanceof LivingEntity entity_living) {
+                if (entity instanceof LivingEntity test) {
 
-                    list.add(entity_living);
+                    list.add(test);
 
                 }
 

@@ -1,0 +1,7 @@
+{
+  "parent": "tanscomplexmagic:custom/lantern_mini",
+  "textures": {
+    "0": "tanscomplexmagic:block/lantern_mini3",
+    "particle": "minecraft:item/lantern"
+  }
+}

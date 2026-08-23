@@ -3,7 +3,7 @@
   "textures": {
     "all": "tanscomplexmagic:block/sword_knight",
     "particle": "tanscomplexmagic:block/sword_knight",
-    "0": "tanscomplexmagic:block/sword_knight"
+    "0": "tanscomplexmagic:block/"
   },
   "render_type": "solid"
 }

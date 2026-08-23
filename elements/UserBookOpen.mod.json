@@ -4,7 +4,7 @@
   "definition": {
     "renderType": 1,
     "texture": "minecraft:knowledge_book",
-    "customModelName": "book_open:default",
+    "customModelName": "book_open:user_book",
     "guiTexture": "",
     "customProperties": {},
     "states": [],
@@ -46,10 +46,10 @@
     "inventorySize": 9,
     "inventoryStackSize": 64,
     "onRightClickedInAir": {
-      "name": "UserBookRightClick"
+      "name": "UserBookWhenRightClick"
     },
     "onRightClickedOnBlock": {
-      "name": "UserBookRightClick"
+      "name": "UserBookWhenRightClick"
     },
     "enableRanged": false,
     "shootConstantly": false,

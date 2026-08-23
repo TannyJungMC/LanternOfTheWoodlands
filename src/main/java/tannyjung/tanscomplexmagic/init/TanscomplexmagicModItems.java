@@ -50,6 +50,7 @@ public class TanscomplexmagicModItems {
 	public static final DeferredItem<Item> ZODIAC_CARD_12;
 	public static final DeferredItem<Item> ZODIAC_CARD_13;
 	public static final DeferredItem<Item> CREATIVE_MANA;
+	public static final DeferredItem<Item> LANTERN_MINI;
 	static {
 		TARGET_ARROW = block(TanscomplexmagicModBlocks.TARGET_ARROW);
 		USER_BOOK = REGISTRY.register("user_book", UserBookItem::new);
@@ -84,6 +85,7 @@ public class TanscomplexmagicModItems {
 		ZODIAC_CARD_12 = REGISTRY.register("zodiac_card_12", ZodiacCard12Item::new);
 		ZODIAC_CARD_13 = REGISTRY.register("zodiac_card_13", ZodiacCard13Item::new);
 		CREATIVE_MANA = REGISTRY.register("creative_mana", CreativeManaItem::new);
+		LANTERN_MINI = REGISTRY.register("lantern_mini", LanternMiniItem::new);
 	}
 
 	// Start of user code block custom items

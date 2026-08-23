@@ -44,6 +44,12 @@ public class GUIManager {
 
         };
 
+        if (Storage.getNumber(group, name) == 0) {
+
+            return;
+
+        }
+
         NBTManager.Mob.setText(player_server, "gui", "group", group, true);
         NBTManager.Mob.setText(player_server, "gui", "name", name, true);
         player_server.openMenu(provider, player_server.blockPosition());
@@ -58,12 +64,11 @@ public class GUIManager {
 
     public static class Storage {
 
-        private static final Map<String, LinkedHashMap<String, Integer>> map_number = new HashMap<>();
-        private static final Map<String, LinkedHashMap<String, Runnable>> map_data = new HashMap<>();
+        private static final Map<String, LinkedHashMap<String, Runnable>> map = new HashMap<>();
 
         public static void draw (String group, String name) {
 
-            Map<String, Runnable> data = map_data.get(group);
+            Map<String, Runnable> data = map.get(group);
 
             if (data == null) {
 
@@ -85,38 +90,67 @@ public class GUIManager {
 
         public static void add (String group, String name, Runnable runnable) {
 
-            LinkedHashMap<String, Integer> get_number = map_number.get(group);
-
-            if (get_number == null) {
-
-                get_number = new LinkedHashMap<>();
-                map_number.put(group, get_number);
-                map_data.put(group, new LinkedHashMap<>());
-
-            }
-
-            get_number.put(name, get_number.size() + 1);
-            map_data.get(group).put(name, runnable);
+            map.computeIfAbsent(group, create -> new LinkedHashMap<>()).put(name, runnable);
 
         }
 
         public static int getNumber (String group, String name) {
 
-            LinkedHashMap<String, Integer> number = map_number.get(group);
+            LinkedHashMap<String, Runnable> data = map.get(group);
 
-            if (number == null) {
+            if (data == null) {
 
                 return 0;
 
             }
 
-            return number.get(name);
+            int number = 1;
+
+            for (Map.Entry<String, Runnable> entry : data.entrySet()) {
+
+                if (entry.getKey().equals(name) == true) {
+
+                    return number;
+
+                }
+
+                number = number + 1;
+
+            }
+
+            return 0;
+
+        }
+
+        public static String getNameByNumber (String group, int number) {
+
+            LinkedHashMap<String, Runnable> data = map.get(group);
+
+            if (data == null) {
+
+                return "";
+
+            }
+
+            for (Map.Entry<String, Runnable> entry : data.entrySet()) {
+
+                if (number <= 1) {
+
+                    return entry.getKey();
+
+                }
+
+                number = number - 1;
+
+            }
+
+            return "";
 
         }
 
         public static String getNamePrevious (String group, String name) {
 
-            LinkedHashMap<String, Runnable> data = map_data.get(group);
+            LinkedHashMap<String, Runnable> data = map.get(group);
 
             if (data == null) {
 
@@ -146,7 +180,7 @@ public class GUIManager {
 
         public static String getNameNext (String group, String name) {
 
-            LinkedHashMap<String, Runnable> data = map_data.get(group);
+            LinkedHashMap<String, Runnable> data = map.get(group);
 
             if (data == null) {
 

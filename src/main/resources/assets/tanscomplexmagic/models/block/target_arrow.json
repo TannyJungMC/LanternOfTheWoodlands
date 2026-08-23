@@ -3,7 +3,7 @@
   "textures": {
     "all": "tanscomplexmagic:block/target_arrow",
     "particle": "tanscomplexmagic:block/target_arrow",
-    "1": "tanscomplexmagic:block/target_arrow"
+    "1": "tanscomplexmagic:block/"
   },
   "render_type": "cutout"
 }

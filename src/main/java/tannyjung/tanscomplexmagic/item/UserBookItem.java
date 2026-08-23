@@ -1,7 +1,7 @@
 package tannyjung.tanscomplexmagic.item;
 
-import tannyjung.tanscomplexmagic.procedures.UserBookRightClickProcedure;
-import tannyjung.tanscomplexmagic.procedures.UserBookPlaceProcedure;
+import tannyjung.tanscomplexmagic.procedures.UserBookWhenRightClickProcedure;
+import tannyjung.tanscomplexmagic.procedures.UserBookWhenRightClickAtBlockProcedure;
 
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.api.distmarker.Dist;
@@ -42,14 +42,14 @@ public class UserBookItem extends Item {
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
 		InteractionResultHolder<ItemStack> ar = super.use(world, entity, hand);
-		UserBookRightClickProcedure.execute(entity);
+		UserBookWhenRightClickProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity);
 		return ar;
 	}
 
 	@Override
 	public InteractionResult useOn(UseOnContext context) {
 		super.useOn(context);
-		UserBookPlaceProcedure.execute(context.getLevel(), context.getClickedPos().getX(), context.getClickedPos().getY(), context.getClickedPos().getZ(), context.getPlayer());
+		UserBookWhenRightClickAtBlockProcedure.execute(context.getLevel(), context.getClickedPos().getX(), context.getClickedPos().getY(), context.getClickedPos().getZ(), context.getPlayer());
 		return InteractionResult.SUCCESS;
 	}
 }

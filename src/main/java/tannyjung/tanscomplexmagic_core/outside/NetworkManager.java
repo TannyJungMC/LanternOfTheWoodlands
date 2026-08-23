@@ -12,12 +12,11 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import tannyjung.tanscomplexmagic.TanscomplexmagicMod;
 import tannyjung.tanscomplexmagic_core.Core;
-import tannyjung.tanscomplexmagic_core.game.ItemManager;
-import tannyjung.tanscomplexmagic_core.game.KeyBindingMaker;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
 import tannyjung.tanscomplexmagic_core.game.screen.ScreenDrawing;
 import tannyjung.tanscomplexmagic_handcode.core.Networks;
@@ -36,40 +35,40 @@ public record NetworkManager (CompoundTag tag) implements CustomPacketPayload {
 
     public static void receive (NetworkManager data, IPayloadContext context) {
 
-        Player player = context.player();
         boolean is_core = data.tag.getBoolean("is_core");
-        boolean is_client = player.level().isClientSide;
         String type = data.tag.getString("type");
-        String work = data.tag.getString("work");
+        String name = data.tag.getString("name");
         CompoundTag extra = data.tag.getCompound("extra");
 
-        sort(player, is_core, is_client, type, work, extra);
+        Player player = context.player();
+        Level level = player.level();
 
-    }
+        if (level.isClientSide == true) {
 
-    public static void sort (Player player, boolean is_core, boolean is_client, String type, String work, CompoundTag extra) {
+            LocalPlayer player_local = (LocalPlayer) player;
 
-        if (is_core == true) {
+            if (is_core == true) {
 
-            if (is_client == true) {
-
-                BuiltIn.client((LocalPlayer) player, type, work, extra);
+                BuiltIn.client(player_local, type, name, extra);
 
             } else {
 
-                BuiltIn.server((ServerPlayer) player, type, work, extra);
+                Networks.client(player_local, type, name, extra);
 
             }
 
         } else {
 
-            if (is_client == true) {
+            ServerPlayer player_server = (ServerPlayer) player;
+            ServerLevel level_server = (ServerLevel) level;
 
-                Networks.client((LocalPlayer) player, type, work, extra);
+            if (is_core == true) {
+
+                BuiltIn.server(level_server, player_server, type, name, extra);
 
             } else {
 
-                Networks.server((ServerPlayer) player, type, work, extra);
+                Networks.server(level_server, player_server, type, name, extra);
 
             }
 
@@ -77,99 +76,54 @@ public record NetworkManager (CompoundTag tag) implements CustomPacketPayload {
 
     }
 
-    public static void runClient (Player player, String type, String work, CompoundTag extra) {
+    private static CompoundTag convertData (boolean is_core, String type, String name, CompoundTag extra) {
 
-        CompoundTag data = new CompoundTag();
-        data.putBoolean("is_core", false);
-        data.putString("type", type);
-        data.putString("work", work);
-        data.put("extra", extra);
-
-        if (player instanceof ServerPlayer player_server) {
-
-            PacketDistributor.sendToPlayer(player_server, new NetworkManager(data));
-
-        } else {
-
-            sort(player, false, true, type, work, extra);
-
-        }
+        CompoundTag tag = new CompoundTag();
+        tag.putBoolean("is_core", is_core);
+        tag.putString("type", type);
+        tag.putString("name", name);
+        tag.put("extra", extra);
+        return tag;
 
     }
 
-    public static void runServer (Player player, String type, String work, CompoundTag extra) {
+    public static void runClient (ServerPlayer player_server, String type, String name, CompoundTag extra) {
 
-        CompoundTag data = new CompoundTag();
-        data.putBoolean("is_core", false);
-        data.putString("type", type);
-        data.putString("work", work);
-        data.put("extra", extra);
-
-        if (player instanceof LocalPlayer) {
-
-            PacketDistributor.sendToServer(new NetworkManager(data));
-
-        } else {
-
-            sort(player, false, false, type, work, extra);
-
-        }
+        PacketDistributor.sendToPlayer(player_server, new NetworkManager(convertData(false, type, name, extra)));
 
     }
 
-    public static void runClientCore (Player player, String type, String work, CompoundTag extra) {
+    public static void runServer (String type, String name, CompoundTag extra) {
 
-        CompoundTag data = new CompoundTag();
-        data.putBoolean("is_core", true);
-        data.putString("type", type);
-        data.putString("work", work);
-        data.put("extra", extra);
-
-        if (player instanceof ServerPlayer player_server) {
-
-            PacketDistributor.sendToPlayer(player_server, new NetworkManager(data));
-
-        } else {
-
-            sort(player, true, true, type, work, extra);
-
-        }
+        PacketDistributor.sendToServer(new NetworkManager(convertData(false, type, name, extra)));
 
     }
 
-    public static void runServerCore (Player player, String type, String work, CompoundTag extra) {
+    public static void runClientCore (ServerPlayer player_server, String type, String name, CompoundTag extra) {
 
-        CompoundTag data = new CompoundTag();
-        data.putBoolean("is_core", true);
-        data.putString("type", type);
-        data.putString("work", work);
-        data.put("extra", extra);
+        PacketDistributor.sendToPlayer(player_server, new NetworkManager(convertData(true, type, name, extra)));
 
-        if (player instanceof LocalPlayer) {
+    }
 
-            PacketDistributor.sendToServer(new NetworkManager(data));
+    public static void runServerCore (String type, String name, CompoundTag extra) {
 
-        } else {
-
-            sort(player, true, false, type, work, extra);
-
-        }
+        PacketDistributor.sendToServer(new NetworkManager(convertData(true, type, name, extra)));
 
     }
 
     private static class BuiltIn {
 
-        private static void client (LocalPlayer player_local, String type, String work, CompoundTag extra) {
+        private static void client (LocalPlayer player_local, String type, String name, CompoundTag extra) {
 
             if (type.equals("nbt") == true) {
 
                 {
 
-                    if (work.equals("sync") == true) {
+                    if (name.equals("sync") == true) {
 
                         NBTManager.Mob.merge(player_local, extra, false);
 
-                    } else if (work.equals("sync_list_add") == true) {
+                    } else if (name.equals("sync_list_add") == true) {
 
                         {
 
@@ -190,13 +144,13 @@ public record NetworkManager (CompoundTag tag) implements CustomPacketPayload {
 
         }
 
-        private static void server (ServerPlayer player_server, String type, String work, CompoundTag extra) {
+        private static void server (ServerLevel level_server, ServerPlayer player_server, String type, String name, CompoundTag extra) {
 
             if (type.equals("gui") == true) {
 
                 {
 
-                    if (work.equals("switch") == true) {
+                    if (name.equals("switch") == true) {
 
                         {
 
@@ -206,7 +160,7 @@ public record NetworkManager (CompoundTag tag) implements CustomPacketPayload {
 
                             if (is_item == true) {
 
-                                ItemStack item = ItemManager.getSlot(player_server, EquipmentSlot.MAINHAND);
+                                ItemStack item = player_server.getItemBySlot(EquipmentSlot.MAINHAND);
                                 NBTManager.Item.setLogic(item, nbt_type, nbt_name, NBTManager.Item.getLogic(item, nbt_type, nbt_name) == false);
 
                             } else {
@@ -217,7 +171,28 @@ public record NetworkManager (CompoundTag tag) implements CustomPacketPayload {
 
                         }
 
-                    } else if (work.equals("slider") == true) {
+                    } else if (name.equals("switch") == true) {
+
+                        {
+
+                            boolean is_item = extra.getBoolean("is_item");
+                            String nbt_type = extra.getString("nbt_type");
+                            String nbt_name = extra.getString("nbt_name");
+
+                            if (is_item == true) {
+
+                                ItemStack item = player_server.getItemBySlot(EquipmentSlot.MAINHAND);
+                                NBTManager.Item.setLogic(item, nbt_type, nbt_name, NBTManager.Item.getLogic(item, nbt_type, nbt_name) == false);
+
+                            } else {
+
+                                NBTManager.Mob.setLogic(player_server, nbt_type, nbt_name, NBTManager.Mob.getLogic(player_server, nbt_type, nbt_name) == false, true);
+
+                            }
+
+                        }
+
+                    } else if (name.equals("slider") == true) {
 
                         {
 
@@ -228,7 +203,7 @@ public record NetworkManager (CompoundTag tag) implements CustomPacketPayload {
 
                             if (is_item == true) {
 
-                                ItemStack item = ItemManager.getSlot(player_server, EquipmentSlot.MAINHAND);
+                                ItemStack item = player_server.getItemBySlot(EquipmentSlot.MAINHAND);
                                 NBTManager.Item.setNumber(item, nbt_type, nbt_name, nbt_value);
 
                             } else {
@@ -239,7 +214,7 @@ public record NetworkManager (CompoundTag tag) implements CustomPacketPayload {
 
                         }
 
-                    } else if (work.equals("radio") == true) {
+                    } else if (name.equals("radio") == true) {
 
                         {
 
@@ -250,7 +225,7 @@ public record NetworkManager (CompoundTag tag) implements CustomPacketPayload {
 
                             if (is_item == true) {
 
-                                ItemStack item = ItemManager.getSlot(player_server, EquipmentSlot.MAINHAND);
+                                ItemStack item = player_server.getItemBySlot(EquipmentSlot.MAINHAND);
                                 NBTManager.Item.setText(item, nbt_type, nbt_name, nbt_value);
 
                             } else {
@@ -261,7 +236,7 @@ public record NetworkManager (CompoundTag tag) implements CustomPacketPayload {
 
                         }
 
-                    } else if (work.equals("text_box") == true) {
+                    } else if (name.equals("text_box") == true) {
 
                         {
 
@@ -272,7 +247,7 @@ public record NetworkManager (CompoundTag tag) implements CustomPacketPayload {
 
                             if (is_item == true) {
 
-                                ItemStack item = ItemManager.getSlot(player_server, EquipmentSlot.MAINHAND);
+                                ItemStack item = player_server.getItemBySlot(EquipmentSlot.MAINHAND);
                                 NBTManager.Item.setText(item, nbt_type, nbt_name, nbt_value);
 
                             } else {
@@ -283,28 +258,27 @@ public record NetworkManager (CompoundTag tag) implements CustomPacketPayload {
 
                         }
 
-                    } else if (work.startsWith("board_entity_") == true) {
+                    } else if (name.startsWith("board_entity_") == true) {
 
                         {
 
-                            ServerLevel level_server = player_server.serverLevel();
                             String nbt_tag = extra.getString("nbt_tag");
 
-                            if (work.equals("board_entity_add") == true) {
+                            if (name.equals("board_entity_add") == true) {
 
-                                ScreenDrawing.ComponentAdvance.Board.ListEntity.runAdd(player_server, nbt_tag);
+                                ScreenDrawing.ComponentWidget.Board.ListEntity.runAdd(player_server, nbt_tag);
 
-                            } else if (work.equals("board_entity_clear") == true) {
+                            } else if (name.equals("board_entity_clear") == true) {
 
-                                ScreenDrawing.ComponentAdvance.Board.ListEntity.runClear(player_server, nbt_tag);
+                                ScreenDrawing.ComponentWidget.Board.ListEntity.runClear(player_server, nbt_tag);
 
-                            } else if (work.equals("board_entity_remove") == true) {
+                            } else if (name.equals("board_entity_remove") == true) {
 
-                                ScreenDrawing.ComponentAdvance.Board.ListEntity.runRemove(level_server, player_server, nbt_tag);
+                                ScreenDrawing.ComponentWidget.Board.ListEntity.runRemove(level_server, player_server, nbt_tag);
 
                             }
 
-                            ScreenDrawing.ComponentAdvance.Board.ListEntity.runRefresh(level_server, player_server, nbt_tag);
+                            ScreenDrawing.ComponentWidget.Board.ListEntity.runRefresh(level_server, player_server, nbt_tag);
 
                         }
 
@@ -316,7 +290,7 @@ public record NetworkManager (CompoundTag tag) implements CustomPacketPayload {
 
                 {
 
-                    if (work.equals("sync_all") == true) {
+                    if (name.equals("sync_all") == true) {
 
                         {
 
@@ -326,7 +300,7 @@ public record NetworkManager (CompoundTag tag) implements CustomPacketPayload {
 
                         }
 
-                    } else if (work.equals("sync_one") == true) {
+                    } else if (name.equals("sync_one") == true) {
 
                         {
 
@@ -335,15 +309,6 @@ public record NetworkManager (CompoundTag tag) implements CustomPacketPayload {
                         }
 
                     }
-
-                }
-
-            } else if (type.equals("key") == true) {
-
-                {
-
-                    String name = extra.getString("name");
-                    KeyBindingMaker.Storage.run(player_server, work, name);
 
                 }
 

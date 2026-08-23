@@ -3,26 +3,42 @@ package tannyjung.tanscomplexmagic_core.game;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
+import tannyjung.tanscomplexmagic.init.TanscomplexmagicModItems;
 
 public class ItemManager {
 
-    public static ItemStack getSlot (Entity entity, EquipmentSlot equipment_slot) {
+    public static void spawn (ServerLevel level_server, Vec3 vec3, ItemStack item) {
 
-        if (entity instanceof LivingEntity living_entity) {
+        level_server.addFreshEntity(new ItemEntity(level_server, vec3.x, vec3.y, vec3.z, item));
 
-            return living_entity.getItemBySlot(equipment_slot);
+    }
+
+    public static String toID (ItemStack item) {
+
+        return String.valueOf(item.getItem());
+
+    }
+
+    public static ItemStack fromID (ServerLevel level_server, String id) {
+
+        Item item = level_server.registryAccess().registryOrThrow(Registries.ITEM).get(ResourceLocation.parse(id));
+
+        if (item == null) {
+
+            return ItemStack.EMPTY;
 
         }
 
-        return ItemStack.EMPTY;
+        return item.getDefaultInstance();
 
     }
 
@@ -32,67 +48,52 @@ public class ItemManager {
 
     }
 
-    public static void setCount (Entity entity, EquipmentSlot equipment_slot, int value) {
+    public static void give (ServerPlayer player_server, ItemStack item) {
 
-        if (entity instanceof LivingEntity living_entity) {
-
-            ItemStack item = living_entity.getItemBySlot(equipment_slot);
-            item.setCount(value);
-
-        }
+        player_server.getInventory().setItem(player_server.getInventory().getFreeSlot(), item);
 
     }
 
-    public static void addCount (Entity entity, EquipmentSlot equipment_slot, int value) {
+    public static void removeFromBody (ServerPlayer player_server, Item item) {
 
-        if (entity instanceof LivingEntity living_entity) {
-
-            ItemStack item = living_entity.getItemBySlot(equipment_slot);
-            item.setCount(item.getCount() + value);
-
-        }
+        player_server.getInventory().clearOrCountMatchingItems(scan -> scan.is(item) == true, 3, player_server.inventoryMenu.getCraftSlots());
 
     }
 
     public static void setCooldown (Entity entity, ItemStack item, int tick) {
 
-        if (entity instanceof Player player) {
+        if (entity instanceof ServerPlayer player_server) {
 
-            player.getCooldowns().addCooldown(item.getItem(), tick);
+            player_server.getCooldowns().addCooldown(item.getItem(), tick);
 
         }
 
     }
 
-    public static void addDamage (ItemStack item, int value) {
+    public static void addDurability (ItemStack item, int value) {
 
-        item.setDamageValue(item.getDamageValue() + value);
+        int damage = item.getDamageValue() - value;
 
-        if (item.getMaxDamage() < item.getDamageValue()) {
+        if (damage < 0) {
+
+            damage = 0;
+
+        }
+
+        item.setDamageValue(damage);
+
+    }
+
+    public static void reduceDurability (ItemStack item, int value) {
+
+        int damage = item.getDamageValue() + value;
+        item.setDamageValue(damage);
+
+        if (item.getMaxDamage() < damage) {
 
             item.shrink(1);
 
         }
-
-    }
-
-    public static void spawn (ServerLevel level_server, Vec3 vec3, ItemStack item) {
-
-        ItemEntity entityToSpawn = new ItemEntity(level_server, vec3.x, vec3.y, vec3.z, item);
-        level_server.addFreshEntity(entityToSpawn);
-
-    }
-
-    public static String toID (ItemStack item) {
-
-        String id = item.getDescriptionId();
-        return id.substring(id.indexOf(".") + 1).replace(".", ":");
-
-    }
-
-    public static ItemStack fromID (ServerLevel level_server, String id) {
-
-        return level_server.registryAccess().registryOrThrow(Registries.ITEM).get(ResourceLocation.parse(id)).getDefaultInstance();
 
     }
 

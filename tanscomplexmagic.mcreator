@@ -981,59 +981,6 @@
       }
     },
     {
-      "name": "UserBookRightClick",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "user_book_right_click",
-      "metadata": {
-        "files": [
-          "src/main/java/tannyjung/tanscomplexmagic/procedures/UserBookRightClickProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ]
-      }
-    },
-    {
-      "name": "UserBookPlace",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "user_book_place",
-      "metadata": {
-        "files": [
-          "src/main/java/tannyjung/tanscomplexmagic/procedures/UserBookPlaceProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      },
-      "path": "~/.../Items and Blocks"
-    },
-    {
       "name": "PersonalWeaponGUIbuttonSet",
       "type": "procedure",
       "compiles": true,
@@ -4821,8 +4768,7 @@
         "files": [
           "src/main/resources/data/tanscomplexmagic/recipe/user_book.json"
         ]
-      },
-      "path": "~/.../Items and Blocks"
+      }
     },
     {
       "name": "Spell1GUI",
@@ -6190,6 +6136,100 @@
       "registry_name": "tab",
       "metadata": {
         "files": []
+      }
+    },
+    {
+      "name": "UserBookWhenRightClick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "user_book_when_right_click",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/tannyjung/tanscomplexmagic/procedures/UserBookWhenRightClickProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "ParticleFireballWhite",
+      "type": "particle",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "particle_fireball_white",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/tanscomplexmagic/particles/particle_fireball_white.json",
+          "src/main/java/tannyjung/tanscomplexmagic/client/particle/ParticleFireballWhiteParticle.java"
+        ]
+      }
+    },
+    {
+      "name": "LanternMini",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "lantern_mini",
+      "metadata": {
+        "files": [
+          "src/main/java/tannyjung/tanscomplexmagic/item/LanternMiniItem.java",
+          "src/main/resources/assets/tanscomplexmagic/models/item/lantern_mini.json"
+        ]
+      }
+    },
+    {
+      "name": "UserBookWhenRightClickAtBlock",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "user_book_when_right_click_at_block",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/tannyjung/tanscomplexmagic/procedures/UserBookWhenRightClickAtBlockProcedure.java"
+        ]
       }
     }
   ],
@@ -9373,7 +9413,8 @@
       "item.tanscomplexmagic.creative_mana.description_0": "§8--------------------------------------------------",
       "item.tanscomplexmagic.creative_mana.description_1": "§8Give user full mana when in inventory",
       "item.tanscomplexmagic.creative_mana": "Creative Mana",
-      "item_group.tanscomplexmagic.tab": "Tan\u0027s Complex Magic"
+      "item_group.tanscomplexmagic.tab": "Tan\u0027s Complex Magic",
+      "item.tanscomplexmagic.lantern_mini": "For Item Display"
     }
   },
   "metadata": {
@@ -9381,6 +9422,8 @@
       "src/main/java/tannyjung/tanscomplexmagic/network/MenuStateUpdateMessage.java",
       "src/main/java/tannyjung/tanscomplexmagic/init/TanscomplexmagicModScreens.java",
       "src/main/java/tannyjung/tanscomplexmagic/init/TanscomplexmagicModMenus.java",
+      "src/main/java/tannyjung/tanscomplexmagic/init/TanscomplexmagicModParticles.java",
+      "src/main/java/tannyjung/tanscomplexmagic/init/TanscomplexmagicModParticleTypes.java",
       "src/main/java/tannyjung/tanscomplexmagic/init/TanscomplexmagicModBlocks.java",
       "src/main/java/tannyjung/tanscomplexmagic/init/TanscomplexmagicModBlockEntities.java",
       "src/main/java/tannyjung/tanscomplexmagic/init/TanscomplexmagicModItems.java",

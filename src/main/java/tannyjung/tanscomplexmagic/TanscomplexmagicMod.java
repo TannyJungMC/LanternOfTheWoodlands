@@ -45,6 +45,7 @@ public class TanscomplexmagicMod {
 		TanscomplexmagicModTabs.REGISTRY.register(modEventBus);
 		TanscomplexmagicModVariables.ATTACHMENT_TYPES.register(modEventBus);
 		TanscomplexmagicModMenus.REGISTRY.register(modEventBus);
+		TanscomplexmagicModParticleTypes.REGISTRY.register(modEventBus);
 		// Start of user code block mod init
 		tannyjung.tanscomplexmagic_core.Core.start(modEventBus);
 		// End of user code block mod init

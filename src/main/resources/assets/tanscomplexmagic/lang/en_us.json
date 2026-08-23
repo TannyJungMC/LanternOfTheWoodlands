@@ -2443,5 +2443,6 @@
   "item.tanscomplexmagic.creative_mana.description_0": "§8--------------------------------------------------",
   "item.tanscomplexmagic.creative_mana.description_1": "§8Give user full mana when in inventory",
   "item.tanscomplexmagic.creative_mana": "Creative Mana",
-  "item_group.tanscomplexmagic.tab": "Tan\u0027s Complex Magic"
+  "item_group.tanscomplexmagic.tab": "Tan\u0027s Complex Magic",
+  "item.tanscomplexmagic.lantern_mini": "For Item Display"
 }

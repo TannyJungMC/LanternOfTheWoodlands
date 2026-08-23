@@ -4,65 +4,160 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import tannyjung.tanscomplexmagic_core.game.GameUtils;
-import tannyjung.tanscomplexmagic_core.game.NBTManager;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
+import tannyjung.tanscomplexmagic_core.Core;
+import tannyjung.tanscomplexmagic_core.game.*;
 import tannyjung.tanscomplexmagic_core.game.screen.GUIManager;
 import tannyjung.tanscomplexmagic_handcode.systems.Book;
+import tannyjung.tanscomplexmagic_handcode.systems.Spell1;
 import tannyjung.tanscomplexmagic_handcode.systems.Utils;
 
 public class Networks {
 
-    public static void client (LocalPlayer player_local, String type, String work, CompoundTag extra) {
+    public static void client (LocalPlayer player_local, String type, String name, CompoundTag extra) {
 
 
 
     }
 
-    public static void server (ServerPlayer player_server, String type, String work, CompoundTag extra) {
+    public static void server (ServerLevel level_server, ServerPlayer player_server, String type, String name, CompoundTag extra) {
 
-        if (type.equals("book") == true) {
+        if (type.equals("key") == true) {
 
             {
 
-                if (work.equals("close") == true) {
+                if (name.startsWith("main_") == true) {
 
                     {
 
-                        GameUtils.playSound((ServerLevel) player_server.level(), player_server.blockPosition(), 1.0, 10, "minecraft:item.book.page_turn");
-                        GUIManager.close(player_server);
+                        if (name.equals("main_push") == true) {
+
+                            {
+
+                                NBTManager.Mob.setLogic(player_server, "main", "is_main_key_active", true, false);
+
+                                int spam = (int) NBTManager.Mob.getNumber(player_server, "main", "main_key_spam") + 1;
+                                NBTManager.Mob.setNumber(player_server, "main", "main_key_spam", spam, false);
+
+                                Core.DelayedWork.createBasic(10, () -> {
+
+                                    if (NBTManager.Mob.getNumber(player_server, "main", "main_key_spam") == 2) {
+
+                                        Book.Placing.stop(level_server, player_server);
+
+                                    }
+
+                                    NBTManager.Mob.setNumber(player_server, "main", "main_key_spam", 0, false);
+
+                                });
+
+                                // Open Placed User Book
+                                {
+
+                                    if (NBTManager.Mob.getLogic(player_server, "main", "is_placed_user_book") == true) {
+
+                                        Vec3 vec3 = EntityManager.getPosRay(player_server, 1);
+
+                                        for (Entity entity : EntityManager.Population.getArea(level_server, vec3, 0.75, false, "", "", Utils.Tag.convertSystemSpecific(player_server, new String[]{"placed_book"}))) {
+
+                                            if (DisplayManager.getItemID(entity).equals("tanscomplexmagic:user_book_open") == false) {
+
+                                                continue;
+
+                                            }
+
+                                            Book.open(level_server, player_server);
+                                            break;
+
+                                        }
+
+                                    }
+
+                                }
+
+                            }
+
+                        } else if (name.equals("main_release") == true) {
+
+                            {
+
+                                NBTManager.Mob.setLogic(player_server, "main", "is_main_key_active", false, false);
+
+                            }
+
+                        }
 
                     }
 
-                } else if (work.equals("page_previous") == true) {
+                } else if (name.startsWith("spell1_") == true) {
 
                     {
 
-                        Book.pageTurn(player_server, false);
+                        if (name.equals("spell1_activate")) {
 
-                    }
+                            {
 
-                } else if (work.equals("page_next") == true) {
+                                if (NBTManager.Mob.getLogic(player_server, "spell1", "is_active") == true) {
 
-                    {
+                                    NBTManager.Mob.setLogic(player_server, "spell1", "is_active", false, false);
+                                    Spell1.activate(level_server, player_server);
 
-                        Book.pageTurn(player_server, true);
+                                    GameUtils.playSound(level_server, player_server.position(), 1.5, 10, "minecraft:block.note_block.chime");
 
-                    }
+                                    Core.DelayedWork.createBasic(3, () -> {
 
-                } else if (work.equals("custom_compass_set") == true) {
+                                        GameUtils.playSound(level_server, player_server.position(), 2, 10, "minecraft:block.note_block.chime");
 
-                    {
+                                    });
 
-                        NBTManager.Mob.setNumber(player_server, "book", "compassX", player_server.getX(), true);
-                        NBTManager.Mob.setNumber(player_server, "book", "compassZ", player_server.getZ(), true);
+                                } else {
 
-                    }
+                                    NBTManager.Mob.setLogic(player_server, "spell1", "is_active", true, false);
 
-                } else if (work.equals("log") == true) {
+                                    Spell1.deactivate(level_server, player_server);
 
-                    {
+                                    for (Entity entity : EntityManager.Population.getEverywhereStatic(level_server, "", "", Utils.Tag.convertSystemSpecific(player_server, new String[]{"spell1"}))) {
 
-                        Book.Log.setType(player_server);
+                                        entity.discard();
+
+                                    }
+
+                                    GameUtils.playSound(level_server, player_server.position(), 1, 20, "minecraft:block.note_block.chime");
+
+                                    Core.DelayedWork.createBasic(3, () -> {
+
+                                        GameUtils.playSound(level_server, player_server.position(), 0.5, 20, "minecraft:block.note_block.chime");
+
+                                    });
+
+                                }
+
+                            }
+
+                        } else if (name.equals("spell1_pause_all")) {
+
+                            {
+
+                                boolean value = NBTManager.Mob.getLogic(player_server, "spell1", "is_pause_all") == false;
+                                NBTManager.Mob.setLogic(player_server, "spell1", "is_pause_all", value, true);
+                                double pitch = 0.0;
+
+                                if (value == true) {
+
+                                    pitch = 1.25;
+
+                                } else {
+
+                                    pitch = 1.75;
+
+                                }
+
+                                GameUtils.playSound(level_server, player_server.position(), pitch, 10, "minecraft:block.note_block.bell");
+
+                            }
+
+                        }
 
                     }
 
@@ -70,32 +165,63 @@ public class Networks {
 
             }
 
-        } else if (type.equals("spell1") == true) {
+        } else if (type.equals("gui") == true) {
 
             {
 
-                if (work.startsWith("get_duration_") == true) {
+                if (name.startsWith("book_") == true) {
 
                     {
 
-                        work = work.substring("get_duration_".length());
-                        String positive_negative = "";
+                        if (name.equals("book_close") == true) {
 
-                        if (work.startsWith("positive") == true) {
+                            {
 
-                            positive_negative = "positive";
+                                GameUtils.playSound((ServerLevel) player_server.level(), player_server.position(), 1.0, 10, "minecraft:item.book.page_turn");
+                                GUIManager.close(player_server);
 
-                        } else {
+                            }
 
-                            positive_negative = "negative";
+                        } else if (name.equals("book_page_previous") == true) {
+
+                            Book.pageTurn(level_server, player_server, false);
+
+                        } else if (name.equals("book_page_next") == true) {
+
+                            Book.pageTurn(level_server, player_server, true);
+
+                        } else if (name.equals("book_custom_compass_set") == true) {
+
+                            {
+
+                                NBTManager.Mob.setNumber(player_server, "book", "compassX", player_server.getX(), true);
+                                NBTManager.Mob.setNumber(player_server, "book", "compassZ", player_server.getZ(), true);
+
+                            }
+
+                        } else if (name.equals("book_log") == true) {
+
+                            Book.Log.setType(player_server);
+
+                        } else if (name.startsWith("book_mark_") == true) {
+
+                            NBTManager.Mob.setText(player_server, "main", "page", name.substring("book_mark_".length()), false);
+                            Book.open(level_server, player_server);
 
                         }
 
-                        int number = Integer.parseInt(work.substring(positive_negative.length()));
+                    }
+
+                } else if (name.startsWith("spell1_get_duration") == true) {
+
+                    {
+
+                        int number = extra.getInt("number");
+                        String positive_negative = extra.getString("positive_negative");
+                        int duration_per_mana = extra.getInt("duration_per_mana");
 
                         if (Utils.trySpendMana(player_server, 1) == true) {
 
-                            int duration_per_mana = extra.getInt("duration_per_mana_" + positive_negative);
                             NBTManager.Mob.addNumber(player_server, "spell1", "card_duration_max_" + positive_negative + number, duration_per_mana, true);
 
                         }

@@ -2,10 +2,13 @@ package tannyjung.tanscomplexmagic_handcode.core;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import tannyjung.tanscomplexmagic_core.game.EntityManager;
+import tannyjung.tanscomplexmagic_core.game.GameUtils;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
 import tannyjung.tanscomplexmagic_handcode.systems.Book;
 import tannyjung.tanscomplexmagic_handcode.systems.Spell1;
+import tannyjung.tanscomplexmagic_handcode.systems.Utils;
 
 public class Loops {
 
@@ -14,6 +17,17 @@ public class Loops {
         for (ServerPlayer player_server : EntityManager.Population.filterPlayerServer(EntityManager.Population.getEverywhereStatic(level_server, "minecraft:player", "", new String[]{}))) {
 
             Spell1.loopTick(level_server, player_server);
+
+            // Placed User Book
+            {
+
+                for (Entity entity : EntityManager.Population.getEverywhereStatic(level_server, "", "", Utils.Tag.convertSystemSpecific(player_server, new String[]{"placed_book"}))) {
+
+                    Book.Placing.tick(level_server, player_server, entity);
+
+                }
+
+            }
 
         }
 

@@ -77,8 +77,7 @@ public class GUIContainer extends AbstractContainerMenu {
 
         if (player.level().isClientSide == true && player.containerMenu instanceof GUIContainer == false) {
 
-            GUIScreen.screen = null;
-            GUIScreen.player_local = null;
+            GUIScreen.close();
 
         }
 

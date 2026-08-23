@@ -4,6 +4,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -20,12 +21,16 @@ import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import tannyjung.tanscomplexmagic.TanscomplexmagicMod;
 import tannyjung.tanscomplexmagic_core.Core;
+import tannyjung.tanscomplexmagic_core.game.screen.GUIContainer;
+import tannyjung.tanscomplexmagic_core.game.screen.GUIManager;
 import tannyjung.tanscomplexmagic_core.game.screen.GUIScreen;
+import tannyjung.tanscomplexmagic_core.game.screen.ScreenDrawing;
 import tannyjung.tanscomplexmagic_core.game.world_gen.*;
 import tannyjung.tanscomplexmagic_core.outside.NetworkManager;
 import tannyjung.tanscomplexmagic_core.outside.config.CustomPackOrganizing;
 import tannyjung.tanscomplexmagic_core.outside.config.TannyPackManager;
 import tannyjung.tanscomplexmagic_handcode.core.Commands;
+import tannyjung.tanscomplexmagic_handcode.core.GUIs;
 import tannyjung.tanscomplexmagic_handcode.core.KeyBindings;
 import tannyjung.tanscomplexmagic_handcode.core.Overlays;
 
@@ -178,7 +183,7 @@ public class EventCenter {
 
             first_player_joined = true;
 
-            Core.DelayedWork.create(true, 100, () -> {
+            Core.DelayedWork.createAsync(100, () -> {
 
                 CustomPackOrganizing.Error.sendMessage(level_server);
 
@@ -227,7 +232,7 @@ public class EventCenter {
     @SubscribeEvent
     public static void eventPlayerRespawn (PlayerEvent.PlayerRespawnEvent event) {
 
-        NetworkManager.runClientCore(event.getEntity(), "nbt", "sync", NBTManager.Mob.getAllMergeReady(event.getEntity()));
+        NetworkManager.runClientCore((ServerPlayer) event.getEntity(), "nbt", "sync", NBTManager.Mob.getAllMergeReady(event.getEntity()));
 
     }
 
@@ -263,7 +268,7 @@ public class EventCenter {
 
 
         ServerLevel level_server = event.getServer().overworld();
-        Core.DelayedWork.runTick();
+        Core.DelayedWork.tick();
         Core.Loop.loopTick(level_server);
 
     }
@@ -273,9 +278,6 @@ public class EventCenter {
 
         @SubscribeEvent
         public static void eventRegisterKey (RegisterKeyMappingsEvent event) {
-
-            KeyBindingMaker.Storage.is_client_side = true;
-            KeyBindings.add();
 
             for (Map.Entry<String, KeyMapping> entry : KeyBindingMaker.Storage.keys.entrySet()) {
 
@@ -302,11 +304,13 @@ public class EventCenter {
         @SubscribeEvent(priority = EventPriority.NORMAL)
         public static void eventOverlayMenu (ScreenEvent.Render.Post event) {
 
-            Screen screen = event.getScreen();
-            GuiGraphics graphic = event.getGuiGraphics();
-            int screen_width = event.getScreen().width;
-            int screen_height = event.getScreen().height;
-            Overlays.eventMenu(screen, graphic, screen_width, screen_height);
+            if (ScreenDrawing.graphic == null) {
+
+                ScreenDrawing.graphic = event.getGuiGraphics();
+
+            }
+
+            Overlays.eventMenu();
 
         }
 
@@ -319,14 +323,25 @@ public class EventCenter {
 
             }
 
-            GuiGraphics graphic = event.getGuiGraphics();
-            Overlays.eventInGame(graphic);
+            if (ScreenDrawing.screen != null) {
 
-            if (Core.developer_mode == true) {
-
-                // ScreenDrawing.Basic.drawText(graphic, "top-left", 8, 58, 0.75, "§9Delayed Command = " + TXTFunction.count_delayed_command);
+                return;
 
             }
+
+            if (ScreenDrawing.graphic == null) {
+
+                ScreenDrawing.graphic = event.getGuiGraphics();
+
+            }
+
+            if (ScreenDrawing.player_local == null) {
+
+                ScreenDrawing.player_local = Minecraft.getInstance().player;
+
+            }
+
+            Overlays.eventInGame();
 
         }
 

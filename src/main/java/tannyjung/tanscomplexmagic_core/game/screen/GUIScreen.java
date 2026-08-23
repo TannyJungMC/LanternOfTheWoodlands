@@ -8,7 +8,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -20,22 +19,24 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
     public static final DeferredRegister<MenuType<?>> register = DeferredRegister.create(Registries.MENU, TanscomplexmagicMod.MODID);
     public static final DeferredHolder<MenuType<?>, MenuType<GUIContainer>> gui = register.register("gui", () -> IMenuTypeExtension.create(GUIContainer::new));
 
-    public static GUIScreen screen = null;
-    public static LocalPlayer player_local = null;
-    public static ItemStack item = ItemStack.EMPTY;
     public static String id_group = "";
     public static String id_name = "";
-
-    private final GUIContainer container = null;
 
     public GUIScreen (GUIContainer container, Inventory inventory, Component text) {
 
         super(container, inventory, text);
         this.imageWidth = 0;
         this.imageHeight = 0;
+        ScreenDrawing.screen = this;
+        ScreenDrawing.player_local = (LocalPlayer) container.player;
 
-        screen = this;
-        player_local = (LocalPlayer) container.player;
+    }
+
+    public static void close () {
+
+        ScreenDrawing.screen = null;
+        ScreenDrawing.graphic = null;
+        ScreenDrawing.player_local = null;
 
     }
 
@@ -46,7 +47,7 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
 
             {
 
-                GUIManager.close(player_local);
+                GUIManager.close(ScreenDrawing.player_local);
                 return true;
 
             }
@@ -119,14 +120,26 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
     @Override
     protected void renderBg (GuiGraphics graphic, float partialTicks, int mouseX, int mouseY) {
 
-        ScreenDrawing.ComponentBasic.PreCalculate.renderImage(graphic);
+        if (ScreenDrawing.graphic == null) {
+
+            ScreenDrawing.graphic = graphic;
+
+        }
+
+        ScreenDrawing.ComponentOverlay.Storage.renderImage();
 
     }
 
     @Override
     protected void renderLabels (GuiGraphics graphic, int mouseX, int mouseY) {
 
-        ScreenDrawing.ComponentBasic.PreCalculate.renderText(graphic);
+        if (ScreenDrawing.graphic == null) {
+
+            ScreenDrawing.graphic = graphic;
+
+        }
+
+        ScreenDrawing.ComponentOverlay.Storage.renderText();
 
     }
 
@@ -145,19 +158,19 @@ public class GUIScreen extends AbstractContainerScreen<GUIContainer> {
 
         public static void add (AbstractWidget widget) {
 
-            screen.addRenderableWidget(widget);
+            ScreenDrawing.screen.addRenderableWidget(widget);
 
         }
 
         public static void removeAll () {
 
-            screen.clearWidgets();
+            ScreenDrawing.screen.clearWidgets();
 
         }
 
         public static void removeSpecific (AbstractWidget widget) {
 
-            screen.removeWidget(widget);
+            ScreenDrawing.screen.removeWidget(widget);
 
         }
 

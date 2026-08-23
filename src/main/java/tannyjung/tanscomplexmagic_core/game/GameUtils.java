@@ -156,25 +156,24 @@ public class GameUtils {
 
 	}
 
-	public static void playSound (ServerLevel level_server, BlockPos pos, double pitch, double max_distance, String id) {
+	public static void playSound (ServerLevel level_server, Vec3 vec3, double pitch, double max_distance, String id) {
 
-		SoundEvent sound = level_server.registryAccess().registryOrThrow(Registries.SOUND_EVENT).get(ResourceLocation.parse(id));
+		ResourceLocation location = ResourceLocation.parse(id);
 
-		if (sound == null) {
+		if (level_server.registryAccess().registryOrThrow(Registries.SOUND_EVENT).get(location) == null) {
 
 			return;
 
 		}
 
 		double distance = 0.0;
-		double volume_min = max_distance / 50.0;
-		double volume_max = 0.0;
 		double percent = 0.0;
-		int delay = 0;
+		double volume_min = 0.0;
+		double volume_max = max_distance / 12.0;
 
 		for (ServerPlayer player_server : level_server.players()) {
 
-			distance = player_server.position().distanceTo(pos.getCenter());
+			distance = player_server.position().distanceTo(vec3);
 
 			if (distance > max_distance) {
 
@@ -182,23 +181,16 @@ public class GameUtils {
 
 			}
 
+			SoundEvent sound = SoundEvent.createFixedRangeEvent(location, (float) max_distance);
 			percent = distance / max_distance;
-			volume_min = volume_min * (1.0 - percent);
-			volume_max = percent * (max_distance / 15.0);
-			double volume = volume_min + volume_max;
+			volume_min = (percent * 0.75) + 0.25;
+			double volume = volume_min * volume_max;
 
-			delay = (int) Math.round(distance / 17.0);
-			Runnable runnable = () -> player_server.connection.send(new ClientboundSoundPacket(Holder.direct(sound), SoundSource.AMBIENT, pos.getX(), pos.getY(), pos.getZ(), (float) volume, (float) pitch, level_server.getRandom().nextLong()));
+			Core.DelayedWork.createBasic((int) Math.round(distance / 17.0), () -> {
 
-			if (delay == 0) {
+				player_server.connection.send(new ClientboundSoundPacket(Holder.direct(sound), SoundSource.AMBIENT, vec3.x, vec3.y, vec3.z, (float) volume, (float) pitch, level_server.getRandom().nextLong()));
 
-				runnable.run();
-
-			} else {
-
-				Core.DelayedWork.create(false, delay, runnable);
-
-			}
+			});
 
 		}
 

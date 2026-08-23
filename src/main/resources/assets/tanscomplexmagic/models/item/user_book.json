@@ -1,7 +1,7 @@
 {
   "parent": "tanscomplexmagic:custom/book",
   "textures": {
-    "missing": "tanscomplexmagic:block/user_book",
+    "0": "tanscomplexmagic:block/user_book",
     "particle": "minecraft:item/knowledge_book"
   }
 }

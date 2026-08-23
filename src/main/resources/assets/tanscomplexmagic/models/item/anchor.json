@@ -1,7 +1,7 @@
 {
   "parent": "tanscomplexmagic:custom/anchor",
   "textures": {
-    "0": "tanscomplexmagic:block/anchor",
+    "0": "tanscomplexmagic:block/",
     "particle": "tanscomplexmagic:item/anchor"
   }
 }

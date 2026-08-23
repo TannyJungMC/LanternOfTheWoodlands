@@ -113,8 +113,8 @@ public class Core {
 
         logger = LogManager.getLogger(mod_id);
         path_config = FMLPaths.GAMEDIR.get().toString() + "/config/" + mod_id;
-
         EventCenter.bus(bus);
+
         GUIs.add();
         KeyBindings.add();
 
@@ -184,7 +184,7 @@ public class Core {
                 GlobalLocking.test();
                 GlobalLocking.lock();
 
-                DelayedWork.create(true, 20, () -> {
+                DelayedWork.createAsync(20, () -> {
 
                     runnable.run();
 
@@ -300,21 +300,33 @@ public class Core {
         private static final Collection<AbstractMap.SimpleEntry<Runnable, Integer>> delayed_works = new ConcurrentLinkedQueue<>();
         private static final ScheduledExecutorService thread_delay = Executors.newScheduledThreadPool(1);
 
-        public static void create (boolean async, int tick, Runnable work) {
+        public static void createBasic (int tick, Runnable work) {
 
-            if (async == true) {
+            if (tick == 0) {
 
-                thread_delay.schedule(work, tick * 50L, TimeUnit.MILLISECONDS);
-
-            } else {
-
-                delayed_works.add(new AbstractMap.SimpleEntry<>(work, tick));
+                work.run();
+                return;
 
             }
 
+            delayed_works.add(new AbstractMap.SimpleEntry<>(work, tick));
+
         }
 
-        public static void runTick () {
+        public static void createAsync (int tick, Runnable work) {
+
+            if (tick == 0) {
+
+                work.run();
+                return;
+
+            }
+
+            thread_delay.schedule(work, tick * 50L, TimeUnit.MILLISECONDS);
+
+        }
+
+        public static void tick () {
 
             for (AbstractMap.SimpleEntry<Runnable, Integer> work : delayed_works) {
 

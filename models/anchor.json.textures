@@ -1,10 +1,10 @@
 {
   "mappings": {
     "default": {
+      "name": "default",
       "map": {
-        "0": "anchor"
-      },
-      "name": "default"
+        "0": ""
+      }
     }
   }
 }

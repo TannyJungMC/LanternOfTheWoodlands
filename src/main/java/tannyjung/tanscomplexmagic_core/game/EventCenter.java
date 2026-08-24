@@ -2,13 +2,11 @@ package tannyjung.tanscomplexmagic_core.game;
 
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.storage.LevelResource;
@@ -21,8 +19,6 @@ import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import tannyjung.tanscomplexmagic.TanscomplexmagicMod;
 import tannyjung.tanscomplexmagic_core.Core;
-import tannyjung.tanscomplexmagic_core.game.screen.GUIContainer;
-import tannyjung.tanscomplexmagic_core.game.screen.GUIManager;
 import tannyjung.tanscomplexmagic_core.game.screen.GUIScreen;
 import tannyjung.tanscomplexmagic_core.game.screen.ScreenDrawing;
 import tannyjung.tanscomplexmagic_core.game.world_gen.*;
@@ -30,8 +26,6 @@ import tannyjung.tanscomplexmagic_core.outside.NetworkManager;
 import tannyjung.tanscomplexmagic_core.outside.config.CustomPackOrganizing;
 import tannyjung.tanscomplexmagic_core.outside.config.TannyPackManager;
 import tannyjung.tanscomplexmagic_handcode.core.Commands;
-import tannyjung.tanscomplexmagic_handcode.core.GUIs;
-import tannyjung.tanscomplexmagic_handcode.core.KeyBindings;
 import tannyjung.tanscomplexmagic_handcode.core.Overlays;
 
 /*
@@ -148,7 +142,9 @@ public class EventCenter {
     @SubscribeEvent
     public static void eventChunkLoad (ChunkEvent.Load event) {
 
-        if (event.getLevel().isClientSide() == true) {
+        LevelAccessor level_accessor = event.getLevel();
+
+        if (level_accessor.isClientSide() == true) {
 
             return;
 
@@ -156,46 +152,13 @@ public class EventCenter {
 
         if (event.isNewChunk() == true) {
 
+            ServerLevel level_server = (ServerLevel) level_accessor;
+            String dimension = GameUtils.Space.getDimensionID(level_server).replace(":", "-");
+            ChunkPos chunk_pos = event.getChunk().getPos();
+
             Core.thread.submit(() -> {
 
-                LevelAccessor level_accessor = event.getLevel();
-                ServerLevel level_server = (ServerLevel) level_accessor;
-                String dimension = GameUtils.Space.getDimensionID(level_server).replace(":", "-");
-                ChunkPos chunk_pos = event.getChunk().getPos();
-
                 WorldGenStepEnd.start(dimension, chunk_pos);
-
-            });
-
-        }
-
-    }
-
-    @SubscribeEvent
-    public static void eventPlayerJoin (PlayerEvent.PlayerLoggedInEvent event) {
-
-        ServerPlayer player_server = (ServerPlayer) event.getEntity();
-        ServerLevel level_server = player_server.serverLevel();
-
-        NetworkManager.runClientCore(player_server, "nbt", "sync", NBTManager.Mob.getAllMergeReady(player_server));
-
-        if (first_player_joined == false) {
-
-            first_player_joined = true;
-
-            Core.DelayedWork.createAsync(100, () -> {
-
-                CustomPackOrganizing.Error.sendMessage(level_server);
-
-                if (Core.auto_check_update == true) {
-
-                    Core.thread.submit(() -> {
-
-                        TannyPackManager.runCheckUpdate(level_server);
-
-                    });
-
-                }
 
             });
 
@@ -230,16 +193,48 @@ public class EventCenter {
     }
 
     @SubscribeEvent
+    public static void eventPlayerJoin (PlayerEvent.PlayerLoggedInEvent event) {
+
+        ServerPlayer player_server = (ServerPlayer) event.getEntity();
+        ServerLevel level_server = player_server.serverLevel();
+
+        NetworkManager.runClientCore(player_server, "nbt", "sync", NBTManager.Mob.getAllForMerge(player_server));
+
+        if (first_player_joined == false) {
+
+            first_player_joined = true;
+
+            Core.DelayedWork.createAsync(100, () -> {
+
+                CustomPackOrganizing.Error.sendMessage(level_server);
+
+                if (Core.auto_check_update == true) {
+
+                    Core.thread.submit(() -> {
+
+                        TannyPackManager.runCheckUpdate(level_server);
+
+                    });
+
+                }
+
+            });
+
+        }
+
+    }
+
+    @SubscribeEvent
     public static void eventPlayerRespawn (PlayerEvent.PlayerRespawnEvent event) {
 
-        NetworkManager.runClientCore((ServerPlayer) event.getEntity(), "nbt", "sync", NBTManager.Mob.getAllMergeReady(event.getEntity()));
+        NetworkManager.runClientCore((ServerPlayer) event.getEntity(), "nbt", "sync", NBTManager.Mob.getAllForMerge(event.getEntity()));
 
     }
 
     @SubscribeEvent
     public static void eventPlayerClone (PlayerEvent.Clone event) {
 
-        NBTManager.Mob.merge(event.getEntity(), NBTManager.Mob.getAllMergeReady(event.getOriginal()), true);
+        NBTManager.Mob.merge(event.getEntity(), NBTManager.Mob.getAllForMerge(event.getOriginal()), true);
 
     }
 

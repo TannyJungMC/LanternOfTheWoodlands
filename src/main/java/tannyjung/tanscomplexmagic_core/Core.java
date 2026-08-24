@@ -372,23 +372,6 @@ public class Core {
             TXTFunction.loop(level_server);
             Loops.second(level_server);
 
-            if (minute > 1) {
-
-                minute = minute - 1;
-
-            } else {
-
-                minute = 60;
-                loopMinute(level_server);
-
-            }
-
-        }
-
-        private static void loopMinute (ServerLevel level_server) {
-
-            Loops.minute(level_server);
-
         }
 
     }

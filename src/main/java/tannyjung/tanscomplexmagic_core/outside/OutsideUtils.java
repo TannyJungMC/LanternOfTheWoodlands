@@ -533,12 +533,6 @@ public class OutsideUtils {
 
         public static String convertSecondToTime (int seconds) {
 
-            if (seconds < 0) {
-
-                seconds = 0;
-
-            }
-
             int hour = (seconds / 60 / 60) % 60;
             int minute = (seconds / 60) % 60;
             int second = seconds % 60;

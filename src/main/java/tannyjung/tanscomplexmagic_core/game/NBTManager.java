@@ -307,10 +307,10 @@ public class NBTManager {
 
         }
 
-        public static CompoundTag getAllMergeReady (Entity entity) {
+        public static CompoundTag getAllForMerge (Entity entity) {
 
             CompoundTag tag = new CompoundTag();
-            tag.put(Core.mod_id, entity.getPersistentData().getCompound(Core.mod_id));
+            tag.put(Core.mod_id, getAll(entity));
             return tag;
 
         }

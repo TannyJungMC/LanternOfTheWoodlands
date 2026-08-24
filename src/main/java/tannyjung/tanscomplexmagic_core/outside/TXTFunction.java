@@ -41,7 +41,7 @@ public class TXTFunction {
         boolean run_break = false;
 
         String[] split = null;
-        double chance = 0.0;
+        double chance = 0;
         String[] offset_pos = null;
         int offset_posX = 0;
         int offset_posY = 0;

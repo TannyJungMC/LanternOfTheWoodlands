@@ -1,11 +1,13 @@
 package tannyjung.tanscomplexmagic_handcode.core;
 
+import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import tannyjung.tanscomplexmagic_core.game.EntityManager;
 import tannyjung.tanscomplexmagic_core.game.GameUtils;
 import tannyjung.tanscomplexmagic_core.game.NBTManager;
+import tannyjung.tanscomplexmagic_handcode.systems.BasicSpells;
 import tannyjung.tanscomplexmagic_handcode.systems.Book;
 import tannyjung.tanscomplexmagic_handcode.systems.Spell1;
 import tannyjung.tanscomplexmagic_handcode.systems.Utils;
@@ -15,8 +17,6 @@ public class Loops {
     public static void tick (ServerLevel level_server) {
 
         for (ServerPlayer player_server : EntityManager.Population.filterPlayerServer(EntityManager.Population.getEverywhereStatic(level_server, "minecraft:player", "", new String[]{}))) {
-
-            Spell1.loopTick(level_server, player_server);
 
             // Placed User Book
             {
@@ -29,6 +29,9 @@ public class Loops {
 
             }
 
+            BasicSpells.loopTick(level_server, player_server);
+            Spell1.loopTick(level_server, player_server);
+
         }
 
     }
@@ -36,6 +39,8 @@ public class Loops {
     public static void second (ServerLevel level_server) {
 
         for (ServerPlayer player_server : EntityManager.Population.filterPlayerServer(EntityManager.Population.getEverywhereStatic(level_server, "minecraft:player", "", new String[]{}))) {
+
+            Book.Log.update(player_server);
 
             // Mana Regeneration
             {
@@ -59,21 +64,14 @@ public class Loops {
 
                     }
 
-                    Book.Log.update(player_server);
-
                 }
 
             }
 
+            BasicSpells.loopSecond(level_server, player_server);
             Spell1.loopSecond(level_server, player_server);
 
         }
-
-    }
-
-    public static void minute (ServerLevel level_server) {
-
-
 
     }
 

@@ -108,24 +108,23 @@ public class Book {
 
         public static void setType (ServerPlayer player_server) {
 
-            if (NBTManager.Mob.getText(player_server, "book", "log").isEmpty() == true) {
+            String type = NBTManager.Mob.getText(player_server, "book", "log");
 
-                NBTManager.Mob.setText(player_server, "book", "log", "mana", true);
+            if (type.isEmpty() == true) {
 
-            } else if (NBTManager.Mob.getText(player_server, "book", "log").equals("mana") == true) {
+                type = "mana";
 
-                NBTManager.Mob.setText(player_server, "book", "log", "action", true);
+            } else if (type.equals("mana") == true) {
 
-            } else if (NBTManager.Mob.getText(player_server, "book", "log").equals("action") == true) {
+                type = "action";
 
-                NBTManager.Mob.setText(player_server, "book", "log", "warning", true);
+            } else if (type.equals("action") == true) {
 
-            } else {
-
-                NBTManager.Mob.setText(player_server, "book", "log", "", true);
+                type = "warning";
 
             }
 
+            NBTManager.Mob.setText(player_server, "book", "log", type, true);
             update(player_server);
 
         }
@@ -159,6 +158,12 @@ public class Book {
 
             }
 
+            if (text.isEmpty() == true) {
+
+                return;
+
+            }
+
             NBTManager.Mob.setText(player_server, "book", "log_text", text, true);
 
         }
@@ -186,7 +191,7 @@ public class Book {
             NBTManager.Mob.setLogic(entity, "main", "is_open", false, false);
             NBTManager.Mob.setNumber(entity, "main", "delay_open", 20, false);
 
-            EntityManager.summon(level_server, entity.position().add(0, -1.25, 0), false, "minecraft:marker", "Placed User Book Fireball", Utils.Tag.convertSystemSpecific(player_server, new String[]{"placed_book_fireball"}), "");
+            EntityManager.summon(level_server, entity.position().add(0, -1.25, 0), false, "minecraft:marker", "Placed User Book Fireball", Utils.Tag.convertSystemSpecific(player_server, new String[]{"placed_book_light"}), "");
             level_server.setBlock(BlockPos.containing(vec3), Blocks.LIGHT.defaultBlockState(), 2);
 
         }
@@ -224,7 +229,7 @@ public class Book {
 
             }
 
-            for (Entity entity : EntityManager.Population.getEverywhereStatic(level_server, "", "", Utils.Tag.convertSystemSpecific(player_server, new String[]{"placed_book_fireball"}))) {
+            for (Entity entity : EntityManager.Population.getEverywhereStatic(level_server, "", "", Utils.Tag.convertSystemSpecific(player_server, new String[]{"placed_book_light"}))) {
 
                 entity.discard();
 
@@ -301,7 +306,7 @@ public class Book {
 
             }
 
-            for (Entity entity_fireball : EntityManager.Population.getEverywhereStatic(level_server, "", "", Utils.Tag.convertSystemSpecific(player_server, new String[]{"placed_book_fireball"}))) {
+            for (Entity entity_fireball : EntityManager.Population.getEverywhereStatic(level_server, "", "", Utils.Tag.convertSystemSpecific(player_server, new String[]{"placed_book_light"}))) {
 
                 entity_fireball.setYRot(entity_fireball.getYRot() - 10);
                 GameUtils.spawnParticle(level_server, EntityManager.getPosLook(entity_fireball, 0, 0, 0.15), 0, 0, 0, 0, 1, "minecraft:end_rod");

@@ -18,7 +18,7 @@ public class Spell1 {
 
     public static void activate (ServerLevel level_server, ServerPlayer player_server) {
 
-        BlockPos pos = BlockPos.containing(EntityManager.getPosRay(player_server, 200));
+        BlockPos pos = BlockPos.containing(EntityManager.getPosRayForward(player_server, 200, false));
 
         if (BlockManager.isPassable(level_server, pos) == false || BlockManager.isPassable(level_server, pos.below()) == true) {
 
@@ -37,14 +37,12 @@ public class Spell1 {
         }
 
         Card.summonAll(level_server, player_server, entity_center);
-        NBTManager.Mob.setLogic(player_server, "spell1", "is_overlay_enable", true, true);
 
     }
 
     public static void deactivate (ServerLevel level_server, ServerPlayer player_server) {
 
         Card.removeAll(level_server, player_server);
-        NBTManager.Mob.setLogic(player_server, "spell1", "is_overlay_enable", false, true);
 
     }
 
@@ -61,6 +59,82 @@ public class Spell1 {
         Map<Integer, Entity> cards = Card.getActive(level_server, player_server);
         updateCenter(entity_center);
         Card.updateTick(level_server, player_server, entity_center, cards);
+
+        // Radius Key Control
+        {
+
+            int control = (int) NBTManager.Mob.getNumber(player_server, "spell1", "radius_key_control");
+
+            if (control != 0) {
+
+                int radius = (int) NBTManager.Mob.getNumber(player_server, "spell1", "radius");
+                int tick = (int) NBTManager.Mob.getNumber(player_server, "spell1", "radius_key_control_tick");
+
+                if (tick > 1) {
+
+                    NBTManager.Mob.setNumber(player_server, "spell1", "radius_key_control_tick", tick - 1, false);
+
+                } else {
+
+                    if (radius <= 10) {
+
+                        tick = 10;
+
+                    } else if (radius <= 20) {
+
+                        tick = 5;
+
+                    } else if (radius <= 50) {
+
+                        tick = 4;
+
+                    } else if (radius <= 100) {
+
+                        tick = 3;
+
+                    } else {
+
+                        tick = 2;
+
+                    }
+
+                    NBTManager.Mob.setNumber(player_server, "spell1", "radius_key_control_tick", tick, false);
+                    int add = 0;
+                    double pitch = 0;
+
+                    if (control == 1) {
+
+                        if (radius > 1) {
+
+                            add = -1;
+                            pitch = 1.5;
+
+                        }
+
+                    } else {
+
+                        if (radius < 200) {
+
+                            add = 1;
+                            pitch = 2;
+
+                        }
+
+                    }
+
+                    if (add != 0) {
+
+                        radius = radius + add;
+                        NBTManager.Mob.setNumber(player_server, "spell1", "radius", radius, true);
+                        GameUtils.playSound(level_server, player_server.position(), pitch, 10, "minecraft:block.note_block.hat");
+
+                    }
+
+                }
+
+            }
+
+        }
 
     }
 
@@ -125,7 +199,7 @@ public class Spell1 {
         private static void summonSpecific (ServerLevel level_server, ServerPlayer player_server, Entity entity_center, int[] numbers) {
 
             double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
-            double height = 0.0;
+            double height = 0;
 
             if (radius <= 10) {
 
@@ -183,7 +257,7 @@ public class Spell1 {
 
         private static void removeSpecific (ServerLevel level_server, ServerPlayer player_server, Entity entity_card, int card_number, double radius) {
 
-            NBTManager.Mob.setText(player_server, "spell1", "card_status" + card_number, "", false);
+            NBTManager.Mob.setText(player_server, "spell1", "card_status" + card_number, "", true);
             NBTManager.Mob.setNumber(player_server, "spell1", "number_of_targets_detected" + card_number, 0, true);
             NBTManager.Mob.setText(player_server, "spell1", "remaining_duration" + card_number, "00s", true);
 
@@ -235,7 +309,7 @@ public class Spell1 {
             // Get Targets
             {
 
-                List<Entity> list = EntityManager.Population.filterLivingEntity(EntityManager.Population.getArea(level_server, entity_center.position(), radius, false, "", "", new String[]{}));
+                List<Entity> list = EntityManager.Population.filterLivingEntity(EntityManager.Population.getArea(level_server, entity_center.position(), radius, "", "", new String[]{}));
                 targets.put("user", new ArrayList<>());
 
                 if (list.contains(player_server) == true) {
@@ -339,26 +413,21 @@ public class Spell1 {
                 }
 
                 is_high_power_mode = NBTManager.Mob.getLogic(player_server, "spell1", "is_card_high_power_mode" + number);
-                remaining_duration = (int) Math.round(NBTManager.Mob.getNumber(player_server, "spell1", "card_duration_" + positive_negative + number) / target_sort.length);
-
-                if (is_high_power_mode == true) {
-
-                    duration_spend_per_second = 2;
-                    remaining_duration = remaining_duration / 2;
-
-                } else {
-
-                    duration_spend_per_second = 1;
-
-                }
-
-                NBTManager.Mob.setNumber(player_server, "spell1", "number_of_targets_detected" + number, target_sort.length, true);
-                NBTManager.Mob.setText(player_server, "spell1", "remaining_duration" + number, OutsideUtils.Calculation.convertSecondToTime(remaining_duration), true);
 
                 if (NBTManager.Mob.getText(player_server, "spell1", "card_status" + number).equals("effect") == true) {
 
                     // Apply Effects
                     {
+
+                        if (is_high_power_mode == true) {
+
+                            duration_spend_per_second = 2;
+
+                        } else {
+
+                            duration_spend_per_second = 1;
+
+                        }
 
                         int duration = (int) NBTManager.Mob.getNumber(player_server, "spell1", "card_duration_" + positive_negative + number);
                         int duration_max = (int) NBTManager.Mob.getNumber(player_server, "spell1", "card_duration_max_" + positive_negative + number);
@@ -391,6 +460,23 @@ public class Spell1 {
 
                 }
 
+                remaining_duration = target_sort.length;
+
+                if (remaining_duration != 0) {
+
+                    remaining_duration = (int) (NBTManager.Mob.getNumber(player_server, "spell1", "card_duration_" + positive_negative + number) / remaining_duration);
+
+                    if (is_high_power_mode == true) {
+
+                        remaining_duration = remaining_duration / 2;
+
+                    }
+
+                }
+
+                NBTManager.Mob.setNumber(player_server, "spell1", "number_of_targets_detected" + number, target_sort.length, true);
+                NBTManager.Mob.setText(player_server, "spell1", "remaining_duration" + number, OutsideUtils.Calculation.convertSecondToTime(remaining_duration), true);
+
             }
 
         }
@@ -400,8 +486,8 @@ public class Spell1 {
             String status = NBTManager.Mob.getText(player_server, "spell1", "card_status" + card_number);
             boolean is_rest = status.isEmpty() == true;
             double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
-            double height = 0.0;
-            double far = 0.0;
+            double height = 0;
+            double far = 0;
 
             if (radius <= 10) {
 
@@ -510,13 +596,14 @@ public class Spell1 {
                 {
 
                     double radius = NBTManager.Mob.getNumber(player_server, "spell1", "radius");
+                    boolean is_high_power_mode = NBTManager.Mob.getLogic(player_server, "spell1", "is_card_high_power_mode" + card_number);
 
                     if (NBTManager.Mob.getText(player_server, "spell1", "card_status" + card_number).equals("flip") == false) {
 
                         // At Start of Flipping
                         {
 
-                            NBTManager.Mob.setText(player_server, "spell1", "card_status" + card_number, "flip", false);
+                            NBTManager.Mob.setText(player_server, "spell1", "card_status" + card_number, "flip", true);
                             GameUtils.playSound(level_server, entity_card.position(), (Math.random() * 0.5) + 0.5, radius * 4.0, "minecraft:block.ender_chest.open");
 
                         }
@@ -527,11 +614,11 @@ public class Spell1 {
                     {
 
                         double degree = 1.0 - (radius / 200.0);
-                        degree = (degree * 0.75) + 0.25;
+                        degree = (degree * 1.25) + 0.25;
 
-                        if (NBTManager.Mob.getLogic(player_server, "spell1", "is_card_high_power_mode" + card_number) == true) {
+                        if (is_high_power_mode == true) {
 
-                            degree = degree / 2.0;
+                            degree = degree * 0.75;
 
                         }
 
@@ -562,9 +649,16 @@ public class Spell1 {
 
                         } else {
 
-                            NBTManager.Mob.setNumber(entity_card, "", "gear_sound_tick", 10, false);
-                            GameUtils.playSound(level_server, entity_card.position(), 0, radius * 4.0, "minecraft:block.wooden_door.open");
+                            double value = Math.floor(radius / 20) + 7;
 
+                            if (is_high_power_mode == true) {
+
+                                value = value * 1.25;
+
+                            }
+
+                            NBTManager.Mob.setNumber(entity_card, "", "gear_sound_tick", value, false);
+                            GameUtils.playSound(level_server, entity_card.position(), 0, radius * 4.0, "minecraft:block.wooden_door.open");
 
                         }
 
@@ -579,11 +673,11 @@ public class Spell1 {
 
                             if (degree_set == 90) {
 
-                                NBTManager.Mob.setText(player_server, "spell1", "card_status" + card_number, "", false);
+                                NBTManager.Mob.setText(player_server, "spell1", "card_status" + card_number, "", true);
 
                             } else {
 
-                                NBTManager.Mob.setText(player_server, "spell1", "card_status" + card_number, "effect", false);
+                                NBTManager.Mob.setText(player_server, "spell1", "card_status" + card_number, "effect", true);
 
                             }
 
@@ -691,7 +785,7 @@ public class Spell1 {
                     GameUtils.spawnParticle(level_server, entity.getEyePosition(), 1, 1, 1, 0, 5, "minecraft:campfire_cosy_smoke");
                     EffectManager.giveBasic(level_server, entity, "minecraft:darkness", 1, 60);
 
-                    double chance = 0.0;
+                    double chance = 0;
 
                     if (is_high_power_mode == true) {
 
@@ -861,7 +955,7 @@ public class Spell1 {
                     }
 
                     int level = 0;
-                    double event_chance = 0.0;
+                    double event_chance = 0;
 
                     if (is_high_power_mode == true) {
 
@@ -884,7 +978,7 @@ public class Spell1 {
 
                             if (entity instanceof ServerPlayer == true) {
 
-                                for (Entity scan : EntityManager.Population.getArea(level_server, entity.position(), 100, true, "", "", new String[]{})) {
+                                for (Entity scan : EntityManager.Population.getArea(level_server, entity.position(), 100, "", "", new String[]{})) {
 
                                     if (Math.random() >= 0.5) {
 
@@ -919,7 +1013,7 @@ public class Spell1 {
 
                             if (entity instanceof ServerPlayer == true) {
 
-                                for (Entity scan : EntityManager.Population.getArea(level_server, entity.position(), 100, true, "", "", new String[]{})) {
+                                for (Entity scan : EntityManager.Population.getArea(level_server, entity.position(), 100, "", "", new String[]{})) {
 
                                     if (Math.random() >= 0.5) {
 
@@ -963,7 +1057,7 @@ public class Spell1 {
                     }
 
                     int level = 0;
-                    double event_chance = 0.0;
+                    double event_chance = 0;
 
                     if (is_high_power_mode == true) {
 
@@ -986,7 +1080,7 @@ public class Spell1 {
 
                             if (entity instanceof ServerPlayer == true) {
 
-                                for (Entity scan : EntityManager.Population.getArea(level_server, entity.position(), 100, true, "", "", new String[]{})) {
+                                for (Entity scan : EntityManager.Population.getArea(level_server, entity.position(), 100, "", "", new String[]{})) {
 
                                     if (Math.random() >= 0.5) {
 
@@ -1021,7 +1115,7 @@ public class Spell1 {
 
                             if (entity instanceof ServerPlayer == true) {
 
-                                for (Entity scan : EntityManager.Population.getArea(level_server, entity.position(), 100, true, "", "", new String[]{})) {
+                                for (Entity scan : EntityManager.Population.getArea(level_server, entity.position(), 100, "", "", new String[]{})) {
 
                                     if (Math.random() >= 0.5) {
 
@@ -1117,7 +1211,7 @@ public class Spell1 {
                     }
 
                     int level = 0;
-                    double event_chance = 0.0;
+                    double event_chance = 0;
 
                     if (is_high_power_mode == true) {
 
@@ -1138,7 +1232,7 @@ public class Spell1 {
 
                         if (entity instanceof ServerPlayer == true) {
 
-                            for (Entity scan : EntityManager.Population.getArea(level_server, entity.position(), 20, true, "", "", new String[]{})) {
+                            for (Entity scan : EntityManager.Population.getArea(level_server, entity.position(), 20, "", "", new String[]{})) {
 
                                 if (Math.random() >= event_chance) {
 
@@ -1186,7 +1280,7 @@ public class Spell1 {
                         // Mob Blind
                         {
 
-                            for (Entity scan : EntityManager.Population.getArea(level_server, entity.position(), 20, true, "", "", new String[]{})) {
+                            for (Entity scan : EntityManager.Population.getArea(level_server, entity.position(), 20, "", "", new String[]{})) {
 
                                 if (EntityManager.getTarget(scan) == entity) {
 
@@ -1212,7 +1306,7 @@ public class Spell1 {
 
                     }
 
-                    double chance = 0.0;
+                    double chance = 0;
 
                     if (is_high_power_mode == true) {
 
@@ -1316,7 +1410,7 @@ public class Spell1 {
                         // Fire Skin
                         {
 
-                            for (Entity scan : EntityManager.Population.getArea(level_server, entity.position(), 10, true, "", "", new String[]{})) {
+                            for (Entity scan : EntityManager.Population.getArea(level_server, entity.position(), 10, "", "", new String[]{})) {
 
                                 if (EntityManager.getTarget(scan) == entity) {
 
@@ -1341,7 +1435,7 @@ public class Spell1 {
                 GameUtils.playSound(level_server, entity.position(), 1, 20, "minecraft:entity.blaze.burn");
                 GameUtils.spawnParticle(level_server, entity.position().add(0, 1, 0), 1, 1, 1, 0, 20, "minecraft:large_smoke");
 
-                double chance = 0.0;
+                double chance = 0;
 
                 if (is_high_power_mode == true) {
 
@@ -1541,7 +1635,7 @@ public class Spell1 {
 
                     } else {
 
-                        level = 5;
+                        level = 10;
 
                     }
 

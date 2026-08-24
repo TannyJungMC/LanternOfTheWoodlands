@@ -27,7 +27,7 @@ public class DisplayManager {
 
         Core.DelayedWork.createBasic(200, () -> {
 
-            for (Entity scan : EntityManager.Population.getArea(level_server, vec3, 1, true, "minecraft:text_display", "", new String[]{Core.mod_id_big + "-display_text"})) {
+            for (Entity scan : EntityManager.Population.getArea(level_server, vec3, 1, "minecraft:text_display", "", new String[]{Core.mod_id_big + "-display_text"})) {
 
                 scan.discard();
 

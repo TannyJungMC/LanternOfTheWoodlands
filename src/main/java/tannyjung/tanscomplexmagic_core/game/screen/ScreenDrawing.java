@@ -30,7 +30,7 @@ public class ScreenDrawing {
     public static GuiGraphics graphic = null;
     public static LocalPlayer player_local = null;
     public static ItemStack item = ItemStack.EMPTY;
-    public static double normal_font_scale = 0.68;
+    public static double normal_font_scale = 0.67;
 
     public static void refresh () {
 
@@ -400,9 +400,9 @@ public class ScreenDrawing {
 
         private static void drawImage (int overall_sizeX, int overall_sizeZ, int slideX, int slideZ, int split_sizeX, int split_sizeZ, String path) {
 
-            int posX = Anchor.at_graphicX +  + Position.posX;
-            int posZ = Anchor.at_graphicZ +  + Position.posZ;
-            graphic.blit(ResourceLocation.parse(path), posX, posZ, slideX,slideZ, split_sizeX, split_sizeZ, overall_sizeX, overall_sizeZ);
+            int posX = Anchor.at_graphicX + Position.posX;
+            int posZ = Anchor.at_graphicZ + Position.posZ;
+            graphic.blit(ResourceLocation.parse(path), posX, posZ, slideX ,slideZ, split_sizeX, split_sizeZ, overall_sizeX, overall_sizeZ);
 
         }
 
@@ -602,7 +602,16 @@ public class ScreenDrawing {
 
                 int posX = Position.posX;
                 int posZ = Position.posZ;
-                image.add(new Object[]{posX, posZ, overall_sizeX, overall_sizeZ, slideX, slideZ, split_sizeX, split_sizeZ, path});
+
+                if (screen == null) {
+
+                    drawImage(overall_sizeX, overall_sizeZ, slideX, slideZ, split_sizeX, split_sizeZ, path);
+
+                } else {
+
+                    image.add(new Object[]{posX, posZ, overall_sizeX, overall_sizeZ, slideX, slideZ, split_sizeX, split_sizeZ, path});
+
+                }
 
             }
 
@@ -898,7 +907,7 @@ public class ScreenDrawing {
                 }
 
                 double range = value_max - value_min;
-                double value_default = 0.0;
+                double value_default = 0;
 
                 // Get Default Value
                 {
@@ -908,11 +917,11 @@ public class ScreenDrawing {
 
                     if (value_default < 0.0 || value_default > 1.0) {
 
-                        double set = 0.0;
+                        double set = 0;
 
                         if (range == 0 || value_default < 0.0) {
 
-                            value_default = 0.0;
+                            value_default = 0;
                             set = value_min;
 
                         } else {
@@ -1501,7 +1510,7 @@ public class ScreenDrawing {
                     List<String> list_name = new ArrayList<>();
                     String uuid = "";
 
-                    for (Entity entity : EntityManager.Population.sort(EntityManager.Population.getArea(player_server.serverLevel(), player_server.position(), radius, false, target_id, target_name, new String[]{"!" + Core.mod_id_big}), player_server.position(), false, 0)) {
+                    for (Entity entity : EntityManager.Population.sort(EntityManager.Population.getArea(player_server.serverLevel(), player_server.position(), radius, target_id, target_name, new String[]{"!" + Core.mod_id_big}), player_server.position(), false, 0)) {
 
                         uuid = entity.getStringUUID();
 

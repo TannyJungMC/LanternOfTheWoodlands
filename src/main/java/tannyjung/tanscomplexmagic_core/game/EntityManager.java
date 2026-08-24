@@ -9,8 +9,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -120,18 +118,73 @@ public class EntityManager {
         return entity.position().add(vec3_horizontal.scale(offsetX)).add(vec3_vertical_adjust.scale(offsetY)).add(vec3_forward.scale(offsetZ));
     }
 
-    public static Vec3 getPosLookReverse (Entity entity, Vec3 vec3_target, double offsetX, double offsetY, double offsetZ) {
+    public static Vec3 getPosLookReverse (Entity entity, Vec3 vec3, double offsetX, double offsetY, double offsetZ) {
 
-        Vec3 forward_behind = vec3_target.subtract(entity.getEyePosition()).normalize();
+        Vec3 forward_behind = vec3.subtract(entity.getEyePosition()).normalize();
         Vec3 left_right = forward_behind.cross(new Vec3(0, 1, 0)).normalize();
         Vec3 up = left_right.cross(forward_behind).normalize();
         return entity.getEyePosition().add(left_right.scale(offsetX)).add(up.scale(offsetY)).add(forward_behind.scale(offsetZ));
 
     }
 
-    public static Vec3 getPosRay (Entity entity, double distance) {
+    public static Vec3 getPosRay (Entity entity, Vec3 vec3, boolean is_feet_position) {
 
-        return entity.level().clip(new ClipContext(entity.getEyePosition(1f), entity.getEyePosition(1f).add(entity.getViewVector(1f).scale(distance)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getLocation();
+        Vec3 vec3_from = null;
+        
+        if (is_feet_position == true) {
+
+            vec3_from = entity.position();
+            
+        } else {
+
+            vec3_from = entity.getEyePosition();
+            
+        }
+        
+        return entity.level().clip(new ClipContext(vec3_from, vec3, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getLocation();
+
+    }
+
+    public static Vec3 getPosRayWithDistance (Entity entity, Vec3 vec3, double distance, boolean is_feet_position) {
+
+        Vec3 vec3_base = null;
+
+        if (is_feet_position == true) {
+
+            vec3_base = entity.getPosition(1f);
+
+        } else {
+
+            vec3_base = entity.getEyePosition(1f);
+
+        }
+
+        vec3 = vec3.subtract(vec3_base).normalize();
+        return getPosRay(entity, vec3_base.add(vec3.scale(distance)), is_feet_position);
+
+    }
+
+    public static Vec3 getPosRayForward (Entity entity, double distance, boolean is_feet_position) {
+
+        Vec3 vec3 = null;
+
+        if (is_feet_position == true) {
+
+            vec3 = entity.getPosition(1f);
+
+        } else {
+
+            vec3 = entity.getEyePosition(1f);
+
+        }
+
+        return getPosRay(entity, vec3.add(entity.getViewVector(1f).scale(distance)), is_feet_position);
+
+    }
+
+    public static boolean testPosRayNoBlocking (Entity entity, Vec3 vec3, boolean is_feet_position) {
+
+        return getPosRay(entity, vec3, is_feet_position).distanceTo(vec3) < 0.1;
 
     }
 
@@ -439,13 +492,13 @@ public class EntityManager {
 
         }
 
-        public static List<Entity> getArea (ServerLevel level_server, Vec3 vec3, double radius, boolean is_box, String id, String name, String[] tags) {
+        public static List<Entity> getArea (ServerLevel level_server, Vec3 vec3, double radius, String id, String name, String[] tags) {
 
             Request request = new Request(id, name, List.of(tags));
 
             return level_server.getEntitiesOfClass(Entity.class, new AABB(vec3, vec3).inflate(radius), entity -> {
 
-                if (is_box == false && entity.position().distanceTo(vec3) > radius) {
+                if (entity.position().distanceTo(vec3) > radius) {
 
                     return false;
 

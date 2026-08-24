@@ -80,11 +80,11 @@ public class GUIs {
                     ScreenDrawing.ComponentOverlay.drawTextCenteredBasic(true, 1, "Taurus");
                     ScreenDrawing.ComponentOverlay.drawTextCenteredBasic(true, ScreenDrawing.normal_font_scale, "§8Hardiness and Worthlessness");
                     
-                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "§" + (int) NBTManager.Mob.getNumber(ScreenDrawing.player_local, "test", "color") + "   The 2nd sign of zodiac. Taurus is the big strong bull. The legend is that Zeus turned himself into the strong white bull to win the heart of the princess Europa, then carrying her across the sea.");
-                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "§" + (int) NBTManager.Mob.getNumber(ScreenDrawing.player_local, "test", "color") + "   Even the history is about love and relationship, but the power of Taurus sign is one of strongest power in the zodiac. The sign gives power of body protection that can protect from almost all damage of any weapons, as though this is the bless of Zeus for the princess Europa.");
-                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "§" + (int) NBTManager.Mob.getNumber(ScreenDrawing.player_local, "test", "color") + "   Note that the sign does not giving people body strength, only body protection. Some magicians called it \"Iron Skin\".");
+                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "   The 2nd sign of zodiac. Taurus is the big strong bull. The legend is that Zeus turned himself into the strong white bull to win the heart of the princess Europa, then carrying her across the sea.");
+                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "   Even the history is about love and relationship, but the power of Taurus sign is one of strongest power in the zodiac. The sign gives power of body protection that can protect from almost all damage of any weapons, as though this is the bless of Zeus for the princess Europa.");
+                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "   Note that the sign does not giving people body strength, only body protection. Some magicians called it \"Iron Skin\".");
                     
-                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "§" + (int) NBTManager.Mob.getNumber(ScreenDrawing.player_local, "test", "color") + "   The card has ability to share part of protection to people and other living things. Can absorbs almost all of incoming damages. While flipping the card not giving them vulnerability, but instead they will receive the feeling of drunken, as if heartbroken.");
+                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "   The card has ability to share part of protection to people and other living things. Can absorbs almost all of incoming damages. While flipping the card not giving them vulnerability, but instead they will receive the feeling of drunken, as if heartbroken.");
 
                 });
 
@@ -97,11 +97,11 @@ public class GUIs {
                     ScreenDrawing.ComponentOverlay.drawTextCenteredBasic(true, 1, "Gemini ");
                     ScreenDrawing.ComponentOverlay.drawTextCenteredBasic(true, ScreenDrawing.normal_font_scale, "§8Hopeful and Hopeless");
                     
-                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "§" + (int) NBTManager.Mob.getNumber(ScreenDrawing.player_local, "test", "color") + "   The 3rd sign of zodiac. Gemini is the twins. Some history tell that they is Pollux and Castor. One has the bloodline of god, so he is an immortal. But other one is a mortal, since he is human. After Castor died, Pollux begged his father to give Castor immortality.");
-                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "§" + (int) NBTManager.Mob.getNumber(ScreenDrawing.player_local, "test", "color") + "   Gemini sign can make people feel of motivation, increasing their strength by no reason. Some astral magicians said that this sign is one of dangerous signs if use it incorrectly. Even it has the power to give people motivation, but can also give the feeling of discouraged and hopeless to some people.");
+                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "   The 3rd sign of zodiac. Gemini is the twins. Some history tell that they is Pollux and Castor. One has the bloodline of god, so he is an immortal. But other one is a mortal, since he is human. After Castor died, Pollux begged his father to give Castor immortality.");
+                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "   Gemini sign can make people feel of motivation, increasing their strength by no reason. Some astral magicians said that this sign is one of dangerous signs if use it incorrectly. Even it has the power to give people motivation, but can also give the feeling of discouraged and hopeless to some people.");
                     
                     ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * 2 + 0, 8 * -12 + 0);
-                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "§" + (int) NBTManager.Mob.getNumber(ScreenDrawing.player_local, "test", "color") + "   The card has ability to give people feeling of bond, motivation, and energy. If flipping, it will make them feel tired and sometime hopeless.");
+                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "   The card has ability to give people feeling of bond, motivation, and energy. If flipping, it will make them feel tired and sometime hopeless.");
                     
 
                 });
@@ -115,10 +115,10 @@ public class GUIs {
                     ScreenDrawing.ComponentOverlay.drawTextCenteredBasic(true, 1, "Cancer");
                     ScreenDrawing.ComponentOverlay.drawTextCenteredBasic(true, ScreenDrawing.normal_font_scale, "§8Luck and Unluck");
                     
-                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "§" + (int) NBTManager.Mob.getNumber(ScreenDrawing.player_local, "test", "color") + "   The 4st sign of zodiac. Cancer is the crab. Some history tells that he crushed under the foot of Heracles. Moved by his loyalty, Hera brings him placed in the sky and becomes the Cancer constellation.");
-                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "§" + (int) NBTManager.Mob.getNumber(ScreenDrawing.player_local, "test", "color") + "   Many astral magicians said that the crab is one of weakest signs in the zodiac, with the power of animal attraction in very small scale. However after my some experiments, I discovered that it might be one of the most powerful sign. While making the card and trying to apply the power of it to my body, I noticed my luck changes instead of attracting the butterflies in the room. Sometimes I'm very lucky, sometimes nearly die in accidents.");
+                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "   The 4st sign of zodiac. Cancer is the crab. Some history tells that he crushed under the foot of Heracles. Moved by his loyalty, Hera brings him placed in the sky and becomes the Cancer constellation.");
+                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "   Many astral magicians said that the crab is one of weakest signs in the zodiac, with the power of animal attraction in very small scale. However after my some experiments, I discovered that it might be one of the most powerful sign. While making the card and trying to apply the power of it to my body, I noticed my luck changes instead of attracting the butterflies in the room. Sometimes I'm very lucky, sometimes nearly die in accidents.");
                     
-                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "§" + (int) NBTManager.Mob.getNumber(ScreenDrawing.player_local, "test", "color") + "   The card has ability to control luck of people. Head up card gives good luck, while head down card gives bad luck. But be careful while using this, the result is unstable. Luck may change to unluck, or just no affect to targets.");
+                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "   The card has ability to control luck of people. Head up card gives good luck, while head down card gives bad luck. But be careful while using this, the result is unstable. Luck may change to unluck, or just no affect to targets.");
                     
                 });
 
@@ -131,11 +131,11 @@ public class GUIs {
                     ScreenDrawing.ComponentOverlay.drawTextCenteredBasic(true, 1, "Libra");
                     ScreenDrawing.ComponentOverlay.drawTextCenteredBasic(true, ScreenDrawing.normal_font_scale, "§8Fairness and Unfairness");
                     
-                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "§" + (int) NBTManager.Mob.getNumber(ScreenDrawing.player_local, "test", "color") + "   The 7st sign of zodiac. The scales of justice. The only sign in the zodiac that represented as an object.");
-                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "§" + (int) NBTManager.Mob.getNumber(ScreenDrawing.player_local, "test", "color") + "   Libra doesn't have much information. No one know the true power of it. Some astral magicians discovered that it can detect liars perfectly, some discovered it can change some reality. So they mark this sign as still in dangerous to use, because of not enough information.");
-                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "§" + (int) NBTManager.Mob.getNumber(ScreenDrawing.player_local, "test", "color") + "   I bring one of its popular powers into the card. Astral magicians named it \"Fair Fight\", used in arenas. It cleanses buffs and debuffs from all fighters in the area.");
+                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "   The 7st sign of zodiac. The scales of justice. The only sign in the zodiac that represented as an object.");
+                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "   Libra doesn't have much information. No one know the true power of it. Some astral magicians discovered that it can detect liars perfectly, some discovered it can change some reality. So they mark this sign as still in dangerous to use, because of not enough information.");
+                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "   I bring one of its popular powers into the card. Astral magicians named it \"Fair Fight\", used in arenas. It cleanses buffs and debuffs from all fighters in the area.");
                     
-                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "§" + (int) NBTManager.Mob.getNumber(ScreenDrawing.player_local, "test", "color") + "   Another power I bring into flipped card. Some astral magicians used it, they named it \"Justice Reflection\". The card will reflect buff and debuff from user into the targets, makes them have the same buff and debuff as user.");
+                    ScreenDrawing.ComponentOverlay.drawTextParagraph(160, "   Another power I bring into flipped card. Some astral magicians used it, they named it \"Justice Reflection\". The card will reflect buff and debuff from user into the targets, makes them have the same buff and debuff as user.");
 
 
                 });
@@ -152,6 +152,8 @@ public class GUIs {
                     ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * -22 + 0, 8 * -12 + 0);
                     ScreenDrawing.ComponentOverlay.drawTextBasic(1.25, "Settings");
                     ScreenDrawing.Position.addZ(8);
+                    ScreenDrawing.ComponentWidget.Switch.drawText("spell1", "is_overlay_enable", "Show Overlay While Active");
+                    ScreenDrawing.Position.addZ(2);
                     ScreenDrawing.ComponentWidget.Switch.drawText("spell1", "is_pause_all", "Pause All Cards");
                     ScreenDrawing.Position.addZ(8);
                     ScreenDrawing.ComponentWidget.Slider.drawText(160, 1, 200, 1, "spell1", "radius", "Radius");
@@ -240,15 +242,13 @@ public class GUIs {
         int number = GUIManager.Storage.getNumber(group, name);
         int mana = (int) NBTManager.Mob.getNumber(ScreenDrawing.player_local, "main", "mana");
 
-        ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * -22 + 0, 8 * 13 + 7);
-        ScreenDrawing.ComponentOverlay.drawTextBasic(0.54, NBTManager.Mob.getText(ScreenDrawing.player_local, "book", "log_text"));
         ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * -25 + 0, 8 * -15 + 0);
-        ScreenDrawing.ComponentOverlay.drawImageBasic(400, 240, "tanscomplexmagic:textures/screens/gui_component_background.png");
+        ScreenDrawing.ComponentOverlay.drawImageBasic(400, 240, "tanscomplexmagic:textures/screens/book/background.png");
         ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * 1 + 0, 8 * 13 + 6);
-        ScreenDrawing.ComponentOverlay.drawImageSplit(168, 7, true, 24, (int) ((ScreenDrawing.player_local.clientLevel.dayTime() % 24000) / 1000), "tanscomplexmagic:textures/screens/gui_component_clock.png");
+        ScreenDrawing.ComponentOverlay.drawImageSplit(168, 7, true, 24, (int) ((ScreenDrawing.player_local.clientLevel.dayTime() % 24000) / 1000), "tanscomplexmagic:textures/screens/book/clock.png");
         ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * 25 + 0, 8 * 15 + 0);
 
-        ScreenDrawing.ComponentWidget.ButtonImage.draw(16, 8, true, true, false, "tanscomplexmagic:textures/screens/gui_component_close.png", () -> {
+        ScreenDrawing.ComponentWidget.ButtonImage.draw(16, 8, true, true, false, "tanscomplexmagic:textures/screens/book/close.png", () -> {
 
             NetworkManager.runServer("gui", "book_close", new CompoundTag());
 
@@ -279,6 +279,27 @@ public class GUIs {
 
         }
 
+        // Page Turn
+        {
+
+            ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * -23 - 4, 8 * 11 + 4);
+
+            ScreenDrawing.ComponentWidget.ButtonImage.draw(32, 16, true, true, false, "tanscomplexmagic:textures/screens/book/page_previous.png", () -> {
+
+                NetworkManager.runServer("gui", "book_page_previous", new CompoundTag());
+
+            });
+
+            ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * 22 - 4, 8 * 11 + 4);
+
+            ScreenDrawing.ComponentWidget.ButtonImage.draw(32, 16, true, true, false, "tanscomplexmagic:textures/screens/book/page_next.png", () -> {
+
+                NetworkManager.runServer("gui", "book_page_next", new CompoundTag());
+
+            });
+
+        }
+
         // Compass
         {
 
@@ -290,19 +311,19 @@ public class GUIs {
             degree = (int) Math.round(degree / 45.0);
 
             ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * 2 - 0, 8 * 13 + 6);
-            ScreenDrawing.ComponentOverlay.drawImageSplit(56, 7, true, 8, degree, "tanscomplexmagic:textures/screens/gui_component_compass.png");
+            ScreenDrawing.ComponentOverlay.drawImageSplit(56, 7, true, 8, degree, "tanscomplexmagic:textures/screens/book/compass.png");
 
             destination_pos = new Vec3(NBTManager.Mob.getNumber(ScreenDrawing.player_local, "book", "compassX"), 0, NBTManager.Mob.getNumber(ScreenDrawing.player_local, "book", "compassZ"));
             degree = (int) OutsideUtils.Calculation.getDegreeDestinationX(ScreenDrawing.player_local.getYRot(), ScreenDrawing.player_local.getX(), ScreenDrawing.player_local.getZ(), destination_pos.x, destination_pos.z);
             degree = (int) Math.round(degree / 45.0);
 
             ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * 3 - 0, 8 * 13 + 6);
-            ScreenDrawing.ComponentOverlay.drawImageSplit(56, 7, true, 8, degree, "tanscomplexmagic:textures/screens/gui_component_compass_custom.png");
+            ScreenDrawing.ComponentOverlay.drawImageSplit(56, 7, true, 8, degree, "tanscomplexmagic:textures/screens/book/compass_custom.png");
             ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * 4 + 0, 8 * 13 + 8);
 
-            ScreenDrawing.ComponentWidget.ButtonImage.draw(6, 3, true, true, false, "tanscomplexmagic:textures/screens/gui_component_compass_custom_set.png", () -> {
+            ScreenDrawing.ComponentWidget.ButtonImage.draw(6, 3, true, true, false, "tanscomplexmagic:textures/screens/book/compass_custom_set.png", () -> {
 
-                NetworkManager.runServer("gui", "book_custom_compass_set", new CompoundTag());
+                NetworkManager.runServer("gui", "book_compass_custom_set", new CompoundTag());
 
             });
 
@@ -310,6 +331,9 @@ public class GUIs {
 
         // Log
         {
+
+            ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * -22 + 0, 8 * 13 + 8);
+            ScreenDrawing.ComponentOverlay.drawTextBasic(0.48, NBTManager.Mob.getText(ScreenDrawing.player_local, "book", "log_text"));
 
             int log = 0;
 
@@ -328,10 +352,10 @@ public class GUIs {
             }
 
             ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * -23 - 4, 8 * 13 + 6);
-            ScreenDrawing.ComponentOverlay.drawImageSplit(28, 7, true, 4, log, "tanscomplexmagic:textures/screens/gui_component_log_type.png");
+            ScreenDrawing.ComponentOverlay.drawImageSplit(28, 7, true, 4, log, "tanscomplexmagic:textures/screens/book/log_type.png");
             ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * -23 - 4, 8 * 13 + 6);
 
-            ScreenDrawing.ComponentWidget.ButtonImage.draw(14, 7, true, true, false, "tanscomplexmagic:textures/screens/gui_component_log_type_set.png", () -> {
+            ScreenDrawing.ComponentWidget.ButtonImage.draw(14, 7, true, true, false, "tanscomplexmagic:textures/screens/book/log_type_set.png", () -> {
 
                 NetworkManager.runServer("gui", "book_log", new CompoundTag());
 
@@ -339,68 +363,96 @@ public class GUIs {
 
         }
 
-        // Page Turn
-        {
-
-            ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * -23 - 4, 8 * 11 + 4);
-
-            ScreenDrawing.ComponentWidget.ButtonImage.draw(32, 16, true, true, false, "tanscomplexmagic:textures/screens/gui_component_page_previous.png", () -> {
-
-                NetworkManager.runServer("gui", "book_page_previous", new CompoundTag());
-
-            });
-
-            ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * 22 - 4, 8 * 11 + 4);
-
-            ScreenDrawing.ComponentWidget.ButtonImage.draw(32, 16, true, true, false, "tanscomplexmagic:textures/screens/gui_component_page_next.png", () -> {
-
-                NetworkManager.runServer("gui", "book_page_next", new CompoundTag());
-
-            });
-
-        }
-
-        // Book Mark
+        // Bookmark
         {
 
             ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * -27 + 0, 8 * -12 + 0);
 
-            ScreenDrawing.ComponentWidget.ButtonImage.draw(24, 16, false, true, false, "tanscomplexmagic:textures/screens/icon_home.png", () -> {
+            ScreenDrawing.ComponentWidget.ButtonImage.draw(24, 16, false, true, false, "tanscomplexmagic:textures/screens/book/bookmark_home.png", () -> {
 
-                NetworkManager.runServer("gui", "book_mark_" + "home", new CompoundTag());
+                NetworkManager.runServer("gui", "book_bookmark_home", new CompoundTag());
 
             });
-            ScreenDrawing.Position.addZ(8);
+            ScreenDrawing.Position.addZ(2);
 
-            ScreenDrawing.ComponentWidget.ButtonImage.draw(24, 16, false, true, false, "tanscomplexmagic:textures/screens/gui_component_shortcut_ally_list.png", () -> {
+            ScreenDrawing.ComponentWidget.ButtonImage.draw(24, 16, false, true, false, "tanscomplexmagic:textures/screens/book/bookmark_ally_list.png", () -> {
 
-                NetworkManager.runServer("gui", "book_mark_" + "ally_list_manager", new CompoundTag());
+                NetworkManager.runServer("gui", "book_bookmark_ally_list_manager", new CompoundTag());
 
             });
 
             ScreenDrawing.Position.addZ(2);
 
-            ScreenDrawing.ComponentWidget.ButtonImage.draw(24, 16, false, true, false, "tanscomplexmagic:textures/screens/gui_component_shortcut_basic_spells.png", () -> {
+            ScreenDrawing.ComponentWidget.ButtonImage.draw(24, 16, false, true, false, "tanscomplexmagic:textures/screens/book/bookmark_basic_spells.png", () -> {
 
-                NetworkManager.runServer("gui", "book_mark_" + "basic_spell", new CompoundTag());
+                NetworkManager.runServer("gui", "book_bookmark_basic_spell", new CompoundTag());
 
             });
 
             ScreenDrawing.Position.addZ(2);
 
-            ScreenDrawing.ComponentWidget.ButtonImage.draw(24, 16, false, true, false, "tanscomplexmagic:textures/screens/gui_component_shortcut_spell_control.png", () -> {
+            ScreenDrawing.ComponentWidget.ButtonImage.draw(24, 16, false, true, false, "tanscomplexmagic:textures/screens/book/bookmark_spell_control.png", () -> {
 
-                NetworkManager.runServer("gui", "book_mark_" + "spell1_settings", new CompoundTag());
-
-            });
-
-            ScreenDrawing.Position.addZ(8);
-
-            ScreenDrawing.ComponentWidget.ButtonImage.draw(24, 16, false, true, false, "tanscomplexmagic:textures/screens/gui_component_shortcut_custom.png", () -> {
-
-                NetworkManager.runServer("gui", "book_mark_" + "home", new CompoundTag());
+                NetworkManager.runServer("gui", "book_bookmark_spell1_settings", new CompoundTag());
 
             });
+
+            // Custom
+            {
+
+                ScreenDrawing.Position.addZ(16);
+
+                ScreenDrawing.ComponentWidget.ButtonImage.draw(24, 16, false, true, false, "tanscomplexmagic:textures/screens/book/bookmark_custom.png", () -> {
+
+                    NetworkManager.runServer("gui", "book_bookmark_custom1", new CompoundTag());
+
+                });
+
+                ScreenDrawing.Position.setMarkX();
+                ScreenDrawing.Position.add(19, 2);
+
+                ScreenDrawing.ComponentWidget.ButtonImage.draw(8, 4, true, true, false, "tanscomplexmagic:textures/screens/book/bookmark_custom_set.png", () -> {
+
+                    NetworkManager.runServer("gui", "book_bookmark_custom_set1", new CompoundTag());
+
+                });
+
+                ScreenDrawing.Position.returnMarkX();
+                ScreenDrawing.Position.addZ(2);
+
+                ScreenDrawing.ComponentWidget.ButtonImage.draw(24, 16, false, true, false, "tanscomplexmagic:textures/screens/book/bookmark_custom.png", () -> {
+
+                    NetworkManager.runServer("gui", "book_bookmark_custom2", new CompoundTag());
+
+                });
+
+                ScreenDrawing.Position.setMarkX();
+                ScreenDrawing.Position.add(19, 2);
+
+                ScreenDrawing.ComponentWidget.ButtonImage.draw(8, 4, true, true, false, "tanscomplexmagic:textures/screens/book/bookmark_custom_set.png", () -> {
+
+                    NetworkManager.runServer("gui", "book_bookmark_custom_set2", new CompoundTag());
+
+                });
+
+                ScreenDrawing.Position.returnMarkX();
+                ScreenDrawing.Position.addZ(2);
+
+                ScreenDrawing.ComponentWidget.ButtonImage.draw(24, 16, false, true, false, "tanscomplexmagic:textures/screens/book/bookmark_custom.png", () -> {
+
+                    NetworkManager.runServer("gui", "book_bookmark_custom3", new CompoundTag());
+
+                });
+
+                ScreenDrawing.Position.add(19, 2);
+
+                ScreenDrawing.ComponentWidget.ButtonImage.draw(8, 4, true, true, false, "tanscomplexmagic:textures/screens/book/bookmark_custom_set.png", () -> {
+
+                    NetworkManager.runServer("gui", "book_bookmark_custom_set3", new CompoundTag());
+
+                });
+
+            }
 
         }
 
@@ -408,9 +460,9 @@ public class GUIs {
         {
 
             ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * 24 + 3, 8 * 5 + 6);
-            ScreenDrawing.ComponentOverlay.drawImageSplit(61, 60, true, 61, (int) NBTManager.Mob.getNumber(ScreenDrawing.player_local, "main", "mana_charge"), "tanscomplexmagic:textures/screens/gui_component_mana_bar_charge.png");
+            ScreenDrawing.ComponentOverlay.drawImageSplit(61, 60, true, 61, (int) NBTManager.Mob.getNumber(ScreenDrawing.player_local, "main", "mana_charge"), "tanscomplexmagic:textures/screens/book/mana_bar_charge.png");
             ScreenDrawing.Position.set(ScreenDrawing.Anchor.Type.CENTER, 8 * 24 + 3, 8 * -14 + 4);
-            ScreenDrawing.ComponentOverlay.drawImageSplit(151, 150, true, 151, mana, "tanscomplexmagic:textures/screens/gui_component_mana_bar.png");
+            ScreenDrawing.ComponentOverlay.drawImageSplit(151, 150, true, 151, mana, "tanscomplexmagic:textures/screens/book/mana_bar.png");
 
         }
 
